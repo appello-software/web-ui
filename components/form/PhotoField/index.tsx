@@ -1,11 +1,11 @@
 import { Button, ButtonVariant } from '@ui/components/common/Button';
 import { FileUpload } from '@ui/components/common/FileUpload';
 import { Field } from '@ui/components/form/Field';
+import { useBlobObjectUrl } from '@ui/hooks/useBlobObjectUrl';
 import * as React from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import photoPlaceholder from '~/view/assets/images/photo-placeholder.svg';
-import { useBlobObjectUrl } from '~/view/hooks/useBlobObjectUrl';
 
 interface Props<TFormValues extends FieldValues, TName> {
   name: TName;

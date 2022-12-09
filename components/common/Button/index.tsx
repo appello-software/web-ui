@@ -1,10 +1,9 @@
+import { isNil } from '@appello/common/lib/utils';
 import { Icon } from '@ui/components/common/Icon';
 import { Loader } from '@ui/components/common/Loader';
 import clsx from 'clsx';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { isNil } from '~/utils/isNil';
 
 import styles from './styles.module.scss';
 
