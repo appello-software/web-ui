@@ -1,0 +1,14 @@
+$text-input-x-padding: 1.18rem;
+$icon-size: 1.24rem;
+
+.icon {
+  @apply absolute-y-center text-gray-3;
+  width: $icon-size;
+  height: $icon-size;
+  left: $text-input-x-padding;
+  pointer-events: none;
+}
+
+.input {
+  padding-left: calc($text-input-x-padding + $icon-size + 0.61rem);
+}

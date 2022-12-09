@@ -1,0 +1,101 @@
+$input-inline-padding: 1.18rem;
+$input-icon-size: 1.25rem;
+$input-icon-margin: 0.56rem;
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__inline-fields {
+    @apply gap-4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__field-row {
+    & ~ & {
+      margin-top: 10px;
+    }
+  }
+
+  &__field-row &__field-row {
+    margin-top: 0;
+  }
+
+  &__label {
+    @apply text-p4 text-gray-1;
+    display: flex;
+    margin-bottom: 2px;
+  }
+
+  &__input {
+    @apply text-p4;
+    padding-inline: $input-inline-padding;
+    border: 1px solid hsl(var(--gray-5-color));
+    border-radius: 0.37rem;
+    width: 100%;
+
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &[readonly] {
+      cursor: pointer;
+    }
+
+    &[disabled] {
+      background-color: hsl(var(--gray-7-color));
+      cursor: not-allowed;
+    }
+
+    &--size-medium {
+      height: 2.62rem;
+    }
+
+    &--size-large {
+      height: 3.37rem;
+    }
+
+    &--error {
+      border-color: hsl(var(--red-color));
+    }
+
+    &:focus {
+      border-color: hsl(var(--gray-3-color));
+    }
+
+    &::placeholder {
+      color: hsl(var(--gray-3-color));
+    }
+
+    &--with-icon-before {
+      padding-left: $input-icon-size + $input-inline-padding + $input-icon-margin;
+    }
+
+    &--with-icon-after {
+      padding-right: $input-icon-size + $input-inline-padding + $input-icon-margin;
+    }
+  }
+
+  &__input-icon {
+    @apply absolute-y-center;
+    width: $input-icon-size;
+    height: $input-icon-size;
+    pointer-events: none;
+
+    &--before {
+      left: $input-inline-padding;
+    }
+
+    &--after {
+      right: $input-inline-padding;
+    }
+  }
+
+  &__error {
+    @apply text-p4 text-red;
+    margin-top: 3px;
+  }
+}

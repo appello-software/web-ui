@@ -1,0 +1,14 @@
+.badge {
+  display: flex;
+  border-radius: 100px;
+  padding: 0.12rem 0.61rem;
+  width: max-content;
+
+  &--green {
+    @apply text-green bg-green/10;
+  }
+
+  &--gray {
+    @apply text-black-2 bg-gray-7;
+  }
+}
