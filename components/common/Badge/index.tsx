@@ -1,7 +1,7 @@
+import './styles.scss';
+
 import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
-
-import styles from './styles.module.scss';
 
 export enum BadgeColor {
   GREEN = 'green',
@@ -15,7 +15,7 @@ interface Props {
 
 export const Badge: FC<Props> = ({ children, color }) => {
   return (
-    <div className={clsx(styles['badge'], styles[`badge--${color}`])}>
+    <div className={clsx('badge', `badge--${color}`)}>
       <p className="text-c1 font-bold">{children}</p>
     </div>
   );

@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode, useMemo } from 'react';
 
-import formStyles from '../styles.module.scss';
-
 export interface TextInputProps
   extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size'> {
   error?: boolean;
@@ -44,34 +42,21 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       <div className="relative">
         <input
           ref={ref}
-          className={clsx(
-            className,
-            formStyles['form__input'],
-            formStyles[`form__input--size-${size}`],
-            {
-              [`${formStyles['form__input--error']}`]: Boolean(error),
-              [`${formStyles['form__input--with-icon-before']}`]: Boolean(iconBeforeElement),
-              [`${formStyles['form__input--with-icon-after']}`]: Boolean(iconAfterElement),
-            },
-          )}
+          className={clsx(className, 'form__input', `form__input--size-${size}`, {
+            'form__input--error': Boolean(error),
+            'form__input--with-icon-before': Boolean(iconBeforeElement),
+            'form__input--with-icon-after': Boolean(iconAfterElement),
+          })}
           placeholder={placeholder}
           autoComplete={autoCompleteAttribute}
           type={type}
           {...inputProps}
         />
         {iconBeforeElement && (
-          <div
-            className={clsx(formStyles['form__input-icon'], formStyles['form__input-icon--before'])}
-          >
-            {iconBeforeElement}
-          </div>
+          <div className="form__input-icon form__input-icon--before">{iconBeforeElement}</div>
         )}
         {iconAfterElement && (
-          <div
-            className={clsx(formStyles['form__input-icon'], formStyles['form__input-icon--after'])}
-          >
-            {iconAfterElement}
-          </div>
+          <div className="form__input-icon form__input-icon--after">{iconAfterElement}</div>
         )}
       </div>
     );

@@ -1,11 +1,11 @@
+import './styles.scss';
+
 import { isNil } from '@appello/common/lib/utils';
 import { Icon } from '@ui/components/common/Icon';
 import { Loader } from '@ui/components/common/Loader';
 import clsx from 'clsx';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import styles from './styles.module.scss';
 
 export enum ButtonVariant {
   PRIMARY = 'primary',
@@ -60,14 +60,14 @@ export const Button: React.FC<ButtonProps> = ({
 
   const combinedClassName = React.useMemo(() => {
     return clsx(
-      styles['button'],
-      variant ? styles[`button--${variant}`] : undefined,
-      styles[`button--size-${size}`],
+      'button',
+      variant ? `button--${variant}` : undefined,
+      `button--size-${size}`,
       {
-        [styles['button--rounded']]: rounded,
-        [styles['button--bold']]: bold,
-        [styles['button--disabled']]: disabled,
-        [styles['button--only-icon']]: [label, children, count].every(isNil) && withIcon,
+        'button--rounded': rounded,
+        'button--bold': bold,
+        'button--disabled': disabled,
+        'button--only-icon': [label, children, count].every(isNil) && withIcon,
       },
       className,
     );
@@ -83,7 +83,7 @@ export const Button: React.FC<ButtonProps> = ({
         name={withIcon}
         width={18}
         height={18}
-        className={clsx(styles['button__icon'], iconClassName)}
+        className={clsx('button__icon', iconClassName)}
       />
     );
   }, [iconClassName, withIcon]);
@@ -97,17 +97,17 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={isLoading || disabled}
     >
       <div
-        className={clsx(styles['button__label'], {
-          [styles['button__label--hidden']]: isLoading,
+        className={clsx('button__label', {
+          'button__label--hidden': isLoading,
         })}
       >
         {!iconAfter && withIcon && renderIcon()}
         {children ?? label}
-        {!isNil(count) && <p className={styles['button__count']}>{count}</p>}
+        {!isNil(count) && <p className="button__count">{count}</p>}
         {iconAfter && withIcon && renderIcon()}
       </div>
       {isLoading && (
-        <div className={styles['button__loader']}>
+        <div className="button__loader">
           <Loader />
         </div>
       )}

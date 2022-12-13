@@ -1,10 +1,10 @@
+import './styles.scss';
+
 import { useSwitchValue, useUpdateEffect } from '@appello/common/lib/hooks';
 import { useClickAway } from '@appello/web/lib/hooks';
 import { Icon } from '@ui/components/common/Icon';
 import clsx from 'clsx';
 import React, { ReactNode, UIEvent, useRef } from 'react';
-
-import styles from './styles.module.scss';
 
 export interface DropdownItem<TValue = undefined> {
   label: string;
@@ -23,7 +23,6 @@ export interface DropdownProps<TValue> {
   onSelect?: (value: TValue, option: DropdownItem<TValue>) => void;
   children: (params: { onClick: () => void; isOpen: boolean }) => React.ReactElement;
   className?: string;
-  classNamePrefix?: string;
   renderOption?: (option: DropdownItem<TValue>) => React.ReactNode;
 }
 
@@ -33,7 +32,6 @@ export const Dropdown = <TValue,>({
   onSelect,
   children,
   className,
-  classNamePrefix,
   renderOption,
 }: DropdownProps<TValue>): React.ReactElement => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -72,7 +70,7 @@ export const Dropdown = <TValue,>({
   const scrollListener = React.useCallback(
     (e: Event) => {
       const el = e.target as Nullable<HTMLElement>;
-      if (!el?.classList?.contains(styles['menu'])) {
+      if (!el?.classList?.contains('dropdown__menu')) {
         closeDropdown();
       }
     },
@@ -89,28 +87,12 @@ export const Dropdown = <TValue,>({
   }, [dropdownIsOpen]);
 
   return (
-    <div
-      className={clsx(styles['wrapper'], className, {
-        [`${classNamePrefix}`]: classNamePrefix,
-      })}
-      ref={containerRef}
-    >
+    <div className={clsx('dropdown', className)} ref={containerRef}>
       {children(childrenProps)}
       {dropdownIsOpen && (
-        <ul
-          className={clsx(styles['container'], styles['menu'], {
-            [`${classNamePrefix}__menu`]: classNamePrefix,
-          })}
-          style={{ width: containerWidth }}
-        >
+        <ul className="dropdown__root-menu dropdown__menu" style={{ width: containerWidth }}>
           {items.map((item, index) => (
-            <Option
-              key={index}
-              option={item}
-              onSelect={handleSelect}
-              renderOption={renderOption}
-              classNamePrefix={classNamePrefix}
-            />
+            <Option key={index} option={item} onSelect={handleSelect} renderOption={renderOption} />
           ))}
         </ul>
       )}
@@ -142,17 +124,15 @@ const Option = <TValue,>({
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
-      className={clsx(styles['option'], {
-        [styles['option--disabled']]: option.disabled,
-        [`${classNamePrefix}__option`]: classNamePrefix,
-        [`${classNamePrefix}__option--disabled`]: classNamePrefix && option.disabled,
-        [styles['option--with-menu']]: option.items,
+      className={clsx('dropdown__option', {
+        'dropdown__option--disabled': option.disabled,
+        'dropdown__option--with-menu': option.items,
       })}
       onMouseDown={handleClick}
       onKeyUp={handleClick}
     >
       {option.items && (
-        <ul className={clsx(styles['menu'], styles['submenu'])}>
+        <ul className="dropdown__menu dropdown__submenu">
           {option.items.map((item, index) => (
             <Option
               key={index}
@@ -172,22 +152,10 @@ const Option = <TValue,>({
               name={option.icon}
               width={16}
               height={16}
-              className={clsx(
-                styles['option__icon'],
-                {
-                  [`${classNamePrefix}__option-icon`]: classNamePrefix,
-                },
-                option.iconClassName,
-              )}
+              className={clsx('dropdown__option-icon', option.iconClassName)}
             />
           )}
-          <p
-            className={clsx(styles['option__label'], {
-              [`${classNamePrefix}__option-label`]: classNamePrefix,
-            })}
-          >
-            {option.label}
-          </p>
+          <p className="dropdown__option-label">{option.label}</p>
           {option.items && (
             <Icon name="polygon" width={6} height={4} className="-rotate-90 ml-auto" />
           )}
