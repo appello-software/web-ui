@@ -17,7 +17,6 @@ import React, { ReactElement, useCallback, useMemo, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { PAGE_SIZE } from '~/constants/pagination';
-import { OrderDirectionChoice } from '~/services/gql/__generated__/globalTypes';
 import { Sorting } from '~/types';
 
 import { HeaderCell } from './components/HeaderCell';
@@ -69,7 +68,7 @@ export const Table = <TData extends Record<string, unknown>, TSorting extends st
   const sortingState: SortingState = useMemo(() => {
     return sorting.map(state => ({
       id: state.field,
-      desc: state.direction === OrderDirectionChoice.DESC,
+      desc: state.direction === 'desc',
     }));
   }, [sorting]);
 
