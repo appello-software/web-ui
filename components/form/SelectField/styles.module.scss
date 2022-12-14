@@ -56,7 +56,7 @@
     }
 
     &__menu {
-      @apply dropdown__menu;
+      @apply dropdown-common__menu;
       top: 100%;
       position: absolute;
       width: 100%;
@@ -64,14 +64,14 @@
     }
 
     &__option {
-      @apply dropdown__option dropdown__option-label;
+      @apply dropdown-common__option dropdown-common__option-label;
 
       &--is-selected {
         @apply bg-accent text-white;
       }
 
       &:not(&--is-selected):hover {
-        @apply dropdown__option-hover;
+        @apply dropdown-common__option-hover;
       }
     }
 

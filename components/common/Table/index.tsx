@@ -1,6 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
-import { isFunction } from '@appello/common/lib/utils';
 import {
   ColumnDef,
   flexRender,
@@ -9,28 +8,27 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { OnChangeFn, RowData } from '@tanstack/table-core';
+import { RowData } from '@tanstack/table-core';
+import { OnChangeFn } from '@tanstack/table-core/src/types';
 import { Icon } from '@ui/components/common/Icon';
-import { transformSortingState } from '@ui/components/common/Table/utils/transformSortingState';
 import clsx from 'clsx';
-import React, { ReactElement, useCallback, useMemo, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { PAGE_SIZE } from '~/constants/pagination';
-import { Sorting } from '~/types';
 
 import { HeaderCell } from './components/HeaderCell';
 import styles from './styles.module.scss';
 
-interface Props<TData, TSorting> {
+interface Props<TData> {
   className?: string;
   data: TData[];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
 
-  sorting: Sorting<TSorting>;
-  setSorting: (value: Sorting<TSorting>) => void;
+  sorting: SortingState;
+  setSorting: OnChangeFn<SortingState>;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore: (
@@ -56,7 +54,7 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const Table = <TData extends Record<string, unknown>, TSorting extends string>({
+export const Table = <TData extends Record<string, unknown>>({
   className,
   data,
   columns,
@@ -64,38 +62,16 @@ export const Table = <TData extends Record<string, unknown>, TSorting extends st
   setSorting,
   fetchMore,
   totalCount,
-}: Props<TData, TSorting>): ReactElement => {
-  const sortingState: SortingState = useMemo(() => {
-    return sorting.map(state => ({
-      id: state.field,
-      desc: state.direction === 'desc',
-    }));
-  }, [sorting]);
-
-  const handleSortingChange: OnChangeFn<SortingState> = useCallback(
-    updaterOrValue => {
-      if (isFunction(updaterOrValue)) {
-        const value = updaterOrValue(sortingState);
-        setSorting(transformSortingState(value));
-        return;
-      }
-
-      setSorting(transformSortingState(updaterOrValue));
-    },
-    [setSorting, sortingState],
-  );
-
+}: Props<TData>): ReactElement => {
   const table = useReactTable({
     data,
     columns,
-    state: {
-      sorting: sortingState,
-    },
+    state: { sorting },
     enableSorting: true,
     manualSorting: true,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: handleSortingChange,
+    onSortingChange: setSorting,
   });
 
   const [isFetching, setFetching] = useState(false);
