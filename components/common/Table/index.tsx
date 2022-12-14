@@ -8,8 +8,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { RowData } from '@tanstack/table-core';
-import { OnChangeFn } from '@tanstack/table-core/src/types';
+import { OnChangeFn, RowData } from '@tanstack/table-core';
 import { Icon } from '@ui/components/common/Icon';
 import clsx from 'clsx';
 import React, { ReactElement, useCallback, useState } from 'react';
