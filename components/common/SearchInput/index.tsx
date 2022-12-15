@@ -12,9 +12,10 @@ interface Props {
   onChange: (value: string) => void;
   className?: string;
   placeholder?: string;
+  defaultValue?: string;
 }
 
-export const SearchInput: FC<Props> = ({ onChange, className, placeholder }) => {
+export const SearchInput: FC<Props> = ({ onChange, className, placeholder, defaultValue }) => {
   const handleChange = useDebouncedCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
     onChange(target.value);
   }, DEBOUNCE_DELAY);
@@ -22,7 +23,12 @@ export const SearchInput: FC<Props> = ({ onChange, className, placeholder }) => 
   return (
     <div className={clsx('relative', className)}>
       <Icon name="magnifier" className={styles['icon']} />
-      <TextInput onChange={handleChange} placeholder={placeholder} className={styles['input']} />
+      <TextInput
+        onChange={handleChange}
+        placeholder={placeholder}
+        className={styles['input']}
+        defaultValue={defaultValue}
+      />
     </div>
   );
 };
