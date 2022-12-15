@@ -28,6 +28,8 @@ interface Props<TData> {
 
   sorting: SortingState;
   setSorting: OnChangeFn<SortingState>;
+  setOffset: (offset: number) => void;
+  offset: number;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore: (
@@ -61,6 +63,8 @@ export const Table = <TData extends Record<string, unknown>>({
   setSorting,
   fetchMore,
   totalCount,
+  setOffset,
+  offset,
 }: Props<TData>): ReactElement => {
   const table = useReactTable({
     data,
@@ -74,7 +78,6 @@ export const Table = <TData extends Record<string, unknown>>({
   });
 
   const [isFetching, setFetching] = useState(false);
-  const [offset, setOffset] = useState(0);
 
   const handlePageClick = useCallback(
     async (event: { selected: number }) => {
@@ -96,7 +99,7 @@ export const Table = <TData extends Record<string, unknown>>({
         setFetching(false);
       }
     },
-    [fetchMore, totalCount],
+    [fetchMore, setOffset, totalCount],
   );
 
   const pageCount = Math.ceil(totalCount / PAGE_SIZE);
@@ -139,6 +142,7 @@ export const Table = <TData extends Record<string, unknown>>({
             breakLinkClassName={styles['pagination__link']}
             breakClassName={styles['pagination__item']}
             pageCount={pageCount}
+            forcePage={offset / PAGE_SIZE}
             previousLabel={<Icon name="down-arrow" size={18} className="rotate-90 inline" />}
             containerClassName={clsx(styles['pagination'], 'mt-4')}
             marginPagesDisplayed={5}
