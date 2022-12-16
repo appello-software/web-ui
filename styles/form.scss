@@ -47,6 +47,7 @@ $input-icon-margin: 0.56rem;
 
     &[disabled] {
       background-color: hsl(var(--gray-7-color));
+      color: hsl(var(--gray-3-color));
       cursor: not-allowed;
     }
 
@@ -99,4 +100,3 @@ $input-icon-margin: 0.56rem;
     margin-top: 3px;
   }
 }
-
