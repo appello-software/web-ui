@@ -1,4 +1,4 @@
-import { Button, ButtonVariant } from '@ui/components/common/Button';
+import { Button, ButtonSize, ButtonVariant } from '@ui/components/common/Button';
 import { FileUpload } from '@ui/components/common/FileUpload';
 import { Field } from '@ui/components/form/Field';
 import { useBlobObjectUrl } from '@ui/hooks/useBlobObjectUrl';
@@ -10,7 +10,6 @@ import photoPlaceholder from '~/view/assets/images/photo-placeholder.svg';
 interface Props<TFormValues extends FieldValues, TName> {
   name: TName;
   control: Control<TFormValues>;
-
   // field props
   label?: string;
   className?: string;
@@ -38,11 +37,23 @@ export const PhotoField = <
       error={controller.fieldState.error}
       labelClassName="mb-1"
     >
-      <img
-        src={photo ?? photoPlaceholder}
-        alt="Profile"
-        className="rounded-full w-20 h-20 mb-3 object-cover"
-      />
+      <div className="w-20 h-20 mb-3 relative">
+        {photo && (
+          <Button
+            onClick={() => controller.field.onChange(null)}
+            size={ButtonSize.SMALL}
+            className="absolute right-0 top-0 bg-black-1 bg-opacity-50 rounded-full w-6 h-6"
+            iconClassName="text-white p-0.5"
+            withIcon="close"
+          />
+        )}
+        <img
+          src={photo ?? photoPlaceholder}
+          alt="Profile"
+          className="object-cover rounded-full w-full h-full"
+        />
+      </div>
+
       <FileUpload onUpload={controller.field.onChange}>
         {({ onClick }) => (
           <Button
