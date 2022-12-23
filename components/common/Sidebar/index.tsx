@@ -18,6 +18,7 @@ interface Props {
   items: SidebarItem[];
   logo: string;
   user?: {
+    photoPlaceholder?: string;
     photo?: Nullable<string>;
     fullName: string;
     email: string;
@@ -41,8 +42,12 @@ export const Sidebar: React.FC<Props> = ({ items, logo, user }) => {
       </nav>
       {user && (
         <footer className="sidebar__footer">
-          {user.photo && (
-            <img src={user.photo} alt={user.fullName} className="sidebar__user-photo" />
+          {Boolean(user.photo || user.photoPlaceholder) && (
+            <img
+              src={user.photo || user.photoPlaceholder}
+              alt={user.fullName}
+              className="sidebar__user-photo"
+            />
           )}
           <div>
             <p className="sidebar__user-name">{user.fullName}</p>
