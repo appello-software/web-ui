@@ -7,12 +7,13 @@ import React, { FC } from 'react';
 interface Props {
   name: string;
   className?: string;
+  iconClassName?: string;
 }
 
-export const IconContainer: FC<Props> = ({ name, className }) => {
+export const IconContainer: FC<Props> = ({ name, className, iconClassName }) => {
   return (
     <div className={clsx('icon-container', className)}>
-      <Icon name={name} className="icon-container__icon" />
+      <Icon name={name} className={clsx('icon-container__icon', iconClassName)} />
     </div>
   );
 };

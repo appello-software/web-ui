@@ -52,11 +52,11 @@ $input-icon-margin: 0.56rem;
     }
 
     &--size-medium {
-      height: 2.62rem;
+      height: var(--input-medium-height);
     }
 
     &--size-large {
-      height: 3.37rem;
+      height: var(--input-large-height);
     }
 
     &--error {

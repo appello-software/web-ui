@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import { Field } from '@ui/components/form/Field';
 import { isMultiOption } from '@ui/components/form/SelectField/utils';
 import { InputSize } from '@ui/components/form/TextInput';
@@ -6,8 +8,6 @@ import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
-
-import styles from './styles.module.scss';
 
 export interface SelectOption<T> {
   label: string;
@@ -80,7 +80,7 @@ export const SelectField = <
   return (
     <Field label={label} error={controller.fieldState.error} className={className}>
       <Select
-        className={clsx(styles['select'], { [styles[`select--size-${inputSize}`]]: inputSize })}
+        className={clsx('react-select', { [`react-select--size-${inputSize}`]: inputSize })}
         isMulti={isMulti}
         options={options}
         onChange={handleChange}

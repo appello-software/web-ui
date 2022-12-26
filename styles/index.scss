@@ -7,6 +7,11 @@
   @return $remValue;
 }
 
+:root {
+  --input-medium-height: 2.62rem;
+  --input-large-height: 3.37rem;
+}
+
 @layer components {
   .dropdown-common {
     &__menu {

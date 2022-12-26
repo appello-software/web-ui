@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import { IconContainer } from '@ui/components/common/IconContainer';
 import React, { FC } from 'react';
 
@@ -8,9 +10,9 @@ interface Props {
 
 export const EmptyState: FC<Props> = ({ iconName, label }) => {
   return (
-    <div className="flex-center flex-col flex-1">
+    <div className="empty-state">
       <IconContainer name={iconName} />
-      <p className="text-p4 text-gray-2 mt-4">{label}</p>
+      <p className="empty-state__label">{label}</p>
     </div>
   );
 };
