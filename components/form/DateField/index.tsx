@@ -3,13 +3,23 @@ import './styles.module.scss';
 
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import { useClickAway } from '@appello/web/lib/hooks';
+import { BrowserSelect } from '@ui/components/common/BrowserSelect';
 import { Icon } from '@ui/components/common/Icon';
 import { Field } from '@ui/components/form/Field';
 import { InputSize, TextInput } from '@ui/components/form/TextInput';
 import clsx from 'clsx';
-import { format, isWeekend, startOfDay } from 'date-fns';
-import React, { ReactElement, useCallback, useMemo, useRef, useState } from 'react';
-import { DayPicker } from 'react-day-picker';
+import {
+  eachMonthOfInterval,
+  endOfYear,
+  format,
+  isWeekend,
+  setMonth,
+  setYear,
+  startOfDay,
+  startOfYear,
+} from 'date-fns';
+import React, { FC, ReactElement, useCallback, useMemo, useRef, useState } from 'react';
+import { CaptionLabelProps, DayPicker, useDayPicker } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { DATE_FORMAT } from '~/constants/dates';
@@ -103,7 +113,9 @@ export const DateField = <
             error={!!controller.fieldState.error}
             className="cursor-pointer"
             iconBeforeElement={<Icon name="calendar" />}
-            iconAfterElement={<Icon name="down-arrow" />}
+            iconAfterElement={
+              <Icon name="down-arrow" className={clsx({ 'rotate-180': isCalendarVisible })} />
+            }
           />
         </div>
         {isCalendarVisible && (
@@ -113,6 +125,7 @@ export const DateField = <
               month={month}
               onMonthChange={handleMonthChange}
               onDayClick={handleDayChange}
+              components={{ CaptionLabel }}
               modifiers={{
                 weekend: isWeekend,
               }}
@@ -128,5 +141,50 @@ export const DateField = <
         )}
       </div>
     </Field>
+  );
+};
+
+const yearsOptions = Array.from({ length: 100 }, (_, index) => {
+  const year = new Date().getFullYear() + 5 - index;
+  return { label: year.toString(), value: year.toString() };
+});
+
+const monthsOptions = eachMonthOfInterval({
+  start: startOfYear(new Date()),
+  end: endOfYear(new Date()),
+}).map(month => {
+  return { label: format(month, 'MMMM'), value: `${month.getMonth()}` };
+});
+
+const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
+  const { onMonthChange, month } = useDayPicker();
+
+  const monthLabel = useMemo(() => format(displayMonth, 'MMMM'), [displayMonth]);
+  const monthValue = useMemo(() => `${displayMonth.getMonth()}`, [displayMonth]);
+  const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
+
+  return (
+    <>
+      <BrowserSelect
+        options={monthsOptions}
+        onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
+        value={monthValue}
+      >
+        <div className="flex items-center">
+          <p className="text-p3 font-semibold">{monthLabel}</p>
+          <Icon name="down-arrow" className="w-5 h-5 ml-1" />
+        </div>
+      </BrowserSelect>
+      <BrowserSelect
+        options={yearsOptions}
+        onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
+        value={yearValue}
+      >
+        <div className="flex items-center">
+          <p className="text-p3 font-semibold">{yearValue}</p>
+          <Icon name="down-arrow" className="w-5 h-5 ml-1" />
+        </div>
+      </BrowserSelect>
+    </>
   );
 };
