@@ -35,7 +35,7 @@ interface Props<TData> {
   totalCount?: number;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  fetchMore: (
+  fetchMore?: (
     options: FetchMoreQueryOptions<any> & {
       updateQuery?: (
         previousQueryResult: any,
@@ -67,7 +67,8 @@ export const Table = <TData extends Record<string, unknown>>({
   setOffset,
   offset,
 }: Props<TData>): ReactElement => {
-  const hasPagination = !isNil(offset) && !isNil(setOffset) && !isNil(totalCount);
+  const hasPagination =
+    !isNil(offset) && !isNil(setOffset) && !isNil(totalCount) && !isNil(fetchMore);
   const hasSorting = !isNil(sorting) && !isNil(setSorting);
 
   const table = useReactTable({
