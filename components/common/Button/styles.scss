@@ -1,7 +1,8 @@
-$medium-height: 2.6rem;
-$large-height: 3.3rem;
-
 .button {
+  --small-height: 1.8rem;
+  --medium-height: 2.6rem;
+  --large-height: 3.3rem;
+
   font-weight: 600;
   cursor: pointer;
   width: 100%;
@@ -9,6 +10,7 @@ $large-height: 3.3rem;
   align-items: center;
   border-radius: 5px;
   justify-content: center;
+  padding-inline: 1rem;
 
   transition: background-color 0.2s ease-in-out, opacity 0.1s;
 
@@ -26,30 +28,42 @@ $large-height: 3.3rem;
     color: #fff;
   }
 
+  &--size-small {
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
+    height: var(--small-height);
+  }
+
   &--size-medium {
     font-size: var(--c1-font-size);
     line-height: var(--c1-line-height);
-    height: $medium-height;
-  }
-
-  $buttonRef: &;
-
-  &--size-medium {
-    &#{$buttonRef}--only-icon {
-      width: $medium-height;
-    }
-  }
-
-  &--size-large {
-    &#{$buttonRef}--only-icon {
-      width: $large-height;
-    }
+    height: var(--medium-height);
   }
 
   &--size-large {
     font-size: var(--p3-font-size);
     line-height: var(--p3-line-height);
-    height: $large-height;
+    height: var(--large-height);
+  }
+
+  $buttonRef: &;
+
+  &--size-small {
+    &#{$buttonRef}--only-icon {
+      width: var(--small-height);
+    }
+  }
+
+  &--size-medium {
+    &#{$buttonRef}--only-icon {
+      width: var(--medium-height);
+    }
+  }
+
+  &--size-large {
+    &#{$buttonRef}--only-icon {
+      width: var(--large-height);
+    }
   }
 
   &:hover,
