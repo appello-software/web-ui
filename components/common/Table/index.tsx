@@ -1,5 +1,6 @@
 import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
+import { isNil } from '@appello/common/lib/utils';
 import {
   ColumnDef,
   flexRender,
@@ -26,10 +27,12 @@ interface Props<TData> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
 
-  sorting: SortingState;
-  setSorting: OnChangeFn<SortingState>;
-  setOffset: (offset: number) => void;
-  offset: number;
+  sorting?: SortingState;
+  setSorting?: OnChangeFn<SortingState>;
+
+  setOffset?: (offset: number) => void;
+  offset?: number;
+  totalCount?: number;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore: (
@@ -44,8 +47,6 @@ interface Props<TData> {
     },
   ) => Promise<ApolloQueryResult<TData>>;
   /* eslint-enable @typescript-eslint/no-explicit-any */
-
-  totalCount: number;
 }
 
 declare module '@tanstack/react-table' {
@@ -66,12 +67,14 @@ export const Table = <TData extends Record<string, unknown>>({
   setOffset,
   offset,
 }: Props<TData>): ReactElement => {
+  const hasPagination = !isNil(offset) && !isNil(setOffset) && !isNil(totalCount);
+  const hasSorting = !isNil(sorting) && !isNil(setSorting);
+
   const table = useReactTable({
     data,
     columns,
     state: { sorting },
-    enableSorting: true,
-    manualSorting: true,
+    enableSorting: hasSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
@@ -81,6 +84,8 @@ export const Table = <TData extends Record<string, unknown>>({
 
   const handlePageClick = useCallback(
     async (event: { selected: number }) => {
+      if (!hasPagination) return;
+
       const newOffset = (event.selected * PAGE_SIZE) % totalCount;
       setOffset(newOffset);
 
@@ -99,10 +104,10 @@ export const Table = <TData extends Record<string, unknown>>({
         setFetching(false);
       }
     },
-    [fetchMore, setOffset, totalCount],
+    [fetchMore, hasPagination, setOffset, totalCount],
   );
 
-  const pageCount = Math.ceil(totalCount / PAGE_SIZE);
+  const pageCount = hasPagination ? Math.ceil(totalCount / PAGE_SIZE) : 0;
 
   return (
     <div className={clsx(styles['table-wrapper'], className)}>
@@ -132,7 +137,7 @@ export const Table = <TData extends Record<string, unknown>>({
         </tbody>
       </table>
       {isFetching && <div className="bg-white/50 absolute inset-0" />}
-      {totalCount > PAGE_SIZE && (
+      {hasPagination && totalCount > PAGE_SIZE && (
         <div>
           <Paginate
             breakLabel="..."
