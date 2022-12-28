@@ -42,7 +42,7 @@ export const PhotoField = <
           <Button
             onClick={() => controller.field.onChange(null)}
             size={ButtonSize.SMALL}
-            className="absolute right-0 top-0 bg-black-1 bg-opacity-50 rounded-full w-6 h-6"
+            className="absolute right-0 top-0 bg-black-1 bg-opacity-50 rounded-full"
             iconClassName="text-white p-0.5"
             withIcon="close"
           />

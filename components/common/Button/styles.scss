@@ -10,9 +10,12 @@
   align-items: center;
   border-radius: 5px;
   justify-content: center;
-  padding-inline: 1rem;
 
   transition: background-color 0.2s ease-in-out, opacity 0.1s;
+
+  &:not(&--only-icon) {
+    padding-inline: 1rem;
+  }
 
   &--primary {
     @apply bg-accent text-white;
