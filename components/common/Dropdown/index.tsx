@@ -126,8 +126,13 @@ const Option = <TValue,>({
   onSelect,
   renderOption,
 }: OptionProps<TValue>): React.ReactElement => {
+  const items = option.items;
+  const hasSubmenu = !!items;
+
   const handleClick = React.useCallback(
     (e: UIEvent) => {
+      if (hasSubmenu) return;
+
       e.stopPropagation();
       onSelect(option);
     },
@@ -168,14 +173,14 @@ const Option = <TValue,>({
     <li
       className={clsx('dropdown__option', {
         'dropdown__option--disabled': option.disabled,
-        'dropdown__option--with-menu': option.items,
+        'dropdown__option--with-menu': hasSubmenu,
       })}
       onMouseDown={handleClick}
       onKeyUp={handleClick}
     >
-      {option.items && (
+      {hasSubmenu && (
         <ul className="dropdown__menu dropdown__submenu" ref={submenuRef}>
-          {option.items.map((item, index) => (
+          {items.map((item, index) => (
             <Option key={index} option={item} onSelect={onSelect} renderOption={renderOption} />
           ))}
         </ul>
@@ -192,7 +197,7 @@ const Option = <TValue,>({
             />
           )}
           <p className="dropdown__option-label">{option.label}</p>
-          {option.items && (
+          {hasSubmenu && (
             <Icon name="polygon" width={6} height={4} className="-rotate-90 ml-auto" />
           )}
           {option.iconAfter && <div className="ml-auto">{option.iconAfter}</div>}
