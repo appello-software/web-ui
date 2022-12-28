@@ -4,7 +4,7 @@ import { useSwitchValue, useUpdateEffect } from '@appello/common/lib/hooks';
 import { useClickAway } from '@appello/web/lib/hooks';
 import { Icon } from '@ui/components/common/Icon';
 import clsx from 'clsx';
-import React, { ReactNode, UIEvent, useRef } from 'react';
+import React, { ReactNode, UIEvent, useEffect, useRef } from 'react';
 
 export interface DropdownItem<TValue = undefined> {
   label: string;
@@ -86,11 +86,26 @@ export const Dropdown = <TValue,>({
     };
   }, [dropdownIsOpen]);
 
+  const rootMenuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (dropdownIsOpen && rootMenuRef.current) {
+      const rect = rootMenuRef.current.getBoundingClientRect();
+      if (rect.bottom > window.innerHeight) {
+        rootMenuRef.current.style.bottom = '100%';
+      }
+    }
+  }, [dropdownIsOpen]);
+
   return (
     <div className={clsx('dropdown', className)} ref={containerRef}>
       {children(childrenProps)}
       {dropdownIsOpen && (
-        <ul className="dropdown__root-menu dropdown__menu" style={{ width: containerWidth }}>
+        <ul
+          className="dropdown__root-menu dropdown__menu"
+          style={{ width: containerWidth }}
+          ref={rootMenuRef}
+        >
           {items.map((item, index) => (
             <Option key={index} option={item} onSelect={handleSelect} renderOption={renderOption} />
           ))}
@@ -103,14 +118,12 @@ export const Dropdown = <TValue,>({
 interface OptionProps<TValue> {
   option: DropdownItem<TValue>;
   onSelect: (item: DropdownItem<TValue>) => void;
-  classNamePrefix?: string;
   renderOption?: (option: DropdownItem<TValue>) => React.ReactNode;
 }
 
 const Option = <TValue,>({
   option,
   onSelect,
-  classNamePrefix,
   renderOption,
 }: OptionProps<TValue>): React.ReactElement => {
   const handleClick = React.useCallback(
@@ -120,6 +133,35 @@ const Option = <TValue,>({
     },
     [onSelect, option],
   );
+
+  const submenuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const submenuElement = submenuRef.current;
+
+    const observer = new ResizeObserver(entries => {
+      entries.forEach(entry => {
+        const isHTMLElement = entry.target instanceof HTMLElement;
+        if (isHTMLElement) {
+          const rect = entry.target.getBoundingClientRect();
+          if (rect.bottom > window.innerHeight) {
+            entry.target.style.top = 'auto';
+            entry.target.style.bottom = '0';
+          }
+        }
+      });
+    });
+
+    if (submenuElement) {
+      observer.observe(submenuElement);
+    }
+
+    return () => {
+      if (submenuElement) {
+        observer.unobserve(submenuElement);
+      }
+    };
+  }, []);
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -132,15 +174,9 @@ const Option = <TValue,>({
       onKeyUp={handleClick}
     >
       {option.items && (
-        <ul className="dropdown__menu dropdown__submenu">
+        <ul className="dropdown__menu dropdown__submenu" ref={submenuRef}>
           {option.items.map((item, index) => (
-            <Option
-              key={index}
-              option={item}
-              onSelect={onSelect}
-              renderOption={renderOption}
-              classNamePrefix={classNamePrefix}
-            />
+            <Option key={index} option={item} onSelect={onSelect} renderOption={renderOption} />
           ))}
         </ul>
       )}
