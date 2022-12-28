@@ -1,12 +1,17 @@
 import { Field } from '@ui/components/form/Field';
-import { InputSize, TextInput } from '@ui/components/form/TextInput';
+import { TextInput, TextInputProps } from '@ui/components/form/TextInput';
 import * as React from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
+
+type AllowedInputProps = Pick<
+  TextInputProps,
+  'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength'
+>;
 
 interface Props<
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, string>,
-> {
+> extends AllowedInputProps {
   name: TName;
   control: Control<TFormValues>;
 
@@ -14,12 +19,6 @@ interface Props<
   label?: string;
   className?: string;
   required?: boolean;
-
-  // input props
-  autoComplete?: boolean | string;
-  autoFocus?: boolean;
-  size?: InputSize;
-  placeholder?: string;
 }
 
 export const TextField = <

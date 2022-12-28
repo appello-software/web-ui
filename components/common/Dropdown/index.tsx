@@ -136,7 +136,7 @@ const Option = <TValue,>({
       e.stopPropagation();
       onSelect(option);
     },
-    [onSelect, option],
+    [hasSubmenu, onSelect, option],
   );
 
   const submenuRef = useRef<HTMLUListElement>(null);

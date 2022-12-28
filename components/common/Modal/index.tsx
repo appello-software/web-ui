@@ -35,6 +35,8 @@ export const Modal: React.FC<ModalProps> = ({
       contentLabel={title}
       className={clsx(styles['container'], contentClassName)}
       overlayClassName={styles['overlay']}
+      shouldCloseOnEsc
+      bodyOpenClassName={styles['react-modal-opened']}
     >
       {withCloseButton && (
         <button type="button" className={styles['close-btn']} onClick={close}>
