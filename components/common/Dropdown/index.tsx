@@ -15,6 +15,7 @@ export interface DropdownItem<TValue = undefined> {
   value?: TValue;
   onSelect?: () => void;
   disabled?: boolean;
+  className?: string;
 }
 
 export interface DropdownProps<TValue> {
@@ -171,7 +172,7 @@ const Option = <TValue,>({
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
-      className={clsx('dropdown__option', {
+      className={clsx('dropdown__option', option.className, {
         'dropdown__option--disabled': option.disabled,
         'dropdown__option--with-menu': hasSubmenu,
       })}
