@@ -1,13 +1,18 @@
 import React, { ChangeEventHandler } from 'react';
 
-interface Props {
+export interface BrowserSelectProps {
   children: React.ReactNode;
   options: { label: string; value: string }[];
   onChange: ChangeEventHandler<HTMLSelectElement>;
   value: string;
 }
 
-export const BrowserSelect: React.FC<Props> = ({ children, options, onChange, value }) => {
+export const BrowserSelect: React.FC<BrowserSelectProps> = ({
+  children,
+  options,
+  onChange,
+  value,
+}) => {
   return (
     <div className="relative">
       {children}

@@ -34,6 +34,8 @@ interface Props<TData> {
   offset?: number;
   totalCount?: number;
 
+  error?: string;
+
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore?: (
     options: FetchMoreQueryOptions<any> & {
@@ -65,6 +67,7 @@ export const Table = <TData extends Record<string, unknown>>({
   fetchMore,
   totalCount,
   setOffset,
+  error,
   offset,
 }: Props<TData>): ReactElement => {
   const hasPagination =
@@ -112,6 +115,7 @@ export const Table = <TData extends Record<string, unknown>>({
 
   return (
     <div className={clsx(styles['table-wrapper'], className)}>
+      {error && <p className="form__error mb-2">{error}</p>}
       <table className={styles['table']}>
         <thead className={styles['head']}>
           {table.getHeaderGroups().map(headerGroup => (
