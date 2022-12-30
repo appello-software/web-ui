@@ -41,6 +41,18 @@ $input-icon-margin: 0.56rem;
 
     transition: background-color 0.2s, border-color 0.2s;
 
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+
     &[readonly] {
       cursor: pointer;
     }

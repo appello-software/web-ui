@@ -1,4 +1,4 @@
-import { Field } from '@ui/components/form/Field';
+import { Field, FieldProps } from '@ui/components/form/Field';
 import { TextInput, TextInputProps } from '@ui/components/form/TextInput';
 import * as React from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
@@ -7,18 +7,18 @@ type AllowedInputProps = Pick<
   TextInputProps,
   'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength'
 >;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 interface Props<
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, string>,
-> extends AllowedInputProps {
+> extends AllowedInputProps,
+    AllowedFieldProps {
   name: TName;
   control: Control<TFormValues>;
 
-  // field props
-  label?: string;
-  className?: string;
-  required?: boolean;
+  // input type
+  type?: 'text' | 'email' | 'search' | 'tel' | 'url' | 'number';
 }
 
 export const TextField = <

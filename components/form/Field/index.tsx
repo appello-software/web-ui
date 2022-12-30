@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 
-interface Props {
+export interface FieldProps {
   label?: string;
   error?: FieldError;
   className?: string;
@@ -13,7 +13,7 @@ interface Props {
   required?: boolean;
 }
 
-export const Field: React.FC<Props> = ({
+export const Field: React.FC<FieldProps> = ({
   label,
   error,
   className,

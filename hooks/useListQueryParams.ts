@@ -1,4 +1,5 @@
 import { useUpdateEffect } from '@appello/common/lib/hooks';
+import { toString } from '@appello/common/lib/utils/string';
 import { useMemo } from 'react';
 import { useQueryParam } from 'use-query-params';
 
@@ -22,7 +23,7 @@ interface UseListQueryParamsReturn {
 
 export const useListQueryParams = (): UseListQueryParamsReturn => {
   const [offset, setOffset] = useQueryParam<number>(ListQueryType.PAGE, {
-    encode: offset => `${Math.ceil(offset / PAGE_SIZE) + 1}`,
+    encode: offset => toString(Math.ceil(offset / PAGE_SIZE) + 1),
     decode: page => (Number(page) - 1 || 0) * PAGE_SIZE,
   });
   const [searchValue, setSearchValue] = useQueryParam<SearchType>(ListQueryType.SEARCH);
