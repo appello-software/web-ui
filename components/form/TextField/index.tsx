@@ -5,7 +5,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 type AllowedInputProps = Pick<
   TextInputProps,
-  'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength'
+  'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength' | 'disabled'
 >;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
