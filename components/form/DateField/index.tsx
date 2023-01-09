@@ -1,5 +1,4 @@
 import 'react-day-picker/dist/style.css';
-import './styles.module.scss';
 
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import { useClickAway } from '@appello/web/lib/hooks';
@@ -24,6 +23,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { DATE_FORMAT } from '~/constants/dates';
 
+import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
 
 interface Props<
@@ -123,6 +123,7 @@ export const DateField = <
             <DayPicker
               selected={value ?? undefined}
               month={month}
+              className={styles['container']}
               onMonthChange={handleMonthChange}
               onDayClick={handleDayChange}
               components={{ CaptionLabel }}
