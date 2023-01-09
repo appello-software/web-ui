@@ -1,0 +1,36 @@
+.container {
+  :global .rnd {
+    &__root-menu {
+      margin-block: 0.43rem;
+    }
+
+    &__menu {
+      @apply dropdown-common__menu;
+    }
+
+    &__submenu {
+      width: 9.93rem;
+    }
+
+    &__option {
+      @apply dropdown-common__option;
+
+      &:not(&--disabled):hover {
+        @apply dropdown-common__option-hover;
+      }
+    }
+
+    &__option-icon {
+      width: 1rem;
+      height: 1rem;
+
+      &--left {
+        margin-right: 0.49rem;
+      }
+    }
+
+    &__option-label {
+      @apply dropdown-common__option-label;
+    }
+  }
+}
