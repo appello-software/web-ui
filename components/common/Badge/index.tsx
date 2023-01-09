@@ -6,6 +6,8 @@ import React, { FC, ReactNode } from 'react';
 export enum BadgeColor {
   GREEN = 'green',
   GRAY = 'gray',
+  BLUE = 'blue',
+  RED = 'red',
 }
 
 interface Props {

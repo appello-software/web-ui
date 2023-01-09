@@ -11,7 +11,7 @@ type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 interface Props<
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, string>,
+  TName extends FieldPathByValue<TFormValues, number | string>,
 > extends AllowedInputProps,
     AllowedFieldProps {
   name: TName;
@@ -23,7 +23,7 @@ interface Props<
 
 export const TextField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, string>,
+  TName extends FieldPathByValue<TFormValues, number | string>,
 >({
   name,
   control,
