@@ -8,6 +8,7 @@ import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
+import { ActionMeta } from 'react-select/dist/declarations/src/types';
 
 export interface SelectOption<T> {
   label: string;
@@ -19,11 +20,9 @@ interface Props<TFormValues extends FieldValues, TValue, TIsMulti> {
   options: SelectOption<TValue>[];
   control: Control<TFormValues>;
   isMulti?: TIsMulti;
-
   // input props
   placeholder?: string;
   inputSize?: InputSize;
-
   // field props
   label?: string;
   className?: string;
@@ -62,12 +61,15 @@ export const SelectField = <
     if (isMulti && Array.isArray(value)) {
       return options.filter(option => value.includes(option.value));
     }
-
-    return options.find(option => option.value === value);
+    return options.find(option => option.value === value) || null;
   }, [isMulti, options, value]);
 
   const handleChange = useCallback(
-    (option: OnChangeValue<SelectOption<TValue>, TIsMulti>) => {
+    (
+      option: OnChangeValue<SelectOption<TValue>, TIsMulti>,
+      { action }: ActionMeta<SelectOption<TValue>>,
+    ) => {
+      if (action === 'clear') controller.field.onChange(null);
       if (isMultiOption(option)) {
         controller.field.onChange(option.map(({ value }) => value));
       } else if (option) {
@@ -90,7 +92,7 @@ export const SelectField = <
         classNamePrefix="react-select"
         menuPortalTarget={document.body}
         menuPosition="fixed"
-        isClearable={false}
+        isClearable={!isMulti}
       />
     </Field>
   );

@@ -54,7 +54,7 @@ export const PhotoField = <
         />
       </div>
 
-      <FileUpload onUpload={controller.field.onChange}>
+      <FileUpload accept=".png, .jpg, .jpeg" onUpload={controller.field.onChange}>
         {({ onClick }) => (
           <Button
             variant={ButtonVariant.SECONDARY}

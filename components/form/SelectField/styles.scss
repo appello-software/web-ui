@@ -18,6 +18,14 @@
     overflow-y: auto;
   }
 
+  &__indicators {
+    @apply flex flex-row items-center;
+
+    .react-select__clear-indicator {
+      @apply mr-1;
+    }
+  }
+
   &__control {
     @apply text-p4 bg-white;
     padding-inline: 1.18rem;
