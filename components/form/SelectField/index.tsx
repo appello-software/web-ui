@@ -8,7 +8,7 @@ import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
 import Select, { OnChangeValue, StylesConfig } from 'react-select';
-import { ActionMeta } from 'react-select/dist/declarations/src/types';
+import { ActionMeta, CSSObjectWithLabel } from 'react-select/dist/declarations/src/types';
 
 export interface SelectOption<T> {
   label: string;
@@ -28,10 +28,17 @@ interface Props<TFormValues extends FieldValues, TValue, TIsMulti> {
   className?: string;
 }
 
-const styleProxy = new Proxy(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const styleProxy = new Proxy<StylesConfig<SelectOption<any>>>(
   {},
   {
-    get: (_, name) => (style: StylesConfig) => {
+    get: (_, name) => (style: CSSObjectWithLabel) => {
+      if (name === 'menu') {
+        return {
+          bottom: style.bottom,
+          top: style.top,
+        };
+      }
       if (name === 'menuPortal') {
         return style;
       }
