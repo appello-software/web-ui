@@ -1,106 +1,68 @@
-import './styles.scss';
-
 import { Field } from '@ui/components/form/Field';
-import { isMultiOption } from '@ui/components/form/SelectField/utils';
-import { InputSize } from '@ui/components/form/TextInput';
-import clsx from 'clsx';
+import { Select, SelectOnChange, SelectValueType } from '@ui/components/form/Select';
+import { SelectProps } from '@ui/components/form/Select';
 import * as React from 'react';
-import { useCallback, useMemo } from 'react';
-import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
-import Select, { OnChangeValue, StylesConfig } from 'react-select';
-import { ActionMeta, CSSObjectWithLabel } from 'react-select/dist/declarations/src/types';
+import {
+  Control,
+  FieldPath,
+  FieldPathByValue,
+  FieldPathValue,
+  FieldValues,
+  useController,
+} from 'react-hook-form';
 
 export interface SelectOption<T> {
   label: string;
   value: T;
 }
 
-interface Props<TFormValues extends FieldValues, TValue, TIsMulti> {
-  name: FieldPath<TFormValues>;
-  options: SelectOption<TValue>[];
+type AllowedSelectProps<TValue, TIsMulti extends boolean, TIsClearable extends boolean> = Pick<
+  SelectProps<TValue, TIsMulti, TIsClearable>,
+  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable'
+>;
+
+interface Props<
+  TFormValues extends FieldValues,
+  TName extends FieldPath<TFormValues>,
+  TValue,
+  TIsMulti extends boolean,
+  TIsClearable extends boolean,
+> extends AllowedSelectProps<TValue, TIsMulti, TIsClearable> {
+  name: TName;
   control: Control<TFormValues>;
-  isMulti?: TIsMulti;
-  // input props
-  placeholder?: string;
-  inputSize?: InputSize;
-  // field props
+  options: TIsMulti extends true
+    ? SelectOption<FieldPathValue<TFormValues, TName>[number]>[]
+    : SelectOption<FieldPathValue<TFormValues, TName>>[];
   label?: string;
   className?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const styleProxy = new Proxy<StylesConfig<SelectOption<any>>>(
-  {},
-  {
-    get: (_, name) => (style: CSSObjectWithLabel) => {
-      if (name === 'menu') {
-        return {
-          bottom: style.bottom,
-          top: style.top,
-        };
-      }
-      if (name === 'menuPortal') {
-        return style;
-      }
-      return undefined;
-    },
-  },
-);
-
 export const SelectField = <
   TFormValues extends FieldValues,
-  TValue extends FieldPathValue<TFormValues, FieldPath<TFormValues>>,
-  TIsMulti extends boolean,
+  TName extends TIsMulti extends true
+    ? FieldPathByValue<TFormValues, unknown[]>
+    : FieldPath<TFormValues>,
+  TValue extends FieldPathValue<TFormValues, TName>,
+  TIsMulti extends boolean = false,
+  TIsClearable extends boolean = false,
 >({
   control,
   name,
   options,
   label,
-  placeholder = label,
   className,
   isMulti,
-  inputSize = InputSize.MEDIUM,
-}: Props<TFormValues, TValue, TIsMulti>): React.ReactElement => {
+  isClearable,
+  inputSize,
+  placeholder,
+}: Props<TFormValues, TName, TValue, TIsMulti, TIsClearable>): React.ReactElement => {
   const controller = useController({ name, control });
-  const value = controller.field.value as TValue;
-
-  const selectedOption = useMemo(() => {
-    if (isMulti && Array.isArray(value)) {
-      return options.filter(option => value.includes(option.value));
-    }
-    return options.find(option => option.value === value) || null;
-  }, [isMulti, options, value]);
-
-  const handleChange = useCallback(
-    (
-      option: OnChangeValue<SelectOption<TValue>, TIsMulti>,
-      { action }: ActionMeta<SelectOption<TValue>>,
-    ) => {
-      if (action === 'clear') controller.field.onChange(null);
-      if (isMultiOption(option)) {
-        controller.field.onChange(option.map(({ value }) => value));
-      } else if (option) {
-        controller.field.onChange(option.value);
-      }
-    },
-    [controller.field],
-  );
+  const value = controller.field.value as SelectValueType<TValue, TIsMulti, TIsClearable>;
+  const onChange = controller.field.onChange as SelectOnChange<TValue, TIsMulti, TIsClearable>;
 
   return (
     <Field label={label} error={controller.fieldState.error} className={className}>
-      <Select
-        className={clsx('react-select', { [`react-select--size-${inputSize}`]: inputSize })}
-        isMulti={isMulti}
-        options={options}
-        onChange={handleChange}
-        value={selectedOption}
-        placeholder={placeholder}
-        styles={styleProxy}
-        classNamePrefix="react-select"
-        menuPortalTarget={document.body}
-        menuPosition="fixed"
-        isClearable={!isMulti}
-      />
+      <Select {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder }} />
     </Field>
   );
 };
