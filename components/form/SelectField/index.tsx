@@ -30,11 +30,11 @@ interface Props<
 > extends AllowedSelectProps<TValue, TIsMulti, TIsClearable> {
   name: TName;
   control: Control<TFormValues>;
+  className?: string;
   options: TIsMulti extends true
     ? SelectOption<FieldPathValue<TFormValues, TName>[number]>[]
     : SelectOption<FieldPathValue<TFormValues, TName>>[];
   label?: string;
-  className?: string;
 }
 
 export const SelectField = <

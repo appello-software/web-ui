@@ -1,4 +1,5 @@
 $input-inline-padding: 1.18rem;
+$input-textarea-vertical-padding: 1rem;
 $input-icon-size: 1.25rem;
 $input-icon-margin: 0.56rem;
 
@@ -90,6 +91,12 @@ $input-icon-margin: 0.56rem;
     &--with-icon-after {
       padding-right: $input-icon-size + $input-inline-padding + $input-icon-margin;
     }
+  }
+
+  &__textarea {
+    padding-block: $input-textarea-vertical-padding;
+    height: 6.5rem;
+    resize: none;
   }
 
   &__input-icon {

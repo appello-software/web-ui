@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode, useMemo } from 'react';
-
 export interface TextInputProps
   extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size'> {
   error?: boolean;
