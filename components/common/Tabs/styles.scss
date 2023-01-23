@@ -1,0 +1,25 @@
+.tabs {
+
+  &__head {
+
+  }
+
+  &__head-item {
+
+  }
+
+  &__head-button {
+    @apply text-c1 text-gray-1 font-semibold;
+    padding-inline: 1rem;
+    padding-block: 0.5rem 1rem;
+
+    &--active {
+      @apply text-accent;
+      border-bottom: 2px solid hsl(var(--accent-color));
+    }
+  }
+
+  &__body {
+
+  }
+}

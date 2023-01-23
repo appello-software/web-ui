@@ -1,3 +1,6 @@
+$content-padding-x: 30px;
+$content-padding-y: 25px;
+
 .container {
   position: relative;
   height: fit-content;
@@ -7,7 +10,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   background-color: #fff;
-  padding: 25px 30px;
+  padding: $content-padding-y $content-padding-x;
 }
 
 .overlay {
@@ -26,16 +29,18 @@
 }
 
 .buttons-list {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 16px;
+  border-top: 1px solid hsl(var(--gray-6-color));
+  padding-top: $content-padding-y;
+  margin-top: $content-padding-y;
   display: flex;
   justify-content: flex-end;
-  margin-top: 25px;
+  margin-inline: -$content-padding-x;
+  padding-inline: $content-padding-x;
 }
 
 .button {
   width: auto;
-  padding: 0 40px;
+  padding: 0 2.5rem;
 }
 
 .react-modal-opened {

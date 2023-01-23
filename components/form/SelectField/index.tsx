@@ -1,4 +1,4 @@
-import { Field } from '@ui/components/form/Field';
+import { Field, FieldProps } from '@ui/components/form/Field';
 import { Select, SelectOnChange, SelectValueType } from '@ui/components/form/Select';
 import { SelectProps } from '@ui/components/form/Select';
 import * as React from 'react';
@@ -27,14 +27,13 @@ interface Props<
   TValue,
   TIsMulti extends boolean,
   TIsClearable extends boolean,
-> extends AllowedSelectProps<TValue, TIsMulti, TIsClearable> {
+> extends AllowedSelectProps<TValue, TIsMulti, TIsClearable>,
+    Pick<FieldProps, 'label' | 'className' | 'required'> {
   name: TName;
   control: Control<TFormValues>;
-  className?: string;
   options: TIsMulti extends true
     ? SelectOption<FieldPathValue<TFormValues, TName>[number]>[]
     : SelectOption<FieldPathValue<TFormValues, TName>>[];
-  label?: string;
 }
 
 export const SelectField = <
@@ -51,6 +50,7 @@ export const SelectField = <
   options,
   label,
   className,
+  required,
   isMulti,
   isClearable,
   inputSize,
@@ -61,7 +61,7 @@ export const SelectField = <
   const onChange = controller.field.onChange as SelectOnChange<TValue, TIsMulti, TIsClearable>;
 
   return (
-    <Field label={label} error={controller.fieldState.error} className={className}>
+    <Field {...{ label, className, required }} error={controller.fieldState.error}>
       <Select {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder }} />
     </Field>
   );
