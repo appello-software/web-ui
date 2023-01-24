@@ -1,11 +1,26 @@
 .tabs {
 
   &__head {
+    position: relative;
+  }
 
+  &__head-list {
+    border-bottom: 1px solid hsl(var(--gray-6-color));
+    display: flex;
   }
 
   &__head-item {
 
+  }
+
+  &__head-line {
+    position: absolute;
+    bottom: 1px;
+    height: 2px;
+    background-color: hsl(var(--accent-color));
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s ease, width 0.3s ease;
+    border-radius: 2px 2px 0 0;
   }
 
   &__head-button {
@@ -15,7 +30,6 @@
 
     &--active {
       @apply text-accent;
-      border-bottom: 2px solid hsl(var(--accent-color));
     }
   }
 
