@@ -2,7 +2,7 @@ import { useSwitchValue } from '@appello/common/lib/hooks';
 import { useClickAway } from '@appello/web/lib/hooks';
 import { Field, FieldProps } from '@ui/components/form/Field';
 import { InputSize, TextInput } from '@ui/components/form/TextInput';
-import React, { useRef } from 'react';
+import React, { ReactElement, useRef } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
@@ -23,7 +23,7 @@ export const ColorPickerField = <
   size,
   className,
   required,
-}: Props<TName, TFormValues>) => {
+}: Props<TName, TFormValues>): ReactElement => {
   const pickerRef = useRef(null);
 
   const { field, fieldState } = useController({ name, control });

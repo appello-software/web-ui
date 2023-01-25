@@ -1,7 +1,14 @@
 import './styles.scss';
 
 import clsx from 'clsx';
-import React, { ReactElement, ReactNode, useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  ReactElement,
+  ReactNode,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export interface Tab {
   title: ReactNode;
@@ -9,14 +16,35 @@ export interface Tab {
   disabled?: boolean;
 }
 
+export interface TabsRef {
+  moveTo(index: number): void;
+  getSelectedTabIndex(): number;
+}
+
 interface Props<TTab> {
   items: TTab[];
   contentClassName?: string;
+  className?: string;
+  tabsRef?: React.RefObject<TabsRef>;
 }
 
-export const Tabs = <TTab extends Tab>({ items, contentClassName }: Props<TTab>): ReactElement => {
+export const Tabs = <TTab extends Tab>({
+  items,
+  contentClassName,
+  className,
+  tabsRef,
+}: Props<TTab>): ReactElement => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
   const element = items[selectedTabIndex].element;
+
+  useImperativeHandle(tabsRef, () => ({
+    moveTo(index: number) {
+      setSelectedTabIndex(index);
+    },
+    getSelectedTabIndex() {
+      return selectedTabIndex;
+    },
+  }));
 
   const headListRef = useRef<HTMLUListElement>(null);
   const activeLineRef = useRef<HTMLDivElement>(null);
@@ -35,7 +63,7 @@ export const Tabs = <TTab extends Tab>({ items, contentClassName }: Props<TTab>)
   }, [selectedTabIndex]);
 
   return (
-    <div className="tabs">
+    <div className={clsx('tabs', className)}>
       <div className="tabs__head">
         <ul ref={headListRef} className="tabs__head-list">
           {items.map((item, index) => (
