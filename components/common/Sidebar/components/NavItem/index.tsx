@@ -57,7 +57,6 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
         <NavLink
           to={item.link}
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
-          end
         >
           <Icon name={item.icon} className="sidebar__nav-icon" />
           <span className="sidebar__item-title">{item.title}</span>
