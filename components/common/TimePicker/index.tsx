@@ -1,13 +1,15 @@
-import { BrowserSelect, BrowserSelectProps } from '@ui/components/common/BrowserSelect';
+import { BrowserSelect } from '@ui/components/common/BrowserSelect';
 import { ISO_TIME_FORMAT, TIME_FORMAT } from '@ui/components/common/TimePicker/consts';
 import clsx from 'clsx';
 import { eachMinuteOfInterval, endOfToday, format, startOfToday } from 'date-fns';
 import React, { useMemo } from 'react';
 
-interface TimePickerProps extends Pick<BrowserSelectProps, 'onChange' | 'value'> {
+interface TimePickerProps {
   labelFormat?: string;
   valueFormat?: string;
   className?: string;
+  onChange: (p: string) => void;
+  value: string;
 }
 
 const step = 30;
@@ -20,7 +22,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   valueFormat = ISO_TIME_FORMAT,
   labelFormat = TIME_FORMAT,
   className,
-  ...rest
+  onChange,
 }) => {
   const options = useMemo(
     () =>
@@ -36,7 +38,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   const selectedValue = useMemo(() => options.find(item => item.value === value), [value, options]);
 
   return (
-    <BrowserSelect options={options} value={value} {...rest}>
+    <BrowserSelect options={options} value={value} onChange={event => onChange(event.target.value)}>
       <button type="button" className={clsx('relative', className)}>
         {selectedValue?.label || 'select time'}
       </button>

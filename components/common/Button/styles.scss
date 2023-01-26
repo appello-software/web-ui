@@ -24,6 +24,10 @@
   &--secondary {
     @apply bg-gray-7;
     border: 1px solid hsl(var(--gray-5-color));
+
+    &[disabled] {
+      @apply bg-gray-6 opacity-60 pointer-events-none;
+    }
   }
 
   &--negative {

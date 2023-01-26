@@ -16,7 +16,11 @@ export const BrowserSelect: React.FC<BrowserSelectProps> = ({
   return (
     <div className="relative">
       {children}
-      <select onChange={onChange} className="absolute inset-0 opacity-0" value={value}>
+      <select
+        onChange={onChange}
+        className="absolute inset-0 opacity-0 cursor-pointer"
+        value={value}
+      >
         {options.map((item, index) => (
           <option value={item.value} key={index}>
             {item.label}

@@ -18,6 +18,12 @@
     overflow-y: auto;
   }
 
+  &__dropdown-indicator {
+    svg {
+      @apply h-full w-full;
+    }
+  }
+
   &__indicators {
     @apply flex flex-row items-center;
 
