@@ -1,0 +1,85 @@
+.modal-overlay {
+  @apply bg-black-1/60;
+  z-index: 2;
+  overflow-y: auto;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.modal {
+  --content-padding-x: 30px;
+  --content-padding-y: 25px;
+
+  position: relative;
+  height: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  width: 500px;
+  overflow: hidden;
+
+  $modal: &;
+
+  &--center {
+    margin: auto;
+    border-radius: 8px;
+    padding: var(--content-padding-y) var(--content-padding-x);
+
+    #{$modal}__close-btn {
+      @apply absolute top-2.5 right-2.5;
+      position: absolute;
+    }
+
+    #{$modal}__header {
+      @apply text-h4 mb-2.5;
+    }
+
+    #{$modal}__buttons-list {
+      border-top: 1px solid hsl(var(--gray-6-color));
+      padding-top: var(--content-padding-y);
+      margin-top: var(--content-padding-y);
+      display: flex;
+      justify-content: flex-end;
+      margin-inline: calc(var(--content-padding-x) * -1);
+      padding-inline: var(--content-padding-x);
+    }
+  }
+
+  &--right {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    height: 100vh;
+
+    #{$modal}__close-btn {
+      @apply top-5 left-5 p-2 rounded;
+      position: absolute;
+      border: 1px solid hsl(var(--gray-6-color));
+    }
+
+    #{$modal}__header {
+      @apply text-p3 font-semibold flex justify-center items-center;
+      min-height: 5rem;
+      border-bottom: 1px solid hsl(var(--gray-6-color));
+    }
+
+    #{$modal}__buttons-list {
+      @apply pb-5 px-5;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #{$modal}__content {
+      @apply p-5 overflow-auto;
+    }
+  }
+
+  &__button {
+    width: auto;
+    padding: 0 2.5rem;
+  }
+}
+
+.react-modal-opened {
+  overflow: hidden;
+}

@@ -1,10 +1,10 @@
+import './styles.scss';
+
 import { Button, ButtonProps } from '@ui/components/common/Button';
 import { Icon } from '@ui/components/common/Icon';
 import clsx from 'clsx';
 import * as React from 'react';
 import ReactModal from 'react-modal';
-
-import styles from './styles.module.scss';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -14,6 +14,7 @@ export interface ModalProps {
   children: React.ReactNode;
   withCloseButton?: boolean;
   contentClassName?: string;
+  position?: 'center' | 'right';
 }
 
 const app = document.querySelector('#root') as HTMLElement;
@@ -26,6 +27,7 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   contentClassName,
   withCloseButton = true,
+  position = 'center',
 }) => {
   return (
     <ReactModal
@@ -33,22 +35,22 @@ export const Modal: React.FC<ModalProps> = ({
       appElement={app}
       onRequestClose={close}
       contentLabel={title}
-      className={clsx(styles['container'], contentClassName)}
-      overlayClassName={styles['overlay']}
+      className={clsx('modal', `modal--${position}`, contentClassName)}
+      overlayClassName="modal-overlay"
       shouldCloseOnEsc
-      bodyOpenClassName={styles['react-modal-opened']}
+      bodyOpenClassName="react-modal-opened"
     >
       {withCloseButton && (
-        <button type="button" className={styles['close-btn']} onClick={close}>
+        <button type="button" className="modal__close-btn" onClick={close}>
           <Icon name="close" size={20} />
         </button>
       )}
-      {title && <h2 className="text-h4 mb-2.5">{title}</h2>}
-      <div>{children}</div>
+      {title && <div className="modal__header">{title}</div>}
+      <div className="modal__content">{children}</div>
       {buttons && buttons.length > 0 && (
-        <div className={styles['buttons-list']}>
+        <div className="modal__buttons-list">
           {buttons.map((props, index) => (
-            <Button key={index} {...props} className={styles['button']} />
+            <Button key={index} {...props} className="modal__button" />
           ))}
         </div>
       )}
