@@ -52,7 +52,7 @@
     height: 100vh;
 
     #{$modal}__close-btn {
-      @apply top-5 left-5 p-2 rounded;
+      @apply top-5 left-5 p-2 rounded bg-gray-7;
       position: absolute;
       border: 1px solid hsl(var(--gray-6-color));
     }
