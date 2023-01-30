@@ -15,6 +15,7 @@ export interface ModalProps {
   withCloseButton?: boolean;
   contentClassName?: string;
   position?: 'center' | 'right';
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 const app = document.querySelector('#root') as HTMLElement;
@@ -28,6 +29,7 @@ export const Modal: React.FC<ModalProps> = ({
   contentClassName,
   withCloseButton = true,
   position = 'center',
+  shouldCloseOnOverlayClick = true,
 }) => {
   return (
     <ReactModal
@@ -37,8 +39,9 @@ export const Modal: React.FC<ModalProps> = ({
       contentLabel={title}
       className={clsx('modal', `modal--${position}`, contentClassName)}
       overlayClassName="modal-overlay"
-      shouldCloseOnEsc
+      shouldCloseOnEsc={shouldCloseOnOverlayClick}
       bodyOpenClassName="react-modal-opened"
+      shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
     >
       {withCloseButton && (
         <button type="button" className="modal__close-btn" onClick={close}>
