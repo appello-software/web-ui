@@ -15,7 +15,7 @@ interface Props<TName, TFormValues extends FieldValues>
 
 export const ColorPickerField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, number | string>,
+  TName extends FieldPathByValue<TFormValues, Nullable<string>>,
 >({
   name,
   control,
@@ -41,7 +41,11 @@ export const ColorPickerField = <
       <div ref={pickerRef} className="relative">
         {isColorPickerOpen && (
           <div className="absolute bottom-[calc(100%+2px)] w-full">
-            <HexColorPicker className="w-auto" color={field.value} onChange={field.onChange} />
+            <HexColorPicker
+              className="w-auto"
+              color={field.value || '#ffffff'}
+              onChange={field.onChange}
+            />
           </div>
         )}
         <TextInput
@@ -55,7 +59,7 @@ export const ColorPickerField = <
           placeholder="Select colour"
           size={size}
           label={label}
-          value={field.value}
+          value={field.value ?? ''}
         />
       </div>
     </Field>
