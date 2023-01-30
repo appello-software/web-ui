@@ -38,7 +38,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
           error={!!controller.fieldState.error}
           autoCapitalize="none"
           type={isPasswordVisible ? 'text' : 'password'}
-          className="pr-[2.81rem]"
+          inputClassName="pr-[2.81rem]"
           {...textInputProps}
         />
         <button type="button" onClick={togglePasswordVisibility} className={styles['toggle']}>

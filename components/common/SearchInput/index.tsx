@@ -26,7 +26,7 @@ export const SearchInput: FC<Props> = ({ onChange, className, placeholder, defau
       <TextInput
         onChange={handleChange}
         placeholder={placeholder}
-        className={styles['input']}
+        inputClassName={styles['input']}
         defaultValue={defaultValue}
       />
     </div>

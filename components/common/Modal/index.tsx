@@ -1,19 +1,22 @@
 import './styles.scss';
 
+import { isString } from '@appello/common/lib/utils/string';
 import { Button, ButtonProps } from '@ui/components/common/Button';
 import { Icon } from '@ui/components/common/Icon';
 import clsx from 'clsx';
 import * as React from 'react';
+import { ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
 export interface ModalProps {
   isOpen: boolean;
   close(): void;
-  title?: string;
+  title?: ReactNode;
   buttons?: ButtonProps[];
   children: React.ReactNode;
   withCloseButton?: boolean;
   contentClassName?: string;
+  bodyClassName?: string;
   position?: 'center' | 'right';
   shouldCloseOnOverlayClick?: boolean;
 }
@@ -27,6 +30,7 @@ export const Modal: React.FC<ModalProps> = ({
   buttons,
   children,
   contentClassName,
+  bodyClassName,
   withCloseButton = true,
   position = 'center',
   shouldCloseOnOverlayClick = true,
@@ -36,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({
       isOpen={isOpen}
       appElement={app}
       onRequestClose={close}
-      contentLabel={title}
+      contentLabel={isString(title) ? title : undefined}
       className={clsx('modal', `modal--${position}`, contentClassName)}
       overlayClassName="modal-overlay"
       shouldCloseOnEsc={shouldCloseOnOverlayClick}
@@ -49,11 +53,11 @@ export const Modal: React.FC<ModalProps> = ({
         </button>
       )}
       {title && <div className="modal__header">{title}</div>}
-      <div className="modal__content">{children}</div>
+      <div className={clsx('modal__content', bodyClassName)}>{children}</div>
       {buttons && buttons.length > 0 && (
         <div className="modal__buttons-list">
           {buttons.map((props, index) => (
-            <Button key={index} {...props} className="modal__button" />
+            <Button key={index} {...props} className={clsx('modal__button', props.className)} />
           ))}
         </div>
       )}

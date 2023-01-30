@@ -111,7 +111,7 @@ export const DateField = <
             size={inputSize}
             value={displayDate}
             error={!!controller.fieldState.error}
-            className="cursor-pointer"
+            inputClassName="cursor-pointer"
             iconBeforeElement={<Icon name="calendar" />}
             iconAfterElement={
               <Icon name="down-arrow" className={clsx({ 'rotate-180': isCalendarVisible })} />

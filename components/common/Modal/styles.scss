@@ -1,6 +1,6 @@
 .modal-overlay {
   @apply bg-black-1/60;
-  z-index: 2;
+  z-index: 999;
   overflow-y: auto;
   display: flex;
   position: fixed;
@@ -15,7 +15,7 @@
   height: fit-content;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   background-color: #fff;
-  width: 500px;
+  width: 35%;
   overflow: hidden;
 
   $modal: &;

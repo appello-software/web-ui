@@ -9,6 +9,7 @@ export interface TextInputProps
   size?: InputSize;
   iconBeforeElement?: ReactNode;
   iconAfterElement?: ReactNode;
+  inputClassName?: string;
 }
 
 export enum InputSize {
@@ -20,6 +21,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       className,
+      inputClassName,
       placeholder,
       autoComplete,
       error = false,
@@ -39,10 +41,10 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }, [autoComplete]);
 
     return (
-      <div className="relative">
+      <div className={clsx('relative', className)}>
         <input
           ref={ref}
-          className={clsx(className, 'form__input', `form__input--size-${size}`, {
+          className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {
             'form__input--error': Boolean(error),
             'form__input--with-icon-before': Boolean(iconBeforeElement),
             'form__input--with-icon-after': Boolean(iconAfterElement),
