@@ -31,7 +31,7 @@
     }
 
     #{$modal}__header {
-      @apply text-h4 mb-2.5;
+      @apply mb-2.5 text-h4;
     }
 
     #{$modal}__buttons-list {
@@ -52,25 +52,25 @@
     height: 100vh;
 
     #{$modal}__close-btn {
-      @apply top-5 left-5 p-2 rounded bg-gray-7;
+      @apply top-5 left-5 rounded bg-gray-7 p-2;
       position: absolute;
       border: 1px solid hsl(var(--gray-6-color));
     }
 
     #{$modal}__header {
-      @apply text-p3 font-semibold flex justify-center items-center;
+      @apply flex items-center justify-center text-p3 font-semibold;
       min-height: 5rem;
       border-bottom: 1px solid hsl(var(--gray-6-color));
     }
 
     #{$modal}__buttons-list {
-      @apply pb-5 px-5;
+      @apply px-5 pb-5;
       display: flex;
       justify-content: flex-end;
     }
 
     #{$modal}__content {
-      @apply p-5 overflow-auto;
+      @apply overflow-auto p-5;
     }
   }
 

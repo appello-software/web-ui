@@ -16,7 +16,7 @@ export const HeaderCell = <TData extends RowData>({
   return (
     <th className={styles['head-cell']}>
       <div
-        className="flex items-center select-none"
+        className="flex select-none items-center"
         {...(header.column.getCanSort()
           ? {
               onClick: header.column.getToggleSortingHandler(),
@@ -29,7 +29,7 @@ export const HeaderCell = <TData extends RowData>({
           ? null
           : flexRender(header.column.columnDef.header, header.getContext())}
         {header.column.getCanSort() && (
-          <div className="inline-flex flex-col ml-2">
+          <div className="ml-2 inline-flex flex-col">
             <Icon
               name="polygon"
               width={6}

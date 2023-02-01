@@ -141,19 +141,19 @@ export const Table = <TData extends Record<string, unknown>>({
           ))}
         </tbody>
       </table>
-      {isFetching && <div className="bg-white/50 absolute inset-0" />}
+      {isFetching && <div className="absolute inset-0 bg-white/50" />}
       {hasPagination && totalCount > PAGE_SIZE && (
         <div>
           <Paginate
             breakLabel="..."
-            nextLabel={<Icon name="down-arrow" size={18} className="-rotate-90 inline" />}
+            nextLabel={<Icon name="down-arrow" size={18} className="inline -rotate-90" />}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             breakLinkClassName={styles['pagination__link']}
             breakClassName={styles['pagination__item']}
             pageCount={pageCount}
             forcePage={offset / PAGE_SIZE}
-            previousLabel={<Icon name="down-arrow" size={18} className="rotate-90 inline" />}
+            previousLabel={<Icon name="down-arrow" size={18} className="inline rotate-90" />}
             containerClassName={clsx(styles['pagination'], 'mt-4')}
             marginPagesDisplayed={5}
             pageLinkClassName={styles['pagination__link']}
@@ -168,7 +168,7 @@ export const Table = <TData extends Record<string, unknown>>({
             nextLinkClassName={clsx(styles['pagination__link'], styles['pagination__link--nav'])}
             nextClassName={styles['pagination__item']}
           />
-          <p className="text-c2 text-gray-2 mt-3">
+          <p className="mt-3 text-c2 text-gray-2">
             Results: {offset + 1} - {!isFetching ? offset + data.length : '...'} of {totalCount}
           </p>
         </div>

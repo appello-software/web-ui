@@ -33,7 +33,7 @@
   }
 
   &__control {
-    @apply text-p4 bg-white;
+    @apply bg-white text-p4;
     padding-inline: 1.18rem;
     border: 1px solid hsl(var(--gray-5-color));
     border-radius: 0.37rem;

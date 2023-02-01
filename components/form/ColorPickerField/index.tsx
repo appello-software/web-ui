@@ -53,7 +53,7 @@ export const ColorPickerField = <
           onClick={toggleColorPicker}
           iconBeforeElement={
             field.value && (
-              <div className="w-5 h-5 rounded" style={{ backgroundColor: field.value }} />
+              <div className="h-5 w-5 rounded" style={{ backgroundColor: field.value }} />
             )
           }
           placeholder="Select colour"

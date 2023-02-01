@@ -12,7 +12,7 @@
 }
 
 .head-cell {
-  @apply text-gray-1 text-c1 bg-gray-7;
+  @apply bg-gray-7 text-c1 text-gray-1;
   padding: 0.49rem 0.87rem;
   text-align: left;
   font-weight: 400;
@@ -40,7 +40,7 @@ $pagination-item-height: 1.74rem;
   column-gap: 0.24rem;
 
   &__item {
-    @apply text-c1 flex-center;
+    @apply flex-center text-c1;
     width: 1.36rem;
     height: $pagination-item-height;
     border-radius: 0.18rem;

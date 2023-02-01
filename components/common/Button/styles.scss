@@ -26,7 +26,7 @@
     border: 1px solid hsl(var(--gray-5-color));
 
     &[disabled] {
-      @apply bg-gray-6 opacity-60 pointer-events-none;
+      @apply pointer-events-none bg-gray-6 opacity-60;
     }
   }
 
@@ -101,7 +101,7 @@
   }
 
   &__count {
-    @apply text-c1 bg-accent rounded-full text-white;
+    @apply rounded-full bg-accent text-c1 text-white;
     display: inline-block;
     padding: 0 6px;
   }

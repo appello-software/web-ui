@@ -37,12 +37,12 @@ export const PhotoField = <
       error={controller.fieldState.error}
       labelClassName="mb-1"
     >
-      <div className="w-20 h-20 mb-3 relative">
+      <div className="relative mb-3 h-20 w-20">
         {photo && (
           <Button
             onClick={() => controller.field.onChange(null)}
             size={ButtonSize.SMALL}
-            className="absolute right-0 top-0 bg-black-1 bg-opacity-50 rounded-full"
+            className="absolute right-0 top-0 rounded-full bg-black-1 bg-opacity-50"
             iconClassName="text-white p-0.5"
             withIcon="close"
           />
@@ -50,7 +50,7 @@ export const PhotoField = <
         <img
           src={photo ?? photoPlaceholder}
           alt="Profile"
-          className="object-cover rounded-full w-full h-full"
+          className="h-full w-full rounded-full object-cover"
         />
       </div>
 
@@ -60,7 +60,7 @@ export const PhotoField = <
             variant={ButtonVariant.SECONDARY}
             withIcon="upload"
             label="Upload new"
-            className="px-7 w-auto"
+            className="w-auto px-7"
             onClick={onClick}
           />
         )}

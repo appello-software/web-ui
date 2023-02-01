@@ -173,7 +173,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
       >
         <div className="flex items-center">
           <p className="text-p3 font-semibold">{monthLabel}</p>
-          <Icon name="down-arrow" className="w-5 h-5 ml-1" />
+          <Icon name="down-arrow" className="ml-1 h-5 w-5" />
         </div>
       </BrowserSelect>
       <BrowserSelect
@@ -183,7 +183,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
       >
         <div className="flex items-center">
           <p className="text-p3 font-semibold">{yearValue}</p>
-          <Icon name="down-arrow" className="w-5 h-5 ml-1" />
+          <Icon name="down-arrow" className="ml-1 h-5 w-5" />
         </div>
       </BrowserSelect>
     </>

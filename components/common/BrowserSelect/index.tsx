@@ -18,7 +18,7 @@ export const BrowserSelect: React.FC<BrowserSelectProps> = ({
       {children}
       <select
         onChange={onChange}
-        className="absolute inset-0 opacity-0 cursor-pointer"
+        className="absolute inset-0 cursor-pointer opacity-0"
         value={value}
       >
         {options.map((item, index) => (

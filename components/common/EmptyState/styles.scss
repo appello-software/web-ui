@@ -1,7 +1,7 @@
 .empty-state {
-  @apply flex-center flex-col flex-1;
+  @apply flex-center flex-1 flex-col;
 
   &__label {
-    @apply text-p4 text-gray-2 mt-4;
+    @apply mt-4 text-p4 text-gray-2;
   }
 }
