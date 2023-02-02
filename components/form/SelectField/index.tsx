@@ -1,6 +1,5 @@
 import { Field, FieldProps } from '@ui/components/form/Field';
-import { Select, SelectOnChange, SelectValueType } from '@ui/components/form/Select';
-import { SelectProps } from '@ui/components/form/Select';
+import { Select, SelectOnChange, SelectProps, SelectValueType } from '@ui/components/form/Select';
 import * as React from 'react';
 import {
   Control,
