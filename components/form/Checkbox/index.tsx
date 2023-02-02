@@ -26,7 +26,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         <div className={styles['square']}>
           <Icon name="check" size={18} className={styles['square__icon']} />
         </div>
-        {label && <p className="ml-2 text-p4">{label}</p>}
+        {label && <p className={styles['label']}>{label}</p>}
       </label>
     );
   },

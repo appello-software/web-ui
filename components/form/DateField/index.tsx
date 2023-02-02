@@ -18,7 +18,7 @@ import {
   startOfYear,
 } from 'date-fns';
 import React, { FC, ReactElement, useCallback, useMemo, useRef, useState } from 'react';
-import { CaptionLabelProps, DayPicker, useDayPicker } from 'react-day-picker';
+import { CaptionLabelProps, DayPicker, Matcher, useDayPicker } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { DATE_FORMAT } from '~/constants/dates';
@@ -41,6 +41,7 @@ interface Props<
   // input props
   placeholder?: string;
   inputSize?: InputSize;
+  disabled?: Matcher;
 }
 
 export const DateField = <
@@ -54,6 +55,7 @@ export const DateField = <
   required,
   placeholder = label,
   inputSize,
+  disabled,
 }: Props<TFormValues, TName>): ReactElement => {
   const controller = useController({ name, control });
   const value = controller.field.value as Nullable<Date>;
@@ -137,6 +139,7 @@ export const DateField = <
               formatters={{
                 formatWeekdayName: renderWeekdayName,
               }}
+              disabled={disabled}
             />
           </div>
         )}

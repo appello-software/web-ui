@@ -1,41 +1,46 @@
 .container {
-  user-select: none;
   display: flex;
-  cursor: pointer;
   align-items: center;
+  cursor: pointer;
+  user-select: none;
 }
 
 .square {
   @apply flex-center;
 
   position: relative;
-  height: 20px;
   width: 20px;
-  border-radius: 3px;
+  height: 20px;
+  transition: background-color 0.2s, border-color 0.2s;
   border: 1px solid hsl(var(--gray-4-color));
+  border-radius: 3px;
+
   background-color: hsl(var(--white-color));
 
-  transition: background-color 0.2s, border-color 0.2s;
-
   &__icon {
-    color: hsl(var(--white-color));
-    opacity: 0;
-    transform: scale(0);
     transition: opacity 0.2s, transform 0.2s;
+    transform: scale(0);
+    opacity: 0;
+    color: hsl(var(--white-color));
   }
 }
 
 .input {
-  opacity: 0;
   display: none;
+  opacity: 0;
 
   &:checked ~ .square {
-    background-color: hsl(var(--green-color));
     border: 1px solid hsl(var(--green-color));
+    background-color: hsl(var(--green-color));
   }
 
   &:checked ~ .square .square__icon {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
+}
+
+.label {
+  @apply ml-2 text-p4;
+  word-break: break-word;
 }
