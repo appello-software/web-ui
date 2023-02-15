@@ -25,6 +25,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
   label,
   control,
   className,
+  placeholder = label,
   ...textInputProps
 }: Props<TFormValues>): React.ReactElement => {
   const controller = useController({ name, control });
@@ -39,6 +40,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
           autoCapitalize="none"
           type={isPasswordVisible ? 'text' : 'password'}
           inputClassName="pr-[2.81rem]"
+          placeholder={placeholder}
           {...textInputProps}
         />
         <button type="button" onClick={togglePasswordVisibility} className={styles['toggle']}>
