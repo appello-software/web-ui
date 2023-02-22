@@ -58,7 +58,7 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const Table = <TData extends Record<string, unknown>>({
+export const Table = <TData extends object>({
   className,
   data,
   columns,
