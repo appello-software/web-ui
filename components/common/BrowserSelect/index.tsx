@@ -1,3 +1,6 @@
+import './styles.scss';
+
+import clsx from 'clsx';
 import React, { ChangeEventHandler } from 'react';
 
 export interface BrowserSelectProps {
@@ -5,6 +8,7 @@ export interface BrowserSelectProps {
   options: { label: string; value: string }[];
   onChange: ChangeEventHandler<HTMLSelectElement>;
   value: string;
+  className?: string;
 }
 
 export const BrowserSelect: React.FC<BrowserSelectProps> = ({
@@ -12,15 +16,12 @@ export const BrowserSelect: React.FC<BrowserSelectProps> = ({
   options,
   onChange,
   value,
+  className,
 }) => {
   return (
-    <div className="relative">
+    <div className={clsx('browser-select', className)}>
       {children}
-      <select
-        onChange={onChange}
-        className="absolute inset-0 cursor-pointer opacity-0"
-        value={value}
-      >
+      <select onChange={onChange} className="browser-select__select" value={value}>
         {options.map((item, index) => (
           <option value={item.value} key={index}>
             {item.label}

@@ -1,0 +1,51 @@
+.radio {
+  user-select: none;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+
+  &__input {
+    box-sizing: border-box;
+    opacity: 0;
+    display: none;
+
+    &:checked ~ .radio__check-mark:after {
+      opacity: 1;
+    }
+
+    &:checked ~ .radio__check-mark {
+      background-color: hsl(var(--accent-color));
+      border: none;
+    }
+  }
+
+  &__check-mark {
+    position: relative;
+    height: 1.25rem;
+    width: 1.25rem;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+    border-radius: 50%;
+    border: 1px solid hsl(var(--gray-4-color));
+    background-color: hsl(var(--white-color));
+    transition: background-color 0.2s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:after {
+      content: '';
+      opacity: 0;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: hsl(var(--white-color));
+    }
+  }
+
+  &__label-text {
+    margin-left: 12px;
+    word-break: break-word;
+    font-weight: 500;
+  }
+}

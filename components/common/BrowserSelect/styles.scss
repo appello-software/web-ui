@@ -1,0 +1,8 @@
+.browser-select {
+  position: relative;
+
+  &__select {
+    @apply absolute inset-0 cursor-pointer opacity-0;
+    width: fit-content;
+  }
+}
