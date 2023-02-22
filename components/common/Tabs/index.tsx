@@ -35,7 +35,7 @@ export const Tabs = <TTab extends Tab>({
   tabsRef,
 }: Props<TTab>): ReactElement => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-  const element = items[selectedTabIndex].element;
+  const element = items[selectedTabIndex]?.element;
 
   useImperativeHandle(tabsRef, () => ({
     moveTo(index: number) {
@@ -60,7 +60,7 @@ export const Tabs = <TTab extends Tab>({
       activeLineRef.current.style.width = `${offsetWidth}px`;
       activeLineRef.current.style.transform = `translate3d(${offsetLeft}px, 0, 0)`;
     }
-  }, [selectedTabIndex]);
+  }, [selectedTabIndex, element]);
 
   return (
     <div className={clsx('tabs', className)}>
