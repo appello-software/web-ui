@@ -37,14 +37,18 @@ export const Tabs = <TTab extends Tab>({
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
   const element = items[selectedTabIndex]?.element;
 
-  useImperativeHandle(tabsRef, () => ({
-    moveTo(index: number) {
-      setSelectedTabIndex(index);
-    },
-    getSelectedTabIndex() {
-      return selectedTabIndex;
-    },
-  }));
+  useImperativeHandle(
+    tabsRef,
+    () => ({
+      moveTo(index: number) {
+        setSelectedTabIndex(index);
+      },
+      getSelectedTabIndex() {
+        return selectedTabIndex;
+      },
+    }),
+    [selectedTabIndex],
+  );
 
   const headListRef = useRef<HTMLUListElement>(null);
   const activeLineRef = useRef<HTMLDivElement>(null);
