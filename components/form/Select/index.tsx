@@ -33,6 +33,7 @@ export interface SelectProps<TValue, TIsMulti extends boolean, TIsClearable exte
   placeholder?: string;
   className?: string;
   isClearable?: TIsClearable;
+  hasError?: boolean;
 }
 
 const styleProxy = new Proxy(
@@ -66,6 +67,7 @@ export const Select = <
   isMulti = false as TIsMulti,
   onChange,
   isClearable = false as TIsClearable,
+  hasError,
 }: SelectProps<TValue, TIsMulti, TIsClearable>): React.ReactElement => {
   const selectedOption = useMemo(() => {
     if (isMulti && Array.isArray(value)) {
@@ -101,6 +103,7 @@ export const Select = <
     <ReactSelect
       className={clsx('react-select', className, {
         [`react-select--size-${inputSize}`]: inputSize,
+        [`react-select--error`]: hasError,
       })}
       isMulti={isMulti}
       value={selectedOption}

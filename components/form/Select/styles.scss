@@ -9,6 +9,10 @@
     min-height: var(--input-large-height);
   }
 
+  &--error .react-select__control {
+    border-color: hsl(var(--red-color));
+  }
+
   &__menu-portal {
     z-index: 999 !important;
   }

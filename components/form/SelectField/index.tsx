@@ -61,7 +61,10 @@ export const SelectField = <
 
   return (
     <Field {...{ label, className, required }} error={controller.fieldState.error}>
-      <Select {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder }} />
+      <Select
+        {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder }}
+        hasError={!!controller.fieldState.error}
+      />
     </Field>
   );
 };
