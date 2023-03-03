@@ -4,6 +4,8 @@
   cursor: pointer;
   align-items: center;
 
+  --checked-bg-color: hsl(var(--accent-color));
+
   &__input {
     box-sizing: border-box;
     opacity: 0;
@@ -14,7 +16,7 @@
     }
 
     &:checked ~ .radio__check-mark {
-      background-color: hsl(var(--accent-color));
+      background-color: var(--checked-bg-color);
       border: none;
     }
   }
