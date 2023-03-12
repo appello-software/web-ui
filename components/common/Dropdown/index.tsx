@@ -2,8 +2,8 @@ import 'react-nested-dropdown/dist/styles.css';
 
 import React, { ReactElement } from 'react';
 import {
-  type DropdownItem,
   Dropdown as ReactNestedDropdown,
+  type DropdownItem,
   DropdownProps,
 } from 'react-nested-dropdown';
 
