@@ -24,15 +24,15 @@
   &--secondary {
     @apply bg-gray-7;
     border: 1px solid hsl(var(--gray-5-color));
-
-    &[disabled] {
-      @apply pointer-events-none bg-gray-6 opacity-60;
-    }
   }
 
   &--negative {
     background-color: hsl(var(--red-color));
-    color: #fff;
+    color: hsl(var(--white-color));
+  }
+
+  &[disabled] {
+    @apply bg-gray-6 opacity-60 text-black-1;
   }
 
   &--size-small {
@@ -78,12 +78,8 @@
     opacity: 0.8;
   }
 
-  &--disabled {
-    background-color: hsl(0, 0%, 89%);
-  }
-
   &[disabled] {
-    cursor: default;
+    cursor: not-allowed;
   }
 
   &__loader {
