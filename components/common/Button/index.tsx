@@ -66,11 +66,12 @@ export const Button: React.FC<ButtonProps> = ({
       {
         'button--rounded': rounded,
         'button--bold': bold,
+        'button--disabled': disabled,
         'button--only-icon': [label, children, count].every(isNil) && withIcon,
       },
       className,
     );
-  }, [variant, size, rounded, bold, label, children, count, withIcon, className]);
+  }, [disabled, variant, size, rounded, bold, label, children, count, withIcon, className]);
 
   const renderIcon = React.useCallback(() => {
     if (!withIcon) {

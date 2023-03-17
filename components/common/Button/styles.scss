@@ -32,7 +32,12 @@
   }
 
   &[disabled] {
+    cursor: default;
+  }
+
+  &--disabled {
     @apply bg-gray-6 opacity-60 text-black-1;
+    cursor: not-allowed !important;
   }
 
   &--size-small {
@@ -76,10 +81,6 @@
   &:hover,
   &:active {
     opacity: 0.8;
-  }
-
-  &[disabled] {
-    cursor: not-allowed;
   }
 
   &__loader {
