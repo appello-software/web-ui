@@ -17,11 +17,6 @@
     z-index: 999 !important;
   }
 
-  &__menu-list {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
   &__dropdown-indicator {
     svg {
       @apply h-full w-full;
@@ -75,6 +70,10 @@
     position: absolute;
     width: 100%;
     margin-top: 0.43rem;
+  }
+
+  &__menu-list {
+    @apply py-1;
   }
 
   &__option {

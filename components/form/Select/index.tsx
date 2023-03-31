@@ -46,7 +46,7 @@ const styleProxy = new Proxy(
           top: style.top,
         };
       }
-      if (name === 'menuPortal') {
+      if (name === 'menuPortal' || name === 'menuList') {
         return style;
       }
       return undefined;
@@ -113,7 +113,10 @@ export const Select = <
       classNamePrefix="react-select"
       menuPortalTarget={document.body}
       onChange={handleChange}
+      maxMenuHeight={300}
+      menuPlacement="auto"
       menuPosition="fixed"
+      unstyled
       isClearable={isClearable}
     />
   );

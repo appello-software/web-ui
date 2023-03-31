@@ -15,7 +15,7 @@
 @layer components {
   .dropdown-common {
     &__menu {
-      @apply rounded-md border border-solid border-gray-5 bg-white py-1 shadow-4;
+      @apply rounded-md border border-solid border-gray-5 bg-white shadow-4;
     }
 
     &__option {

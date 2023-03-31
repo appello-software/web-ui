@@ -5,7 +5,7 @@
     }
 
     &__menu {
-      @apply dropdown-common__menu;
+      @apply dropdown-common__menu py-1;
     }
 
     &__submenu {
