@@ -1,9 +1,11 @@
 import './styles.scss';
 
+import { useUpdateEffect } from '@appello/common/lib/hooks';
 import clsx from 'clsx';
 import React, {
   ReactElement,
   ReactNode,
+  useEffect,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
@@ -26,6 +28,8 @@ interface Props<TTab> {
   contentClassName?: string;
   className?: string;
   tabsRef?: React.RefObject<TabsRef>;
+  selected?: number;
+  onSelect?: (value: number) => void;
 }
 
 export const Tabs = <TTab extends Tab>({
@@ -33,9 +37,19 @@ export const Tabs = <TTab extends Tab>({
   contentClassName,
   className,
   tabsRef,
+  selected,
+  onSelect,
 }: Props<TTab>): ReactElement => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? 0);
   const element = items[selectedTabIndex]?.element;
+
+  useEffect(() => {
+    setSelectedTabIndex(selected ?? 0);
+  }, [selected]);
+
+  useUpdateEffect(() => {
+    onSelect?.(selectedTabIndex);
+  }, [selectedTabIndex, onSelect]);
 
   useImperativeHandle(
     tabsRef,
