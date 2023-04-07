@@ -34,6 +34,7 @@ export interface SelectProps<TValue, TIsMulti extends boolean, TIsClearable exte
   className?: string;
   isClearable?: TIsClearable;
   hasError?: boolean;
+  disabled?: boolean;
 }
 
 export const Select = <
@@ -50,6 +51,7 @@ export const Select = <
   onChange,
   isClearable = false as TIsClearable,
   hasError,
+  disabled,
 }: SelectProps<TValue, TIsMulti, TIsClearable>): React.ReactElement => {
   const selectedOption = useMemo(() => {
     if (isMulti && Array.isArray(value)) {
@@ -99,6 +101,7 @@ export const Select = <
       menuPosition="fixed"
       unstyled
       isClearable={isClearable}
+      isDisabled={disabled}
     />
   );
 };

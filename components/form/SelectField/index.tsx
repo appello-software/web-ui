@@ -17,7 +17,7 @@ export interface SelectOption<T> {
 
 type AllowedSelectProps<TValue, TIsMulti extends boolean, TIsClearable extends boolean> = Pick<
   SelectProps<TValue, TIsMulti, TIsClearable>,
-  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable'
+  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable' | 'disabled'
 >;
 
 interface Props<

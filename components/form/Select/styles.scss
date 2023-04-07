@@ -45,6 +45,11 @@ body .react-select {
     height: auto;
   }
 
+  &__control--is-disabled {
+    background-color: hsl(var(--gray-7-color));
+    color: hsl(var(--gray-3-color));
+  }
+
   &__menu {
     @apply dropdown-common__menu;
     position: absolute;
