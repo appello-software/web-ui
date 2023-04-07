@@ -16,7 +16,15 @@ import {
   startOfDay,
   startOfYear,
 } from 'date-fns';
-import React, { FC, ReactElement, useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  FC,
+  ReactElement,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { CaptionLabelProps, DayPicker, Matcher, useDayPicker } from 'react-day-picker';
 
 import { DATE_FORMAT } from '~/constants/dates';
@@ -44,6 +52,7 @@ export const DateInput = <TValue extends Date | null>({
   disabledDate,
 }: DateInputProps<TValue>): ReactElement => {
   const calendarRef = useRef<HTMLDivElement>(null);
+  const calendarWrapperRef = useRef<HTMLDivElement>(null);
   const [month, setMonth] = useState(() => value ?? new Date());
 
   const {
@@ -77,6 +86,23 @@ export const DateInput = <TValue extends Date | null>({
     return format(value, DATE_FORMAT);
   }, [value]);
 
+  useLayoutEffect(() => {
+    const element = calendarWrapperRef.current;
+
+    if (isCalendarVisible && element) {
+      const rect = element.getBoundingClientRect();
+      const isBottomOverflow = rect.bottom > window.innerHeight && rect.top > rect.height;
+      if (isBottomOverflow) {
+        element.classList.add(styles['calendar-wrapper--top']);
+      }
+    }
+    return () => {
+      if (isCalendarVisible) {
+        element?.classList.remove(styles['calendar-wrapper--top']);
+      }
+    };
+  }, [isCalendarVisible]);
+
   useClickAway(calendarRef, closeCalendar);
 
   return (
@@ -97,7 +123,7 @@ export const DateInput = <TValue extends Date | null>({
         />
       </div>
       {isCalendarVisible && (
-        <div className="absolute mt-2">
+        <div className={styles['calendar-wrapper']} ref={calendarWrapperRef}>
           <DayPicker
             selected={value ?? undefined}
             month={month}
