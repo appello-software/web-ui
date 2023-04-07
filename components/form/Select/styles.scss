@@ -1,4 +1,5 @@
-.react-select {
+// body selector is required to override default styles (make more priority)
+body .react-select {
   position: relative;
 
   &--size-medium .react-select__control {
@@ -36,33 +37,12 @@
     padding-inline: 1.18rem;
     border: 1px solid hsl(var(--gray-5-color));
     border-radius: 0.37rem;
-    width: 100%;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     transition: background-color 0.2s, border-color 0.2s;
-  }
-
-  &__input-container {
-    height: 0;
   }
 
   &__control--is-focused &__input-container {
     height: auto;
-  }
-
-  &__value-container {
-    flex: 1;
-    overflow: hidden;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-
-    &--is-multi {
-      padding-block: 0.5rem;
-    }
   }
 
   &__menu {
@@ -134,7 +114,6 @@
 
   &__placeholder {
     @apply text-gray-3;
-    position: absolute;
   }
 
   &__indicator {

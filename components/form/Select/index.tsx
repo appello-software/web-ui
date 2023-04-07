@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import ReactSelect, { OnChangeValue } from 'react-select';
-import { ActionMeta, CSSObjectWithLabel } from 'react-select/dist/declarations/src/types';
+import { ActionMeta } from 'react-select/dist/declarations/src/types';
 
 import { isMultiOption } from './utils';
 
@@ -35,24 +35,6 @@ export interface SelectProps<TValue, TIsMulti extends boolean, TIsClearable exte
   isClearable?: TIsClearable;
   hasError?: boolean;
 }
-
-const styleProxy = new Proxy(
-  {},
-  {
-    get: (_, name) => (style: CSSObjectWithLabel) => {
-      if (name === 'menu') {
-        return {
-          bottom: style.bottom,
-          top: style.top,
-        };
-      }
-      if (name === 'menuPortal' || name === 'menuList') {
-        return style;
-      }
-      return undefined;
-    },
-  },
-);
 
 export const Select = <
   TValue,
@@ -109,7 +91,6 @@ export const Select = <
       value={selectedOption}
       placeholder={placeholder}
       options={options}
-      styles={styleProxy}
       classNamePrefix="react-select"
       menuPortalTarget={document.body}
       onChange={handleChange}
