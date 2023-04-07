@@ -26,6 +26,7 @@ export interface TabsRef {
 interface Props<TTab> {
   items: TTab[];
   contentClassName?: string;
+  headListClassName?: string;
   className?: string;
   tabsRef?: React.RefObject<TabsRef>;
   selected?: number;
@@ -35,6 +36,7 @@ interface Props<TTab> {
 export const Tabs = <TTab extends Tab>({
   items,
   contentClassName,
+  headListClassName,
   className,
   tabsRef,
   selected,
@@ -83,7 +85,7 @@ export const Tabs = <TTab extends Tab>({
   return (
     <div className={clsx('tabs', className)}>
       <div className="tabs__head">
-        <ul ref={headListRef} className="tabs__head-list">
+        <ul ref={headListRef} className={clsx('tabs__head-list', headListClassName)}>
           {items.map((item, index) => (
             <li key={index} className="tabs__head-item">
               <button
