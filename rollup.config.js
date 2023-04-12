@@ -51,7 +51,7 @@ const buildConfig = {
     json(),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-env'],
+      presets: ['@babel/preset-react'],
     }),
     typescript({ sourceMap: true }),
     postcss({
