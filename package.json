@@ -20,7 +20,9 @@
     "prettier": "prettier --write src/**/*.{ts,tsx,scss,json,css,pcss,js,graphql}",
     "lint": "eslint --quiet src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
-    "check-types": "tsc -p tsconfig.json"
+    "check-types": "tsc -p tsconfig.json",
+    "generate-exports": "node scripts/generate-exports.js",
+    "prepublishOnly": "npm version prerelease && npm run generate-exports && npm run build"
   },
   "repository": {
     "type": "git",
