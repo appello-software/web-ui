@@ -8,7 +8,7 @@
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.min.js",
   "types": "dist/index.d.ts",
-  "style": "dist/styles.css",
+  "style": "dist/index.css",
   "sideEffects": false,
   "files": [
     "dist",
@@ -22,7 +22,7 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepublishOnly": "npm version prerelease && npm run generate-exports && npm run build"
+    "prepublishOnly": "npm run build && npm version prerelease && npm run generate-exports"
   },
   "repository": {
     "type": "git",
