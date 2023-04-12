@@ -12,7 +12,6 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "src",
     "tsconfig.json"
   ],
   "scripts": {
