@@ -22,7 +22,7 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepublishOnly": "npm run build && npm version prerelease && npm run generate-exports"
+    "prepublishOnly": "npm run generate-exports && npm run build && npm version prerelease"
   },
   "repository": {
     "type": "git",
