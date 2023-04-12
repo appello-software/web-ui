@@ -1,4 +1,5 @@
-import { useAppelloKitComponents } from './index';
+import { useAppelloKitComponents } from '~/ctx';
+
 import { UIComponents, UseCombinedPropsWithKitProps } from './types';
 
 export function useCombinedPropsWithKit<

@@ -9,12 +9,13 @@ import {
 } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
-import { Select, SelectOnChange, SelectProps, SelectValueType } from '~/components/form/Select';
-
-export interface SelectOption<T> {
-  label: string;
-  value: T;
-}
+import {
+  Select,
+  SelectOnChange,
+  SelectOption,
+  SelectProps,
+  SelectValueType,
+} from '~/components/form/Select';
 
 type AllowedSelectProps<TValue, TIsMulti extends boolean, TIsClearable extends boolean> = Pick<
   SelectProps<TValue, TIsMulti, TIsClearable>,
