@@ -17,7 +17,7 @@ interface Props {
   logo: string;
   user?: {
     photoPlaceholder?: string;
-    photo?: Nullable<string>;
+    photo?: string | null;
     fullName: string;
     email: string;
   };

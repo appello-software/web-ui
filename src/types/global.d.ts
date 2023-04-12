@@ -24,5 +24,3 @@ declare module '*.css' {
   export default styles;
 }
 /* eslint-enable import/no-default-export */
-
-declare type Nullable<T> = T | null;

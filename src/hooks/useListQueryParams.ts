@@ -20,8 +20,8 @@ interface UseListQueryParamsReturn<TFilter> {
   setOffset: (newValue: OffsetType) => void;
   searchValue: SearchType;
   setSearchValue: (newValue: SearchType) => void;
-  filter: Nullable<TFilter>;
-  setFilter: (newValue: Nullable<TFilter>) => void;
+  filter: TFilter | null;
+  setFilter: (newValue: TFilter | null) => void;
   filtersCount: number;
 }
 
@@ -33,7 +33,7 @@ export const useListQueryParams = <TFilter>(): UseListQueryParamsReturn<TFilter>
     decode: page => (Number(page) - 1 || 0) * pageSize,
   });
   const [searchValue, setSearchValue] = useQueryParam<SearchType>(ListQueryType.SEARCH);
-  const [filter, setFilter] = useState<Nullable<TFilter>>(null);
+  const [filter, setFilter] = useState<TFilter | null>(null);
 
   const filtersCount = useMemo(() => {
     return Object.values(filter || {}).filter(value => !isNil(value)).length;

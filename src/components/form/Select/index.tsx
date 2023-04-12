@@ -19,7 +19,7 @@ export type SelectValueType<
   TValue,
   TIsMulti extends boolean,
   TIsClearable extends boolean,
-> = TIsMulti extends true ? TValue[] : TIsClearable extends true ? Nullable<TValue> : TValue;
+> = TIsMulti extends true ? TValue[] : TIsClearable extends true ? TValue | null : TValue;
 
 export type SelectOnChange<TValue, TIsMulti extends boolean, TIsClearable extends boolean> = (
   value: SelectValueType<TValue, TIsMulti, TIsClearable>,

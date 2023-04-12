@@ -16,7 +16,7 @@ export interface PhotoFieldProps<TFormValues extends FieldValues, TName> {
   photoPlaceholder?: string;
 }
 
-type PhotoValue = Nullable<File | string>;
+type PhotoValue = File | string | null;
 
 export const PhotoField = <
   TFormValues extends FieldValues,

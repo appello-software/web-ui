@@ -12,7 +12,7 @@ type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 interface Props<
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Nullable<Date>>,
+  TName extends FieldPathByValue<TFormValues, Date | null>,
 > extends AllowedDateInputProps,
     AllowedFieldProps {
   name: TName;
@@ -21,7 +21,7 @@ interface Props<
 
 export const DateField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Nullable<Date>>,
+  TName extends FieldPathByValue<TFormValues, Date | null>,
 >({
   name,
   control,
@@ -33,8 +33,8 @@ export const DateField = <
   disabledDate,
 }: Props<TFormValues, TName>): ReactElement => {
   const controller = useController({ name, control });
-  const value = controller.field.value as Nullable<Date>;
-  const onChange = controller.field.onChange as (value: Nullable<Date>) => void;
+  const value = controller.field.value as Date | null;
+  const onChange = controller.field.onChange as (value: Date | null) => void;
 
   return (
     <Field

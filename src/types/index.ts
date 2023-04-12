@@ -19,11 +19,6 @@ export interface AppelloKit {
 }
 
 export type AppelloKitComponents = { [P in keyof UIComponents]?: Partial<UIComponents[P]> };
-// import photoPlaceholder from '~/view/assets/images/photo-placeholder.svg';
-// import { PAGE_SIZE } from '~/constants/pagination';
-// import { DEBOUNCE_DELAY } from '~/constants/timing';
-// import { DATE_FORMAT } from '~/constants/dates';
-// <link rel="stylesheet" href="node_modules/@atlaskit/css-reset/dist/bundle.css" />
 
 export interface UseCombinedPropsWithKitProps<
   TName extends keyof UIComponents,

@@ -2,9 +2,9 @@ import { isString } from '@appello/common/lib/utils/string';
 import { useMemo } from 'react';
 
 export function useBlobObjectUrl(blob: Blob | File): string;
-export function useBlobObjectUrl(blob: Nullable<Blob | File | string>): Nullable<string>;
+export function useBlobObjectUrl(blob: Blob | File | string | null): string | null;
 
-export function useBlobObjectUrl(blob: Nullable<Blob | File | string>): Nullable<string> {
+export function useBlobObjectUrl(blob: Blob | File | string | null): string | null {
   return useMemo(() => {
     if (isString(blob)) {
       return blob;

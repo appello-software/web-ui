@@ -16,7 +16,7 @@ interface Props<TName, TFormValues extends FieldValues>
 
 export const ColorPickerField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Nullable<string>>,
+  TName extends FieldPathByValue<TFormValues, string | null>,
 >({
   name,
   control,
