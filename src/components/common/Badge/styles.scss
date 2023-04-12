@@ -5,18 +5,22 @@
   border-radius: 100px;
 
   &--green {
-    @apply bg-green/10 text-green;
+    background-color: hsl(var(--green-color) / 10%);
+    color: hsl(var(--green-color));
   }
 
   &--gray {
-    @apply bg-gray-7 text-black-2;
+    background-color: hsl(var(--gray-7-color) / 10%);
+    color: hsl(var(--black-2-color));
   }
 
   &--blue {
-    @apply bg-blue/10 text-blue;
+    background-color: hsl(var(--blue-color) / 10%);
+    color: hsl(var(--blue-color));
   }
 
   &--red {
-    @apply bg-red/10 text-red;
+    background-color: hsl(var(--red-color) / 10%);
+    color: hsl(var(--red-color));
   }
 }

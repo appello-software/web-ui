@@ -4,7 +4,9 @@
   --margin-between-icon-and-title: 0.75rem;
   --padding-x: 1.25rem;
 
-  @apply flex flex-col bg-primary;
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(var(--primary-color));
   width: 17.4rem;
   padding: 1.64rem 0;
   position: sticky;
@@ -13,7 +15,8 @@
   z-index: 1;
 
   &__header {
-    @apply flex justify-between;
+    display: flex;
+    justify-content: space-between;
     padding-inline: var(--padding-x);
   }
 
@@ -23,16 +26,18 @@
   }
 
   &__nav-container {
-    @apply mt-7;
+    margin-top: 1.75rem;
   }
 
   &__list-item {
-    @apply mb-2;
+    margin-bottom: 0.5rem;
     position: relative;
   }
 
   &__item {
-    @apply text-c1 text-white/40;
+    color: hsl(var(--white-color) / 40%);
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
     display: flex;
     align-items: center;
     font-weight: 600;
@@ -48,10 +53,10 @@
 
   &__item {
     &--active {
-      @apply bg-white/5 text-white;
+      background-color: hsl(var(--white-color) / 5%);
+      color: hsl(var(--white-color));
 
       &::before {
-        @apply bg-red;
         content: '';
         display: block;
         position: absolute;
@@ -59,6 +64,7 @@
         width: 3px;
         height: 100%;
         border-radius: 0 1px 1px 0;
+        background-color: hsl(var(--red-color));
       }
     }
   }
@@ -82,18 +88,20 @@
   }
 
   &__footer {
-    @apply flex;
+    display: flex;
     padding-inline: var(--padding-x);
     margin-top: auto;
     align-items: center;
   }
 
   &__user-name {
-    @apply text-p3 text-white;
+    font-size: var(--p3-font-size);
+    line-height: var(--p3-line-height);
+    color: hsl(var(--white-color));
   }
 
   &__user-photo {
-    @apply rounded-full;
+    border-radius: 50%;
     width: 2.25rem;
     height: 2.25rem;
     object-fit: cover;
@@ -101,15 +109,17 @@
   }
 
   &__user-email {
-    @apply text-c1 text-white/50;
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
+    color: hsl(var(--white-color) / 50%);
   }
 
   &__submenu {
-    @apply hidden;
+    display: none;
   }
 
   &__item--expanded ~ &__submenu {
-    @apply block;
+    display: block;
   }
 }
 

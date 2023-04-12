@@ -1,5 +1,12 @@
 .icon-container {
-  @apply flex-center h-24 w-24 rounded-full bg-gray-7 text-accent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: hsl(var(--gray-7-color));
+  color: hsl(var(--accent-color));
 
   &__icon {
     width: 1.68rem;

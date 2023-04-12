@@ -10,7 +10,9 @@
 }
 
 .container:global(.rdp) {
-  @apply border border-solid border-gray-5 bg-white shadow-4;
+  border: 1px solid hsl(var(--gray-5-color));
+  box-shadow: var(--shadow-4);
+  background-color: hsl(var(--white-color));
   margin: 0;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -24,7 +26,9 @@
 .container {
   :global {
     .rdp-caption_label {
-      @apply text-p3 font-semibold;
+      font-size: var(--p3-font-size);
+      line-height: var(--p3-line-height);
+      font-weight: 600;
     }
 
     .rdp-nav_button {
@@ -37,26 +41,31 @@
     }
 
     .rdp-head_cell {
-      @apply text-p4 font-normal;
+      font-size: var(--p4-font-size);
+      line-height: var(--p4-line-height);
+      font-weight: 400;
       text-transform: none;
       height: 38px;
     }
 
     .rdp-day {
-      @apply text-c1 font-semibold text-gray-1;
+      font-size: var(--c1-font-size);
+      line-height: var(--c1-line-height);
+      font-weight: 600;
+      color: hsl(var(--gray-1-color));
       border-radius: 8px;
       margin: 1px;
 
       &--today {
-        @apply text-accent;
+        color: hsl(var(--accent-color));
       }
 
       &--weekend {
-        @apply text-red;
+        color: hsl(var(--red-color));
       }
 
       &_selected {
-        @apply text-white;
+        color: hsl(var(--white-color));
       }
     }
   }

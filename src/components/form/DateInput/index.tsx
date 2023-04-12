@@ -27,7 +27,7 @@ import { CaptionLabelProps, DayPicker, Matcher, useDayPicker } from 'react-day-p
 import { BrowserSelect } from '~/components/common/BrowserSelect';
 import { Icon } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
-import { useAppelloKit } from '~/index';
+import { useAppelloKit } from '~/ctx';
 
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';

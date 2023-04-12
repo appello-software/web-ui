@@ -1,7 +1,14 @@
 .empty-state {
-  @apply flex-center flex-1 flex-col;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 
   &__label {
-    @apply mt-4 text-p4 text-gray-2;
+    margin-top: 1rem;
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    color: hsl(var(--gray-2-color));
   }
 }

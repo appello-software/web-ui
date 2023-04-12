@@ -12,7 +12,10 @@
 }
 
 .head-cell {
-  @apply bg-gray-7 text-c1 text-gray-1;
+  background-color: hsl(var(--gray-7-color));
+  font-size: var(--c1-font-size);
+  line-height: var(--c1-line-height);
+  color: hsl(var(--gray-1-color));
   padding: 0.49rem 0.87rem;
   text-align: left;
   font-weight: 400;
@@ -27,40 +30,48 @@
 }
 
 .cell {
-  @apply text-c1;
+  font-size: var(--c1-font-size);
+  line-height: var(--c1-line-height);
   border: 1px solid hsl(var(--gray-6-color));
   padding: 0.93rem;
   vertical-align: middle;
 }
 
-$pagination-item-height: 1.74rem;
-
 .pagination {
+  --pagination-item-height: 1.74rem;
+
   display: flex;
   column-gap: 0.24rem;
 
   &__item {
-    @apply flex-center text-c1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
     width: 1.36rem;
-    height: $pagination-item-height;
+    height: var(--pagination-item-height);
     border-radius: 0.18rem;
 
     &--active {
-      @apply bg-accent text-white;
+      background-color: hsl(var(--accent-color));
+      color: hsl(var(--white-color));
     }
 
     &--disabled {
-      @apply text-gray-2;
+      color: hsl(var(--gray-2-color));
     }
 
     &:hover:not(&--active) {
-      @apply bg-gray-6;
+      background-color: hsl(var(--gray-6-color));
     }
   }
 
   &__link {
-    @apply truncate;
-    line-height: $pagination-item-height;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: var(--pagination-item-height);
     width: 100%;
     text-align: center;
 

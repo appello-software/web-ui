@@ -5,7 +5,11 @@
     }
 
     &__menu {
-      @apply dropdown-common__menu py-1;
+      padding-block: 1rem;
+      border-radius: 0.375rem;
+      border: 1px solid hsl(var(--gray-5-color));
+      background-color: hsl(var(--white-color));
+      box-shadow: var(--shadow-4);
     }
 
     &__submenu {
@@ -13,10 +17,12 @@
     }
 
     &__option {
-      @apply dropdown-common__option;
+      padding: 0.75rem 0.93rem;
+      cursor: pointer;
+      word-break: break-word;
 
       &:not(&--disabled):hover {
-        @apply dropdown-common__option-hover;
+        background-color: hsl(var(--gray-6-color));
       }
     }
 
@@ -30,7 +36,9 @@
     }
 
     &__option-label {
-      @apply dropdown-common__option-label;
+      font-size: var(--c1-font-size);
+      line-height: var(--c1-line-height);
+      font-weight: 600;
     }
   }
 }

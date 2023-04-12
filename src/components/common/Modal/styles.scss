@@ -1,5 +1,5 @@
 .modal-overlay {
-  @apply bg-black-1/60;
+  background-color: hsl(var(--black-1-color) / 60%);
   z-index: 999;
   overflow-y: auto;
   display: flex;
@@ -26,12 +26,15 @@
     padding: var(--content-padding-y) var(--content-padding-x);
 
     #{$modal}__close-btn {
-      @apply absolute top-2.5 right-2.5;
+      top: 0.625rem;
+      right: 0.625rem;
       position: absolute;
     }
 
     #{$modal}__header {
-      @apply mb-2.5 text-h4;
+      margin-bottom: 0.625rem;
+      font-size: var(--h4-font-size);
+      line-height: var(--h4-line-height);
     }
 
     #{$modal}__buttons-list {
@@ -52,25 +55,36 @@
     height: 100vh;
 
     #{$modal}__close-btn {
-      @apply top-5 left-5 rounded bg-gray-7 p-2;
+      top: 1.25rem;
+      left: 1.25rem;
+      border-radius: 0.25rem;
+      background-color: hsl(var(--gray-7-color));
+      padding: 0.5rem;
       position: absolute;
       border: 1px solid hsl(var(--gray-6-color));
     }
 
     #{$modal}__header {
-      @apply flex items-center justify-center text-p3 font-semibold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--p3-font-size);
+      line-height: var(--p3-line-height);
+      font-weight: 600;
       min-height: 5rem;
       border-bottom: 1px solid hsl(var(--gray-6-color));
     }
 
     #{$modal}__buttons-list {
-      @apply px-5 pb-5;
+      padding-inline: 1.25rem;
+      padding-bottom: 1.25rem;
       display: flex;
       justify-content: flex-end;
     }
 
     #{$modal}__content {
-      @apply overflow-auto p-5;
+      overflow: auto;
+      padding: 1.25rem;
     }
   }
 

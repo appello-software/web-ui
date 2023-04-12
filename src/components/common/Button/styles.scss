@@ -18,11 +18,12 @@
   }
 
   &--primary {
-    @apply bg-accent text-white;
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(--white-color));
   }
 
   &--secondary {
-    @apply bg-gray-7;
+    background-color: hsl(var(--gray-7-color));
     border: 1px solid hsl(var(--gray-5-color));
   }
 
@@ -36,7 +37,9 @@
   }
 
   &--disabled {
-    @apply bg-gray-6 opacity-60 text-black-1;
+    background-color: hsl(var(--gray-6-color));
+    opacity: 0.6;
+    color: hsl(var(--black-1-color));
     cursor: not-allowed !important;
   }
 
@@ -98,7 +101,11 @@
   }
 
   &__count {
-    @apply rounded-full bg-accent text-c1 text-white;
+    border-radius: 50%;
+    background-color: hsl(var(--accent-color));
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
+    color: hsl(var(--white-color));
     display: inline-block;
     padding: 0 6px;
   }

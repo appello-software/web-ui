@@ -22,12 +22,15 @@
   }
 
   &__head-button {
-    @apply text-c1 font-semibold text-gray-1;
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
+    font-weight: 600;
+    color: hsl(var(--gray-1-color));
     padding-inline: 1rem;
     padding-block: 0.5rem 1rem;
 
     &--active {
-      @apply text-accent;
+      color: hsl(var(--accent-color));
     }
   }
 

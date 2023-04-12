@@ -6,7 +6,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
-import scss from 'rollup-plugin-scss'
+import postcss from 'rollup-plugin-postcss';
 
 import pkg from './package.json' assert { type: 'json' };
 
@@ -54,7 +54,14 @@ const buildConfig = {
       presets: ['@babel/preset-env'],
     }),
     typescript({ sourceMap: true }),
-    scss(),
+    postcss({
+      extract: true,
+      modules: {
+        exportGlobals: true,
+        generateScopedName: '[local]_[hash:base64:5]',
+      },
+      use: ['sass'],
+    }),
   ],
 };
 

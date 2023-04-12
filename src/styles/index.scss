@@ -1,5 +1,6 @@
 @use 'sass:math';
 
+@import './reset.scss';
 @import './form.scss';
 
 @function pxToRem($value) {
@@ -8,28 +9,59 @@
 }
 
 :root {
+  --accent-color: 209 78% 48%;
+  --primary-color: 230 29% 20%;
+  --white-color: 0 0% 100%;
+
+  --black-1-color: 180 3% 6%;
+  --black-2-color: 220 8% 17%;
+
+  --gray-1-color: 240 3% 45%;
+  --gray-2-color: 240 6% 60%;
+  --gray-3-color: 240 11% 75%;
+  --gray-4-color: 240 21% 86%;
+  --gray-5-color: 207 28% 92%;
+  --gray-6-color: 240 19% 94%;
+  --gray-7-color: 240 29% 97%;
+
+  --red-color: 0 84% 61%;
+  --green-color: 145 63% 42%;
+  --blue-color: 208 79% 51%;
+
+  --h1-font-size: #{pxToRem(34)};
+  --h1-line-height: #{pxToRem(48)};
+
+  --h2-font-size: #{pxToRem(29)};
+  --h2-line-height: #{pxToRem(42)};
+
+  --h3-font-size: #{pxToRem(25)};
+  --h3-line-height: #{pxToRem(36)};
+
+  --h4-font-size: #{pxToRem(20)};
+  --h4-line-height: #{pxToRem(32)};
+
+  --p1-font-size: #{pxToRem(15)};
+  --p1-line-height: #{pxToRem(24)};
+
+  --p2-font-size: #{pxToRem(14)};
+  --p2-line-height: #{pxToRem(23)};
+
+  --p3-font-size: #{pxToRem(13)};
+  --p3-line-height: #{pxToRem(23)};
+
+  --p4-font-size: #{pxToRem(12)};
+  --p4-line-height: #{pxToRem(18)};
+
+  --c1-font-size: #{pxToRem(11)};
+  --c1-line-height: #{pxToRem(19)};
+
+  --c2-font-size: #{pxToRem(10)};
+  --c2-line-height: #{pxToRem(16)};
+
   --input-medium-height: 2.62rem;
   --input-large-height: 3.37rem;
-}
-
-@layer components {
-  .dropdown-common {
-    &__menu {
-      @apply rounded-md border border-solid border-gray-5 bg-white shadow-4;
-    }
-
-    &__option {
-      padding: pxToRem(12) pxToRem(15);
-      cursor: pointer;
-      word-break: break-word;
-    }
-
-    &__option-hover {
-      @apply bg-gray-6;
-    }
-
-    &__option-label {
-      @apply text-c1 font-semibold;
-    }
-  }
+  --input-inline-padding: 1.18rem;
+  --input-textarea-vertical-padding: 1rem;
+  --input-icon-size: 1.25rem;
+  --input-icon-margin: 0.56rem;
 }

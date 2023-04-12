@@ -1,13 +1,13 @@
+import './styles.scss';
+
 import clsx from 'clsx';
 import React, { ChangeEvent, FC } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { Icon } from '~/components/common/Icon';
 import { TextInput } from '~/components/form/TextInput';
+import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
-import { useAppelloKit } from '~/index';
-
-import styles from './styles.module.scss';
 
 export interface SearchInputProps {
   onChange: (value: string) => void;
@@ -32,12 +32,12 @@ export const SearchInput: FC<SearchInputProps> = props => {
   }, debounceDelay);
 
   return (
-    <div className={clsx('relative', className)}>
-      <Icon name="magnifier" className={styles['icon']} />
+    <div className={clsx('search-input', className)}>
+      <Icon name="magnifier" className="search-input__icon" />
       <TextInput
         onChange={handleChange}
         placeholder={placeholder}
-        inputClassName={styles['input']}
+        inputClassName="search-input__input"
         defaultValue={defaultValue}
       />
     </div>

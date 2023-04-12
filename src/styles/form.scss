@@ -1,14 +1,9 @@
-$input-inline-padding: 1.18rem;
-$input-textarea-vertical-padding: 1rem;
-$input-icon-size: 1.25rem;
-$input-icon-margin: 0.56rem;
-
 .form {
   display: flex;
   flex-direction: column;
 
   &__inline-fields {
-    @apply gap-4;
+    gap: 1rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -28,14 +23,17 @@ $input-icon-margin: 0.56rem;
   }
 
   &__label {
-    @apply text-p4 text-gray-1;
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    color: hsl(var(--gray-1-color));
     display: flex;
     margin-bottom: 2px;
   }
 
   &__input {
-    @apply text-p4;
-    padding-inline: $input-inline-padding;
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    padding-inline: var(--input-inline-padding);
     border: 1px solid hsl(var(--gray-5-color));
     border-radius: 0.37rem;
     width: 100%;
@@ -85,37 +83,41 @@ $input-icon-margin: 0.56rem;
     }
 
     &--with-icon-before {
-      padding-left: $input-icon-size + $input-inline-padding + $input-icon-margin;
+      padding-left: calc(var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin));
     }
 
     &--with-icon-after {
-      padding-right: $input-icon-size + $input-inline-padding + $input-icon-margin;
+      padding-right: calc(var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin));
     }
   }
 
   &__textarea {
-    padding-block: $input-textarea-vertical-padding;
+    padding-block: var(--input-textarea-vertical-padding);
     height: 6.5rem;
     resize: none;
   }
 
   &__input-icon {
-    @apply absolute-y-center;
-    width: $input-icon-size;
-    height: $input-icon-size;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--input-icon-size);
+    height: var(--input-icon-size);
     pointer-events: none;
 
     &--before {
-      left: $input-inline-padding;
+      left: var(--input-inline-padding);
     }
 
     &--after {
-      right: $input-inline-padding;
+      right: var(--input-inline-padding);
     }
   }
 
   &__error {
-    @apply text-p4 text-red;
+    font-size: var(--p4-font-size);
+    line-height: var(--p4-line-height);
+    color: hsl(var(--red-color));
     margin-top: 3px;
   }
 }

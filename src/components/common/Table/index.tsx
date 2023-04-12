@@ -15,7 +15,7 @@ import React, { ReactElement, useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { Icon } from '~/components/common/Icon';
-import { useAppelloKit } from '~/index';
+import { useAppelloKit } from '~/ctx';
 
 import { HeaderCell } from './components/HeaderCell';
 import styles from './styles.module.scss';

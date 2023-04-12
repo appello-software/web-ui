@@ -8,8 +8,9 @@
 }
 
 .square {
-  @apply flex-center;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   width: 20px;
   height: 20px;
@@ -43,6 +44,8 @@
 }
 
 .label {
-  @apply ml-2 text-p4;
+  margin-left: 0.5rem;
+  font-size: var(--p4-font-size);
+  line-height: var(--p4-line-height);
   word-break: break-word;
 }

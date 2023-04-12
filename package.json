@@ -82,7 +82,7 @@
     "react-router-dom": "^6.10.0",
     "rollup": "^3.20.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-scss": "^4.0.0",
+    "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.62.0",
     "tsc-alias": "^1.8.5",
     "zx": "^7.2.1"
