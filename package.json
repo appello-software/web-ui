@@ -35,7 +35,6 @@
     "@tanstack/react-table": "^8.8.5",
     "@tanstack/table-core": "^8.8.5",
     "dot-path-value": "^0.0.9",
-    "react": "^18.2.0",
     "react-colorful": "^5.6.1",
     "react-content-loader": "^6.2.1",
     "react-day-picker": "^8.7.1",
@@ -47,6 +46,9 @@
     "typescript": "^5.0.4",
     "use-debounce": "^9.0.4",
     "use-query-params": "^2.2.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@apollo/client": "^3.7.11",
