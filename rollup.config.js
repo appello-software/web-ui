@@ -46,13 +46,13 @@ const buildConfig = {
   plugins: [
     peerDepsExternal(),
     nodeResolve(),
-    commonjs({ transformMixedEsModules: true }),
-    tscAliasPlugin(),
-    json(),
+    commonjs(),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-react'],
+      presets: ['@babel/preset-env', '@babel/preset-react'],
     }),
+    tscAliasPlugin(),
+    json(),
     typescript({ sourceMap: true }),
     postcss({
       extract: true,
