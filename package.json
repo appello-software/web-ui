@@ -41,7 +41,6 @@
     "react-modal": "^3.16.1",
     "react-nested-dropdown": "^0.0.12",
     "react-paginate": "^8.1.5",
-    "react-router-dom": "^6.10.0",
     "typescript": "^5.0.4",
     "use-debounce": "^9.0.4",
     "use-query-params": "^2.2.1"
@@ -51,13 +50,13 @@
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-hook-form": "^7.0.0",
     "react-hot-toast": "*",
+    "react-router-dom": "^6.0.0",
     "react-select": "*"
   },
   "devDependencies": {
     "@apollo/client": "^3.7.11",
     "@appello/common": "^1.0.24",
     "@appello/eslint-config": "^0.1.12",
-    "@appello/web": "^0.1.8",
     "@babel/core": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@rollup/plugin-babel": "^6.0.3",
@@ -85,6 +84,7 @@
     "react": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.0",
+    "react-router-dom": "^6.10.0",
     "react-select": "^5.7.2",
     "rollup": "^3.20.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",

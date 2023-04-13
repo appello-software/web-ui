@@ -1,7 +1,6 @@
 import 'react-day-picker/dist/style.css';
 
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { useClickAway } from '@appello/web/lib/hooks';
 import clsx from 'clsx';
 import {
   eachMonthOfInterval,
@@ -28,6 +27,7 @@ import { BrowserSelect } from '~/components/common/BrowserSelect';
 import { Icon } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
+import { useClickAway } from '~/hooks/useClickAway';
 
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';

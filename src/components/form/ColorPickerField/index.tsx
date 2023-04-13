@@ -1,11 +1,11 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
-import { useClickAway } from '@appello/web/lib/hooks';
 import React, { ReactElement, useRef } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { InputSize, TextInput } from '~/components/form/TextInput';
+import { useClickAway } from '~/hooks/useClickAway';
 
 interface Props<TName, TFormValues extends FieldValues>
   extends Pick<FieldProps, 'className' | 'label' | 'required'> {

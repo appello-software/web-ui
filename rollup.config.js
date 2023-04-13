@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { babel } from '@rollup/plugin-babel';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+// import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
@@ -43,10 +43,12 @@ const buildConfig = {
       sourcemap: true,
     },
   ],
+  external: ['react-router-dom', 'react-select', 'react', 'react-hot-toast', 'react-hook-form', 'clsx'],
   plugins: [
-    peerDepsExternal(),
     nodeResolve(),
-    commonjs(),
+    commonjs({
+      transformMixedEsModules: true
+    }),
     babel({
       exclude: 'node_modules/**',
       presets: ['@babel/preset-env', '@babel/preset-react'],
