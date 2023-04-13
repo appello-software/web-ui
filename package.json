@@ -21,7 +21,8 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepublishOnly": "npm run generate-exports && npm run build && npm version prerelease"
+    "prepublishOnly": "npm run generate-exports && npm run build && npm version prerelease",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -41,9 +42,7 @@
     "react-modal": "^3.16.1",
     "react-nested-dropdown": "^0.0.12",
     "react-paginate": "^8.1.5",
-    "typescript": "^5.0.4",
-    "use-debounce": "^9.0.4",
-    "use-query-params": "^2.2.1"
+    "use-debounce": "^9.0.4"
   },
   "peerDependencies": {
     "clsx": "*",
@@ -51,9 +50,12 @@
     "react-hook-form": "^7.0.0",
     "react-hot-toast": "*",
     "react-router-dom": "^6.0.0",
-    "react-select": "*"
+    "react-select": "*",
+    "use-query-params": "*"
   },
   "devDependencies": {
+    "typescript": "^5.0.4",
+    "use-query-params": "^2.2.1",
     "@apollo/client": "^3.7.11",
     "@appello/common": "^1.0.24",
     "@appello/eslint-config": "^0.1.12",
