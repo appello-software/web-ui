@@ -46,7 +46,7 @@ const buildConfig = {
   plugins: [
     peerDepsExternal(),
     nodeResolve(),
-    commonjs(),
+    commonjs({ transformMixedEsModules: true }),
     tscAliasPlugin(),
     json(),
     babel({
