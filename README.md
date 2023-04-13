@@ -23,6 +23,8 @@ yarn add @appello/web-ui
 ## Basic usage
 
 ```tsx
+import '@appello/web-ui/dist/index.css';
+
 import React from 'react';
 import {
   AppelloKit,
