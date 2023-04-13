@@ -1,6 +1,13 @@
 import { useAppelloKitComponents } from '~/ctx';
+import { UIComponents } from '~/types';
 
-import { UIComponents, UseCombinedPropsWithKitProps } from './types';
+export interface UseCombinedPropsWithKitProps<
+  TName extends keyof UIComponents,
+  TProps extends UIComponents[TName],
+> {
+  name: TName;
+  props: TProps;
+}
 
 export function useCombinedPropsWithKit<
   TName extends keyof UIComponents,

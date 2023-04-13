@@ -19,11 +19,3 @@ export interface AppelloKit {
 }
 
 export type AppelloKitComponents = { [P in keyof UIComponents]?: Partial<UIComponents[P]> };
-
-export interface UseCombinedPropsWithKitProps<
-  TName extends keyof UIComponents,
-  TProps extends UIComponents[TName],
-> {
-  name: TName;
-  props: TProps;
-}

@@ -4,7 +4,7 @@ import { toString } from '@appello/common/lib/utils/string';
 import { useMemo, useState } from 'react';
 import { useQueryParam } from 'use-query-params';
 
-import { useAppelloKit } from '~/index';
+import { useAppelloKit } from '~/ctx';
 
 enum ListQueryType {
   PAGE = 'page',
