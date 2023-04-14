@@ -16,12 +16,12 @@
   ],
   "scripts": {
     "build": "rm -rf dist && rollup -c",
-    "prettier": "prettier --write src/**/*.{ts,tsx,scss,json,css,pcss,js,graphql}",
+    "prettier": "prettier --write src/**/*.{ts,tsx,scss}",
     "lint": "eslint --quiet src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepublishOnly": "npm run generate-exports && npm run build && npm version prerelease",
+    "prepublishOnly": "npm run prettier && npm run generate-exports && npm run build && npm version prerelease",
     "postversion": "git push && git push --tags"
   },
   "repository": {

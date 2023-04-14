@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import clsx from 'clsx';
 import { eachMinuteOfInterval, endOfToday, format, startOfToday } from 'date-fns';
 import React, { useMemo } from 'react';
@@ -39,8 +41,13 @@ export const TimePicker: React.FC<TimePickerProps> = ({
   const selectedValue = useMemo(() => options.find(item => item.value === value), [value, options]);
 
   return (
-    <BrowserSelect options={options} value={value} onChange={event => onChange(event.target.value)}>
-      <button type="button" className={clsx('relative', className)}>
+    <BrowserSelect
+      options={options}
+      value={value}
+      onChange={event => onChange(event.target.value)}
+      className="time-picker"
+    >
+      <button type="button" className={clsx('time-picker__control', className)}>
         {selectedValue?.label || 'select time'}
       </button>
     </BrowserSelect>

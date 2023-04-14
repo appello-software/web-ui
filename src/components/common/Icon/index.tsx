@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 
 interface Props {
@@ -25,7 +24,7 @@ export const Icon: React.FC<Props> = ({
     xmlnsXlink="http://www.w3.org/1999/xlink"
     width={size !== undefined ? size : width}
     height={size !== undefined ? size : height}
-    className={clsx('pointer-events-none', className)}
+    className={className}
     style={{ color }}
   >
     <use

@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode, useMemo } from 'react';
@@ -41,7 +43,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }, [autoComplete]);
 
     return (
-      <div className={clsx('relative', className)}>
+      <div className={clsx('text-input-wrapper', className)}>
         <input
           ref={ref}
           className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {

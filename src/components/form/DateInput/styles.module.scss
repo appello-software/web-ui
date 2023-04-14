@@ -1,3 +1,39 @@
+.date-input {
+  position: relative;
+  z-index: 50;
+
+  &__arrow {
+    transform: rotate(180deg);
+  }
+
+  &__input {
+    cursor: pointer;
+  }
+}
+
+.control {
+  display: flex;
+  align-items: center;
+
+  &__label {
+    font-size: var(--p3-font-size);
+    line-height: var(--p3-line-height);
+    font-weight: 600;
+  }
+
+  &__arrow {
+    margin-left: 0.25rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+}
+
+.weekday {
+  &--weekend {
+    color: hsl(var(--red-color));
+  }
+}
+
 .calendar-wrapper {
   position: absolute;
   margin-block: 4px;

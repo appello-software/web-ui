@@ -1,4 +1,5 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
+import clsx from 'clsx';
 import React, { ReactElement, useRef } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
@@ -38,12 +39,16 @@ export const ColorPickerField = <
   useClickAway(pickerRef, closeColorPicker);
 
   return (
-    <Field {...{ className, label, required }} error={fieldState.error}>
-      <div ref={pickerRef} className="relative">
+    <Field
+      {...{ label, required }}
+      error={fieldState.error}
+      className={clsx('color-picker-field', className)}
+    >
+      <div ref={pickerRef} className="color-picker-field__input-wrapper">
         {isColorPickerOpen && (
-          <div className="absolute bottom-[calc(100%+2px)] w-full">
+          <div className="color-picker-field__picker">
             <HexColorPicker
-              className="w-auto"
+              className="color-picker-field__picker-inner"
               color={field.value || '#ffffff'}
               onChange={field.onChange}
             />
@@ -54,7 +59,7 @@ export const ColorPickerField = <
           onClick={toggleColorPicker}
           iconBeforeElement={
             field.value && (
-              <div className="h-5 w-5 rounded" style={{ backgroundColor: field.value }} />
+              <div className="color-picker-field__color" style={{ backgroundColor: field.value }} />
             )
           }
           placeholder="Select colour"

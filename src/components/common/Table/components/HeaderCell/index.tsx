@@ -17,7 +17,7 @@ export const HeaderCell = <TData extends RowData>({
   return (
     <th className={styles['head-cell']}>
       <div
-        className="flex select-none items-center"
+        className={styles['head-cell__body']}
         {...(header.column.getCanSort()
           ? {
               onClick: header.column.getToggleSortingHandler(),
@@ -30,26 +30,22 @@ export const HeaderCell = <TData extends RowData>({
           ? null
           : flexRender(header.column.columnDef.header, header.getContext())}
         {header.column.getCanSort() && (
-          <div className="ml-2 inline-flex flex-col">
+          <div className={styles['head-cell__sort']}>
             <Icon
               name="polygon"
               width={6}
               height={4}
-              className={clsx(
-                'rotate-180',
-                'mb-[1px]',
-                'transition',
-                header.column.getIsSorted() === 'asc' ? 'text-gray-1' : 'text-gray-3',
-              )}
+              className={clsx(styles['head-cell__sort-icon'], {
+                [styles['head-cell__sort-icon--active']]: header.column.getIsSorted() === 'asc',
+              })}
             />
             <Icon
               name="polygon"
               width={6}
               height={4}
-              className={clsx(
-                'transition',
-                header.column.getIsSorted() === 'desc' ? 'text-gray-1' : 'text-gray-3',
-              )}
+              className={clsx(styles['head-cell__sort-icon'], {
+                [styles['head-cell__sort-icon--active']]: header.column.getIsSorted() === 'desc',
+              })}
             />
           </div>
         )}

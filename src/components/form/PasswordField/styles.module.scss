@@ -1,3 +1,7 @@
+.input-wrapper {
+  position: relative;
+}
+
 .toggle {
   position: absolute;
   top: 50%;
@@ -7,4 +11,8 @@
 
 .eye-icon {
   color: hsl(var(--black-1-color));
+}
+
+.input {
+  padding-right: 2.81rem;
 }

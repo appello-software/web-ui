@@ -1,0 +1,22 @@
+.color-picker-field {
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__picker {
+    position: absolute;
+    bottom: calc(100% + 2px);
+    width: 100%;
+  }
+
+  &__picker-inner {
+    width: auto;
+  }
+
+  &__color {
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 0.25rem;
+  }
+}

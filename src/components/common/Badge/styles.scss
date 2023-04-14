@@ -23,4 +23,10 @@
     background-color: hsl(var(--red-color) / 10%);
     color: hsl(var(--red-color));
   }
+
+  &__text {
+    font-size: var(--c1-font-size);
+    line-height: var(--c1-line-height);
+    font-weight: 700;
+  }
 }

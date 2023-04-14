@@ -18,7 +18,7 @@ interface Props {
 export const Badge: FC<Props> = ({ children, color }) => {
   return (
     <div className={clsx('badge', `badge--${color}`)}>
-      <p className="text-c1 font-bold">{children}</p>
+      <p className="badge__text">{children}</p>
     </div>
   );
 };

@@ -76,7 +76,11 @@ export const DateInput = <TValue extends Date | null>({
 
   const renderWeekdayName = useCallback((date: Date) => {
     const name = formatWeekdayName(date);
-    return <span className={clsx({ 'text-red': isWeekend(date) })}>{name}</span>;
+    return (
+      <span className={clsx(styles['weekday'], { [styles['weekday--weekend']]: isWeekend(date) })}>
+        {name}
+      </span>
+    );
   }, []);
 
   const displayDate = useMemo(() => {
@@ -107,7 +111,7 @@ export const DateInput = <TValue extends Date | null>({
   useClickAway(calendarRef, closeCalendar);
 
   return (
-    <div ref={calendarRef} className={clsx('relative z-50', className)}>
+    <div ref={calendarRef} className={clsx(styles['date-input'], className)}>
       <div>
         <TextInput
           readOnly
@@ -116,10 +120,13 @@ export const DateInput = <TValue extends Date | null>({
           size={inputSize}
           value={displayDate}
           error={error}
-          inputClassName="cursor-pointer"
+          inputClassName={styles['date-input__input']}
           iconBeforeElement={<Icon name="calendar" />}
           iconAfterElement={
-            <Icon name="down-arrow" className={clsx({ 'rotate-180': isCalendarVisible })} />
+            <Icon
+              name="down-arrow"
+              className={clsx({ [styles['date-input__arrow']]: isCalendarVisible })}
+            />
           }
         />
       </div>
@@ -176,9 +183,9 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
         onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
         value={monthValue}
       >
-        <div className="flex items-center">
-          <p className="text-p3 font-semibold">{monthLabel}</p>
-          <Icon name="down-arrow" className="ml-1 h-5 w-5" />
+        <div className={styles['control']}>
+          <p className={styles['control__label']}>{monthLabel}</p>
+          <Icon name="down-arrow" className={styles['control__arrow']} />
         </div>
       </BrowserSelect>
       <BrowserSelect
@@ -186,9 +193,9 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
         onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
         value={yearValue}
       >
-        <div className="flex items-center">
-          <p className="text-p3 font-semibold">{yearValue}</p>
-          <Icon name="down-arrow" className="ml-1 h-5 w-5" />
+        <div className={styles['control']}>
+          <p className={styles['control__label']}>{yearValue}</p>
+          <Icon name="down-arrow" className={styles['control__arrow']} />
         </div>
       </BrowserSelect>
     </>

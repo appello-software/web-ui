@@ -83,11 +83,15 @@
     }
 
     &--with-icon-before {
-      padding-left: calc(var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin));
+      padding-left: calc(
+        var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin)
+      );
     }
 
     &--with-icon-after {
-      padding-right: calc(var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin));
+      padding-right: calc(
+        var(--input-icon-size) + var(--input-inline-padding) + var(--input-icon-margin)
+      );
     }
   }
 

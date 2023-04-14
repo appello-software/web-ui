@@ -34,13 +34,13 @@ export const PasswordField = <TFormValues extends FieldValues>({
 
   return (
     <Field label={label} error={controller.fieldState.error} className={className}>
-      <div className="relative">
+      <div className={styles['input-wrapper']}>
         <TextInput
           {...controller.field}
           error={!!controller.fieldState.error}
           autoCapitalize="none"
           type={isPasswordVisible ? 'text' : 'password'}
-          inputClassName="pr-[2.81rem]"
+          inputClassName={styles['input']}
           placeholder={placeholder}
           {...textInputProps}
         />

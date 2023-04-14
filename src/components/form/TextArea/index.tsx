@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import clsx from 'clsx';
 import * as React from 'react';
 import { useMemo } from 'react';
@@ -17,7 +19,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     }, [autoComplete]);
 
     return (
-      <div className="relative">
+      <div className="textarea">
         <textarea
           ref={ref}
           className={clsx(

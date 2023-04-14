@@ -8,6 +8,7 @@ export * from './Icon';
 export * from './IconContainer';
 export * from './Loader';
 export * from './Modal';
+export * from './Pagination';
 export * from './SearchInput';
 export * from './Sidebar';
 export * from './Table';
