@@ -1,38 +1,78 @@
 import './styles.scss';
 
+import { ApolloQueryResult } from '@apollo/client/core/types';
+import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { Icon } from '~/components';
+import { useAppelloKit } from '~/ctx';
 
 export interface PaginationProps {
-  pageCount: number;
   offset: number;
-  pageSize: number;
+  setOffset: (offset: number) => void;
   totalCount: number;
   itemsCount: number;
-  onPageChange: (selectedItem: { selected: number }) => void;
-  isFetching?: boolean;
   className?: string;
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  fetchMore: (
+    options: FetchMoreQueryOptions<any> & {
+      updateQuery?: (
+        previousQueryResult: any,
+        options: {
+          fetchMoreResult: any;
+          variables: any;
+        },
+      ) => any;
+    },
+  ) => Promise<ApolloQueryResult<any>>;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
-  pageSize,
-  pageCount,
   offset,
-  onPageChange,
+  setOffset,
   totalCount,
-  isFetching,
   itemsCount,
   className,
+  fetchMore,
 }) => {
+  const [isFetching, setFetching] = useState<boolean>(false);
+  const { pageSize } = useAppelloKit();
+
+  const handlePageClick = useCallback(
+    async (event: { selected: number }) => {
+      const newOffset = (event.selected * pageSize) % totalCount;
+      setOffset(newOffset);
+
+      try {
+        setFetching(true);
+        await fetchMore({
+          variables: {
+            pagination: {
+              limit: pageSize,
+              offset: newOffset,
+            },
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult,
+        });
+      } finally {
+        setFetching(false);
+      }
+    },
+    [fetchMore, pageSize, setOffset, totalCount],
+  );
+
+  const pageCount = Math.ceil(totalCount / pageSize);
+
   return (
     <div className={className}>
       <Paginate
         breakLabel="..."
         nextLabel={<Icon name="down-arrow" size={18} className="inline -rotate-90" />}
-        onPageChange={onPageChange}
+        onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         breakLinkClassName="pagination__link"
         breakClassName="pagination__item"

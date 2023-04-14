@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table';
 import { OnChangeFn, RowData } from '@tanstack/table-core';
 import clsx from 'clsx';
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Pagination } from '~/components/common/Pagination';
 import { useAppelloKit } from '~/ctx';
@@ -84,35 +84,6 @@ export const Table = <TData extends object>({
     onSortingChange: setSorting,
   });
 
-  const [isFetching, setFetching] = useState(false);
-
-  const handlePageClick = useCallback(
-    async (event: { selected: number }) => {
-      if (!hasPagination) return;
-
-      const newOffset = (event.selected * pageSize) % totalCount;
-      setOffset(newOffset);
-
-      try {
-        setFetching(true);
-        await fetchMore({
-          variables: {
-            pagination: {
-              limit: pageSize,
-              offset: newOffset,
-            },
-          },
-          updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult,
-        });
-      } finally {
-        setFetching(false);
-      }
-    },
-    [fetchMore, hasPagination, pageSize, setOffset, totalCount],
-  );
-
-  const pageCount = hasPagination ? Math.ceil(totalCount / pageSize) : 0;
-
   return (
     <div className={clsx(styles['table-wrapper'], className)}>
       {error && <p className={clsx('form__error', styles['table-error'])}>{error}</p>}
@@ -141,13 +112,11 @@ export const Table = <TData extends object>({
           ))}
         </tbody>
       </table>
-      {isFetching && <div className={styles['table-overlay']} />}
       {hasPagination && totalCount > pageSize && (
         <Pagination
-          onPageChange={handlePageClick}
-          pageSize={pageSize}
+          fetchMore={fetchMore}
           offset={offset}
-          pageCount={pageCount}
+          setOffset={setOffset}
           totalCount={totalCount}
           itemsCount={data.length}
         />

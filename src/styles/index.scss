@@ -58,6 +58,11 @@
   --c2-font-size: #{pxToRem(10)};
   --c2-line-height: #{pxToRem(16)};
 
+  --shadow-1: 0px 8px 20px rgba(205, 205, 205, 0.1);
+  --shadow-2: 0px 4px 4px rgba(176, 176, 176, 0.1);
+  --shadow-3: 0px -4px 20px rgba(199, 199, 199, 0.1);
+  --shadow-4: 0px 4px 17px rgba(6, 6, 11, 0.06);
+
   --input-medium-height: 2.62rem;
   --input-large-height: 3.37rem;
   --input-inline-padding: 1.18rem;
