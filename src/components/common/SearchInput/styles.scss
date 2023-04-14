@@ -12,6 +12,7 @@
     height: var(--icon-size);
     left: var(--text-input-x-padding);
     pointer-events: none;
+    color: hsl(var(--gray-3-color));
   }
 
   &__input {
