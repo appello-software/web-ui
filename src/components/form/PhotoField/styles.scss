@@ -1,0 +1,38 @@
+.photo-field {
+
+  &__label {
+    margin-bottom: 0.25rem;
+  }
+
+  &__img-wrapper {
+    position: relative;
+    margin-bottom: 0.75rem;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  &__remove-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 50%;
+    background-color: hsl(var(--black-1-color) / 50%);
+  }
+
+  &__remove-btn-icon {
+    color: hsl(var(--white-color));
+    padding: 0.125rem;
+  }
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__upload-btn {
+    width: auto;
+    padding-inline: 1.75rem;
+  }
+}

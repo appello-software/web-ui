@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import * as React from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
@@ -37,23 +39,19 @@ export const PhotoField = <
       className={className}
       label={label}
       error={controller.fieldState.error}
-      labelClassName="mb-1"
+      labelClassName="photo-field__label"
     >
-      <div className="relative mb-3 h-20 w-20">
+      <div className="photo-field__img-wrapper">
         {photo && (
           <Button
             onClick={() => controller.field.onChange(null)}
             size={ButtonSize.SMALL}
-            className="absolute right-0 top-0 rounded-full bg-black-1 bg-opacity-50"
-            iconClassName="text-white p-0.5"
+            className="photo-field__remove-btn"
+            iconClassName="photo-field__remove-btn-icon"
             withIcon="close"
           />
         )}
-        <img
-          src={photo ?? photoPlaceholder}
-          alt="Profile"
-          className="h-full w-full rounded-full object-cover"
-        />
+        <img src={photo ?? photoPlaceholder} alt="Profile" className="photo-field__img" />
       </div>
 
       <FileUpload accept=".png, .jpg, .jpeg" onUpload={controller.field.onChange}>
@@ -62,7 +60,7 @@ export const PhotoField = <
             variant={ButtonVariant.SECONDARY}
             withIcon="upload"
             label="Upload new"
-            className="w-auto px-7"
+            className="photo-field__upload-btn"
             onClick={onClick}
           />
         )}
