@@ -36,7 +36,7 @@ export const Icon: React.FC<IconProps> = ({
   className,
   width = '100%',
   height = '100%',
-  raw,
+  raw = false,
   size,
   color,
 }) => (
