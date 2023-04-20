@@ -35,7 +35,6 @@
   "homepage": "https://bitbucket.org/appello/web-ui-kit#readme",
   "dependencies": {
     "dot-path-value": "^0.0.9",
-    "modern-normalize": "^1.1.0",
     "react-paginate": "^8.2.0",
     "use-debounce": "^9.0.4"
   },
