@@ -4,10 +4,25 @@ import clsx from 'clsx';
 import React, { ChangeEventHandler } from 'react';
 
 export interface BrowserSelectProps {
+  /**
+   * Control label
+   */
   children: React.ReactNode;
+  /**
+   * Select options
+   */
   options: { label: string; value: string }[];
+  /**
+   * On change handler
+   */
   onChange: ChangeEventHandler<HTMLSelectElement>;
+  /**
+   * Selected value
+   */
   value: string;
+  /**
+   * Additional class name
+   */
   className?: string;
 }
 

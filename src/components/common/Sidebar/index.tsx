@@ -12,7 +12,7 @@ export interface SidebarItem {
   items?: Omit<SidebarItem, 'icon' | 'items'>[];
 }
 
-interface Props {
+export interface SidebarProps {
   items: SidebarItem[];
   logo: string;
   user?: {
@@ -23,7 +23,7 @@ interface Props {
   };
 }
 
-export const Sidebar: React.FC<Props> = ({ items, logo, user }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ items, logo, user }) => {
   return (
     <div className="sidebar">
       <header className="sidebar__header">

@@ -10,10 +10,26 @@ import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface SearchInputProps {
+  /**
+   * Change handler
+   * @param value
+   */
   onChange: (value: string) => void;
+  /**
+   * Additional class name
+   */
   className?: string;
+  /**
+   * Placeholder
+   */
   placeholder?: string;
+  /**
+   * Default value
+   */
   defaultValue?: string;
+  /**
+   * Debounce delay
+   */
   debounceDelay?: number;
 }
 

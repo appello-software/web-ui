@@ -23,7 +23,7 @@ export interface TabsRef {
   getSelectedTabIndex(): number;
 }
 
-interface Props<TTab> {
+export interface TabsProps<TTab> {
   items: TTab[];
   contentClassName?: string;
   headListClassName?: string;
@@ -41,7 +41,7 @@ export const Tabs = <TTab extends Tab>({
   tabsRef,
   selected,
   onSelect,
-}: Props<TTab>): ReactElement => {
+}: TabsProps<TTab>): ReactElement => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? 0);
   const element = items[selectedTabIndex]?.element;
 

@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
-interface Props {
+export interface TextLinkProps {
   to?: string | VoidFunction;
   external?: boolean;
   children: React.ReactNode;
   className?: string;
 }
 
-export const TextLink: React.FC<Props> = ({ to, children, className, external = false }) => {
+export const TextLink: React.FC<TextLinkProps> = ({
+  to,
+  children,
+  className,
+  external = false,
+}) => {
   const combinedClassName = useMemo(() => {
     return clsx(className, styles['link']);
   }, [className]);

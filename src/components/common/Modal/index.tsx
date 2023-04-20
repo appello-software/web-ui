@@ -10,16 +10,49 @@ import { Button, ButtonProps } from '~/components/common/Button';
 import { Icon } from '~/components/common/Icon';
 
 export interface ModalProps {
+  /**
+   * Open state
+   */
   isOpen: boolean;
+  /**
+   * Close handler
+   */
   close(): void;
+  /**
+   * Title
+   */
   title?: ReactNode;
+  /**
+   * Footer buttons
+   */
   buttons?: ButtonProps[];
+  /**
+   * Modal content
+   */
   children: React.ReactNode;
+  /**
+   * Show close button
+   */
   withCloseButton?: boolean;
+  /**
+   * Additional class name for modal content
+   */
   contentClassName?: string;
+  /**
+   * Additional class name for modal body
+   */
   bodyClassName?: string;
+  /**
+   * Content position
+   */
   position?: 'center' | 'right';
+  /**
+   * Close on overlay click
+   */
   shouldCloseOnOverlayClick?: boolean;
+  /**
+   * Callback that will be called after modal is closed
+   */
   onAfterClose?: () => void;
 }
 

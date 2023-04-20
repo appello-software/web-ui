@@ -1,16 +1,37 @@
 import React from 'react';
 
-interface Props {
+export interface IconProps {
+  /**
+   * Icon name
+   */
   name: string;
+  /**
+   * Additional class name
+   */
   className?: string;
+  /**
+   * Icon width
+   */
   width?: string | number;
+  /**
+   * Icon height
+   */
   height?: string | number;
+  /**
+   * Icon size (replacing width and height)
+   */
   size?: string | number;
+  /**
+   * Use raw icon
+   */
   raw?: boolean;
+  /**
+   * Icon color
+   */
   color?: string;
 }
 
-export const Icon: React.FC<Props> = ({
+export const Icon: React.FC<IconProps> = ({
   name,
   className,
   width = '100%',

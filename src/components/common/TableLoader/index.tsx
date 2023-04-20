@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import React, { FC, Fragment } from 'react';
 import ContentLoader from 'react-content-loader';
 
-interface Props {
+export interface TableLoaderProps {
   className?: string;
 }
 
-export const TableLoader: FC<Props> = ({ className }) => {
+export const TableLoader: FC<TableLoaderProps> = ({ className }) => {
   return (
     <ContentLoader
       viewBox="0 0 1112 800"

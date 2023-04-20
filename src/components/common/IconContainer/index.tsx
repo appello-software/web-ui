@@ -5,13 +5,13 @@ import React, { FC } from 'react';
 
 import { Icon } from '~/components/common/Icon';
 
-interface Props {
+export interface IconContainerProps {
   name: string;
   className?: string;
   iconClassName?: string;
 }
 
-export const IconContainer: FC<Props> = ({ name, className, iconClassName }) => {
+export const IconContainer: FC<IconContainerProps> = ({ name, className, iconClassName }) => {
   return (
     <div className={clsx('icon-container', className)}>
       <Icon name={name} className={clsx('icon-container__icon', iconClassName)} />

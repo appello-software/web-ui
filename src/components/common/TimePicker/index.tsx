@@ -7,7 +7,7 @@ import React, { useMemo } from 'react';
 import { BrowserSelect } from '~/components/common/BrowserSelect';
 import { ISO_TIME_FORMAT, TIME_FORMAT } from '~/components/common/TimePicker/consts';
 
-interface TimePickerProps {
+export interface TimePickerProps {
   labelFormat?: string;
   valueFormat?: string;
   className?: string;

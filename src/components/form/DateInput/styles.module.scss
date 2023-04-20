@@ -1,6 +1,6 @@
 .date-input {
   position: relative;
-  z-index: 50;
+  //z-index: 50;
 
   &__arrow {
     transform: rotate(180deg);
@@ -38,6 +38,7 @@
   position: absolute;
   margin-block: 4px;
   top: 100%;
+  z-index: 999;
 
   &--top {
     bottom: 100%;
@@ -52,7 +53,6 @@
   margin: 0;
   border-radius: 0.5rem;
   padding: 1rem;
-  z-index: 999;
 
   --rdp-cell-size: 30px;
   --rdp-accent-color: hsl(var(--accent-color));

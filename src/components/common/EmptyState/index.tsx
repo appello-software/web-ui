@@ -5,13 +5,22 @@ import React, { FC } from 'react';
 
 import { IconContainer } from '~/components/common/IconContainer';
 
-interface Props {
+export interface EmptyStateProps {
+  /**
+   * Icon name from spritemap
+   */
   iconName: string;
+  /**
+   * Description text
+   */
   label: string;
+  /**
+   * Additional class name
+   */
   className?: string;
 }
 
-export const EmptyState: FC<Props> = ({ iconName, label, className }) => {
+export const EmptyState: FC<EmptyStateProps> = ({ iconName, label, className }) => {
   return (
     <div className={clsx('empty-state', className)}>
       <IconContainer name={iconName} />

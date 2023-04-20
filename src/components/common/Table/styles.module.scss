@@ -42,16 +42,16 @@
     margin-left: 0.5rem;
     display: inline-flex;
     flex-direction: column;
-
-    &:first-child {
-      margin-bottom: 1px;
-      transform: rotate(180deg);
-    }
   }
 
   &__sort-icon {
     transition: color 0.2s ease-in-out;
     color: hsl(var(--gray-3-color));
+
+    &:first-child {
+      margin-bottom: 1px;
+      transform: rotate(180deg);
+    }
 
     &--active {
       color: hsl(var(--gray-1-color));

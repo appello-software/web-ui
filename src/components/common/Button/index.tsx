@@ -21,21 +21,70 @@ export enum ButtonSize {
 }
 
 export interface ButtonProps {
+  /**
+   * Button variant
+   */
   variant?: ButtonVariant;
+  /**
+   * Button label
+   */
   label?: string;
+  /**
+   * Is button loading
+   */
   isLoading?: boolean;
+  /**
+   * Additional class name
+   */
   className?: string;
+  /**
+   * Button size
+   */
   size?: ButtonSize;
+  /**
+   * Click handler
+   * @param e
+   */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * Link to
+   */
   to?: string;
+  /**
+   * Button type
+   */
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  /**
+   * Button icon
+   */
   withIcon?: string;
+  /**
+   * Icon class name
+   */
   iconClassName?: string;
+  /**
+   * Button children
+   */
   children?: React.ReactNode;
+  /**
+   * Is button disabled
+   */
   disabled?: boolean;
+  /**
+   * Set icon after
+   */
   iconAfter?: boolean;
+  /**
+   * Set rounded
+   */
   rounded?: boolean;
+  /**
+   * Set bold
+   */
   bold?: boolean;
+  /**
+   * Count value
+   */
   count?: number;
 }
 

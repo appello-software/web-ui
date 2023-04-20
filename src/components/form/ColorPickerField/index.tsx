@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import clsx from 'clsx';
 import React, { ReactElement, useRef } from 'react';
@@ -8,7 +10,7 @@ import { Field, FieldProps } from '~/components/form/Field';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useClickAway } from '~/hooks/useClickAway';
 
-interface Props<TName, TFormValues extends FieldValues>
+export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
   extends Pick<FieldProps, 'className' | 'label' | 'required'> {
   size?: InputSize;
   name: TName;
@@ -25,7 +27,7 @@ export const ColorPickerField = <
   size,
   className,
   required,
-}: Props<TName, TFormValues>): ReactElement => {
+}: ColorPickerFieldProps<TName, TFormValues>): ReactElement => {
   const pickerRef = useRef(null);
 
   const { field, fieldState } = useController({ name, control });

@@ -1,21 +1,39 @@
 import './styles.scss';
 
-import { ApolloQueryResult } from '@apollo/client/core/types';
 import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
 import clsx from 'clsx';
 import React, { useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
-import { Icon } from '~/components';
+import { Icon } from '~/components/common/Icon';
 import { useAppelloKit } from '~/ctx';
 
 export interface PaginationProps {
+  /**
+   * Current offset
+   */
   offset: number;
+  /**
+   * Offset setter
+   * @param offset
+   */
   setOffset: (offset: number) => void;
+  /**
+   * Total items count
+   */
   totalCount: number;
+  /**
+   * Items count per page
+   */
   itemsCount: number;
+  /**
+   * Additional class name
+   */
   className?: string;
 
+  /**
+   * Fetch more function (GraphQL only)
+   */
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore: (
     options: FetchMoreQueryOptions<any> & {
@@ -27,7 +45,7 @@ export interface PaginationProps {
         },
       ) => any;
     },
-  ) => Promise<ApolloQueryResult<any>>;
+  ) => Promise<unknown>;
   /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
@@ -71,14 +89,14 @@ export const Pagination: React.FC<PaginationProps> = ({
     <div className={className}>
       <Paginate
         breakLabel="..."
-        nextLabel={<Icon name="down-arrow" size={18} className="inline -rotate-90" />}
+        nextLabel={<Icon name="down-arrow" size={18} className="pagination__nav-icon--next" />}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         breakLinkClassName="pagination__link"
         breakClassName="pagination__item"
         pageCount={pageCount}
         forcePage={offset / pageSize}
-        previousLabel={<Icon name="down-arrow" size={18} className="inline rotate-90" />}
+        previousLabel={<Icon name="down-arrow" size={18} className="pagination__nav-icon--prev" />}
         containerClassName="pagination"
         marginPagesDisplayed={5}
         pageLinkClassName="pagination__link"

@@ -1,0 +1,10 @@
+@import '../src/styles/index.scss';
+
+body {
+  font-size: var(--p1-font-size);
+  color: hsl(var(--black-1-color));
+}
+
+.button {
+  width: auto !important;
+}

@@ -3,13 +3,22 @@ import * as React from 'react';
 
 import styles from './styles.module.scss';
 
-interface Props {
+export interface LoaderProps {
+  /**
+   * Full screen loader
+   */
   full?: boolean;
+  /**
+   * Apply accent color
+   */
   colorful?: boolean;
+  /**
+   * Each dot size
+   */
   dotSize?: number;
 }
 
-export const Loader: React.FC<Props> = ({ full, colorful, dotSize = 10 }) => {
+export const Loader: React.FC<LoaderProps> = ({ full, colorful, dotSize = 10 }) => {
   const dotStyle = React.useMemo(
     () => ({
       width: `${dotSize}px`,

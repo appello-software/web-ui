@@ -10,7 +10,7 @@ type AllowedInputProps = Pick<
 >;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
-interface Props<
+export interface TextFieldProps<
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, number | string>,
 > extends AllowedInputProps,
@@ -33,7 +33,7 @@ export const TextField = <
   required,
   placeholder = label,
   ...textInputProps
-}: Props<TFormValues, TName>): React.ReactElement => {
+}: TextFieldProps<TFormValues, TName>): React.ReactElement => {
   const controller = useController({ name, control });
 
   return (

@@ -1,10 +1,27 @@
 import React from 'react';
 
-interface Props<TMultiple extends boolean> {
+export interface FileUploadProps<TMultiple extends boolean> {
+  /**
+   * Callback that will be called when files are selected
+   * @param files
+   */
   onUpload: (files: TMultiple extends true ? File[] : File) => void;
+  /**
+   * File selection trigger
+   * @param props
+   */
   children: (props: { onClick: () => void }) => React.ReactNode;
+  /**
+   * Allowed file types
+   */
   accept?: string;
+  /**
+   * Allow multiple files
+   */
   multiple?: TMultiple;
+  /**
+   * Additional class name
+   */
   className?: string;
 }
 
@@ -14,7 +31,7 @@ export const FileUpload = <TMultiple extends boolean = false>({
   accept,
   multiple,
   className,
-}: Props<TMultiple>): React.ReactElement => {
+}: FileUploadProps<TMultiple>): React.ReactElement => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleChange = React.useCallback(

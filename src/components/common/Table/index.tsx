@@ -19,7 +19,7 @@ import { useAppelloKit } from '~/ctx';
 import { HeaderCell } from './components/HeaderCell';
 import styles from './styles.module.scss';
 
-interface Props<TData> {
+export interface TableProps<TData> {
   className?: string;
   data: TData[];
 
@@ -68,7 +68,7 @@ export const Table = <TData extends object>({
   setOffset,
   error,
   offset,
-}: Props<TData>): ReactElement => {
+}: TableProps<TData>): ReactElement => {
   const hasPagination =
     !isNil(offset) && !isNil(setOffset) && !isNil(totalCount) && !isNil(fetchMore);
   const hasSorting = !isNil(sorting) && !isNil(setSorting);

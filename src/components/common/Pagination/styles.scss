@@ -49,4 +49,14 @@
     line-height: var(--c2-line-height);
     color: hsl(var(--gray-2-color));
   }
+
+  &__nav-icon--next {
+    display: inline;
+    transform: rotate(-90deg);
+  }
+
+  &__nav-icon--prev {
+    display: inline;
+    transform: rotate(90deg);
+  }
 }

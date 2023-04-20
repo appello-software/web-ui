@@ -22,7 +22,7 @@ type AllowedSelectProps<TValue, TIsMulti extends boolean, TIsClearable extends b
   'inputSize' | 'isMulti' | 'placeholder' | 'isClearable' | 'disabled'
 >;
 
-interface Props<
+export interface SelectFieldProps<
   TFormValues extends FieldValues,
   TName extends FieldPath<TFormValues>,
   TValue,
@@ -56,7 +56,8 @@ export const SelectField = <
   isClearable,
   inputSize,
   placeholder,
-}: Props<TFormValues, TName, TValue, TIsMulti, TIsClearable>): React.ReactElement => {
+  disabled,
+}: SelectFieldProps<TFormValues, TName, TValue, TIsMulti, TIsClearable>): React.ReactElement => {
   const controller = useController({ name, control });
   const value = controller.field.value as SelectValueType<TValue, TIsMulti, TIsClearable>;
   const onChange = controller.field.onChange as SelectOnChange<TValue, TIsMulti, TIsClearable>;
@@ -64,7 +65,7 @@ export const SelectField = <
   return (
     <Field {...{ label, className, required }} error={controller.fieldState.error}>
       <Select
-        {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder }}
+        {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder, disabled }}
         hasError={!!controller.fieldState.error}
       />
     </Field>

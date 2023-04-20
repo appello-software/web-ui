@@ -10,12 +10,12 @@ export enum BadgeColor {
   RED = 'red',
 }
 
-interface Props {
+export interface BadgeProps {
   children: ReactNode;
   color: BadgeColor;
 }
 
-export const Badge: FC<Props> = ({ children, color }) => {
+export const Badge: FC<BadgeProps> = ({ children, color }) => {
   return (
     <div className={clsx('badge', `badge--${color}`)}>
       <p className="badge__text">{children}</p>

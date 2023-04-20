@@ -1,6 +1,6 @@
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import * as React from 'react';
-import { Control, FieldPath, FieldValues, useController } from 'react-hook-form';
+import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { Icon } from '~/components/common/Icon';
 import { Field } from '~/components/form/Field';
@@ -8,8 +8,8 @@ import { Field } from '~/components/form/Field';
 import { InputSize, TextInput, TextInputProps } from '../TextInput';
 import styles from './styles.module.scss';
 
-interface Props<TFormValues extends FieldValues> extends TextInputProps {
-  name: FieldPath<TFormValues>;
+export interface PasswordFieldProps<TFormValues extends FieldValues> extends TextInputProps {
+  name: FieldPathByValue<TFormValues, string>;
   control: Control<TFormValues>;
 
   // field props
@@ -28,7 +28,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
   className,
   placeholder = label,
   ...textInputProps
-}: Props<TFormValues>): React.ReactElement => {
+}: PasswordFieldProps<TFormValues>): React.ReactElement => {
   const controller = useController({ name, control });
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
 
