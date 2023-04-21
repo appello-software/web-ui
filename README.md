@@ -1,6 +1,6 @@
 # @appello/web-ui
 
-React library of components and modules. Designed by [Appello](https://appello.com.au/).
+React UI library of components and modules. Designed by [Appello](https://appello.com.au/).
 
 <a href="https://www.npmjs.com/package/@appello/web-ui">
   <img alt="npm version" src="https://img.shields.io/npm/v/@appello/web-ui.svg?style=flat-square" />
