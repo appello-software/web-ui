@@ -13,3 +13,5 @@ yarn-error.log
 .env
 /build
 /dist
+/build-storybook.log
+/storybook-static

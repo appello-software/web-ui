@@ -6,9 +6,6 @@ const meta = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
-  args: {
-    className: 'button',
-  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -19,6 +16,7 @@ export const Primary: Story = {
   args: {
     variant: ButtonVariant.PRIMARY,
     label: 'Button',
+    className: 'sb-button',
   },
 };
 
@@ -26,12 +24,22 @@ export const Secondary: Story = {
   args: {
     variant: ButtonVariant.SECONDARY,
     label: 'Button',
+    className: 'sb-button',
   },
 };
 
-export const Negative: Story = {
+export const WithIcon: Story = {
   args: {
-    variant: ButtonVariant.NEGATIVE,
+    variant: ButtonVariant.PRIMARY,
     label: 'Button',
+    withIcon: 'add',
+    className: 'sb-button',
+  },
+};
+
+export const OnlyIcon: Story = {
+  args: {
+    variant: ButtonVariant.PRIMARY,
+    withIcon: 'add',
   },
 };
