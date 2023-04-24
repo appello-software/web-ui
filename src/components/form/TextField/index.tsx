@@ -6,7 +6,16 @@ import { TextInput, TextInputProps } from '~/components/form/TextInput';
 
 type AllowedInputProps = Pick<
   TextInputProps,
-  'autoComplete' | 'autoFocus' | 'size' | 'placeholder' | 'maxLength' | 'disabled'
+  | 'autoComplete'
+  | 'autoFocus'
+  | 'size'
+  | 'placeholder'
+  | 'maxLength'
+  | 'disabled'
+  | 'iconBeforeElement'
+  | 'iconAfterElement'
+  | 'onIconBeforeClick'
+  | 'onIconAfterClick'
 >;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
