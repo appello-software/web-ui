@@ -9,8 +9,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--c1-font-size);
-    line-height: var(--c1-line-height);
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
     width: 1.36rem;
     height: var(--pagination-item-height);
     border-radius: 0.18rem;
@@ -46,8 +46,8 @@
 
   &__caption {
     margin-top: 0.75rem;
-    font-size: var(--c2-font-size);
-    line-height: var(--c2-line-height);
+    font-size: var(--p6-font-size);
+    line-height: var(--p6-line-height);
     color: hsl(var(--gray-2-color));
   }
 

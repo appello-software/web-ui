@@ -17,8 +17,8 @@
 
 .head-cell {
   background-color: hsl(var(--gray-7-color));
-  font-size: var(--c1-font-size);
-  line-height: var(--c1-line-height);
+  font-size: var(--p5-font-size);
+  line-height: var(--p5-line-height);
   color: hsl(var(--gray-1-color));
   padding: 0.49rem 0.87rem;
   text-align: left;
@@ -66,8 +66,8 @@
 }
 
 .cell {
-  font-size: var(--c1-font-size);
-  line-height: var(--c1-line-height);
+  font-size: var(--p5-font-size);
+  line-height: var(--p5-line-height);
   border: 1px solid hsl(var(--gray-6-color));
   padding: 0.93rem;
   vertical-align: middle;

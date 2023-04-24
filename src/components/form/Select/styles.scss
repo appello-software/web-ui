@@ -70,8 +70,8 @@ body .react-select {
 
   &__option {
     font-weight: 600;
-    font-size: var(--c1-font-size);
-    line-height: var(--c1-line-height);
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
     padding: 0.75rem 0.93rem;
     cursor: pointer;
     word-break: break-word;
@@ -129,8 +129,8 @@ body .react-select {
 
   &__menu-notice {
     &--no-options {
-      font-size: var(--c1-font-size);
-      line-height: var(--c1-line-height);
+      font-size: var(--p5-font-size);
+      line-height: var(--p5-line-height);
       font-weight: 600;
       text-align: center;
       padding: 0.46rem 0;
