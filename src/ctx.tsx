@@ -1,5 +1,5 @@
 import { deepmerge } from 'deepmerge-ts';
-import { createContext, FC, useContext, useMemo } from 'react';
+import { createContext, FC, ReactNode, useContext, useMemo } from 'react';
 import React from 'react';
 
 import { AppelloKit, AppelloKitComponents } from './types';
@@ -11,10 +11,16 @@ const defaultTheme: AppelloKit = {
 };
 
 const AppelloKitCtx = createContext<AppelloKit>(defaultTheme);
-export const AppelloKitProvider: FC<{ value: Partial<AppelloKit> }> = ({ value }) => {
+
+interface AppelloKitProviderProps {
+  value: Partial<AppelloKit>;
+  children: ReactNode;
+}
+
+export const AppelloKitProvider: FC<AppelloKitProviderProps> = ({ value, children }) => {
   const mergedTheme = useMemo(() => deepmerge(value, defaultTheme), [value]);
 
-  return <AppelloKitCtx.Provider value={mergedTheme} />;
+  return <AppelloKitCtx.Provider value={mergedTheme}>{children}</AppelloKitCtx.Provider>;
 };
 
 export function useAppelloKit(): AppelloKit {
