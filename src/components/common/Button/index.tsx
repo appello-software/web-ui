@@ -86,6 +86,10 @@ export interface ButtonProps {
    * Count value
    */
   count?: number;
+  /**
+   * Set full width
+   */
+  fullWidth?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -97,6 +101,7 @@ export const Button: React.FC<ButtonProps> = ({
   withIcon,
   iconClassName,
   variant,
+  fullWidth = true,
   children,
   disabled,
   isLoading,
@@ -114,6 +119,7 @@ export const Button: React.FC<ButtonProps> = ({
       variant ? `button--${variant}` : undefined,
       `button--size-${size}`,
       {
+        'button--full': fullWidth,
         'button--rounded': rounded,
         'button--bold': bold,
         'button--disabled': disabled,
@@ -121,7 +127,19 @@ export const Button: React.FC<ButtonProps> = ({
       },
       className,
     );
-  }, [disabled, variant, size, rounded, bold, label, children, count, withIcon, className]);
+  }, [
+    disabled,
+    variant,
+    size,
+    rounded,
+    bold,
+    label,
+    children,
+    count,
+    withIcon,
+    className,
+    fullWidth,
+  ]);
 
   const renderIcon = React.useCallback(() => {
     if (!withIcon) {

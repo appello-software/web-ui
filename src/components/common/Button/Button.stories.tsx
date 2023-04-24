@@ -16,7 +16,7 @@ export const Primary: Story = {
   args: {
     variant: ButtonVariant.PRIMARY,
     label: 'Button',
-    className: 'sb-button',
+    fullWidth: false,
   },
 };
 
@@ -24,7 +24,7 @@ export const Secondary: Story = {
   args: {
     variant: ButtonVariant.SECONDARY,
     label: 'Button',
-    className: 'sb-button',
+    fullWidth: false,
   },
 };
 
@@ -33,7 +33,7 @@ export const WithIcon: Story = {
     variant: ButtonVariant.PRIMARY,
     label: 'Button',
     withIcon: 'add',
-    className: 'sb-button',
+    fullWidth: false,
   },
 };
 
