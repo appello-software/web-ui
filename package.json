@@ -22,7 +22,6 @@
     "generate-exports": "node scripts/generate-exports.js",
     "prepareAlphaRelease": "npm run prettier && npm run generate-exports && npm run build && npm version prerelease --preid=alpha",
     "preparePatchRelease": "npm run prettier && npm run generate-exports && npm run build && npm version patch",
-    "prepublishOnly": "npm run preparePatchRelease",
     "postversion": "git push && git push --tags",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
