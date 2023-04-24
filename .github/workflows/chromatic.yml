@@ -1,9 +1,12 @@
 name: 'Chromatic Publish'
 
-on: push
+on:
+  push:
+    tags:
+      - v*
 
 jobs:
-  chromatic-deployment:
+  chromatic:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
