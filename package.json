@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/appello/web-ui-kit.git"
+    "url": "git@github.com:appello-software/web-ui.git"
   },
   "bugs": {
-    "url": "https://bitbucket.org/appello/web-ui-kit/issues"
+    "url": "https://github.com/appello-software/web-ui/issues"
   },
-  "homepage": "https://bitbucket.org/appello/web-ui-kit#readme",
+  "homepage": "https://main--644289178c2770e8e278fef0.chromatic.com",
   "dependencies": {
     "dot-path-value": "^0.0.9",
     "react-paginate": "^8.2.0",
