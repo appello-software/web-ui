@@ -39,6 +39,7 @@
     "use-debounce": "^9.0.4"
   },
   "peerDependencies": {
+    "@appello/common": "*",
     "@tanstack/react-table": "*",
     "@tanstack/table-core": "*",
     "clsx": "*",
@@ -56,7 +57,7 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.7.11",
-    "@appello/common": "^1.0.24",
+    "@appello/common": "^1.0.25",
     "@appello/eslint-config": "^0.1.12",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
