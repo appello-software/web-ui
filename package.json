@@ -35,6 +35,7 @@
   },
   "homepage": "https://main--644289178c2770e8e278fef0.chromatic.com",
   "dependencies": {
+    "deepmerge-ts": "^5.1.0",
     "dot-path-value": "^0.0.9",
     "react-paginate": "^8.2.0",
     "use-debounce": "^9.0.4"
