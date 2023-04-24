@@ -6,7 +6,7 @@ import * as React from 'react';
 import { FC, ReactNode, useMemo } from 'react';
 
 export interface TextInputProps
-  extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size' | 'value'> {
+  extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size'> {
   error?: boolean;
   autoComplete?: boolean | string;
   size?: InputSize;
