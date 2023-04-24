@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+
+import { Icon } from '~/components/common/Icon';
 
 import { TextInput } from '.';
 
@@ -14,6 +17,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Standard: Story = {
   args: {
+    placeholder: 'Placeholder',
+  },
+};
+
+export const IconBefore: Story = {
+  args: {
+    iconBeforeElement: <Icon name="magnifier" />,
+    placeholder: 'Placeholder',
+  },
+};
+
+export const IconAfter: Story = {
+  args: {
+    iconAfterElement: <Icon name="document" />,
     placeholder: 'Placeholder',
   },
 };

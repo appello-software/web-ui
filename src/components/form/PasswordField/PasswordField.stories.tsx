@@ -12,10 +12,8 @@ const meta = {
 
 export default meta;
 
-const Template: React.FC = () => {
+export const Standard: React.FC = () => {
   const form = useForm({ defaultValues: { password: '' } });
 
   return <PasswordField name="password" control={form.control} label="Password" />;
 };
-
-export const Standard = Template.bind({});

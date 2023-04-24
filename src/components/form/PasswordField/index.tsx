@@ -42,12 +42,10 @@ export const PasswordField = <TFormValues extends FieldValues>({
           type={isPasswordVisible ? 'text' : 'password'}
           inputClassName={styles['input']}
           placeholder={placeholder}
+          iconAfterElement={<Icon name={isPasswordVisible ? 'eye' : 'eye-crossed'} />}
+          onIconAfterClick={togglePasswordVisibility}
           {...textInputProps}
         />
-        <button type="button" onClick={togglePasswordVisibility} className={styles['toggle']}>
-          {isPasswordVisible && <Icon name="eye" size={20} />}
-          {!isPasswordVisible && <Icon name="eye-crossed" size={20} />}
-        </button>
       </div>
     </Field>
   );

@@ -109,6 +109,10 @@
     height: var(--input-icon-size);
     pointer-events: none;
 
+    &--clickable {
+      pointer-events: auto;
+    }
+
     &--before {
       left: var(--input-inline-padding);
     }
