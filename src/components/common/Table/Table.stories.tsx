@@ -34,7 +34,6 @@ const COLUMNS = [
   columnHelper.accessor('fullName', {
     id: 'fullName',
     header: 'Full Name',
-    enableHiding: true,
   }),
   columnHelper.accessor('email', {
     id: 'email',
