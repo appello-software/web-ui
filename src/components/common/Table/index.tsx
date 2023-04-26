@@ -91,23 +91,28 @@ export const Table = <TData extends object>({
         <thead className={styles['head']}>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <HeaderCell key={header.id} header={header} />
-              ))}
+              {headerGroup.headers.map(header =>
+                header.column.columnDef.enableHiding ? null : (
+                  <HeaderCell key={header.id} header={header} />
+                ),
+              )}
             </tr>
           ))}
         </thead>
         <tbody>
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td
-                  key={cell.id}
-                  className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
-                >
-                  {flexRender(cell.column.columnDef.cell || '-', cell.getContext())}
-                </td>
-              ))}
+              {row.getVisibleCells().map(cell =>
+                cell.column.columnDef.enableHiding ? null : (
+                  <td
+                    key={cell.id}
+                    className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
+                  >
+                    {(console.log(cell.column.columnDef.enableHiding), '')}
+                    {flexRender(cell.column.columnDef.cell || '-', cell.getContext())}
+                  </td>
+                ),
+              )}
             </tr>
           ))}
         </tbody>
