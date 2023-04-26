@@ -108,7 +108,6 @@ export const Table = <TData extends object>({
                     key={cell.id}
                     className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
                   >
-                    {(console.log(cell.column.columnDef.enableHiding), '')}
                     {flexRender(cell.column.columnDef.cell || '-', cell.getContext())}
                   </td>
                 ),
