@@ -18,7 +18,7 @@ interface AppelloKitProviderProps {
 }
 
 export const AppelloKitProvider: FC<AppelloKitProviderProps> = ({ value, children }) => {
-  const mergedTheme = useMemo(() => deepmerge(value, defaultTheme), [value]);
+  const mergedTheme = useMemo(() => deepmerge(defaultTheme, value) as AppelloKit, [value]);
 
   return <AppelloKitCtx.Provider value={mergedTheme}>{children}</AppelloKitCtx.Provider>;
 };
