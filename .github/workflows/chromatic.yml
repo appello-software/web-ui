@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - v*
+    paths:
+      - '../../src/**/*.stories.@(js|jsx|ts|tsx)'
 
 jobs:
   chromatic:
