@@ -28,10 +28,17 @@ interface UseListQueryParamsReturn<TFilter> {
 export const useListQueryParams = <TFilter>(): UseListQueryParamsReturn<TFilter> => {
   const { pageSize } = useAppelloKit();
 
-  const [offset, setOffset] = useQueryParam<number>(ListQueryType.PAGE, {
-    encode: offset => toString(Math.ceil(offset / pageSize) + 1),
-    decode: page => (Number(page) - 1 || 0) * pageSize,
-  });
+  const [offset, setOffset] = useQueryParam<number>(
+    ListQueryType.PAGE,
+    {
+      default: 0,
+      encode: offset => toString(Math.ceil(offset / pageSize) + 1),
+      decode: page => (Number(page) - 1 || 0) * pageSize,
+    },
+    {
+      removeDefaultsFromUrl: true,
+    },
+  );
   const [searchValue, setSearchValue] = useQueryParam<SearchType>(ListQueryType.SEARCH);
   const [filter, setFilter] = useState<TFilter | null>(null);
 
@@ -46,7 +53,7 @@ export const useListQueryParams = <TFilter>(): UseListQueryParamsReturn<TFilter>
   return useMemo(
     () => ({
       offset,
-      setOffset: (newValue: OffsetType) => setOffset(newValue, 'replaceIn'),
+      setOffset,
       searchValue,
       setSearchValue,
       filter,
