@@ -23,8 +23,9 @@ const Template: React.FC = () => {
       offset={offset}
       setOffset={setOffset}
       totalCount={1000}
-      itemsCount={pageSize}
+      itemsCount={pageSize * 4}
       fetchMore={() => sleep(1000)}
+      pageSize={pageSize}
     />
   );
 };
