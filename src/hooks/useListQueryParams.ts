@@ -40,13 +40,13 @@ export const useListQueryParams = <TFilter>(): UseListQueryParamsReturn<TFilter>
   }, [filter]);
 
   useUpdateEffect(() => {
-    setOffset(0);
+    setOffset(0, 'replaceIn');
   }, [searchValue, filter]);
 
   return useMemo(
     () => ({
       offset,
-      setOffset,
+      setOffset: (newValue: OffsetType) => setOffset(newValue, 'replaceIn'),
       searchValue,
       setSearchValue,
       filter,
