@@ -1,3 +1,4 @@
+import { TableProps } from '~/components';
 import { ButtonProps } from '~/components/common/Button';
 import { SearchInputProps } from '~/components/common/SearchInput';
 import { PhotoFieldProps } from '~/components/form/PhotoField';
@@ -9,6 +10,7 @@ export interface UIComponents {
   Button: ButtonProps;
   PhotoField: PhotoFieldProps<any, any>;
   SearchInput: SearchInputProps;
+  Table: TableProps<any>;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 

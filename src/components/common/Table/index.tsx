@@ -14,27 +14,60 @@ import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 
 import { Pagination } from '~/components/common/Pagination';
-import { useAppelloKit } from '~/ctx';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 import { HeaderCell } from './components/HeaderCell';
 import styles from './styles.module.scss';
 
 export interface TableProps<TData> {
+  /**
+   * Additional class name
+   */
   className?: string;
+  /**
+   * Table data
+   */
   data: TData[];
 
+  /**
+   * Table columns
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
 
+  /**
+   * Sorting state
+   */
   sorting?: SortingState;
+  /**
+   * Sorting state setter
+   */
   setSorting?: OnChangeFn<SortingState>;
-
-  setOffset?: (offset: number) => void;
+  /**
+   * Pagination offset
+   */
   offset?: number;
+  /**
+   * Pagination offset setter
+   * @param offset
+   */
+  setOffset?: (offset: number) => void;
+  /**
+   * Total items count for pagination
+   */
   totalCount?: number;
-
+  /**
+   * Items count per page
+   */
+  pageSize?: number;
+  /**
+   * Error message
+   */
   error?: string;
 
+  /**
+   * Fetch more function (GraphQL only)
+   */
   /* eslint-disable @typescript-eslint/no-explicit-any */
   fetchMore?: (
     options: FetchMoreQueryOptions<any> & {
@@ -57,22 +90,32 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const Table = <TData extends object>({
-  className,
-  data,
-  columns,
-  sorting,
-  setSorting,
-  fetchMore,
-  totalCount,
-  setOffset,
-  error,
-  offset,
-}: TableProps<TData>): ReactElement => {
+export const Table = <TData extends object>(props: TableProps<TData>): ReactElement => {
+  const {
+    className,
+    data,
+    columns,
+    sorting,
+    setSorting,
+    fetchMore,
+    totalCount,
+    setOffset,
+    error,
+    offset,
+    pageSize,
+  } = useCombinedPropsWithKit({
+    name: 'Table',
+    props,
+  });
+
   const hasPagination =
-    !isNil(offset) && !isNil(setOffset) && !isNil(totalCount) && !isNil(fetchMore);
+    !isNil(offset) &&
+    !isNil(setOffset) &&
+    !isNil(totalCount) &&
+    !isNil(fetchMore) &&
+    !isNil(pageSize);
+
   const hasSorting = !isNil(sorting) && !isNil(setSorting);
-  const { pageSize } = useAppelloKit();
 
   const table = useReactTable({
     data,
@@ -123,6 +166,7 @@ export const Table = <TData extends object>({
           setOffset={setOffset}
           totalCount={totalCount}
           itemsCount={data.length}
+          pageSize={pageSize}
         />
       )}
     </div>
