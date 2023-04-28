@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { useUpdateEffect } from '@appello/common/lib/hooks';
+import { useMountEffect, useUpdateEffect } from '@appello/common/lib/hooks';
 import { isNil } from '@appello/common/lib/utils/isNil';
 import clsx from 'clsx';
 import React, {
@@ -54,6 +54,13 @@ export const Tabs = <TTab extends Tab>({
 
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? tabIndexByPath ?? 0);
   const element = items[selectedTabIndex]?.element;
+
+  useMountEffect(() => {
+    if (!isNil(tabIndexByPath) && !isNil(selected)) {
+      setSelectedTabIndex(tabIndexByPath);
+      onSelect?.(selectedTabIndex);
+    }
+  });
 
   useUpdateEffect(() => {
     setSelectedTabIndex(tabIndexByPath ?? 0);
