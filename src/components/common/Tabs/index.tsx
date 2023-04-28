@@ -1,26 +1,28 @@
 import './styles.scss';
 
 import { useUpdateEffect } from '@appello/common/lib/hooks';
+import { isNil } from '@appello/common/lib/utils/isNil';
 import clsx from 'clsx';
 import React, {
   ReactElement,
   ReactNode,
-  useEffect,
   useImperativeHandle,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 export interface Tab {
   title: ReactNode;
   element: ReactNode;
   disabled?: boolean;
+  path?: string;
 }
 
 export interface TabsRef {
   moveTo(index: number): void;
-  getSelectedTabIndex(): number;
 }
 
 export interface TabsProps<TTab> {
@@ -42,10 +44,22 @@ export const Tabs = <TTab extends Tab>({
   selected,
   onSelect,
 }: TabsProps<TTab>): ReactElement => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? 0);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const tabIndexByPath = useMemo(() => {
+    const index = items.findIndex(item => item.path && matchPath(location.pathname, item.path));
+    return index === -1 ? undefined : index;
+  }, [items, location.pathname]);
+
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? tabIndexByPath ?? 0);
   const element = items[selectedTabIndex]?.element;
 
-  useEffect(() => {
+  useUpdateEffect(() => {
+    setSelectedTabIndex(tabIndexByPath ?? 0);
+  }, [tabIndexByPath]);
+
+  useUpdateEffect(() => {
     setSelectedTabIndex(selected ?? 0);
   }, [selected]);
 
@@ -53,18 +67,11 @@ export const Tabs = <TTab extends Tab>({
     onSelect?.(selectedTabIndex);
   }, [selectedTabIndex, onSelect]);
 
-  useImperativeHandle(
-    tabsRef,
-    () => ({
-      moveTo(index: number) {
-        setSelectedTabIndex(index);
-      },
-      getSelectedTabIndex() {
-        return selectedTabIndex;
-      },
-    }),
-    [selectedTabIndex],
-  );
+  useImperativeHandle(tabsRef, () => ({
+    moveTo(index: number) {
+      setSelectedTabIndex(index);
+    },
+  }));
 
   const headListRef = useRef<HTMLUListElement>(null);
   const activeLineRef = useRef<HTMLDivElement>(null);
@@ -90,7 +97,12 @@ export const Tabs = <TTab extends Tab>({
             <li key={index} className="tabs__head-item">
               <button
                 type="button"
-                onClick={() => setSelectedTabIndex(index)}
+                onClick={() => {
+                  setSelectedTabIndex(index);
+                  if (!isNil(item.path)) {
+                    navigate(item.path);
+                  }
+                }}
                 disabled={item.disabled}
                 className={clsx('tabs__head-button', {
                   'tabs__head-button--active': index === selectedTabIndex,
