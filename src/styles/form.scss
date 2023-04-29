@@ -5,14 +5,11 @@
   &__inline-fields {
     gap: 1rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc((100% / 2) - 0.5rem));
   }
 
   &__field {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
 
   &__field-row {
@@ -26,11 +23,17 @@
   }
 
   &__label {
+    display: block;
     font-size: var(--p4-font-size);
     line-height: var(--p4-line-height);
     color: hsl(var(--gray-1-color));
-    display: flex;
     margin-bottom: 2px;
+  }
+
+  &__inline-fields &__label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &__input {
