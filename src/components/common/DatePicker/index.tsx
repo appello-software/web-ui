@@ -10,6 +10,7 @@ import { DatePickerPopup, Icon } from '~/components';
 export interface DatePickerProps {
   placeholder?: ReactNode;
   onChange: (value: Date | null) => void;
+  defaultValue?: Date | null;
   className?: string;
 }
 
