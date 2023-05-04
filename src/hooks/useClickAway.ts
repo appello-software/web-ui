@@ -10,7 +10,7 @@ interface UseClickAwayOptions {
 export function useClickAway(
   ref: RefObject<HTMLElement | null>,
   onClickAway: (event: Event) => void,
-  options: UseClickAwayOptions,
+  options: UseClickAwayOptions = {},
 ): void {
   const { events = defaultEvents, excludeElements = [] } = options;
   const savedCallback = useRef(onClickAway);

@@ -1,6 +1,7 @@
 export * from './Badge';
 export * from './BrowserSelect';
 export * from './Button';
+export * from './DatePickerPopup';
 export * from './Dropdown';
 export * from './EmptyState';
 export * from './FileUpload';
