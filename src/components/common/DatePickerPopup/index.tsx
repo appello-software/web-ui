@@ -61,25 +61,24 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
   }, []);
 
   useEffect(() => {
-    const inputElement = callableElement;
-
     const observer = new ResizeObserver(entries => {
       entries.forEach(entry => {
         const isHTMLElement = entry.target instanceof HTMLElement;
         if (isHTMLElement && containerRef.current) {
           const rect = entry.target.getBoundingClientRect();
           containerRef.current.style.top = `${rect.bottom}px`;
+          containerRef.current.style.left = `${rect.left}px`;
         }
       });
     });
 
-    if (inputElement) {
-      observer.observe(inputElement);
+    if (callableElement) {
+      observer.observe(callableElement);
     }
 
     return () => {
-      if (inputElement) {
-        observer.unobserve(inputElement);
+      if (callableElement) {
+        observer.unobserve(callableElement);
       }
     };
   }, [callableElement]);
@@ -129,7 +128,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
   });
 
   return createPortal(
-    <div style={{ position: 'fixed' }} ref={containerRef}>
+    <div className={styles['calendar-wrapper']} ref={containerRef}>
       <DayPicker
         selected={value ?? undefined}
         month={month}
