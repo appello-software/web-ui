@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue, useUpdateEffect } from '@appello/common/lib/hooks';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
@@ -17,6 +17,7 @@ export interface DatePickerProps {
 export const DatePicker: React.FC<DatePickerProps> = ({
   placeholder = 'Choose a date',
   className,
+  onChange,
 }) => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [value, setValue] = useState<Date | null>(null);
@@ -29,6 +30,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
     return format(value, 'd MMM yyyy');
   }, [value]);
+
+  useUpdateEffect(() => {
+    onChange?.(value);
+  }, [value, onChange]);
 
   return (
     <div className={clsx('date-picker', className)}>
