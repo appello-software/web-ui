@@ -12,12 +12,14 @@ export interface DatePickerProps {
   onChange: (value: Date | null) => void;
   defaultValue?: Date | null;
   className?: string;
+  leftIconElement?: ReactNode;
 }
 
 export const DatePicker: React.FC<DatePickerProps> = ({
   placeholder = 'Choose a date',
   className,
   onChange,
+  leftIconElement,
 }) => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [value, setValue] = useState<Date | null>(null);
@@ -38,7 +40,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div className={clsx('date-picker', className)}>
       <button type="button" onClick={toggleCalendar} ref={buttonRef} className="date-picker__btn">
-        <Icon name="calendar" size={16} />
+        {leftIconElement !== undefined && leftIconElement}
+        {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}
         <Icon name="down-arrow" size={18} />
       </button>
