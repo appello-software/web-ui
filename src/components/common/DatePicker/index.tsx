@@ -39,7 +39,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   useUpdateEffect(() => {
     onChange?.(value);
-  }, [value, onChange]);
+  }, [value]);
 
   return (
     <div className={clsx('date-picker', className)}>
