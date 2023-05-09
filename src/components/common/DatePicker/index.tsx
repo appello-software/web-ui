@@ -4,6 +4,7 @@ import { useSwitchValue, useUpdateEffect } from '@appello/common/lib/hooks';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
+import { Matcher } from 'react-day-picker';
 
 import { DatePickerPopup, Icon } from '~/components';
 
@@ -11,6 +12,7 @@ export interface DatePickerProps {
   placeholder?: ReactNode;
   onChange: (value: Date | null) => void;
   defaultValue?: Date | null;
+  disabledDate?: Matcher;
   className?: string;
   leftIconElement?: ReactNode;
 }
@@ -20,6 +22,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   className,
   onChange,
   leftIconElement,
+  disabledDate,
 }) => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [value, setValue] = useState<Date | null>(null);
@@ -50,6 +53,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           value={value}
           onChange={setValue}
           callableElement={buttonRef.current}
+          disabledDate={disabledDate}
           onClose={closeCalendar}
         />
       )}
