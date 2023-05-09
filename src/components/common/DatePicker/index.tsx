@@ -23,9 +23,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   leftIconElement,
   disabledDate,
+  defaultValue,
 }) => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
-  const [value, setValue] = useState<Date | null>(null);
+  const [value, setValue] = useState<Date | null>(defaultValue ?? null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const displayDate = useMemo(() => {
