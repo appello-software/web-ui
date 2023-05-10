@@ -7,7 +7,7 @@ import { AppelloKit, AppelloKitComponents } from './types';
 const defaultTheme: AppelloKit = {
   pageSize: 10,
   debounceDelay: 500,
-  dateFormat: 'dd/MM/yyyy',
+  dateFormat: 'd MMM yyyy',
 };
 
 const AppelloKitCtx = createContext<AppelloKit>(defaultTheme);
