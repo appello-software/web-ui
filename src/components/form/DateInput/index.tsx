@@ -4,32 +4,35 @@ import { format } from 'date-fns';
 import React, { ReactElement, useMemo, useRef } from 'react';
 import { Matcher } from 'react-day-picker';
 
-import { DatePickerPopup } from '~/components/common/DatePickerPopup';
+import {
+  DatePickerDefaultProps,
+  DatePickerPopup,
+  DatePickerRangeProps,
+} from '~/components/common/DatePickerPopup';
 import { Icon } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
 
 import styles from './styles.module.scss';
 
-export interface DateInputProps<TValue extends Date | null> {
+export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) & {
   placeholder?: string;
   inputSize?: InputSize;
   error?: boolean;
-  value: TValue;
-  onChange: (value: TValue) => void;
   className?: string;
   disabledDate?: Matcher;
-}
+};
 
-export const DateInput = <TValue extends Date | null>({
+export const DateInput: React.FC<DateInputProps> = ({
   className,
   placeholder,
   inputSize,
   value,
   error,
   onChange,
+  mode,
   disabledDate,
-}: DateInputProps<TValue>): ReactElement => {
+}): ReactElement => {
   const { dateFormat } = useAppelloKit();
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,11 +43,22 @@ export const DateInput = <TValue extends Date | null>({
     off: closeCalendar,
   } = useSwitchValue(false);
 
-  const handleDayChange = React.useCallback(
-    (day: Date) => {
-      onChange(day as TValue);
+  const handleDayChange: DatePickerDefaultProps['onChange'] = React.useCallback(
+    (day, ...args) => {
+      if (mode === undefined) {
+        onChange(day, ...args);
+      }
     },
-    [onChange],
+    [mode, onChange],
+  );
+
+  const handleRangeChange: DatePickerRangeProps['onChange'] = React.useCallback(
+    (range, ...args) => {
+      if (mode === 'range') {
+        onChange(range, ...args);
+      }
+    },
+    [mode, onChange],
   );
 
   const displayDate = useMemo(() => {
@@ -52,8 +66,35 @@ export const DateInput = <TValue extends Date | null>({
       return '';
     }
 
+    if (mode === 'range') {
+      const { to, from } = value;
+
+      if (!from) {
+        return '';
+      }
+
+      if (!to) {
+        return format(from, 'd MMM yyyy');
+      }
+
+      return `${format(from, 'd MMM yyyy')} - ${format(to, 'd MMM yyyy')}`;
+    }
+
     return format(value, dateFormat);
-  }, [value, dateFormat]);
+  }, [value, mode, dateFormat]);
+
+  const propsByMode =
+    mode === 'range'
+      ? {
+          mode: 'range' as const,
+          value,
+          onChange: handleRangeChange,
+        }
+      : {
+          mode: undefined,
+          value,
+          onChange: handleDayChange,
+        };
 
   return (
     <div ref={containerRef} className={clsx(styles['date-input'], className)}>
@@ -78,8 +119,7 @@ export const DateInput = <TValue extends Date | null>({
       </div>
       {isCalendarVisible && (
         <DatePickerPopup
-          value={value}
-          onChange={handleDayChange}
+          {...propsByMode}
           disabledDate={disabledDate}
           callableElement={inputRef.current}
           onClose={closeCalendar}
