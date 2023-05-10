@@ -20,8 +20,9 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepareAlphaRelease": "npm run prettier && npm run generate-exports && npm run build && npm version prerelease --preid=alpha",
-    "preparePatchRelease": "npm run prettier && npm run generate-exports && npm run build && npm version patch",
+    "prepareRelease": "npm run generate-exports && npm run prettier",
+    "alpha-version": "npm version prerelease --preid=alpha",
+    "patch-version": "npm version patch",
     "postpublish": "git push && git push --tags",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

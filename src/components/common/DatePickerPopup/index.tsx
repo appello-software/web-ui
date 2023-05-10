@@ -33,6 +33,12 @@ import { useClickAway } from '~/hooks';
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
 
+export interface DatePickerDefaultProps {
+  mode?: undefined;
+  value: Date | null;
+  onChange: DayClickEventHandler;
+}
+
 export interface DatePickerRangeProps {
   mode: 'range';
   value: DateRange | null;
@@ -42,12 +48,6 @@ export interface DatePickerRangeProps {
     activeModifiers: ActiveModifiers,
     e: React.MouseEvent,
   ) => void;
-}
-
-export interface DatePickerDefaultProps {
-  mode?: undefined;
-  value: Date | null;
-  onChange: DayClickEventHandler;
 }
 
 export interface DatePickerBaseProps {

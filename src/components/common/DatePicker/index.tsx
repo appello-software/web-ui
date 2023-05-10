@@ -6,7 +6,8 @@ import { format } from 'date-fns';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { Matcher } from 'react-day-picker';
 
-import { DatePickerPopup, Icon } from '~/components';
+import { DatePickerPopup } from '~/components/common/DatePickerPopup';
+import { Icon } from '~/components/common/Icon';
 
 export interface DatePickerProps {
   placeholder?: ReactNode;
