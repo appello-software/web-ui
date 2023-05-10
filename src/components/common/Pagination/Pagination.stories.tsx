@@ -25,6 +25,7 @@ const Template: React.FC = () => {
       totalCount={1000}
       itemsCount={pageSize}
       fetchMore={() => sleep(1000)}
+      pageSize={pageSize}
     />
   );
 };

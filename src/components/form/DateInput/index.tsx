@@ -1,36 +1,15 @@
-import 'react-day-picker/dist/style.css';
-
 import { useSwitchValue } from '@appello/common/lib/hooks';
 import clsx from 'clsx';
-import {
-  eachMonthOfInterval,
-  endOfYear,
-  format,
-  isWeekend,
-  setMonth,
-  setYear,
-  startOfDay,
-  startOfYear,
-} from 'date-fns';
-import React, {
-  FC,
-  ReactElement,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { CaptionLabelProps, DayPicker, Matcher, useDayPicker } from 'react-day-picker';
+import { format } from 'date-fns';
+import React, { ReactElement, useMemo, useRef } from 'react';
+import { Matcher } from 'react-day-picker';
 
-import { BrowserSelect } from '~/components/common/BrowserSelect';
+import { DatePickerPopup } from '~/components/common/DatePickerPopup';
 import { Icon } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
-import { useClickAway } from '~/hooks/useClickAway';
 
 import styles from './styles.module.scss';
-import { formatWeekdayName } from './utils';
 
 export interface DateInputProps<TValue extends Date | null> {
   placeholder?: string;
@@ -52,9 +31,8 @@ export const DateInput = <TValue extends Date | null>({
   disabledDate,
 }: DateInputProps<TValue>): ReactElement => {
   const { dateFormat } = useAppelloKit();
-  const calendarRef = useRef<HTMLDivElement>(null);
-  const calendarWrapperRef = useRef<HTMLDivElement>(null);
-  const [month, setMonth] = useState(() => value ?? new Date());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const {
     value: isCalendarVisible,
@@ -62,26 +40,12 @@ export const DateInput = <TValue extends Date | null>({
     off: closeCalendar,
   } = useSwitchValue(false);
 
-  const handleMonthChange = useCallback((month: Date) => {
-    setMonth(month);
-  }, []);
-
   const handleDayChange = React.useCallback(
     (day: Date) => {
-      onChange(startOfDay(day) as TValue);
-      closeCalendar();
+      onChange(day as TValue);
     },
-    [onChange, closeCalendar],
+    [onChange],
   );
-
-  const renderWeekdayName = useCallback((date: Date) => {
-    const name = formatWeekdayName(date);
-    return (
-      <span className={clsx(styles['weekday'], { [styles['weekday--weekend']]: isWeekend(date) })}>
-        {name}
-      </span>
-    );
-  }, []);
 
   const displayDate = useMemo(() => {
     if (!value) {
@@ -91,30 +55,12 @@ export const DateInput = <TValue extends Date | null>({
     return format(value, dateFormat);
   }, [value, dateFormat]);
 
-  useLayoutEffect(() => {
-    const element = calendarWrapperRef.current;
-
-    if (isCalendarVisible && element) {
-      const rect = element.getBoundingClientRect();
-      const isBottomOverflow = rect.bottom > window.innerHeight && rect.top > rect.height;
-      if (isBottomOverflow) {
-        element.classList.add(styles['calendar-wrapper--top']);
-      }
-    }
-    return () => {
-      if (isCalendarVisible) {
-        element?.classList.remove(styles['calendar-wrapper--top']);
-      }
-    };
-  }, [isCalendarVisible]);
-
-  useClickAway(calendarRef, closeCalendar);
-
   return (
-    <div ref={calendarRef} className={clsx(styles['date-input'], className)}>
+    <div ref={containerRef} className={clsx(styles['date-input'], className)}>
       <div>
         <TextInput
           readOnly
+          ref={inputRef}
           onClick={toggleCalendar}
           placeholder={placeholder}
           size={inputSize}
@@ -131,73 +77,14 @@ export const DateInput = <TValue extends Date | null>({
         />
       </div>
       {isCalendarVisible && (
-        <div className={styles['calendar-wrapper']} ref={calendarWrapperRef}>
-          <DayPicker
-            selected={value ?? undefined}
-            month={month}
-            className={styles['container']}
-            onMonthChange={handleMonthChange}
-            onDayClick={handleDayChange}
-            components={{ CaptionLabel }}
-            modifiers={{
-              weekend: isWeekend,
-            }}
-            modifiersClassNames={{
-              weekend: 'rdp-day--weekend',
-              today: 'rdp-day--today',
-            }}
-            formatters={{
-              formatWeekdayName: renderWeekdayName,
-            }}
-            disabled={disabledDate}
-          />
-        </div>
+        <DatePickerPopup
+          value={value}
+          onChange={handleDayChange}
+          disabledDate={disabledDate}
+          callableElement={inputRef.current}
+          onClose={closeCalendar}
+        />
       )}
     </div>
-  );
-};
-
-const yearsOptions = Array.from({ length: 100 }, (_, index) => {
-  const year = new Date().getFullYear() + 5 - index;
-  return { label: year.toString(), value: year.toString() };
-});
-
-const monthsOptions = eachMonthOfInterval({
-  start: startOfYear(new Date()),
-  end: endOfYear(new Date()),
-}).map(month => {
-  return { label: format(month, 'MMMM'), value: `${month.getMonth()}` };
-});
-
-const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
-  const { onMonthChange, month } = useDayPicker();
-
-  const monthLabel = useMemo(() => format(displayMonth, 'MMMM'), [displayMonth]);
-  const monthValue = useMemo(() => `${displayMonth.getMonth()}`, [displayMonth]);
-  const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
-
-  return (
-    <>
-      <BrowserSelect
-        options={monthsOptions}
-        onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
-        value={monthValue}
-      >
-        <div className={styles['control']}>
-          <p className={styles['control__label']}>{monthLabel}</p>
-          <Icon name="down-arrow" className={styles['control__arrow']} />
-        </div>
-      </BrowserSelect>
-      <BrowserSelect
-        options={yearsOptions}
-        onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
-        value={yearValue}
-      >
-        <div className={styles['control']}>
-          <p className={styles['control__label']}>{yearValue}</p>
-          <Icon name="down-arrow" className={styles['control__arrow']} />
-        </div>
-      </BrowserSelect>
-    </>
   );
 };

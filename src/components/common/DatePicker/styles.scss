@@ -1,0 +1,9 @@
+.date-picker {
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.43rem;
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+  }
+}

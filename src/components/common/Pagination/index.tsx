@@ -6,7 +6,6 @@ import React, { useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { Icon } from '~/components/common/Icon';
-import { useAppelloKit } from '~/ctx';
 
 export interface PaginationProps {
   /**
@@ -30,6 +29,10 @@ export interface PaginationProps {
    * Additional class name
    */
   className?: string;
+  /**
+   * Page size
+   */
+  pageSize: number;
 
   /**
    * Fetch more function (GraphQL only)
@@ -56,9 +59,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   itemsCount,
   className,
   fetchMore,
+  pageSize,
 }) => {
   const [isFetching, setFetching] = useState<boolean>(false);
-  const { pageSize } = useAppelloKit();
 
   const handlePageClick = useCallback(
     async (event: { selected: number }) => {

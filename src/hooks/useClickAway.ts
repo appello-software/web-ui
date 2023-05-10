@@ -2,11 +2,17 @@ import { RefObject, useEffect, useRef } from 'react';
 
 const defaultEvents = ['mousedown', 'touchstart'];
 
+interface UseClickAwayOptions {
+  events?: string[];
+  excludeElements?: HTMLElement[];
+}
+
 export function useClickAway(
   ref: RefObject<HTMLElement | null>,
   onClickAway: (event: Event) => void,
-  events: string[] = defaultEvents,
+  options: UseClickAwayOptions = {},
 ): void {
+  const { events = defaultEvents, excludeElements = [] } = options;
   const savedCallback = useRef(onClickAway);
 
   useEffect(() => {
@@ -15,8 +21,11 @@ export function useClickAway(
 
   useEffect(() => {
     function handler(event: Event): void {
-      const { current: el } = ref;
-      if (el && !el.contains(event.target as Node)) {
+      const el = ref.current;
+      const isExcludeElement = excludeElements.some(excludeElement =>
+        excludeElement.contains(event.target as Node),
+      );
+      if (el && !el.contains(event.target as Node) && !isExcludeElement) {
         savedCallback.current(event);
       }
     }
@@ -30,5 +39,5 @@ export function useClickAway(
         document.removeEventListener(eventName, handler);
       });
     };
-  }, [events, ref]);
+  }, [events, excludeElements, ref]);
 }
