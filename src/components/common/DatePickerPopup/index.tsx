@@ -14,10 +14,14 @@ import {
 } from 'date-fns';
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  ActiveModifiers,
   CaptionLabelProps,
+  DateRange,
   DayClickEventHandler,
   DayPicker,
+  isDateRange,
   Matcher,
+  SelectRangeEventHandler,
   useDayPicker,
 } from 'react-day-picker';
 import { createPortal } from 'react-dom';
@@ -29,13 +33,30 @@ import { useClickAway } from '~/hooks';
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
 
-export interface DatePickerPopupProps {
+interface RangeProps extends BaseProps {
+  mode: 'range';
+  value: DateRange | null;
+  onChange: (
+    range: DateRange | null,
+    selectedDay: Date,
+    activeModifiers: ActiveModifiers,
+    e: React.MouseEvent,
+  ) => void;
+}
+
+interface DefaultProps extends BaseProps {
+  mode?: undefined;
   value: Date | null;
   onChange: DayClickEventHandler;
+}
+
+interface BaseProps {
   disabledDate?: Matcher;
   callableElement: HTMLElement | null;
   onClose: () => void;
 }
+
+export type DatePickerPopupProps = DefaultProps | RangeProps;
 
 export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
   value,
@@ -43,8 +64,11 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
   disabledDate,
   onClose,
   callableElement,
+  mode,
 }) => {
-  const [month, setMonth] = useState(() => value ?? new Date());
+  const [month, setMonth] = useState<Date>(
+    () => (isDateRange(value) ? value.from : value) ?? new Date(),
+  );
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMonthChange = useCallback((month: Date) => {
@@ -59,6 +83,25 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
       </span>
     );
   }, []);
+
+  const handleDayClick: DayClickEventHandler = useCallback(
+    (day, ...args) => {
+      if (mode === undefined) {
+        onChange(startOfDay(day), ...args);
+        onClose();
+      }
+    },
+    [mode, onChange, onClose],
+  );
+
+  const handleRangeSelect: SelectRangeEventHandler = useCallback(
+    (range, ...args) => {
+      if (mode === 'range') {
+        onChange(range ?? null, ...args);
+      }
+    },
+    [mode, onChange],
+  );
 
   useEffect(() => {
     const observer = new ResizeObserver(entries => {
@@ -127,17 +170,26 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
     excludeElements: callableElement ? [callableElement] : undefined,
   });
 
+  const propsByMode =
+    mode === 'range'
+      ? {
+          mode: 'range' as const,
+          selected: value ?? undefined,
+          onSelect: handleRangeSelect,
+        }
+      : {
+          mode: 'default' as const,
+          selected: value ?? undefined,
+          onDayClick: handleDayClick,
+        };
+
   return createPortal(
     <div className={styles['calendar-wrapper']} ref={containerRef}>
       <DayPicker
-        selected={value ?? undefined}
+        {...propsByMode}
         month={month}
         className={styles['container']}
         onMonthChange={handleMonthChange}
-        onDayClick={(day, ...args) => {
-          onChange(startOfDay(day), ...args);
-          onClose();
-        }}
         components={{ CaptionLabel }}
         modifiers={{
           weekend: isWeekend,
