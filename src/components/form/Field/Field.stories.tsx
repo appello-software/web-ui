@@ -24,7 +24,8 @@ export const Standard: Story = {
 
 export const WithError: Story = {
   args: {
-    children: <TextInput />,
+    label: 'Field label',
+    children: <TextInput error />,
     error: { type: 'custom', message: 'This is an error' },
   },
 };
