@@ -20,7 +20,7 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "generate-exports": "node scripts/generate-exports.js",
-    "prepareRelease": "npm run generate-exports && npm run prettier",
+    "prepareRelease": "npm run generate-exports && npm run prettier && npm run build",
     "alpha-version": "npm version prerelease --preid=alpha",
     "patch-version": "npm version patch",
     "postpublish": "git push && git push --tags",
