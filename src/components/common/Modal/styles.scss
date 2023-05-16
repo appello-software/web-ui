@@ -20,6 +20,10 @@
 
   $modal: &;
 
+  &__buttons-list {
+    gap: 1rem;
+  }
+
   &--center {
     margin: auto;
     border-radius: 8px;
