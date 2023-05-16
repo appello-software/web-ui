@@ -21,15 +21,17 @@ export interface SidebarProps {
     fullName: string;
     email: string;
   };
+  rightHeaderElement?: React.ReactNode;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ items, logo, user }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ items, logo, user, rightHeaderElement }) => {
   return (
     <div className="sidebar">
       <header className="sidebar__header">
         <Link to="/">
           <img src={logo} alt="Logo" className="sidebar__logo" />
         </Link>
+        {rightHeaderElement}
       </header>
       <nav className="sidebar__nav-container">
         <ul>
