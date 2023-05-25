@@ -3,7 +3,9 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { AllHTMLAttributes } from 'react';
 
-export const RadioInput: React.FC<AllHTMLAttributes<HTMLInputElement>> = ({
+export interface RadioInputProps extends AllHTMLAttributes<HTMLInputElement> {}
+
+export const RadioInput: React.FC<RadioInputProps> = ({
   checked,
   label,
   className,
