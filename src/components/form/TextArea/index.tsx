@@ -10,7 +10,7 @@ export interface TextAreaProps
   autoComplete?: boolean | string;
 }
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, placeholder, autoComplete, error = false, ...inputProps }, ref) => {
+  ({ className, autoComplete, error = false, maxLength, value, ...inputProps }, ref) => {
     const autoCompleteAttribute = useMemo(() => {
       if (typeof autoComplete === 'boolean') {
         return autoComplete ? undefined : 'off';
@@ -30,10 +30,16 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             },
             className,
           )}
-          placeholder={placeholder}
           autoComplete={autoCompleteAttribute}
+          maxLength={maxLength}
+          value={value}
           {...inputProps}
         />
+        {maxLength !== undefined && (
+          <div className="textarea__counter">
+            {`${value ?? ''}`.length}/{maxLength}
+          </div>
+        )}
       </div>
     );
   },
