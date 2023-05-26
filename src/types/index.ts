@@ -59,7 +59,7 @@ export interface UIComponents {
   Checkbox: CheckboxProps;
   ColorPickerField: ColorPickerFieldProps<any, any>;
   DateField: DateProps<any, any>;
-  DateInput: DateInputProps<any>;
+  DateInput: DateInputProps;
   Field: FieldProps;
   FieldErrorMessage: FieldErrorMessageProps;
   InlineFields: InlineFieldsProps;

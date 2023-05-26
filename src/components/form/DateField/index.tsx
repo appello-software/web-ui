@@ -4,10 +4,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 import { DateInput, DateInputProps } from '~/components/form/DateInput';
 import { Field, FieldProps } from '~/components/form/Field';
 
-type AllowedDateInputProps = Pick<
-  DateInputProps<null>,
-  'placeholder' | 'inputSize' | 'disabledDate'
->;
+type AllowedDateInputProps = Pick<DateInputProps, 'placeholder' | 'inputSize' | 'disabledDate'>;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 export interface DateProps<

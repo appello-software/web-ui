@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
 
 import { TextArea } from '.';
 
@@ -16,4 +17,16 @@ export const Standard: Story = {
   args: {
     placeholder: 'Placeholder',
   },
+};
+
+export const WithLength: React.FC = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <TextArea
+      value={value}
+      onChange={e => setValue((e.target as HTMLTextAreaElement).value)}
+      maxLength={150}
+    />
+  );
 };

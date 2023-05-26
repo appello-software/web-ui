@@ -33,7 +33,13 @@ import { useClickAway } from '~/hooks';
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
 
-interface RangeProps extends BaseProps {
+export interface DatePickerDefaultProps {
+  mode?: undefined;
+  value: Date | null;
+  onChange: DayClickEventHandler;
+}
+
+export interface DatePickerRangeProps {
   mode: 'range';
   value: DateRange | null;
   onChange: (
@@ -44,19 +50,14 @@ interface RangeProps extends BaseProps {
   ) => void;
 }
 
-interface DefaultProps extends BaseProps {
-  mode?: undefined;
-  value: Date | null;
-  onChange: DayClickEventHandler;
-}
-
-interface BaseProps {
+export interface DatePickerBaseProps {
   disabledDate?: Matcher;
   callableElement: HTMLElement | null;
   onClose: () => void;
 }
 
-export type DatePickerPopupProps = DefaultProps | RangeProps;
+export type DatePickerPopupProps = DatePickerBaseProps &
+  (DatePickerDefaultProps | DatePickerRangeProps);
 
 export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
   value,

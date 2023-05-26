@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+
+import { Icon } from '~/components';
 
 import { Sidebar } from '.';
 
@@ -41,5 +44,27 @@ export const LoggedIn: Story = {
       email: 'johndoe@gmail.com',
       photoPlaceholder: '/photo-placeholder.svg',
     },
+  },
+};
+
+export const WithRightHeaderElement: Story = {
+  args: {
+    ...LoggedOut.args,
+    rightHeaderElement: (
+      <div
+        style={{
+          backgroundColor: 'hsl(var(--white-color) / 5%)',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'hsl(var(--white-color) / 40%)',
+          borderRadius: 4,
+        }}
+      >
+        <Icon name="bell" size={16} />
+      </div>
+    ),
   },
 };

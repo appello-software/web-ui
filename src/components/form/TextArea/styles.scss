@@ -1,3 +1,13 @@
 .textarea {
   position: relative;
+
+  &__counter {
+    position: absolute;
+    right: 0.625rem;
+    bottom: 0.625rem;
+    user-select: none;
+    color: hsl(var(--gray-3-color));
+    font-size: var(--p5-font-size);
+    line-height: var(--p5-line-height);
+  }
 }

@@ -1,4 +1,4 @@
-.radio {
+.radio-input {
   user-select: none;
   display: flex;
   cursor: pointer;
@@ -11,11 +11,11 @@
     opacity: 0;
     display: none;
 
-    &:checked ~ .radio__check-mark:after {
+    &:checked ~ .radio-input__check-mark:after {
       opacity: 1;
     }
 
-    &:checked ~ .radio__check-mark {
+    &:checked ~ .radio-input__check-mark {
       background-color: var(--checked-bg-color);
       border: none;
     }
@@ -46,8 +46,10 @@
   }
 
   &__label-text {
-    margin-left: 12px;
+    margin-left: 0.75rem;
     word-break: break-word;
     font-weight: 500;
+    font-size: var(--p2-font-size);
+    line-height: var(--p2-line-height);
   }
 }

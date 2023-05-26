@@ -1,6 +1,7 @@
 .badge {
   display: flex;
   width: max-content;
+  align-items: center;
   padding: 0.12rem 0.61rem;
   border-radius: 100px;
 
@@ -10,7 +11,7 @@
   }
 
   &--gray {
-    background-color: hsl(var(--gray-7-color) / 10%);
+    background-color: hsl(var(--gray-7-color));
     color: hsl(var(--black-2-color));
   }
 
@@ -24,9 +25,43 @@
     color: hsl(var(--red-color));
   }
 
+  &--orange {
+    background-color: hsl(var(--orange-color) / 10%);
+    color: hsl(var(--orange-color));
+  }
+
+  &--filled.badge--green {
+    background-color: hsl(var(--green-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--gray {
+    background-color: hsl(var(--gray-1-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--blue {
+    background-color: hsl(var(--blue-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--red {
+    background-color: hsl(var(--red-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--orange {
+    background-color: hsl(var(--orange-color));
+    color: hsl(var(--white-color));
+  }
+
   &__text {
     font-size: var(--p5-font-size);
     line-height: var(--p5-line-height);
     font-weight: 700;
+  }
+
+  &__icon {
+    margin-right: 0.25rem;
   }
 }

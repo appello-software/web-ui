@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { FC, ReactNode, useMemo } from 'react';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 export interface TextInputProps
   extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size'> {
   error?: boolean;
@@ -22,73 +24,73 @@ export enum InputSize {
   LARGE = 'large',
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    {
-      className,
-      inputClassName,
-      placeholder,
-      autoComplete,
-      error = false,
-      size = InputSize.MEDIUM,
-      type = 'text',
-      iconBeforeElement,
-      iconAfterElement,
-      onIconBeforeClick,
-      onIconAfterClick,
-      ...inputProps
-    },
-    ref,
-  ) => {
-    const innerRef = React.useRef<HTMLInputElement>(null);
+export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
+  const {
+    className,
+    inputClassName,
+    placeholder,
+    autoComplete,
+    error = false,
+    size = InputSize.MEDIUM,
+    type = 'text',
+    iconBeforeElement,
+    iconAfterElement,
+    onIconBeforeClick,
+    onIconAfterClick,
+    ...inputProps
+  } = useCombinedPropsWithKit({
+    name: 'TextInput',
+    props,
+  });
 
-    const autoCompleteAttribute = useMemo(() => {
-      if (typeof autoComplete === 'boolean') {
-        return autoComplete ? undefined : 'off';
-      }
-      return autoComplete;
-    }, [autoComplete]);
+  const innerRef = React.useRef<HTMLInputElement>(null);
 
-    const wrapAsideIconClick = (
-      onClick: TextInputProps['onIconBeforeClick'],
-    ): (() => void) | undefined => {
-      if (!onClick) {
-        return undefined;
-      }
+  const autoCompleteAttribute = useMemo(() => {
+    if (typeof autoComplete === 'boolean') {
+      return autoComplete ? undefined : 'off';
+    }
+    return autoComplete;
+  }, [autoComplete]);
 
-      return () => {
-        onClick(innerRef.current?.value ?? '');
-      };
+  const wrapAsideIconClick = (
+    onClick: TextInputProps['onIconBeforeClick'],
+  ): (() => void) | undefined => {
+    if (!onClick) {
+      return undefined;
+    }
+
+    return () => {
+      onClick(innerRef.current?.value ?? '');
     };
+  };
 
-    return (
-      <div className={clsx('text-input-wrapper', className)}>
-        <input
-          ref={useCombinedRef(ref, innerRef)}
-          className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {
-            'form__input--error': Boolean(error),
-            'form__input--with-icon-before': Boolean(iconBeforeElement),
-            'form__input--with-icon-after': Boolean(iconAfterElement),
-          })}
-          placeholder={placeholder}
-          autoComplete={autoCompleteAttribute}
-          type={type}
-          {...inputProps}
-        />
-        {iconBeforeElement && (
-          <AsideIcon position="before" onClick={wrapAsideIconClick(onIconBeforeClick)}>
-            {iconBeforeElement}
-          </AsideIcon>
-        )}
-        {iconAfterElement && (
-          <AsideIcon position="after" onClick={wrapAsideIconClick(onIconAfterClick)}>
-            {iconAfterElement}
-          </AsideIcon>
-        )}
-      </div>
-    );
-  },
-);
+  return (
+    <div className={clsx('text-input-wrapper', className)}>
+      <input
+        ref={useCombinedRef(ref, innerRef)}
+        className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {
+          'form__input--error': Boolean(error),
+          'form__input--with-icon-before': Boolean(iconBeforeElement),
+          'form__input--with-icon-after': Boolean(iconAfterElement),
+        })}
+        placeholder={placeholder}
+        autoComplete={autoCompleteAttribute}
+        type={type}
+        {...inputProps}
+      />
+      {iconBeforeElement && (
+        <AsideIcon position="before" onClick={wrapAsideIconClick(onIconBeforeClick)}>
+          {iconBeforeElement}
+        </AsideIcon>
+      )}
+      {iconAfterElement && (
+        <AsideIcon position="after" onClick={wrapAsideIconClick(onIconAfterClick)}>
+          {iconAfterElement}
+        </AsideIcon>
+      )}
+    </div>
+  );
+});
 
 interface AsideIconProps {
   onClick?: () => void;

@@ -39,3 +39,26 @@ export const Red: Story = {
     children: 'Text',
   },
 };
+
+export const Orange: Story = {
+  args: {
+    color: BadgeColor.ORANGE,
+    children: 'Text',
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    color: BadgeColor.GREEN,
+    children: 'Text',
+    icon: 'document',
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    color: BadgeColor.GREEN,
+    children: 'Text',
+    filled: true,
+  },
+};
