@@ -28,6 +28,14 @@ export const Secondary: Story = {
   },
 };
 
+export const Negative: Story = {
+  args: {
+    variant: ButtonVariant.NEGATIVE,
+    label: 'Button',
+    fullWidth: false,
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     variant: ButtonVariant.PRIMARY,
@@ -37,9 +45,46 @@ export const WithIcon: Story = {
   },
 };
 
+export const WithIconAfter: Story = {
+  args: {
+    variant: ButtonVariant.PRIMARY,
+    label: 'Button',
+    withIcon: 'add',
+    iconAfter: true,
+    fullWidth: false,
+  },
+};
+
 export const OnlyIcon: Story = {
   args: {
     variant: ButtonVariant.PRIMARY,
     withIcon: 'add',
+  },
+};
+
+export const WithCount: Story = {
+  args: {
+    variant: ButtonVariant.SECONDARY,
+    label: 'Button',
+    count: 3,
+    fullWidth: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    variant: ButtonVariant.PRIMARY,
+    label: 'Button',
+    disabled: true,
+    fullWidth: false,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    variant: ButtonVariant.PRIMARY,
+    label: 'Some action',
+    isLoading: true,
+    fullWidth: false,
   },
 };

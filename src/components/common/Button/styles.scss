@@ -104,12 +104,25 @@
   }
 
   &__count {
-    border-radius: 50%;
-    background-color: hsl(var(--accent-color));
+    border-radius: 50px;
     font-size: var(--p5-font-size);
-    line-height: var(--p5-line-height);
-    color: hsl(var(--white-color));
     display: inline-block;
-    padding: 0 6px;
+    line-height: 1;
+    padding: 2px 7px;
+  }
+
+  &--primary &__count {
+    color: hsl(var(--accent-color));
+    background-color: hsl(var(--white-color));
+  }
+
+  &--negative &__count {
+    color: hsl(var(--red-color));
+    background-color: hsl(var(--white-color));
+  }
+
+  &--secondary &__count {
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(--white-color));
   }
 }
