@@ -7,6 +7,7 @@ export * from './FieldErrorMessage';
 export * from './InlineFields';
 export * from './PasswordField';
 export * from './PhotoField';
+export * from './RadioGroupField';
 export * from './RadioInput';
 export * from './Select';
 export * from './SelectField';

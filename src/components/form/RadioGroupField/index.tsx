@@ -3,7 +3,8 @@ import './styles.scss';
 import React, { ReactElement } from 'react';
 import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
 
-import { Field, FieldProps, RadioInput } from '~/components';
+import { Field, FieldProps } from '~/components/form/Field';
+import { RadioInput } from '~/components/form/RadioInput';
 
 export interface RadioGroupItem<T> {
   label: string;

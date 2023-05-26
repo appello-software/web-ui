@@ -3,7 +3,7 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 
-import { Icon } from '~/components';
+import { Icon } from '~/components/common/Icon';
 
 export enum BadgeColor {
   GREEN = 'green',
