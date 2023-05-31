@@ -66,8 +66,8 @@ export interface UIComponents {
   PasswordField: PasswordFieldProps<any>;
   PhotoField: PhotoFieldProps<any, any>;
   RadioInput: RadioInputProps;
-  Select: SelectProps<any, any, any>;
-  SelectField: SelectFieldProps<any, any, any, any, any>;
+  Select: SelectProps<any, any, any, any>;
+  SelectField: SelectFieldProps<any, any, any, any, any, any>;
   TextArea: TextAreaProps;
   TextAreaField: TextAreaFieldProps<any, any>;
   TextField: TextFieldProps<any, any>;

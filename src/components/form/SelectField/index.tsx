@@ -12,14 +12,19 @@ import { Field, FieldProps } from '~/components/form/Field';
 import {
   Select,
   SelectOnChange,
-  SelectOption,
+  SelectOptionType,
   SelectProps,
   SelectValueType,
 } from '~/components/form/Select';
 
-type AllowedSelectProps<TValue, TIsMulti extends boolean, TIsClearable extends boolean> = Pick<
-  SelectProps<TValue, TIsMulti, TIsClearable>,
-  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable' | 'disabled'
+type AllowedSelectProps<
+  TValue,
+  TIsMulti extends boolean,
+  TIsClearable extends boolean,
+  TIsCreatable extends boolean,
+> = Pick<
+  SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
+  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable' | 'isCreatable' | 'disabled'
 >;
 
 export interface SelectFieldProps<
@@ -28,23 +33,24 @@ export interface SelectFieldProps<
   TValue,
   TIsMulti extends boolean,
   TIsClearable extends boolean,
-> extends AllowedSelectProps<TValue, TIsMulti, TIsClearable>,
+  TIsCreatable extends boolean,
+> extends AllowedSelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
     Pick<FieldProps, 'label' | 'className' | 'required'> {
   name: TName;
   control: Control<TFormValues>;
-  options: TIsMulti extends true
-    ? SelectOption<FieldPathValue<TFormValues, TName>[number]>[]
-    : SelectOption<FieldPathValue<TFormValues, TName>>[];
+  options: SelectOptionType<FieldPathValue<TFormValues, TName>>[];
 }
 
 export const SelectField = <
   TFormValues extends FieldValues,
-  TName extends TIsMulti extends true
-    ? FieldPathByValue<TFormValues, unknown[]>
-    : FieldPath<TFormValues>,
+  TName extends FieldPathByValue<
+    TFormValues,
+    SelectValueType<TValue, TIsMulti, TIsClearable, TIsCreatable>
+  >,
   TValue extends FieldPathValue<TFormValues, TName>,
   TIsMulti extends boolean = false,
   TIsClearable extends boolean = false,
+  TIsCreatable extends boolean = false,
 >({
   control,
   name,
@@ -54,18 +60,46 @@ export const SelectField = <
   required,
   isMulti,
   isClearable,
+  isCreatable,
   inputSize,
   placeholder,
   disabled,
-}: SelectFieldProps<TFormValues, TName, TValue, TIsMulti, TIsClearable>): React.ReactElement => {
+}: SelectFieldProps<
+  TFormValues,
+  TName,
+  TValue,
+  TIsMulti,
+  TIsClearable,
+  TIsCreatable
+>): React.ReactElement => {
   const controller = useController({ name, control });
-  const value = controller.field.value as SelectValueType<TValue, TIsMulti, TIsClearable>;
-  const onChange = controller.field.onChange as SelectOnChange<TValue, TIsMulti, TIsClearable>;
+  const value = controller.field.value as SelectProps<
+    TValue,
+    TIsMulti,
+    TIsClearable,
+    TIsCreatable
+  >['value'];
+  const onChange = controller.field.onChange as SelectOnChange<
+    TValue,
+    TIsMulti,
+    TIsClearable,
+    TIsCreatable
+  >;
 
   return (
     <Field {...{ label, className, required }} error={controller.fieldState.error}>
       <Select
-        {...{ isMulti, options, value, onChange, isClearable, inputSize, placeholder, disabled }}
+        {...{
+          isMulti,
+          options,
+          value,
+          onChange,
+          isClearable,
+          isCreatable,
+          inputSize,
+          placeholder,
+          disabled,
+        }}
         hasError={!!controller.fieldState.error}
       />
     </Field>
