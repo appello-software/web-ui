@@ -12,6 +12,7 @@ import {
 import { Icon } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 
@@ -23,16 +24,13 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) & {
   disabledDate?: Matcher;
 };
 
-export const DateInput: React.FC<DateInputProps> = ({
-  className,
-  placeholder,
-  inputSize,
-  value,
-  error,
-  onChange,
-  mode,
-  disabledDate,
-}): ReactElement => {
+export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
+  const { className, placeholder, inputSize, value, error, onChange, mode, disabledDate } =
+    useCombinedPropsWithKit({
+      name: 'DateInput',
+      props,
+    });
+
   const { dateFormat } = useAppelloKit();
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);

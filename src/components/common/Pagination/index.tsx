@@ -6,6 +6,7 @@ import React, { useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
 
 import { Icon } from '~/components/common/Icon';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface PaginationProps {
   /**
@@ -52,15 +53,13 @@ export interface PaginationProps {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
-  offset,
-  setOffset,
-  totalCount,
-  itemsCount,
-  className,
-  fetchMore,
-  pageSize,
-}) => {
+export const Pagination: React.FC<PaginationProps> = props => {
+  const { offset, setOffset, totalCount, itemsCount, className, fetchMore, pageSize } =
+    useCombinedPropsWithKit({
+      name: 'Pagination',
+      props,
+    });
+
   const [isFetching, setFetching] = useState<boolean>(false);
 
   const handlePageClick = useCallback(

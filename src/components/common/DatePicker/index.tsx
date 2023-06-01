@@ -8,6 +8,7 @@ import { Matcher } from 'react-day-picker';
 
 import { DatePickerPopup } from '~/components/common/DatePickerPopup';
 import { Icon } from '~/components/common/Icon';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface DatePickerProps {
   placeholder?: ReactNode;
@@ -18,14 +19,19 @@ export interface DatePickerProps {
   leftIconElement?: ReactNode;
 }
 
-export const DatePicker: React.FC<DatePickerProps> = ({
-  placeholder = 'Choose a date',
-  className,
-  onChange,
-  leftIconElement,
-  disabledDate,
-  defaultValue,
-}) => {
+export const DatePicker: React.FC<DatePickerProps> = props => {
+  const {
+    placeholder = 'Choose a date',
+    className,
+    onChange,
+    leftIconElement,
+    disabledDate,
+    defaultValue,
+  } = useCombinedPropsWithKit({
+    name: 'DatePicker',
+    props,
+  });
+
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [value, setValue] = useState<Date | null>(defaultValue ?? null);
   const buttonRef = useRef<HTMLButtonElement>(null);

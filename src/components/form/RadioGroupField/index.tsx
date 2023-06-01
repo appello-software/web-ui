@@ -5,6 +5,7 @@ import { Control, FieldPath, FieldPathValue, FieldValues, useController } from '
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { RadioInput } from '~/components/form/RadioInput';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface RadioGroupItem<T> {
   label: string;
@@ -18,14 +19,14 @@ export interface RadioGroupFieldProps<TFormValues extends FieldValues>
   items: RadioGroupItem<FieldPathValue<TFormValues, FieldPath<TFormValues>>>[];
 }
 
-export const RadioGroupField = <TFormValues extends FieldValues>({
-  items,
-  control,
-  name,
-  label,
-  className,
-  required,
-}: RadioGroupFieldProps<TFormValues>): ReactElement => {
+export const RadioGroupField = <TFormValues extends FieldValues>(
+  props: RadioGroupFieldProps<TFormValues>,
+): ReactElement => {
+  const { items, control, name, label, className, required } = useCombinedPropsWithKit({
+    name: 'RadioGroupField',
+    props,
+  });
+
   const controller = useController({ name, control });
 
   return (

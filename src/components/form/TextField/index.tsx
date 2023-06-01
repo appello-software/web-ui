@@ -3,6 +3,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextInput, TextInputProps } from '~/components/form/TextInput';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedInputProps = Pick<
   TextInputProps,
@@ -34,15 +35,15 @@ export interface TextFieldProps<
 export const TextField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, number | string>,
->({
-  name,
-  control,
-  label,
-  className,
-  required,
-  placeholder = label,
-  ...textInputProps
-}: TextFieldProps<TFormValues, TName>): React.ReactElement => {
+>(
+  props: TextFieldProps<TFormValues, TName>,
+): React.ReactElement => {
+  const { name, control, label, className, required, placeholder, ...textInputProps } =
+    useCombinedPropsWithKit({
+      name: 'TextField',
+      props,
+    });
+
   const controller = useController({ name, control });
 
   return (
@@ -50,7 +51,7 @@ export const TextField = <
       <TextInput
         {...controller.field}
         error={!!controller.fieldState.error}
-        placeholder={placeholder}
+        placeholder={placeholder ?? label}
         {...textInputProps}
       />
     </Field>

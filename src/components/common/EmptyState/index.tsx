@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React, { FC } from 'react';
 
 import { IconContainer } from '~/components/common/IconContainer';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface EmptyStateProps {
   /**
@@ -20,7 +21,12 @@ export interface EmptyStateProps {
   className?: string;
 }
 
-export const EmptyState: FC<EmptyStateProps> = ({ iconName, label, className }) => {
+export const EmptyState: FC<EmptyStateProps> = props => {
+  const { iconName, label, className } = useCombinedPropsWithKit({
+    name: 'EmptyState',
+    props,
+  });
+
   return (
     <div className={clsx('empty-state', className)}>
       <IconContainer name={iconName} />

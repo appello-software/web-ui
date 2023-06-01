@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 import styles from './styles.module.scss';
 
 export interface LoaderProps {
@@ -18,7 +20,16 @@ export interface LoaderProps {
   dotSize?: number;
 }
 
-export const Loader: React.FC<LoaderProps> = ({ full, colorful, dotSize = 10 }) => {
+export const Loader: React.FC<LoaderProps> = props => {
+  const {
+    full,
+    colorful,
+    dotSize = 10,
+  } = useCombinedPropsWithKit({
+    name: 'Loader',
+    props,
+  });
+
   const dotStyle = React.useMemo(
     () => ({
       width: `${dotSize}px`,

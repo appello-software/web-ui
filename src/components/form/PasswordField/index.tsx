@@ -4,6 +4,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { Icon } from '~/components/common/Icon';
 import { Field } from '~/components/form/Field';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 import { InputSize, TextInput, TextInputProps } from '../TextInput';
 import styles from './styles.module.scss';
@@ -21,15 +22,17 @@ export interface PasswordFieldProps<TFormValues extends FieldValues> extends Tex
   size?: InputSize;
 }
 
-export const PasswordField = <TFormValues extends FieldValues>({
-  name,
-  label,
-  control,
-  className,
-  placeholder = label,
-  ...textInputProps
-}: PasswordFieldProps<TFormValues>): React.ReactElement => {
+export const PasswordField = <TFormValues extends FieldValues>(
+  props: PasswordFieldProps<TFormValues>,
+): React.ReactElement => {
+  const { name, label, control, className, placeholder, ...textInputProps } =
+    useCombinedPropsWithKit({
+      name: 'PasswordField',
+      props,
+    });
+
   const controller = useController({ name, control });
+
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
 
   return (
@@ -41,7 +44,7 @@ export const PasswordField = <TFormValues extends FieldValues>({
           autoCapitalize="none"
           type={isPasswordVisible ? 'text' : 'password'}
           inputClassName={styles['input']}
-          placeholder={placeholder}
+          placeholder={placeholder ?? label}
           iconAfterElement={<Icon name={isPasswordVisible ? 'eye' : 'eye-crossed'} />}
           onIconAfterClick={togglePasswordVisibility}
           {...textInputProps}

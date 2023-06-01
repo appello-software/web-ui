@@ -16,6 +16,7 @@ import {
   SelectProps,
   SelectValueType,
 } from '~/components/form/Select';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedSelectProps<
   TValue,
@@ -51,27 +52,27 @@ export const SelectField = <
   TIsMulti extends boolean = false,
   TIsClearable extends boolean = false,
   TIsCreatable extends boolean = false,
->({
-  control,
-  name,
-  options,
-  label,
-  className,
-  required,
-  isMulti,
-  isClearable,
-  isCreatable,
-  inputSize,
-  placeholder,
-  disabled,
-}: SelectFieldProps<
-  TFormValues,
-  TName,
-  TValue,
-  TIsMulti,
-  TIsClearable,
-  TIsCreatable
->): React.ReactElement => {
+>(
+  props: SelectFieldProps<TFormValues, TName, TValue, TIsMulti, TIsClearable, TIsCreatable>,
+): React.ReactElement => {
+  const {
+    control,
+    name,
+    options,
+    label,
+    className,
+    required,
+    isMulti,
+    isClearable,
+    isCreatable,
+    inputSize,
+    placeholder,
+    disabled,
+  } = useCombinedPropsWithKit({
+    name: 'SelectField',
+    props,
+  });
+
   const controller = useController({ name, control });
   const value = controller.field.value as SelectProps<
     TValue,

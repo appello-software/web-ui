@@ -8,6 +8,7 @@ import CreatableReactSelect from 'react-select/creatable';
 import { ActionMeta } from 'react-select/dist/declarations/src/types';
 
 import { InputSize } from '~/components/form/TextInput';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 import { isMultiOption, isNewSelectOption } from './utils';
 
@@ -86,19 +87,26 @@ export const Select = <
   TIsMulti extends boolean = false,
   TIsClearable extends boolean = false,
   TIsCreatable extends boolean = false,
->({
-  placeholder,
-  inputSize = InputSize.MEDIUM,
-  value,
-  options,
-  className,
-  isMulti = false as TIsMulti,
-  onChange,
-  isClearable = false as TIsClearable,
-  hasError,
-  disabled,
-  isCreatable,
-}: SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>): React.ReactElement => {
+>(
+  props: SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
+): React.ReactElement => {
+  const {
+    placeholder,
+    inputSize = InputSize.MEDIUM,
+    value,
+    options,
+    className,
+    isMulti = false as TIsMulti,
+    onChange,
+    isClearable = false as TIsClearable,
+    hasError,
+    disabled,
+    isCreatable,
+  } = useCombinedPropsWithKit({
+    name: 'Select',
+    props,
+  });
+
   const selectedOption = useMemo(() => {
     if (isCreatable && isNewSelectOption(value)) {
       return value as SelectOptionType<TValue>;

@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import { FieldErrorMessage } from '~/components/form/FieldErrorMessage';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface FieldProps {
   label?: string;
@@ -14,15 +15,13 @@ export interface FieldProps {
   required?: boolean;
 }
 
-export const Field: React.FC<FieldProps> = ({
-  label,
-  error,
-  className,
-  required,
-  children,
-  labelClassName,
-  childrenClassName,
-}) => {
+export const Field: React.FC<FieldProps> = props => {
+  const { label, error, className, required, children, labelClassName, childrenClassName } =
+    useCombinedPropsWithKit({
+      name: 'Field',
+      props,
+    });
+
   return (
     <div className={clsx('form__field', 'form__field-row', className)}>
       {label && (

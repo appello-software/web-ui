@@ -3,6 +3,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { DateInput, DateInputProps } from '~/components/form/DateInput';
 import { Field, FieldProps } from '~/components/form/Field';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedDateInputProps = Pick<DateInputProps, 'placeholder' | 'inputSize' | 'disabledDate'>;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
@@ -19,16 +20,15 @@ export interface DateProps<
 export const DateField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, Date | null>,
->({
-  name,
-  control,
-  label,
-  className,
-  required,
-  placeholder = label,
-  inputSize,
-  disabledDate,
-}: DateProps<TFormValues, TName>): ReactElement => {
+>(
+  props: DateProps<TFormValues, TName>,
+): ReactElement => {
+  const { name, control, label, className, required, placeholder, inputSize, disabledDate } =
+    useCombinedPropsWithKit({
+      name: 'DateField',
+      props,
+    });
+
   const controller = useController({ name, control });
   const value = controller.field.value as Date | null;
   const onChange = controller.field.onChange as (value: Date | null) => void;
@@ -43,7 +43,7 @@ export const DateField = <
       <DateInput
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
+        placeholder={placeholder ?? label}
         inputSize={inputSize}
         error={!!controller.fieldState.error}
         disabledDate={disabledDate}

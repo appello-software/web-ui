@@ -28,7 +28,7 @@ import { createPortal } from 'react-dom';
 
 import { BrowserSelect } from '~/components/common/BrowserSelect';
 import { Icon } from '~/components/common/Icon';
-import { useClickAway } from '~/hooks';
+import { useClickAway, useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
@@ -59,14 +59,14 @@ export interface DatePickerBaseProps {
 export type DatePickerPopupProps = DatePickerBaseProps &
   (DatePickerDefaultProps | DatePickerRangeProps);
 
-export const DatePickerPopup: React.FC<DatePickerPopupProps> = ({
-  value,
-  onChange,
-  disabledDate,
-  onClose,
-  callableElement,
-  mode,
-}) => {
+export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
+  const { value, onChange, disabledDate, onClose, callableElement, mode } = useCombinedPropsWithKit(
+    {
+      name: 'DatePickerPopup',
+      props,
+    },
+  );
+
   const [month, setMonth] = useState<Date>(
     () => (isDateRange(value) ? value.from : value) ?? new Date(),
   );

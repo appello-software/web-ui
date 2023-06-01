@@ -7,11 +7,17 @@ import {
   DropdownProps,
 } from 'react-nested-dropdown';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 import styles from './styles.module.scss';
 
-export const Dropdown = <TValue,>({ children, ...props }: DropdownProps<TValue>): ReactElement => {
+export const Dropdown = <TValue,>(props: DropdownProps<TValue>): ReactElement => {
+  const { children, ...restProps } = useCombinedPropsWithKit({
+    name: 'Dropdown',
+    props,
+  });
   return (
-    <ReactNestedDropdown {...props} className={styles['container']}>
+    <ReactNestedDropdown {...restProps} className={styles['container']}>
       {children}
     </ReactNestedDropdown>
   );
