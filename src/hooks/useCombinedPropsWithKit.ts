@@ -18,7 +18,7 @@ export function useCombinedPropsWithKit<
   const componentProps = components[name] ?? {};
 
   return {
-    ...props,
     ...componentProps,
+    ...props,
   };
 }

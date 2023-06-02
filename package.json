@@ -23,7 +23,7 @@
     "prepareRelease": "npm run generate-exports && npm run prettier && npm run build",
     "alpha-version": "npm version prerelease --preid=alpha",
     "patch-version": "npm version patch",
-    "postpublish": "git push && git push --tags",
+    "postpublish": "git push && git push --tags && rm -rf dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

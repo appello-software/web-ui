@@ -30,6 +30,7 @@ export const PhotoField = <
     name: 'PhotoField',
     props,
   });
+
   const controller = useController({ name, control });
   const value = controller.field.value as PhotoValue;
   const photo = useBlobObjectUrl(value);
@@ -51,7 +52,9 @@ export const PhotoField = <
             withIcon="close"
           />
         )}
-        <img src={photo ?? photoPlaceholder} alt="Profile" className="photo-field__img" />
+        {(photo || photoPlaceholder) && (
+          <img src={photo ?? photoPlaceholder} alt="Profile" className="photo-field__img" />
+        )}
       </div>
 
       <FileUpload accept=".png, .jpg, .jpeg" onUpload={controller.field.onChange}>
