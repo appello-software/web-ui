@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Icon } from '~/components/common/Icon';
 import { Loader } from '~/components/common/Loader';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export enum ButtonVariant {
   PRIMARY = 'primary',
@@ -92,25 +93,30 @@ export interface ButtonProps {
   fullWidth?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  type = 'button',
-  label,
-  size = ButtonSize.MEDIUM,
-  className,
-  onClick,
-  withIcon,
-  iconClassName,
-  variant,
-  fullWidth = true,
-  children,
-  disabled,
-  isLoading,
-  count,
-  rounded = false,
-  iconAfter = false,
-  bold = false,
-  to,
-}) => {
+export const Button: React.FC<ButtonProps> = props => {
+  const {
+    type = 'button',
+    label,
+    size = ButtonSize.MEDIUM,
+    className,
+    onClick,
+    withIcon,
+    iconClassName,
+    variant,
+    fullWidth = true,
+    children,
+    disabled,
+    isLoading,
+    count,
+    rounded = false,
+    iconAfter = false,
+    bold = false,
+    to,
+  } = useCombinedPropsWithKit({
+    name: 'Button',
+    props,
+  });
+
   const navigate = useNavigate();
 
   const combinedClassName = React.useMemo(() => {

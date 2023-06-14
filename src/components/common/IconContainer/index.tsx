@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React, { FC } from 'react';
 
 import { Icon } from '~/components/common/Icon';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface IconContainerProps {
   name: string;
@@ -11,7 +12,12 @@ export interface IconContainerProps {
   iconClassName?: string;
 }
 
-export const IconContainer: FC<IconContainerProps> = ({ name, className, iconClassName }) => {
+export const IconContainer: FC<IconContainerProps> = props => {
+  const { name, className, iconClassName } = useCombinedPropsWithKit({
+    name: 'IconContainer',
+    props,
+  });
+
   return (
     <div className={clsx('icon-container', className)}>
       <Icon name={name} className={clsx('icon-container__icon', iconClassName)} />

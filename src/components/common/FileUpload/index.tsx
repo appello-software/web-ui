@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 export interface FileUploadProps<TMultiple extends boolean> {
   /**
    * Callback that will be called when files are selected
@@ -25,13 +27,14 @@ export interface FileUploadProps<TMultiple extends boolean> {
   className?: string;
 }
 
-export const FileUpload = <TMultiple extends boolean = false>({
-  children,
-  onUpload,
-  accept,
-  multiple,
-  className,
-}: FileUploadProps<TMultiple>): React.ReactElement => {
+export const FileUpload = <TMultiple extends boolean = false>(
+  props: FileUploadProps<TMultiple>,
+): React.ReactElement => {
+  const { children, onUpload, accept, multiple, className } = useCombinedPropsWithKit({
+    name: 'FileUpload',
+    props,
+  });
+
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleChange = React.useCallback(

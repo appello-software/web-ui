@@ -3,6 +3,8 @@ import './styles.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 import { NavItem } from './components/NavItem';
 
 export interface SidebarItem {
@@ -24,7 +26,12 @@ export interface SidebarProps {
   rightHeaderElement?: React.ReactNode;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ items, logo, user, rightHeaderElement }) => {
+export const Sidebar: React.FC<SidebarProps> = props => {
+  const { items, logo, user, rightHeaderElement } = useCombinedPropsWithKit({
+    name: 'Sidebar',
+    props,
+  });
+
   return (
     <div className="sidebar">
       <header className="sidebar__header">

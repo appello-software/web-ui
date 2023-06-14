@@ -2,11 +2,18 @@ import clsx from 'clsx';
 import React, { FC, Fragment } from 'react';
 import ContentLoader from 'react-content-loader';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 export interface TableLoaderProps {
   className?: string;
 }
 
-export const TableLoader: FC<TableLoaderProps> = ({ className }) => {
+export const TableLoader: FC<TableLoaderProps> = props => {
+  const { className } = useCombinedPropsWithKit({
+    name: 'TableLoader',
+    props,
+  });
+
   return (
     <ContentLoader
       viewBox="0 0 1112 800"

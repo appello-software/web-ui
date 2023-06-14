@@ -3,6 +3,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextArea, TextAreaProps } from '~/components/form/TextArea';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedInputProps = Pick<
   TextAreaProps,
@@ -23,16 +24,23 @@ export interface TextAreaFieldProps<
 export const TextAreaField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, string>,
->({
-  name,
-  control,
-  label,
-  className,
-  textAreaClassName,
-  required,
-  placeholder = label,
-  ...textAreaProps
-}: TextAreaFieldProps<TFormValues, TName>): React.ReactElement => {
+>(
+  props: TextAreaFieldProps<TFormValues, TName>,
+): React.ReactElement => {
+  const {
+    name,
+    control,
+    label,
+    className,
+    textAreaClassName,
+    required,
+    placeholder,
+    ...textAreaProps
+  } = useCombinedPropsWithKit({
+    name: 'TextAreaField',
+    props,
+  });
+
   const controller = useController({ name, control });
 
   return (
@@ -40,7 +48,7 @@ export const TextAreaField = <
       <TextArea
         {...controller.field}
         error={!!controller.fieldState.error}
-        placeholder={placeholder}
+        placeholder={placeholder ?? label}
         className={textAreaClassName}
         {...textAreaProps}
       />

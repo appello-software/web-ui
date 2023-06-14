@@ -14,6 +14,8 @@ import React, {
 } from 'react';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 export interface Tab {
   title: ReactNode;
   element: ReactNode;
@@ -35,15 +37,13 @@ export interface TabsProps<TTab> {
   onSelect?: (value: number) => void;
 }
 
-export const Tabs = <TTab extends Tab>({
-  items,
-  contentClassName,
-  headListClassName,
-  className,
-  tabsRef,
-  selected,
-  onSelect,
-}: TabsProps<TTab>): ReactElement => {
+export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => {
+  const { items, contentClassName, headListClassName, className, tabsRef, selected, onSelect } =
+    useCombinedPropsWithKit({
+      name: 'Tabs',
+      props,
+    });
+
   const location = useLocation();
   const navigate = useNavigate();
 

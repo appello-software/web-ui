@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 import styles from './styles.module.scss';
 
 export interface TextLinkProps {
@@ -11,12 +13,17 @@ export interface TextLinkProps {
   className?: string;
 }
 
-export const TextLink: React.FC<TextLinkProps> = ({
-  to,
-  children,
-  className,
-  external = false,
-}) => {
+export const TextLink: React.FC<TextLinkProps> = props => {
+  const {
+    to,
+    children,
+    className,
+    external = false,
+  } = useCombinedPropsWithKit({
+    name: 'TextLink',
+    props,
+  });
+
   const combinedClassName = useMemo(() => {
     return clsx(className, styles['link']);
   }, [className]);

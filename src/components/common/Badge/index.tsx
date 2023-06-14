@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 
 import { Icon } from '~/components/common/Icon';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export enum BadgeColor {
   GREEN = 'green',
@@ -20,7 +21,11 @@ export interface BadgeProps {
   filled?: boolean;
 }
 
-export const Badge: FC<BadgeProps> = ({ children, color, icon, filled }) => {
+export const Badge: FC<BadgeProps> = props => {
+  const { children, color, icon, filled } = useCombinedPropsWithKit({
+    name: 'Badge',
+    props,
+  });
   return (
     <div className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}>
       {icon !== undefined && <Icon name={icon} size={14} className="badge__icon" />}

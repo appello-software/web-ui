@@ -3,6 +3,8 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { ChangeEventHandler } from 'react';
 
+import { useCombinedPropsWithKit } from '~/hooks';
+
 export interface BrowserSelectProps {
   /**
    * Control label
@@ -26,13 +28,11 @@ export interface BrowserSelectProps {
   className?: string;
 }
 
-export const BrowserSelect: React.FC<BrowserSelectProps> = ({
-  children,
-  options,
-  onChange,
-  value,
-  className,
-}) => {
+export const BrowserSelect: React.FC<BrowserSelectProps> = props => {
+  const { children, options, onChange, value, className } = useCombinedPropsWithKit({
+    name: 'BrowserSelect',
+    props,
+  });
   return (
     <div className={clsx('browser-select', className)}>
       {children}

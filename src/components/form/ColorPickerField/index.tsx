@@ -8,6 +8,7 @@ import { Control, FieldPathByValue, FieldValues, useController } from 'react-hoo
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { InputSize, TextInput } from '~/components/form/TextInput';
+import { useCombinedPropsWithKit } from '~/hooks';
 import { useClickAway } from '~/hooks/useClickAway';
 
 export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
@@ -20,14 +21,14 @@ export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
 export const ColorPickerField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, string | null>,
->({
-  name,
-  control,
-  label,
-  size,
-  className,
-  required,
-}: ColorPickerFieldProps<TName, TFormValues>): ReactElement => {
+>(
+  props: ColorPickerFieldProps<TName, TFormValues>,
+): ReactElement => {
+  const { name, control, label, size, className, required } = useCombinedPropsWithKit({
+    name: 'ColorPickerField',
+    props,
+  });
+
   const pickerRef = useRef(null);
 
   const { field, fieldState } = useController({ name, control });

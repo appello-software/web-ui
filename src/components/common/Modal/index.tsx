@@ -8,6 +8,7 @@ import ReactModal from 'react-modal';
 
 import { Button, ButtonProps } from '~/components/common/Button';
 import { Icon } from '~/components/common/Icon';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface ModalProps {
   /**
@@ -58,19 +59,24 @@ export interface ModalProps {
 
 const app = document.querySelector('#root') as HTMLElement;
 
-export const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  close,
-  title,
-  buttons,
-  children,
-  contentClassName,
-  bodyClassName,
-  onAfterClose,
-  withCloseButton = true,
-  position = 'center',
-  shouldCloseOnOverlayClick = true,
-}) => {
+export const Modal: React.FC<ModalProps> = props => {
+  const {
+    isOpen,
+    close,
+    title,
+    buttons,
+    children,
+    contentClassName,
+    bodyClassName,
+    onAfterClose,
+    withCloseButton = true,
+    position = 'center',
+    shouldCloseOnOverlayClick = true,
+  } = useCombinedPropsWithKit({
+    name: 'Modal',
+    props,
+  });
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -93,8 +99,8 @@ export const Modal: React.FC<ModalProps> = ({
       <div className={clsx('modal__content', bodyClassName)}>{children}</div>
       {buttons && buttons.length > 0 && (
         <div className="modal__buttons-list">
-          {buttons.map((props, index) => (
-            <Button key={index} {...props} className={clsx('modal__button', props.className)} />
+          {buttons.map(({ className, ...props }, index) => (
+            <Button key={index} {...props} className={clsx('modal__button', className)} />
           ))}
         </div>
       )}
