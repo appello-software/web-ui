@@ -16,6 +16,22 @@ export const Standard: React.FC = () => {
   return <Table columns={COLUMNS} data={data} />;
 };
 
+export const WithPagination: React.FC = () => {
+  const [offset, setOffset] = useState<number>(0);
+  const pageSize = 1;
+
+  return (
+    <Table
+      columns={COLUMNS}
+      data={data.slice(offset, offset + pageSize)}
+      pageSize={pageSize}
+      offset={offset}
+      setOffset={setOffset}
+      totalCount={data.length}
+    />
+  );
+};
+
 export const WithSorting: React.FC = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
 

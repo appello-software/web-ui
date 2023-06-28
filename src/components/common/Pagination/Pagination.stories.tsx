@@ -1,4 +1,3 @@
-import { sleep } from '@appello/common/lib/utils';
 import type { Meta } from '@storybook/react';
 import React from 'react';
 
@@ -24,7 +23,6 @@ const Template: React.FC = () => {
       setOffset={setOffset}
       totalCount={1000}
       itemsCount={pageSize}
-      fetchMore={() => sleep(1000)}
       pageSize={pageSize}
     />
   );

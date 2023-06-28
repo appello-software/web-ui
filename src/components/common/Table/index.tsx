@@ -1,5 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client/core/types';
-import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
 import { isNil } from '@appello/common/lib/utils';
 import {
   ColumnDef,
@@ -13,7 +11,7 @@ import { OnChangeFn, RowData } from '@tanstack/table-core';
 import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 
-import { Pagination } from '~/components/common/Pagination';
+import { Pagination, PaginationProps } from '~/components/common/Pagination';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import { HeaderCell } from './components/HeaderCell';
@@ -28,13 +26,11 @@ export interface TableProps<TData> {
    * Table data
    */
   data: TData[];
-
   /**
    * Table columns
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
-
   /**
    * Sorting state
    */
@@ -64,23 +60,10 @@ export interface TableProps<TData> {
    * Error message
    */
   error?: string;
-
   /**
-   * Fetch more function (GraphQL only)
+   * Triggering when page changed
    */
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  fetchMore?: (
-    options: FetchMoreQueryOptions<any> & {
-      updateQuery?: (
-        previousQueryResult: any,
-        options: {
-          fetchMoreResult: any;
-          variables: any;
-        },
-      ) => any;
-    },
-  ) => Promise<ApolloQueryResult<TData>>;
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  onPageChange?: PaginationProps['onPageChange'];
 }
 
 declare module '@tanstack/react-table' {
@@ -97,7 +80,7 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
     columns,
     sorting,
     setSorting,
-    fetchMore,
+    onPageChange,
     totalCount,
     setOffset,
     error,
@@ -109,11 +92,7 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
   });
 
   const hasPagination =
-    !isNil(offset) &&
-    !isNil(setOffset) &&
-    !isNil(totalCount) &&
-    !isNil(fetchMore) &&
-    !isNil(pageSize);
+    !isNil(offset) && !isNil(setOffset) && !isNil(totalCount) && !isNil(pageSize);
 
   const hasSorting = !isNil(sorting) && !isNil(setSorting);
 
@@ -161,7 +140,7 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
       </table>
       {hasPagination && totalCount > pageSize && (
         <Pagination
-          fetchMore={fetchMore}
+          onPageChange={onPageChange}
           offset={offset}
           setOffset={setOffset}
           totalCount={totalCount}

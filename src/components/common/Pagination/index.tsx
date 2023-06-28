@@ -1,6 +1,5 @@
 import './styles.scss';
 
-import { FetchMoreQueryOptions } from '@apollo/client/core/watchQueryOptions';
 import clsx from 'clsx';
 import React, { useCallback, useState } from 'react';
 import Paginate from 'react-paginate';
@@ -34,27 +33,15 @@ export interface PaginationProps {
    * Page size
    */
   pageSize: number;
-
   /**
-   * Fetch more function (GraphQL only)
+   * Triggering when page changed
+   * @param options
    */
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  fetchMore: (
-    options: FetchMoreQueryOptions<any> & {
-      updateQuery?: (
-        previousQueryResult: any,
-        options: {
-          fetchMoreResult: any;
-          variables: any;
-        },
-      ) => any;
-    },
-  ) => Promise<unknown>;
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  onPageChange?: (options: { limit: number; offset: number }) => unknown;
 }
 
 export const Pagination: React.FC<PaginationProps> = props => {
-  const { offset, setOffset, totalCount, itemsCount, className, fetchMore, pageSize } =
+  const { offset, setOffset, totalCount, itemsCount, className, pageSize, onPageChange } =
     useCombinedPropsWithKit({
       name: 'Pagination',
       props,
@@ -67,22 +54,21 @@ export const Pagination: React.FC<PaginationProps> = props => {
       const newOffset = (event.selected * pageSize) % totalCount;
       setOffset(newOffset);
 
+      if (!onPageChange) {
+        return;
+      }
+
       try {
         setFetching(true);
-        await fetchMore({
-          variables: {
-            pagination: {
-              limit: pageSize,
-              offset: newOffset,
-            },
-          },
-          updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult,
+        await onPageChange({
+          limit: pageSize,
+          offset: newOffset,
         });
       } finally {
         setFetching(false);
       }
     },
-    [fetchMore, pageSize, setOffset, totalCount],
+    [onPageChange, pageSize, setOffset, totalCount],
   );
 
   const pageCount = Math.ceil(totalCount / pageSize);
