@@ -28,6 +28,7 @@ import { FieldProps } from '~/components/form/Field';
 import { FieldErrorMessageProps } from '~/components/form/FieldErrorMessage';
 import { InlineFieldsProps } from '~/components/form/InlineFields';
 import { PasswordFieldProps } from '~/components/form/PasswordField';
+import { PhoneNumberFieldProps } from '~/components/form/PhoneNumberField';
 import { PhotoFieldProps } from '~/components/form/PhotoField';
 import { RadioGroupFieldProps } from '~/components/form/RadioGroupField';
 import { RadioInputProps } from '~/components/form/RadioInput';
@@ -78,6 +79,7 @@ export interface UIComponents {
   TextAreaField: TextAreaFieldProps<any, any>;
   TextField: TextFieldProps<any, any>;
   TextInput: TextInputProps;
+  PhoneNumberField: PhoneNumberFieldProps<any, any>;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
