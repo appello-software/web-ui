@@ -31,6 +31,21 @@ export const LoggedOut: Story = {
         icon: 'add',
         link: '/users',
       },
+      {
+        title: 'Settings',
+        icon: 'add',
+        link: '/settings',
+        items: [
+          {
+            title: 'General',
+            link: '/settings/general',
+          },
+          {
+            title: 'Profile',
+            link: '/settings/profile',
+          },
+        ],
+      },
     ],
     logo: '/white-logo.svg',
   },

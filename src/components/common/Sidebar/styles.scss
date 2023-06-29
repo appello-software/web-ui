@@ -1,5 +1,5 @@
 .sidebar {
-  --item-inner-x-padding: 1.8rem;
+  --item-inner-x-padding: 0.85rem;
   --icon-size: 1.1rem;
   --margin-between-icon-and-title: 0.75rem;
   --padding-x: 1.25rem;
@@ -28,6 +28,7 @@
 
   &__nav-container {
     margin-top: 1.75rem;
+    padding-inline: 0.75rem;
   }
 
   &__list-item {
@@ -43,31 +44,19 @@
     align-items: center;
     font-weight: 600;
     padding: 0.61rem var(--item-inner-x-padding);
+    border-radius: 5px;
     position: relative;
     width: 100%;
     cursor: pointer;
+
+    &--active {
+      background-color: hsl(var(--white-color) / 5%);
+      color: hsl(var(--white-color));
+    }
   }
 
   &__item--expanded &__chevron {
     transform: rotate(180deg);
-  }
-
-  &__item {
-    &--active {
-      background-color: hsl(var(--white-color) / 5%);
-      color: hsl(var(--white-color));
-
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        width: 3px;
-        height: 100%;
-        border-radius: 0 1px 1px 0;
-        background-color: hsl(var(--red-color));
-      }
-    }
   }
 
   &__nav-icon {
