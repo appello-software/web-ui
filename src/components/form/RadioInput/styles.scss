@@ -1,4 +1,4 @@
-.radio-input {
+.appello-radio-input {
   user-select: none;
   display: flex;
   cursor: pointer;
@@ -11,11 +11,11 @@
     opacity: 0;
     display: none;
 
-    &:checked ~ .radio-input__check-mark:after {
+    &:checked ~ .appello-radio-input__check-mark:after {
       opacity: 1;
     }
 
-    &:checked ~ .radio-input__check-mark {
+    &:checked ~ .appello-radio-input__check-mark {
       background-color: var(--checked-bg-color);
       border: none;
     }

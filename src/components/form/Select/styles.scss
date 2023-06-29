@@ -1,16 +1,16 @@
 // body selector is required to override default styles (make more priority)
-body .react-select {
+body .appello-react-select {
   position: relative;
 
-  &--size-medium .react-select__control {
+  &--size-medium .appello-react-select__control {
     min-height: var(--input-medium-height);
   }
 
-  &--size-large .react-select__control {
+  &--size-large .appello-react-select__control {
     min-height: var(--input-large-height);
   }
 
-  &--error .react-select__control {
+  &--error .appello-react-select__control {
     border-color: hsl(var(--red-color));
   }
 
@@ -29,7 +29,7 @@ body .react-select {
     display: flex;
     align-items: center;
 
-    .react-select__clear-indicator {
+    .appello-react-select__clear-indicator {
       margin-right: 0.25rem;
     }
   }

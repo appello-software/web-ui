@@ -1,4 +1,4 @@
-.modal-overlay {
+.appello-modal-overlay {
   background-color: hsl(var(--black-1-color) / 60%);
   z-index: 999;
   overflow-y: auto;
@@ -7,7 +7,7 @@
   inset: 0;
 }
 
-.modal {
+.appello-modal {
   --content-padding-x: 30px;
   --content-padding-y: 25px;
 
@@ -99,6 +99,6 @@
   }
 }
 
-.react-modal-opened {
+.appello-react-modal-opened {
   overflow: hidden;
 }

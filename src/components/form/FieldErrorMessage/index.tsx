@@ -18,5 +18,5 @@ export const FieldErrorMessage: React.FC<FieldErrorMessageProps> = props => {
   if (!error) {
     return null;
   }
-  return <p className={clsx('form__error', className)}>{error.message}</p>;
+  return <p className={clsx('appello-form__error', className)}>{error.message}</p>;
 };

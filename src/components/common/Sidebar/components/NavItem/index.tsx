@@ -30,24 +30,26 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
         <>
           <button
             type="button"
-            className={clsx('sidebar__item', { 'sidebar__item--expanded': isSubItemsOpen })}
+            className={clsx('appello-sidebar__item', {
+              'appello-sidebar__item--expanded': isSubItemsOpen,
+            })}
             onClick={toggleSubItems}
           >
-            <Icon name={item.icon} className="sidebar__nav-icon" />
-            <span className="sidebar__item-title">{item.title}</span>
-            <Icon name="down-arrow" className="sidebar__chevron" />
+            <Icon name={item.icon} className="appello-sidebar__nav-icon" />
+            <span className="appello-sidebar__item-title">{item.title}</span>
+            <Icon name="down-arrow" className="appello-sidebar__chevron" />
           </button>
-          <ul className="sidebar__submenu">
+          <ul className="appello-sidebar__submenu">
             {item.items.map((subItem, index) => (
               <li key={index}>
                 <NavLink
                   to={subItem.link}
                   className={({ isActive }) =>
-                    clsx('sidebar__item', { 'sidebar__item--active': isActive })
+                    clsx('appello-sidebar__item', { 'appello-sidebar__item--active': isActive })
                   }
                   end
                 >
-                  <span className="sidebar__item-title">{subItem.title}</span>
+                  <span className="appello-sidebar__item-title">{subItem.title}</span>
                 </NavLink>
               </li>
             ))}
@@ -57,10 +59,12 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
       {!item.items && (
         <NavLink
           to={item.link}
-          className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
+          className={({ isActive }) =>
+            clsx('appello-sidebar__item', { 'appello-sidebar__item--active': isActive })
+          }
         >
-          <Icon name={item.icon} className="sidebar__nav-icon" />
-          <span className="sidebar__item-title">{item.title}</span>
+          <Icon name={item.icon} className="appello-sidebar__nav-icon" />
+          <span className="appello-sidebar__item-title">{item.title}</span>
         </NavLink>
       )}
     </li>

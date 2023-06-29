@@ -12,5 +12,5 @@ export const InlineFields: React.FC<InlineFieldsProps> = props => {
     props,
   });
 
-  return <div className="form__inline-fields form__field-row">{children}</div>;
+  return <div className="appello-form__inline-fields appello-form__field-row">{children}</div>;
 };

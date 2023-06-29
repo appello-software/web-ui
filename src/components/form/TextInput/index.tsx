@@ -65,14 +65,19 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
   };
 
   return (
-    <div className={clsx('text-input-wrapper', className)}>
+    <div className={clsx('appello-text-input-wrapper', className)}>
       <input
         ref={useCombinedRef(ref, innerRef)}
-        className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {
-          'form__input--error': Boolean(error),
-          'form__input--with-icon-before': Boolean(iconBeforeElement),
-          'form__input--with-icon-after': Boolean(iconAfterElement),
-        })}
+        className={clsx(
+          inputClassName,
+          'appello-form__input',
+          `appello-form__input--size-${size}`,
+          {
+            'appello-form__input--error': Boolean(error),
+            'appello-form__input--with-icon-before': Boolean(iconBeforeElement),
+            'appello-form__input--with-icon-after': Boolean(iconAfterElement),
+          },
+        )}
         placeholder={placeholder}
         autoComplete={autoCompleteAttribute}
         type={type}
@@ -100,10 +105,10 @@ interface AsideIconProps {
 
 const AsideIcon: FC<AsideIconProps> = ({ onClick, children, position }) => {
   const className = useMemo(() => {
-    return clsx('form__input-icon', 'form__input-icon--after', {
-      'form__input-icon--after': position === 'after',
-      'form__input-icon--before': position === 'before',
-      'form__input-icon--clickable': onClick,
+    return clsx('appello-form__input-icon', 'appello-form__input-icon--after', {
+      'appello-form__input-icon--after': position === 'after',
+      'appello-form__input-icon--before': position === 'before',
+      'appello-form__input-icon--clickable': onClick,
     });
   }, [onClick, position]);
 

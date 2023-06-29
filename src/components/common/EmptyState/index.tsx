@@ -28,9 +28,9 @@ export const EmptyState: FC<EmptyStateProps> = props => {
   });
 
   return (
-    <div className={clsx('empty-state', className)}>
+    <div className={clsx('appello-empty-state', className)}>
       <IconContainer name={iconName} />
-      <p className="empty-state__label">{label}</p>
+      <p className="appello-empty-state__label">{label}</p>
     </div>
   );
 };

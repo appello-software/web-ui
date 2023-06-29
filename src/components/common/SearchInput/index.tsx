@@ -48,14 +48,14 @@ export const SearchInput: FC<SearchInputProps> = props => {
   }, debounceDelay);
 
   return (
-    <div className={clsx('search-input', className)}>
+    <div className={clsx('appello-search-input', className)}>
       <TextInput
         onChange={handleChange}
         placeholder={placeholder}
-        inputClassName="search-input__input"
+        inputClassName="appello-search-input__input"
         defaultValue={defaultValue}
       />
-      <Icon name="magnifier" className="search-input__icon" />
+      <Icon name="magnifier" className="appello-search-input__icon" />
     </div>
   );
 };

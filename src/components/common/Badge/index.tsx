@@ -27,9 +27,13 @@ export const Badge: FC<BadgeProps> = props => {
     props,
   });
   return (
-    <div className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}>
-      {icon !== undefined && <Icon name={icon} size={14} className="badge__icon" />}
-      <p className="badge__text">{children}</p>
+    <div
+      className={clsx('appello-badge', `appello-badge--${color}`, {
+        'appello-badge--filled': filled,
+      })}
+    >
+      {icon !== undefined && <Icon name={icon} size={14} className="appello-badge__icon" />}
+      <p className="appello-badge__text">{children}</p>
     </div>
   );
 };

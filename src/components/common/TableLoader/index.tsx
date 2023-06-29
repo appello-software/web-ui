@@ -4,6 +4,8 @@ import ContentLoader from 'react-content-loader';
 
 import { useCombinedPropsWithKit } from '~/hooks';
 
+import styles from './styles.module.scss';
+
 export interface TableLoaderProps {
   className?: string;
 }
@@ -17,7 +19,7 @@ export const TableLoader: FC<TableLoaderProps> = props => {
   return (
     <ContentLoader
       viewBox="0 0 1112 800"
-      className={clsx('pointer-events-none', className)}
+      className={clsx(styles['loader'], className)}
       backgroundColor="hsl(var(--gray-7-color))"
       foregroundColor="hsl(var(--gray-7-color) / 50%)"
     >

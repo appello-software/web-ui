@@ -160,15 +160,15 @@ export const Select = <
   );
 
   const reactSelectProps = {
-    className: clsx('react-select', className, {
-      [`react-select--size-${inputSize}`]: inputSize,
-      [`react-select--error`]: hasError,
+    className: clsx('appello-react-select', className, {
+      [`appello-react-select--size-${inputSize}`]: inputSize,
+      [`appello-react-select--error`]: hasError,
     }),
     isMulti,
     value: selectedOption,
     placeholder,
     options,
-    classNamePrefix: 'react-select',
+    classNamePrefix: 'appello-react-select',
     menuPortalTarget: document.body,
     onChange: handleChange,
     maxMenuHeight: 300,

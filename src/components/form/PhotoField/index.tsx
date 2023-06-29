@@ -40,20 +40,20 @@ export const PhotoField = <
       className={className}
       label={label}
       error={controller.fieldState.error}
-      labelClassName="photo-field__label"
+      labelClassName="appello-photo-field__label"
     >
-      <div className="photo-field__img-wrapper">
+      <div className="appello-photo-field__img-wrapper">
         {photo && (
           <Button
             onClick={() => controller.field.onChange(null)}
             size={ButtonSize.SMALL}
-            className="photo-field__remove-btn"
-            iconClassName="photo-field__remove-btn-icon"
+            className="appello-photo-field__remove-btn"
+            iconClassName="appello-photo-field__remove-btn-icon"
             withIcon="close"
           />
         )}
         {(photo || photoPlaceholder) && (
-          <img src={photo ?? photoPlaceholder} alt="Profile" className="photo-field__img" />
+          <img src={photo ?? photoPlaceholder} alt="Profile" className="appello-photo-field__img" />
         )}
       </div>
 
@@ -63,7 +63,7 @@ export const PhotoField = <
             variant={ButtonVariant.SECONDARY}
             withIcon="upload"
             label="Upload new"
-            className="photo-field__upload-btn"
+            className="appello-photo-field__upload-btn"
             onClick={onClick}
           />
         )}
