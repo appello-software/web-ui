@@ -38,6 +38,8 @@ import { TextAreaFieldProps } from '~/components/form/TextAreaField';
 import { TextFieldProps } from '~/components/form/TextField';
 import { TextInputProps } from '~/components/form/TextInput';
 
+import { TimeFieldProps } from '..';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UIComponents {
   Badge: BadgeProps;
@@ -78,6 +80,7 @@ export interface UIComponents {
   TextAreaField: TextAreaFieldProps<any, any>;
   TextField: TextFieldProps<any, any>;
   TextInput: TextInputProps;
+  TimeField: TimeFieldProps<any, any>;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 

@@ -17,5 +17,6 @@ export * from './Table';
 export * from './TableLoader';
 export * from './Tabs';
 export * from './TextLink';
+export * from './TimeField';
 export * from './TimePicker';
 export * from './Toaster';
