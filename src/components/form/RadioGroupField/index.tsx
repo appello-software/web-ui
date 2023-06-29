@@ -31,7 +31,7 @@ export const RadioGroupField = <TFormValues extends FieldValues>(
 
   return (
     <Field {...{ label, className, required }}>
-      <div className="radio-group">
+      <div className="appello-radio-group">
         {items.map((item, index) => (
           <RadioInput
             key={index}

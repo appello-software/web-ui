@@ -121,15 +121,15 @@ export const Button: React.FC<ButtonProps> = props => {
 
   const combinedClassName = React.useMemo(() => {
     return clsx(
-      'button',
-      variant ? `button--${variant}` : undefined,
-      `button--size-${size}`,
+      'appello-button',
+      variant ? `appello-button--${variant}` : undefined,
+      `appello-button--size-${size}`,
       {
-        'button--full': fullWidth,
-        'button--rounded': rounded,
-        'button--bold': bold,
-        'button--disabled': disabled,
-        'button--only-icon': [label, children, count].every(isNil) && withIcon,
+        'appello-button--full': fullWidth,
+        'appello-button--rounded': rounded,
+        'appello-button--bold': bold,
+        'appello-button--disabled': disabled,
+        'appello-button--only-icon': [label, children, count].every(isNil) && withIcon,
       },
       className,
     );
@@ -157,7 +157,7 @@ export const Button: React.FC<ButtonProps> = props => {
         name={withIcon}
         width={18}
         height={18}
-        className={clsx('button__icon', iconClassName)}
+        className={clsx('appello-button__icon', iconClassName)}
       />
     );
   }, [iconClassName, withIcon]);
@@ -171,17 +171,17 @@ export const Button: React.FC<ButtonProps> = props => {
       disabled={isLoading || disabled}
     >
       <div
-        className={clsx('button__label', {
-          'button__label--hidden': isLoading,
+        className={clsx('appello-button__label', {
+          'appello-button__label--hidden': isLoading,
         })}
       >
         {!iconAfter && withIcon && renderIcon()}
         {children ?? label}
-        {!isNil(count) && <p className="button__count">{count}</p>}
+        {!isNil(count) && <p className="appello-button__count">{count}</p>}
         {iconAfter && withIcon && renderIcon()}
       </div>
       {isLoading && (
-        <div className="button__loader">
+        <div className="appello-button__loader">
           <Loader />
         </div>
       )}

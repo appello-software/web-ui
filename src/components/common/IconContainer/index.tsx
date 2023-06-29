@@ -19,8 +19,8 @@ export const IconContainer: FC<IconContainerProps> = props => {
   });
 
   return (
-    <div className={clsx('icon-container', className)}>
-      <Icon name={name} className={clsx('icon-container__icon', iconClassName)} />
+    <div className={clsx('appello-icon-container', className)}>
+      <Icon name={name} className={clsx('appello-icon-container__icon', iconClassName)} />
     </div>
   );
 };

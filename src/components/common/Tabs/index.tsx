@@ -97,11 +97,11 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
   }, [selectedTabIndex, element]);
 
   return (
-    <div className={clsx('tabs', className)}>
-      <div className="tabs__head">
-        <ul ref={headListRef} className={clsx('tabs__head-list', headListClassName)}>
+    <div className={clsx('appello-tabs', className)}>
+      <div className="appello-tabs__head">
+        <ul ref={headListRef} className={clsx('appello-tabs__head-list', headListClassName)}>
           {items.map((item, index) => (
-            <li key={index} className="tabs__head-item">
+            <li key={index} className="appello-tabs__head-item">
               <button
                 type="button"
                 onClick={() => {
@@ -111,8 +111,8 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
                   }
                 }}
                 disabled={item.disabled}
-                className={clsx('tabs__head-button', {
-                  'tabs__head-button--active': index === selectedTabIndex,
+                className={clsx('appello-tabs__head-button', {
+                  'appello-tabs__head-button--active': index === selectedTabIndex,
                 })}
               >
                 {item.title}
@@ -120,9 +120,9 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
             </li>
           ))}
         </ul>
-        <div ref={activeLineRef} className="tabs__head-line" />
+        <div ref={activeLineRef} className="appello-tabs__head-line" />
       </div>
-      <div className={clsx('tabs__body', contentClassName)}>{element}</div>
+      <div className={clsx('appello-tabs__body', contentClassName)}>{element}</div>
     </div>
   );
 };

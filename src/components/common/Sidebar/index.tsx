@@ -33,32 +33,32 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   });
 
   return (
-    <div className="sidebar">
-      <header className="sidebar__header">
+    <div className="appello-sidebar">
+      <header className="appello-sidebar__header">
         <Link to="/">
-          <img src={logo} alt="Logo" className="sidebar__logo" />
+          <img src={logo} alt="Logo" className="appello-sidebar__logo" />
         </Link>
         {rightHeaderElement}
       </header>
-      <nav className="sidebar__nav-container">
+      <nav className="appello-sidebar__nav-container">
         <ul>
           {items.map(item => (
-            <NavItem key={item.title} item={item} className="sidebar__list-item" />
+            <NavItem key={item.title} item={item} className="appello-sidebar__list-item" />
           ))}
         </ul>
       </nav>
       {user && (
-        <footer className="sidebar__footer">
+        <footer className="appello-sidebar__footer">
           {Boolean(user.photo || user.photoPlaceholder) && (
             <img
               src={user.photo || user.photoPlaceholder}
               alt={user.fullName}
-              className="sidebar__user-photo"
+              className="appello-sidebar__user-photo"
             />
           )}
           <div>
-            <p className="sidebar__user-name">{user.fullName}</p>
-            <p className="sidebar__user-email">{user.email}</p>
+            <p className="appello-sidebar__user-name">{user.fullName}</p>
+            <p className="appello-sidebar__user-email">{user.email}</p>
           </div>
         </footer>
       )}

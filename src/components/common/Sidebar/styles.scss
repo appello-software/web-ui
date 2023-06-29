@@ -1,4 +1,4 @@
-.sidebar {
+.appello-sidebar {
   --item-inner-x-padding: 1.8rem;
   --icon-size: 1.1rem;
   --margin-between-icon-and-title: 0.75rem;
@@ -76,7 +76,7 @@
     margin-right: var(--margin-between-icon-and-title);
   }
 
-  &__submenu .sidebar__item {
+  &__submenu .appello-sidebar__item {
     padding-left: calc(
       var(--icon-size) + var(--item-inner-x-padding) + var(--margin-between-icon-and-title)
     );
@@ -125,7 +125,7 @@
 }
 
 @media screen and (max-width: 1400px) {
-  .sidebar {
+  .appello-sidebar {
     width: 3.75rem;
     padding-inline: 0.75rem;
 

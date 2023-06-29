@@ -108,7 +108,7 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
 
   return (
     <div className={clsx(styles['table-wrapper'], className)}>
-      {error && <p className={clsx('form__error', styles['table-error'])}>{error}</p>}
+      {error && <p className={clsx('appello-form__error', styles['table-error'])}>{error}</p>}
       <table className={styles['table']}>
         <thead className={styles['head']}>
           {table.getHeaderGroups().map(headerGroup => (

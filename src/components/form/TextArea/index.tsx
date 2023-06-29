@@ -32,14 +32,14 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
   }, [autoComplete]);
 
   return (
-    <div className="textarea">
+    <div className="appello-textarea">
       <textarea
         ref={ref}
         className={clsx(
-          'form__input',
-          'form__textarea',
+          'appello-form__input',
+          'appello-form__textarea',
           {
-            'form__input--error': Boolean(error),
+            'appello-form__input--error': Boolean(error),
           },
           className,
         )}
@@ -49,7 +49,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
         {...inputProps}
       />
       {maxLength !== undefined && (
-        <div className="textarea__counter">
+        <div className="appello-textarea__counter">
           {`${value ?? ''}`.length}/{maxLength}
         </div>
       )}

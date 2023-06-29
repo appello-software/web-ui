@@ -49,8 +49,13 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
   }, [value]);
 
   return (
-    <div className={clsx('date-picker', className)}>
-      <button type="button" onClick={toggleCalendar} ref={buttonRef} className="date-picker__btn">
+    <div className={clsx('appello-date-picker', className)}>
+      <button
+        type="button"
+        onClick={toggleCalendar}
+        ref={buttonRef}
+        className="appello-date-picker__btn"
+      >
         {leftIconElement !== undefined && leftIconElement}
         {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}

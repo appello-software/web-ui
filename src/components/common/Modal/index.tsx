@@ -83,24 +83,24 @@ export const Modal: React.FC<ModalProps> = props => {
       appElement={app}
       onRequestClose={close}
       contentLabel={isString(title) ? title : undefined}
-      className={clsx('modal', `modal--${position}`, contentClassName)}
-      overlayClassName="modal-overlay"
+      className={clsx('appello-modal', `appello-modal--${position}`, contentClassName)}
+      overlayClassName="appello-modal-overlay"
       shouldCloseOnEsc={shouldCloseOnOverlayClick}
-      bodyOpenClassName="react-modal-opened"
+      bodyOpenClassName="appello-react-modal-opened"
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       onAfterClose={onAfterClose}
     >
       {withCloseButton && (
-        <button type="button" className="modal__close-btn" onClick={close}>
+        <button type="button" className="appello-modal__close-btn" onClick={close}>
           <Icon name="close" size={20} />
         </button>
       )}
-      {title && <div className="modal__header">{title}</div>}
-      <div className={clsx('modal__content', bodyClassName)}>{children}</div>
+      {title && <div className="appello-modal__header">{title}</div>}
+      <div className={clsx('appello-modal__content', bodyClassName)}>{children}</div>
       {buttons && buttons.length > 0 && (
-        <div className="modal__buttons-list">
+        <div className="appello-modal__buttons-list">
           {buttons.map(({ className, ...props }, index) => (
-            <Button key={index} {...props} className={clsx('modal__button', className)} />
+            <Button key={index} {...props} className={clsx('appello-modal__button', className)} />
           ))}
         </div>
       )}

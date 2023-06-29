@@ -1,4 +1,4 @@
-.badge {
+.appello-badge {
   display: flex;
   width: max-content;
   align-items: center;
@@ -30,27 +30,27 @@
     color: hsl(var(--orange-color));
   }
 
-  &--filled.badge--green {
+  &--filled.appello-badge--green {
     background-color: hsl(var(--green-color));
     color: hsl(var(--white-color));
   }
 
-  &--filled.badge--gray {
+  &--filled.appello-badge--gray {
     background-color: hsl(var(--gray-1-color));
     color: hsl(var(--white-color));
   }
 
-  &--filled.badge--blue {
+  &--filled.appello-badge--blue {
     background-color: hsl(var(--blue-color));
     color: hsl(var(--white-color));
   }
 
-  &--filled.badge--red {
+  &--filled.appello-badge--red {
     background-color: hsl(var(--red-color));
     color: hsl(var(--white-color));
   }
 
-  &--filled.badge--orange {
+  &--filled.appello-badge--orange {
     background-color: hsl(var(--orange-color));
     color: hsl(var(--white-color));
   }

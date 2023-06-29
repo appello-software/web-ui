@@ -23,10 +23,10 @@ export const Field: React.FC<FieldProps> = props => {
     });
 
   return (
-    <div className={clsx('form__field', 'form__field-row', className)}>
+    <div className={clsx('appello-form__field', 'appello-form__field-row', className)}>
       {label && (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={clsx('form__label', labelClassName)} title={label}>
+        <label className={clsx('appello-form__label', labelClassName)} title={label}>
           {label}
           {required ? ' *' : null}
         </label>

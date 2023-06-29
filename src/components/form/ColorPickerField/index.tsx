@@ -45,13 +45,13 @@ export const ColorPickerField = <
     <Field
       {...{ label, required }}
       error={fieldState.error}
-      className={clsx('color-picker-field', className)}
+      className={clsx('appello-color-picker-field', className)}
     >
-      <div ref={pickerRef} className="color-picker-field__input-wrapper">
+      <div ref={pickerRef} className="appello-color-picker-field__input-wrapper">
         {isColorPickerOpen && (
-          <div className="color-picker-field__picker">
+          <div className="appello-color-picker-field__picker">
             <HexColorPicker
-              className="color-picker-field__picker-inner"
+              className="appello-color-picker-field__picker-inner"
               color={field.value || '#ffffff'}
               onChange={field.onChange}
             />
@@ -62,10 +62,13 @@ export const ColorPickerField = <
           onClick={toggleColorPicker}
           iconBeforeElement={
             field.value && (
-              <div className="color-picker-field__color" style={{ backgroundColor: field.value }} />
+              <div
+                className="appello-color-picker-field__color"
+                style={{ backgroundColor: field.value }}
+              />
             )
           }
-          placeholder="Select colour"
+          placeholder="Select color"
           size={size}
           label={label}
           value={field.value ?? ''}
