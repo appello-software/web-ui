@@ -20,11 +20,13 @@ pnpm install @appello/web-ui
 yarn add @appello/web-ui
 ```
 
+**IMPORTANT:** These icons should be in `src/view/assets/icons`: calendar.svg, down-arrow.svg, close.svg,magnifier.svg, bell.svg, polygon.svg, check.svg, eye.svg, eye-crossed.svg, document.svg
+
 ## Basic usage
 
 ```tsx
 import '@appello/web-ui/dist/index.css';
-
+*
 import React from 'react';
 import {
   AppelloKit,
