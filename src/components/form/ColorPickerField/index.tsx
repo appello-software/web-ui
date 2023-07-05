@@ -6,6 +6,7 @@ import React, { ReactElement, useRef } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
+import { Icon } from '~/components/common/Icon';
 import { Field, FieldProps } from '~/components/form/Field';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -17,6 +18,9 @@ export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
   name: TName;
   control: Control<TFormValues>;
 }
+
+const generateClassName = (child?: string): string =>
+  child ? `color-picker-field__${child}` : 'color-picker-field';
 
 export const ColorPickerField = <
   TFormValues extends FieldValues,
@@ -45,13 +49,13 @@ export const ColorPickerField = <
     <Field
       {...{ label, required }}
       error={fieldState.error}
-      className={clsx('color-picker-field', className)}
+      className={clsx(generateClassName(), className)}
     >
-      <div ref={pickerRef} className="color-picker-field__input-wrapper">
+      <div ref={pickerRef} className={generateClassName('input-wrapper')}>
         {isColorPickerOpen && (
-          <div className="color-picker-field__picker">
+          <div className={generateClassName('picker')}>
             <HexColorPicker
-              className="color-picker-field__picker-inner"
+              className={generateClassName('picker-inner')}
               color={field.value || '#ffffff'}
               onChange={field.onChange}
             />
@@ -62,13 +66,22 @@ export const ColorPickerField = <
           onClick={toggleColorPicker}
           iconBeforeElement={
             field.value && (
-              <div className="color-picker-field__color" style={{ backgroundColor: field.value }} />
+              <div
+                className={generateClassName('color')}
+                style={{ backgroundColor: field.value }}
+              />
             )
           }
           placeholder="Select colour"
           size={size}
           label={label}
           value={field.value ?? ''}
+          iconAfterElement={
+            <Icon
+              name="down-arrow"
+              className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
+            />
+          }
         />
       </div>
     </Field>
