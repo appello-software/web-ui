@@ -151,11 +151,13 @@
 
       &--collapsed {
         display: block;
+        width: 100%;
+        padding-inline: 4px;
       }
     }
 
     &__logo {
-      width: auto;
+      width: 100%;
       height: auto;
     }
 
