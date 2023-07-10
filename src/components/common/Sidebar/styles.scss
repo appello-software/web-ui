@@ -111,6 +111,13 @@
   &__item--expanded ~ &__submenu {
     display: block;
   }
+
+  &__logo-link {
+    display: block;
+    &--collapsed {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-width: 1400px) {
@@ -135,10 +142,15 @@
     &__header {
       padding: 0;
       margin-bottom: 0.5rem;
+      flex-direction: column;
+      gap: 20px;
     }
 
     &__logo-link {
       display: none;
+      &--collapsed {
+        display: block;
+      }
     }
 
     &__nav-container {

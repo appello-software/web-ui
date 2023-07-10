@@ -17,6 +17,7 @@ export interface SidebarItem {
 export interface SidebarProps {
   items: SidebarItem[];
   logo: string;
+  smallLogo?: string;
   user?: {
     photoPlaceholder?: string;
     photo?: string | null;
@@ -27,7 +28,7 @@ export interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { items, logo, user, rightHeaderElement } = useCombinedPropsWithKit({
+  const { items, logo, smallLogo, user, rightHeaderElement } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
   });
@@ -37,6 +38,9 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       <header className="sidebar__header">
         <Link to="/" className="sidebar__logo-link">
           <img src={logo} alt="Logo" className="sidebar__logo" />
+        </Link>
+        <Link to="/" className="sidebar__logo-link--collapsed">
+          <img src={smallLogo} alt="Logo" className="sidebar__logo" />
         </Link>
         {rightHeaderElement}
       </header>
