@@ -30,6 +30,81 @@ export const Standard: React.FC = () => {
   );
 };
 
+export const WithDescription: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { value: isOpen, on: openModal, off: closeModal } = useSwitchValue(false);
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        Open modal
+      </button>
+      <Modal
+        isOpen={isOpen}
+        title="Lorem ipsum"
+        close={closeModal}
+        description="Lorem ipsum dolor sit amet"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
+        cum dignissimos doloribus earum eius eveniet exercitationem harum.
+      </Modal>
+    </>
+  );
+};
+
+export const RightPosition: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { value: isOpen, on: openModal, off: closeModal } = useSwitchValue(false);
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        Open modal
+      </button>
+      <Modal isOpen={isOpen} title="Lorem ipsum dolor sit amet" close={closeModal} position="right">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
+        cum dignissimos doloribus earum eius eveniet exercitationem harum.
+      </Modal>
+    </>
+  );
+};
+
+export const RightPositionWithDescription: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { value: isOpen, on: openModal, off: closeModal } = useSwitchValue(false);
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        Open modal
+      </button>
+      <Modal
+        isOpen={isOpen}
+        title="Lorem ipsum dolor sit amet"
+        close={closeModal}
+        position="right"
+        description="Lorem ipsum dolor sit amet"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
+        cum dignissimos doloribus earum eius eveniet exercitationem harum.
+      </Modal>
+    </>
+  );
+};
+
+export const WithoutElements: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { value: isOpen, on: openModal, off: closeModal } = useSwitchValue(false);
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        Open modal
+      </button>
+      <Modal isOpen={isOpen} withCloseButton={false} close={closeModal}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
+        cum dignissimos doloribus earum eius eveniet exercitationem harum.
+      </Modal>
+    </>
+  );
+};
+
 export const WithButtons: React.FC = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { value: isOpen, on: openModal, off: closeModal } = useSwitchValue(false);

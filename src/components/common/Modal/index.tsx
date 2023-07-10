@@ -24,6 +24,10 @@ export interface ModalProps {
    */
   title?: ReactNode;
   /**
+   * Description
+   */
+  description?: ReactNode;
+  /**
    * Footer buttons
    */
   buttons?: ButtonProps[];
@@ -72,6 +76,7 @@ export const Modal: React.FC<ModalProps> = props => {
     withCloseButton = true,
     position = 'center',
     shouldCloseOnOverlayClick = true,
+    description,
   } = useCombinedPropsWithKit({
     name: 'Modal',
     props,
@@ -90,12 +95,21 @@ export const Modal: React.FC<ModalProps> = props => {
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       onAfterClose={onAfterClose}
     >
-      {withCloseButton && (
-        <button type="button" className="modal__close-btn" onClick={close}>
-          <Icon name="close" size={20} />
-        </button>
+      {Boolean(title || description || withCloseButton) && (
+        <div className="modal__header">
+          {withCloseButton && (
+            <button type="button" className="modal__close-btn" onClick={close}>
+              <Icon name="close" size={20} />
+            </button>
+          )}
+          {Boolean(title || description) && (
+            <div className="modal__header-content">
+              {title && <div className="modal__title">{title}</div>}
+              {description && <div className="modal__description">{description}</div>}
+            </div>
+          )}
+        </div>
       )}
-      {title && <div className="modal__header">{title}</div>}
       <div className={clsx('modal__content', bodyClassName)}>{children}</div>
       {buttons && buttons.length > 0 && (
         <div className="modal__buttons-list">
