@@ -141,16 +141,22 @@
 
     &__header {
       padding: 0;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
       flex-direction: column;
-      gap: 20px;
+      row-gap: 1rem;
     }
 
     &__logo-link {
       display: none;
+
       &--collapsed {
         display: block;
       }
+    }
+
+    &__logo {
+      width: auto;
+      height: auto;
     }
 
     &__nav-container {

@@ -37,11 +37,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     <div className="sidebar">
       <header className="sidebar__header">
         <Link to="/" className="sidebar__logo-link">
-          <img src={logo} alt="Logo" className="sidebar__logo" />
+          <img src={logo} alt="logo" className="sidebar__logo" />
         </Link>
         {smallLogo && (
           <Link to="/" className="sidebar__logo-link--collapsed">
-            <img src={smallLogo} alt="smallLogo" className="sidebar__logo" />
+            <img src={smallLogo} alt="minimized logo" className="sidebar__logo" />
           </Link>
         )}
         {rightHeaderElement}
