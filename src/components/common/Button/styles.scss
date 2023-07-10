@@ -2,7 +2,7 @@
   --small-height: 1.8rem;
   --medium-height: 2.6rem;
   --large-height: 3.3rem;
-
+  position: relative;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -27,7 +27,6 @@
 
   &--secondary {
     background-color: hsl(var(--gray-7-color));
-    border: 1px solid hsl(var(--gray-5-color));
   }
 
   &--negative {

@@ -182,7 +182,7 @@ export const Button: React.FC<ButtonProps> = props => {
       </div>
       {isLoading && (
         <div className="button__loader">
-          <Loader />
+          <Loader colorful={variant === ButtonVariant.SECONDARY} />
         </div>
       )}
     </button>
