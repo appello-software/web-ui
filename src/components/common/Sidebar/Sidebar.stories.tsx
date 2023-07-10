@@ -48,6 +48,7 @@ export const LoggedOut: Story = {
       },
     ],
     logo: '/white-logo.svg',
+    smallLogo: '/small-logo.svg',
   },
 };
 
