@@ -35,7 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   return (
     <div className="sidebar">
       <header className="sidebar__header">
-        <Link to="/">
+        <Link to="/" className="sidebar__logo-link">
           <img src={logo} alt="Logo" className="sidebar__logo" />
         </Link>
         {rightHeaderElement}

@@ -133,6 +133,11 @@
     }
 
     &__header {
+      padding: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    &__logo-link {
       display: none;
     }
 
