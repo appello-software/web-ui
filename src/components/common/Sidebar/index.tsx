@@ -39,9 +39,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         <Link to="/" className="sidebar__logo-link">
           <img src={logo} alt="Logo" className="sidebar__logo" />
         </Link>
-        <Link to="/" className="sidebar__logo-link--collapsed">
-          <img src={smallLogo} alt="Logo" className="sidebar__logo" />
-        </Link>
+        {smallLogo && (
+          <Link to="/" className="sidebar__logo-link--collapsed">
+            <img src={smallLogo} alt="smallLogo" className="sidebar__logo" />
+          </Link>
+        )}
         {rightHeaderElement}
       </header>
       <nav className="sidebar__nav-container">
