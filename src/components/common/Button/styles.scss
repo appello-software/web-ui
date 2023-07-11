@@ -1,7 +1,4 @@
 .button {
-  --small-height: 1.8rem;
-  --medium-height: 2.6rem;
-  --large-height: 3.3rem;
   position: relative;
   font-weight: 600;
   cursor: pointer;
@@ -48,38 +45,38 @@
   &--size-small {
     font-size: var(--p5-font-size);
     line-height: var(--p5-line-height);
-    height: var(--small-height);
+    height: var(--input-small-height);
   }
 
   &--size-medium {
     font-size: var(--p5-font-size);
     line-height: var(--p5-line-height);
-    height: var(--medium-height);
+    height: var(--input-medium-height);
   }
 
   &--size-large {
     font-size: var(--p3-font-size);
     line-height: var(--p3-line-height);
-    height: var(--large-height);
+    height: var(--input-large-height);
   }
 
   $buttonRef: &;
 
   &--size-small {
     &#{$buttonRef}--only-icon {
-      width: var(--small-height);
+      width: var(--input-small-height);
     }
   }
 
   &--size-medium {
     &#{$buttonRef}--only-icon {
-      width: var(--medium-height);
+      width: var(--input-medium-height);
     }
   }
 
   &--size-large {
     &#{$buttonRef}--only-icon {
-      width: var(--large-height);
+      width: var(--input-large-height);
     }
   }
 
