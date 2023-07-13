@@ -3,7 +3,6 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
@@ -102,7 +101,6 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
     state: { sorting },
     enableSorting: hasSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
   });
 
