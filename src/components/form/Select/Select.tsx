@@ -3,9 +3,13 @@ import './styles.scss';
 import clsx from 'clsx';
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
-import ReactSelect, { OnChangeValue } from 'react-select';
+import ReactSelect, {
+  ActionMeta,
+  GroupBase,
+  OnChangeValue,
+  SelectComponentsConfig,
+} from 'react-select';
 import CreatableReactSelect from 'react-select/creatable';
-import { ActionMeta } from 'react-select/dist/declarations/src/types';
 
 import { InputSize } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -15,6 +19,8 @@ import { isMultiOption, isNewSelectOption } from './utils';
 export interface SelectOption<T> {
   label: string;
   value: T;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export interface NewSelectOption {
@@ -80,6 +86,11 @@ export interface SelectProps<
   hasError?: boolean;
   disabled?: boolean;
   isCreatable?: TIsCreatable;
+  components?: SelectComponentsConfig<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >;
 }
 
 export const Select = <
@@ -102,6 +113,7 @@ export const Select = <
     hasError,
     disabled,
     isCreatable,
+    components,
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -177,6 +189,7 @@ export const Select = <
     unstyled: true,
     isClearable,
     isDisabled: disabled,
+    components,
   } as const;
 
   if (isCreatable) {

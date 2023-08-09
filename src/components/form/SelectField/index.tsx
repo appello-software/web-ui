@@ -25,7 +25,13 @@ type AllowedSelectProps<
   TIsCreatable extends boolean,
 > = Pick<
   SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
-  'inputSize' | 'isMulti' | 'placeholder' | 'isClearable' | 'isCreatable' | 'disabled'
+  | 'inputSize'
+  | 'isMulti'
+  | 'placeholder'
+  | 'isClearable'
+  | 'isCreatable'
+  | 'disabled'
+  | 'components'
 >;
 
 export interface SelectFieldProps<
@@ -68,6 +74,7 @@ export const SelectField = <
     inputSize,
     placeholder,
     disabled,
+    components,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -100,6 +107,7 @@ export const SelectField = <
           inputSize,
           placeholder,
           disabled,
+          components,
         }}
         hasError={!!controller.fieldState.error}
       />
