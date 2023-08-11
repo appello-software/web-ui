@@ -15,3 +15,4 @@ export * from './TextArea';
 export * from './TextAreaField';
 export * from './TextField';
 export * from './TextInput';
+export * from './TimeField';
