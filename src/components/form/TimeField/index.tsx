@@ -80,6 +80,7 @@ export const TimeField = <
         value={value}
         onChange={controller.field.onChange}
         options={timeOptions}
+        hasError={!!controller.fieldState.error}
         {...{ inputSize, placeholder, disabled, components }}
       />
     </Field>
