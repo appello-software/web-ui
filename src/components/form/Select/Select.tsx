@@ -190,6 +190,7 @@ export const Select = <
     isClearable,
     isDisabled: disabled,
     components,
+    closeMenuOnSelect: !isMulti,
   } as const;
 
   if (isCreatable) {
