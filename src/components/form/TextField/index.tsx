@@ -17,6 +17,8 @@ type AllowedInputProps = Pick<
   | 'iconAfterElement'
   | 'onIconBeforeClick'
   | 'onIconAfterClick'
+  | 'onFocus'
+  | 'onBlur'
 >;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
