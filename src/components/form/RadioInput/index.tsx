@@ -9,7 +9,7 @@ export interface RadioInputProps extends AllHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export const RadioInput: React.FC<RadioInputProps> = props => {
+export const RadioInput = React.forwardRef<HTMLInputElement, RadioInputProps>((props, ref) => {
   const { checked, label, className, disabled, ...restProps } = useCombinedPropsWithKit({
     name: 'RadioInput',
     props,
@@ -23,10 +23,11 @@ export const RadioInput: React.FC<RadioInputProps> = props => {
         className="radio-input__input"
         checked={checked}
         disabled={disabled}
+        ref={ref}
         {...restProps}
       />
       <div className="radio-input__check-mark" />
       {label && <div className="radio-input__label-text">{label}</div>}
     </label>
   );
-};
+});
