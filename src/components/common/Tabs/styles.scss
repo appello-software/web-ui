@@ -32,6 +32,10 @@
     &--active {
       color: hsl(var(--accent-color));
     }
+    &--with-right-component {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__body {

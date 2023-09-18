@@ -19,6 +19,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 export interface Tab {
   title: ReactNode;
   element: ReactNode;
+  rightComponent?: ReactNode;
   disabled?: boolean;
   path?: string;
 }
@@ -113,9 +114,11 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
                 disabled={item.disabled}
                 className={clsx('tabs__head-button', {
                   'tabs__head-button--active': index === selectedTabIndex,
+                  'tabs__head-button--with-right-component': item.rightComponent,
                 })}
               >
-                {item.title}
+                <span>{item.title}</span>
+                {item.rightComponent}
               </button>
             </li>
           ))}
