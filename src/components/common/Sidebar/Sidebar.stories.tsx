@@ -63,6 +63,33 @@ export const LoggedIn: Story = {
   },
 };
 
+export const WithUserRightElement: Story = {
+  args: {
+    ...LoggedOut.args,
+    user: {
+      fullName: 'John Doe',
+      email: 'johndoe@gmail.com',
+      photoPlaceholder: '/photo-placeholder.svg',
+    },
+    userInfoRightElement: (
+      <div
+        style={{
+          backgroundColor: 'hsl(var(--white-color) / 5%)',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'hsl(var(--white-color) / 40%)',
+          borderRadius: 4,
+        }}
+      >
+        <Icon name="bell" size={16} />
+      </div>
+    ),
+  },
+};
+
 export const WithRightHeaderElement: Story = {
   args: {
     ...LoggedOut.args,

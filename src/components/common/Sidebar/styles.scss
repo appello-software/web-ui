@@ -77,12 +77,25 @@
     padding-inline: var(--padding-x);
     margin-top: auto;
     align-items: center;
+
+    &--with-user-right-element {
+      justify-content: space-between;
+      gap: 10px;
+    }
+  }
+
+  &__footer-user-info {
+    display: flex;
+    margin-top: auto;
+    align-items: center;
+    padding-inline: 0;
   }
 
   &__user-name {
     font-size: var(--p3-font-size);
     line-height: var(--p3-line-height);
     color: hsl(var(--white-color));
+    word-break: break-all;
   }
 
   &__user-photo {
@@ -91,12 +104,18 @@
     height: 2.25rem;
     object-fit: cover;
     margin-right: 0.75rem;
+    flex-shrink: 0;
   }
 
   &__user-email {
     font-size: var(--p5-font-size);
     line-height: var(--p5-line-height);
     color: hsl(var(--white-color) / 50%);
+    word-break: break-all;
+  }
+
+  &__footer-user-right-element {
+    flex-shrink: 0;
   }
 
   &__submenu {
