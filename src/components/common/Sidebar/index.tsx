@@ -1,5 +1,6 @@
 import './styles.scss';
 
+import clsx from 'clsx';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -25,13 +26,15 @@ export interface SidebarProps {
     email: string;
   };
   rightHeaderElement?: React.ReactNode;
+  userRightElement?: React.ReactNode;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { items, logo, smallLogo, user, rightHeaderElement } = useCombinedPropsWithKit({
-    name: 'Sidebar',
-    props,
-  });
+  const { items, logo, smallLogo, user, rightHeaderElement, userRightElement } =
+    useCombinedPropsWithKit({
+      name: 'Sidebar',
+      props,
+    });
 
   return (
     <div className="sidebar">
@@ -54,18 +57,27 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         </ul>
       </nav>
       {user && (
-        <footer className="sidebar__footer">
-          {Boolean(user.photo || user.photoPlaceholder) && (
-            <img
-              src={user.photo || user.photoPlaceholder}
-              alt={user.fullName}
-              className="sidebar__user-photo"
-            />
-          )}
-          <div>
-            <p className="sidebar__user-name">{user.fullName}</p>
-            <p className="sidebar__user-email">{user.email}</p>
+        <footer
+          className={clsx('sidebar__footer', {
+            'sidebar__footer--with-user-right-element': userRightElement,
+          })}
+        >
+          <div className="sidebar__footer-user-info">
+            {Boolean(user.photo || user.photoPlaceholder) && (
+              <img
+                src={user.photo || user.photoPlaceholder}
+                alt={user.fullName}
+                className="sidebar__user-photo"
+              />
+            )}
+            <div>
+              <p className="sidebar__user-name">{user.fullName}</p>
+              <p className="sidebar__user-email">{user.email}</p>
+            </div>
           </div>
+          {userRightElement && (
+            <div className="sidebar__footer-user-right-element">{userRightElement}</div>
+          )}
         </footer>
       )}
     </div>
