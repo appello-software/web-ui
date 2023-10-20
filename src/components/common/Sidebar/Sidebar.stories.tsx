@@ -71,7 +71,7 @@ export const WithUserRightElement: Story = {
       email: 'johndoe@gmail.com',
       photoPlaceholder: '/photo-placeholder.svg',
     },
-    userRightElement: (
+    userInfoRightElement: (
       <div
         style={{
           backgroundColor: 'hsl(var(--white-color) / 5%)',

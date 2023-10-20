@@ -26,11 +26,11 @@ export interface SidebarProps {
     email: string;
   };
   rightHeaderElement?: React.ReactNode;
-  userRightElement?: React.ReactNode;
+  userInfoRightElement?: React.ReactNode;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { items, logo, smallLogo, user, rightHeaderElement, userRightElement } =
+  const { items, logo, smallLogo, user, rightHeaderElement, userInfoRightElement } =
     useCombinedPropsWithKit({
       name: 'Sidebar',
       props,
@@ -59,7 +59,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       {user && (
         <footer
           className={clsx('sidebar__footer', {
-            'sidebar__footer--with-user-right-element': userRightElement,
+            'sidebar__footer--with-user-right-element': userInfoRightElement,
           })}
         >
           <div className="sidebar__footer-user-info">
@@ -75,8 +75,8 @@ export const Sidebar: React.FC<SidebarProps> = props => {
               <p className="sidebar__user-email">{user.email}</p>
             </div>
           </div>
-          {userRightElement && (
-            <div className="sidebar__footer-user-right-element">{userRightElement}</div>
+          {userInfoRightElement && (
+            <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>
           )}
         </footer>
       )}
