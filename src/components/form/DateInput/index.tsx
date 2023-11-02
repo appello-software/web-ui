@@ -22,14 +22,24 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) & {
   error?: boolean;
   className?: string;
   disabledDate?: Matcher;
+  iconAfterName?: string;
 };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
-  const { className, placeholder, inputSize, value, error, onChange, mode, disabledDate } =
-    useCombinedPropsWithKit({
-      name: 'DateInput',
-      props,
-    });
+  const {
+    className,
+    placeholder,
+    inputSize,
+    value,
+    error,
+    onChange,
+    mode,
+    disabledDate,
+    iconAfterName = 'down-arrow',
+  } = useCombinedPropsWithKit({
+    name: 'DateInput',
+    props,
+  });
 
   const { dateFormat } = useAppelloKit();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -109,7 +119,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           iconBeforeElement={<Icon name="calendar" />}
           iconAfterElement={
             <Icon
-              name="down-arrow"
+              name={iconAfterName || 'down-arrow'}
               className={clsx({ [styles['date-input__arrow']]: isCalendarVisible })}
             />
           }
