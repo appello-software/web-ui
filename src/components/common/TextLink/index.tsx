@@ -30,7 +30,7 @@ export const TextLink: React.FC<TextLinkProps> = props => {
 
   if (to === undefined || to instanceof Function) {
     return (
-      <span onClick={to} className={combinedClassName} onKeyUp={to} role="button" tabIndex={0}>
+      <span className={combinedClassName} role="button" tabIndex={0} onClick={to} onKeyUp={to}>
         {children}
       </span>
     );
@@ -38,14 +38,14 @@ export const TextLink: React.FC<TextLinkProps> = props => {
 
   if (external) {
     return (
-      <a href={to} className={combinedClassName} target="_blank" rel="noreferrer">
+      <a className={combinedClassName} href={to} rel="noreferrer" target="_blank">
         {children}
       </a>
     );
   }
 
   return (
-    <Link to={to} className={combinedClassName}>
+    <Link className={combinedClassName} to={to}>
       {children}
     </Link>
   );

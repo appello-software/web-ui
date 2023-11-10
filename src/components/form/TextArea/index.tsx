@@ -34,7 +34,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
   return (
     <div className="textarea">
       <textarea
-        ref={ref}
+        autoComplete={autoCompleteAttribute}
         className={clsx(
           'form__input',
           'form__textarea',
@@ -43,8 +43,8 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
           },
           className,
         )}
-        autoComplete={autoCompleteAttribute}
         maxLength={maxLength}
+        ref={ref}
         value={value}
         {...inputProps}
       />

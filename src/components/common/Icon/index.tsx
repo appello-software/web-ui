@@ -49,12 +49,12 @@ export const Icon: React.FC<IconProps> = props => {
 
   return (
     <svg
+      className={className}
+      height={size !== undefined ? size : height}
+      style={{ color }}
+      width={size !== undefined ? size : width}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width={size !== undefined ? size : width}
-      height={size !== undefined ? size : height}
-      className={className}
-      style={{ color }}
     >
       <use
         xlinkHref={

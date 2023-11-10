@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { isNil } from '@appello/common/lib/utils';
+import { isNil } from '@appello/common';
 import clsx from 'clsx';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -154,21 +154,21 @@ export const Button: React.FC<ButtonProps> = props => {
 
     return (
       <Icon
+        className={clsx('button__icon', iconClassName)}
+        height={18}
         name={withIcon}
         width={18}
-        height={18}
-        className={clsx('button__icon', iconClassName)}
       />
     );
   }, [iconClassName, withIcon]);
 
   return (
     <button
+      className={combinedClassName}
+      disabled={isLoading || disabled}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={combinedClassName}
       onClick={to ? () => navigate(to) : onClick}
-      disabled={isLoading || disabled}
     >
       <div
         className={clsx('button__label', {

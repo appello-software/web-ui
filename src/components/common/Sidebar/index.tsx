@@ -39,12 +39,12 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   return (
     <div className="sidebar">
       <header className="sidebar__header">
-        <Link to="/" className="sidebar__logo-link">
-          <img src={logo} alt="logo" className="sidebar__logo" />
+        <Link className="sidebar__logo-link" to="/">
+          <img alt="logo" className="sidebar__logo" src={logo} />
         </Link>
         {smallLogo && (
-          <Link to="/" className="sidebar__logo-link--collapsed">
-            <img src={smallLogo} alt="minimized logo" className="sidebar__logo" />
+          <Link className="sidebar__logo-link--collapsed" to="/">
+            <img alt="minimized logo" className="sidebar__logo" src={smallLogo} />
           </Link>
         )}
         {rightHeaderElement}
@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       <nav className="sidebar__nav-container">
         <ul>
           {items.map(item => (
-            <NavItem key={item.title} item={item} className="sidebar__list-item" />
+            <NavItem className="sidebar__list-item" item={item} key={item.title} />
           ))}
         </ul>
       </nav>
@@ -65,9 +65,9 @@ export const Sidebar: React.FC<SidebarProps> = props => {
           <div className="sidebar__footer-user-info">
             {Boolean(user.photo || user.photoPlaceholder) && (
               <img
-                src={user.photo || user.photoPlaceholder}
                 alt={user.fullName}
                 className="sidebar__user-photo"
+                src={user.photo || user.photoPlaceholder}
               />
             )}
             <div>

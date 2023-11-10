@@ -1,7 +1,6 @@
 import './styles.scss';
 
-import { useMountEffect, useUpdateEffect } from '@appello/common/lib/hooks';
-import { isNil } from '@appello/common/lib/utils/isNil';
+import { isNil, useMountEffect, useUpdateEffect } from '@appello/common';
 import clsx from 'clsx';
 import React, {
   ReactElement,
@@ -100,10 +99,15 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
   return (
     <div className={clsx('tabs', className)}>
       <div className="tabs__head">
-        <ul ref={headListRef} className={clsx('tabs__head-list', headListClassName)}>
+        <ul className={clsx('tabs__head-list', headListClassName)} ref={headListRef}>
           {items.map((item, index) => (
-            <li key={index} className="tabs__head-item">
+            <li className="tabs__head-item" key={index}>
               <button
+                className={clsx('tabs__head-button', {
+                  'tabs__head-button--active': index === selectedTabIndex,
+                  'tabs__head-button--with-right-component': item.rightComponent,
+                })}
+                disabled={item.disabled}
                 type="button"
                 onClick={() => {
                   setSelectedTabIndex(index);
@@ -111,11 +115,6 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
                     navigate(item.path);
                   }
                 }}
-                disabled={item.disabled}
-                className={clsx('tabs__head-button', {
-                  'tabs__head-button--active': index === selectedTabIndex,
-                  'tabs__head-button--with-right-component': item.rightComponent,
-                })}
               >
                 <span>{item.title}</span>
                 {item.rightComponent}
@@ -123,7 +122,7 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
             </li>
           ))}
         </ul>
-        <div ref={activeLineRef} className="tabs__head-line" />
+        <div className="tabs__head-line" ref={activeLineRef} />
       </div>
       <div className={clsx('tabs__body', contentClassName)}>{element}</div>
     </div>

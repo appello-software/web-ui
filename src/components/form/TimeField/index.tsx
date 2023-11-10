@@ -77,10 +77,10 @@ export const TimeField = <
   return (
     <Field {...{ className, label, required }} error={controller.fieldState.error}>
       <Select
+        hasError={!!controller.fieldState.error}
+        options={timeOptions}
         value={value}
         onChange={controller.field.onChange}
-        options={timeOptions}
-        hasError={!!controller.fieldState.error}
         {...{ inputSize, placeholder, disabled, components }}
       />
     </Field>

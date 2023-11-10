@@ -19,11 +19,11 @@ const Template: React.FC = () => {
 
   return (
     <Pagination
+      itemsCount={pageSize}
       offset={offset}
+      pageSize={pageSize}
       setOffset={setOffset}
       totalCount={1000}
-      itemsCount={pageSize}
-      pageSize={pageSize}
     />
   );
 };

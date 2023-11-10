@@ -1,4 +1,4 @@
-import { noop } from '@appello/common/lib/utils';
+import { noop } from '@appello/common';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 

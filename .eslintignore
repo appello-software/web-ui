@@ -2,7 +2,7 @@
 /.vscode
 /.idea
 node_modules
-jest.config.js
-rollup.config.js
+lint-staged.config.js
+rollup.config.mjs
 /dist
 /scripts

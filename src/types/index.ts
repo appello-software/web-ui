@@ -41,7 +41,6 @@ import {
   TimePickerProps,
 } from '~/components';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UIComponents {
   Badge: BadgeProps;
   BrowserSelect: BrowserSelectProps;
@@ -83,7 +82,6 @@ export interface UIComponents {
   TextInput: TextInputProps;
   TimeField: TimeFieldProps<any, any>;
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export interface AppelloKit {
   pageSize: number;

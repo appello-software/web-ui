@@ -62,12 +62,12 @@ export const FileUpload = <TMultiple extends boolean = false>(
     <div className={className}>
       {children({ onClick: showNativeDialog })}
       <input
-        type="file"
         hidden
-        ref={inputRef}
-        onChange={handleChange}
         accept={accept}
         multiple={multiple}
+        ref={inputRef}
+        type="file"
+        onChange={handleChange}
       />
     </div>
   );

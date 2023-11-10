@@ -76,25 +76,25 @@ export const Pagination: React.FC<PaginationProps> = props => {
   return (
     <div className={className}>
       <Paginate
-        breakLabel="..."
-        nextLabel={<Icon name="down-arrow" size={18} className="pagination__nav-icon--next" />}
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        breakLinkClassName="pagination__link"
-        breakClassName="pagination__item"
-        pageCount={pageCount}
-        forcePage={offset / pageSize}
-        previousLabel={<Icon name="down-arrow" size={18} className="pagination__nav-icon--prev" />}
-        containerClassName="pagination"
-        marginPagesDisplayed={5}
-        pageLinkClassName="pagination__link"
-        pageClassName="pagination__item"
-        disabledClassName="pagination__item--disabled"
         activeClassName="pagination__item--active"
-        previousLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
-        previousClassName="pagination__item"
-        nextLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
+        breakClassName="pagination__item"
+        breakLabel="..."
+        breakLinkClassName="pagination__link"
+        containerClassName="pagination"
+        disabledClassName="pagination__item--disabled"
+        forcePage={offset / pageSize}
+        marginPagesDisplayed={5}
         nextClassName="pagination__item"
+        nextLabel={<Icon className="pagination__nav-icon--next" name="down-arrow" size={18} />}
+        nextLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
+        pageClassName="pagination__item"
+        pageCount={pageCount}
+        pageLinkClassName="pagination__link"
+        pageRangeDisplayed={5}
+        previousClassName="pagination__item"
+        previousLabel={<Icon className="pagination__nav-icon--prev" name="down-arrow" size={18} />}
+        previousLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
+        onPageChange={handlePageClick}
       />
       <p className="pagination__caption">
         Results: {offset + 1} - {!isFetching ? offset + itemsCount : '...'} of {totalCount}

@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import React, { ReactElement, useMemo, useRef } from 'react';
@@ -105,31 +105,31 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
         };
 
   return (
-    <div ref={containerRef} className={clsx(styles['date-input'], className)}>
+    <div className={clsx(styles['date-input'], className)} ref={containerRef}>
       <div>
         <TextInput
           readOnly
-          ref={inputRef}
-          onClick={toggleCalendar}
-          placeholder={placeholder}
-          size={inputSize}
-          value={displayDate}
           error={error}
-          inputClassName={styles['date-input__input']}
-          iconBeforeElement={<Icon name="calendar" />}
           iconAfterElement={
             <Icon
-              name={iconAfterName || 'down-arrow'}
               className={clsx({ [styles['date-input__arrow']]: isCalendarVisible })}
+              name={iconAfterName || 'down-arrow'}
             />
           }
+          iconBeforeElement={<Icon name="calendar" />}
+          inputClassName={styles['date-input__input']}
+          placeholder={placeholder}
+          ref={inputRef}
+          size={inputSize}
+          value={displayDate}
+          onClick={toggleCalendar}
         />
       </div>
       {isCalendarVisible && (
         <DatePickerPopup
           {...propsByMode}
-          disabledDate={disabledDate}
           callableElement={inputRef.current}
+          disabledDate={disabledDate}
           onClose={closeCalendar}
         />
       )}

@@ -24,14 +24,14 @@ export const Standard: React.FC = () => {
 
   return (
     <SelectField
-      name="select"
+      isClearable
       control={form.control}
+      label="Choose an option"
+      name="select"
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
       ]}
-      isClearable
-      label="Choose an option"
     />
   );
 };
@@ -45,15 +45,15 @@ export const Creatable: React.FC = () => {
 
   return (
     <SelectField
-      name="select"
+      isClearable
+      isCreatable
       control={form.control}
+      label="Choose an option"
+      name="select"
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
       ]}
-      isClearable
-      isCreatable
-      label="Choose an option"
     />
   );
 };
@@ -67,15 +67,15 @@ export const Multi: React.FC = () => {
 
   return (
     <SelectField
-      name="select"
+      isClearable
+      isMulti
       control={form.control}
+      label="Choose an option"
+      name="select"
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
       ]}
-      isClearable
-      isMulti
-      label="Choose an option"
     />
   );
 };
@@ -89,16 +89,16 @@ export const MultiCreatable: React.FC = () => {
 
   return (
     <SelectField
-      name="select"
+      isClearable
+      isCreatable
+      isMulti
       control={form.control}
+      label="Choose an option"
+      name="select"
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
       ]}
-      isClearable
-      isCreatable
-      isMulti
-      label="Choose an option"
     />
   );
 };
@@ -106,7 +106,7 @@ export const MultiCreatable: React.FC = () => {
 const UserOption: FC<OptionProps<SelectOption<string>, true>> = ({ children, ...props }) => (
   <components.Option {...props}>
     <div style={{ display: 'flex' }}>
-      <img src={props.data.photo} alt="" style={{ width: 20 }} />
+      <img alt="" src={props.data.photo} style={{ width: 20 }} />
       {children}
     </div>
   </components.Option>
@@ -121,16 +121,16 @@ export const CustomComponents: React.FC = () => {
 
   return (
     <SelectField
-      name="select"
+      isClearable
+      isMulti
+      components={{ Option: UserOption }}
       control={form.control}
+      label="Choose an option"
+      name="select"
       options={[
         { label: 'Option 1', value: 'option-1', photo: 'https://picsum.photos/188' },
         { label: 'Option 2', value: 'option-2', photo: 'https://picsum.photos/189' },
       ]}
-      isClearable
-      isMulti
-      label="Choose an option"
-      components={{ Option: UserOption }}
     />
   );
 };

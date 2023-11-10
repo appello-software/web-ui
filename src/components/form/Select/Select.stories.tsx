@@ -17,6 +17,7 @@ export const Standard: React.FC = () => {
 
   return (
     <Select
+      isClearable
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
@@ -24,7 +25,6 @@ export const Standard: React.FC = () => {
       ]}
       value={value}
       onChange={setValue}
-      isClearable
     />
   );
 };
@@ -32,7 +32,7 @@ export const Standard: React.FC = () => {
 const UserOption: FC<OptionProps<SelectOption<string>, true>> = ({ children, ...props }) => (
   <components.Option {...props}>
     <div style={{ display: 'flex' }}>
-      <img src={props.data.photo} alt="" style={{ width: 20 }} />
+      <img alt="" src={props.data.photo} style={{ width: 20 }} />
       {children}
     </div>
   </components.Option>
@@ -43,6 +43,9 @@ export const Multi: React.FC = () => {
 
   return (
     <Select
+      isClearable
+      isMulti
+      components={{ Option: UserOption }}
       options={[
         { label: 'Option 1', value: 'option-1', photo: 'https://picsum.photos/188' },
         { label: 'Option 2', value: 'option-2', photo: 'https://picsum.photos/199' },
@@ -50,9 +53,6 @@ export const Multi: React.FC = () => {
       ]}
       value={value}
       onChange={setValue}
-      isClearable
-      isMulti
-      components={{ Option: UserOption }}
     />
   );
 };
@@ -62,6 +62,8 @@ export const Creatable: React.FC = () => {
 
   return (
     <Select
+      isClearable
+      isCreatable
       options={[
         { label: 'Option 1', value: 1 },
         { label: 'Option 2', value: 2 },
@@ -69,8 +71,6 @@ export const Creatable: React.FC = () => {
       ]}
       value={value}
       onChange={setValue}
-      isClearable
-      isCreatable
     />
   );
 };
@@ -80,6 +80,8 @@ export const MultiCreatable: React.FC = () => {
 
   return (
     <Select
+      isCreatable
+      isMulti
       options={[
         { label: 'Option 1', value: 'option-1' },
         { label: 'Option 2', value: 'option-2' },
@@ -87,8 +89,6 @@ export const MultiCreatable: React.FC = () => {
       ]}
       value={value}
       onChange={setValue}
-      isCreatable
-      isMulti
     />
   );
 };

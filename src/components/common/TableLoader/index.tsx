@@ -16,10 +16,10 @@ export const TableLoader: FC<TableLoaderProps> = props => {
 
   return (
     <ContentLoader
-      viewBox="0 0 1112 800"
-      className={clsx('pointer-events-none', className)}
       backgroundColor="hsl(var(--gray-7-color))"
+      className={clsx('pointer-events-none', className)}
       foregroundColor="hsl(var(--gray-7-color) / 50%)"
+      viewBox="0 0 1112 800"
     >
       {Array.from({ length: 10 }).map((_, index) => {
         const y = index * 120;
@@ -27,15 +27,15 @@ export const TableLoader: FC<TableLoaderProps> = props => {
 
         return (
           <Fragment key={index}>
-            <rect width="27%" y={y} height="20" rx="5" ry="5" />
-            <rect x="408" y={y} width="112" height="20" rx="5" />
-            <rect x="1000" y={y} width="112" height="20" rx="5" />
-            <rect x="699" y={y} width="82" height="20" rx="5" />
+            <rect height="20" rx="5" ry="5" width="27%" y={y} />
+            <rect height="20" rx="5" width="112" x="408" y={y} />
+            <rect height="20" rx="5" width="112" x="1000" y={y} />
+            <rect height="20" rx="5" width="82" x="699" y={y} />
 
-            <rect width="243" y={y2} height="20" rx="5" />
-            <rect x="408" y={y2} width="82" height="20" rx="5" />
-            <rect x="963" y={y2} width="149" height="20" rx="5" />
-            <rect x="699" y={y2} width="112" height="20" rx="5" />
+            <rect height="20" rx="5" width="243" y={y2} />
+            <rect height="20" rx="5" width="82" x="408" y={y2} />
+            <rect height="20" rx="5" width="149" x="963" y={y2} />
+            <rect height="20" rx="5" width="112" x="699" y={y2} />
           </Fragment>
         );
       })}

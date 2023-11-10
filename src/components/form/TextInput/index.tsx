@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { useCombinedRef } from '@appello/common/lib/hooks/useCombinedRef';
+import { useCombinedRef } from '@appello/common';
 import clsx from 'clsx';
 import * as React from 'react';
 import { FC, ReactNode, useMemo } from 'react';
@@ -67,14 +67,14 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
   return (
     <div className={clsx('text-input-wrapper', className)}>
       <input
-        ref={useCombinedRef(ref, innerRef)}
+        autoComplete={autoCompleteAttribute}
         className={clsx(inputClassName, 'form__input', `form__input--size-${size}`, {
           'form__input--error': Boolean(error),
           'form__input--with-icon-before': Boolean(iconBeforeElement),
           'form__input--with-icon-after': Boolean(iconAfterElement),
         })}
         placeholder={placeholder}
-        autoComplete={autoCompleteAttribute}
+        ref={useCombinedRef(ref, innerRef)}
         type={type}
         {...inputProps}
       />
@@ -109,7 +109,7 @@ const AsideIcon: FC<AsideIconProps> = ({ onClick, children, position }) => {
 
   if (onClick) {
     return (
-      <button type="button" className={className} onClick={onClick}>
+      <button className={className} type="button" onClick={onClick}>
         {children}
       </button>
     );

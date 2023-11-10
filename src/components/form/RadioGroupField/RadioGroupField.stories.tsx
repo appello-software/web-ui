@@ -21,13 +21,13 @@ export const Standard: React.FC = () => {
 
   return (
     <RadioGroupField
-      name="answer"
       control={form.control}
-      label="How much professional work experience do you have ?"
       items={[
         { label: 'less than 5 years', value: true },
         { label: 'more than 5 years', value: false },
       ]}
+      label="How much professional work experience do you have ?"
+      name="answer"
     />
   );
 };

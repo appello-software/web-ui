@@ -1,4 +1,4 @@
-import { isNil } from '@appello/common/lib/utils';
+import { isNil } from '@appello/common';
 import {
   ColumnDef,
   flexRender,
@@ -113,7 +113,7 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header =>
                 header.column.columnDef.enableHiding ? null : (
-                  <HeaderCell key={header.id} header={header} />
+                  <HeaderCell header={header} key={header.id} />
                 ),
               )}
             </tr>
@@ -125,8 +125,8 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
               {row.getVisibleCells().map(cell =>
                 cell.column.columnDef.enableHiding ? null : (
                   <td
-                    key={cell.id}
                     className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
+                    key={cell.id}
                   >
                     {flexRender(cell.column.columnDef.cell || '-', cell.getContext())}
                   </td>
@@ -138,12 +138,12 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
       </table>
       {hasPagination && totalCount > pageSize && (
         <Pagination
-          onPageChange={onPageChange}
+          itemsCount={data.length}
           offset={offset}
+          pageSize={pageSize}
           setOffset={setOffset}
           totalCount={totalCount}
-          itemsCount={data.length}
-          pageSize={pageSize}
+          onPageChange={onPageChange}
         />
       )}
     </div>

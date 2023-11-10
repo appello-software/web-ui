@@ -24,9 +24,9 @@ export const WithLength: React.FC = () => {
 
   return (
     <TextArea
+      maxLength={150}
       value={value}
       onChange={e => setValue((e.target as HTMLTextAreaElement).value)}
-      maxLength={150}
     />
   );
 };

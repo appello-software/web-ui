@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Icon } from '~/components';
+import { Icon, SidebarProps } from '~/components';
 
 import { Sidebar } from '.';
 
@@ -18,43 +18,47 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const defaultSidebarProps: SidebarProps = {
+  items: [
+    {
+      title: 'Dashboard',
+      icon: 'add',
+      link: '/dashboard',
+    },
+    {
+      title: 'Users',
+      icon: 'add',
+      link: '/users',
+    },
+    {
+      title: 'Settings',
+      icon: 'add',
+      link: '/settings',
+      items: [
+        {
+          title: 'General',
+          link: '/settings/general',
+        },
+        {
+          title: 'Profile',
+          link: '/settings/profile',
+        },
+      ],
+    },
+  ],
+  logo: '/white-logo.svg',
+  smallLogo: '/small-logo.svg',
+};
+
 export const LoggedOut: Story = {
-  args: {
-    items: [
-      {
-        title: 'Dashboard',
-        icon: 'add',
-        link: '/dashboard',
-      },
-      {
-        title: 'Users',
-        icon: 'add',
-        link: '/users',
-      },
-      {
-        title: 'Settings',
-        icon: 'add',
-        link: '/settings',
-        items: [
-          {
-            title: 'General',
-            link: '/settings/general',
-          },
-          {
-            title: 'Profile',
-            link: '/settings/profile',
-          },
-        ],
-      },
-    ],
-    logo: '/white-logo.svg',
-    smallLogo: '/small-logo.svg',
-  },
+  name: 'Sidebar when user logged out',
+  args: defaultSidebarProps,
 };
 
 export const LoggedIn: Story = {
+  name: 'Sidebar when user authorized',
   args: {
-    ...LoggedOut.args,
+    ...defaultSidebarProps,
     user: {
       fullName: 'John Doe',
       email: 'johndoe@gmail.com',
@@ -64,8 +68,9 @@ export const LoggedIn: Story = {
 };
 
 export const WithUserRightElement: Story = {
+  name: 'Sidebar with user right custom block',
   args: {
-    ...LoggedOut.args,
+    ...defaultSidebarProps,
     user: {
       fullName: 'John Doe',
       email: 'johndoe@gmail.com',
@@ -91,8 +96,9 @@ export const WithUserRightElement: Story = {
 };
 
 export const WithRightHeaderElement: Story = {
+  name: 'Sidebar with header right custom block',
   args: {
-    ...LoggedOut.args,
+    ...defaultSidebarProps,
     rightHeaderElement: (
       <div
         style={{
