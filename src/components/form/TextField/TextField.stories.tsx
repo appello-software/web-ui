@@ -15,7 +15,7 @@ export default meta;
 const Template: React.FC = () => {
   const form = useForm({ defaultValues: { description: '' } });
 
-  return <TextField name="description" control={form.control} label="Description" />;
+  return <TextField control={form.control} label="Description" name="description" />;
 };
 
 export const Standard = Template.bind({});

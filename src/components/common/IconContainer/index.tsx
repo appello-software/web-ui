@@ -20,7 +20,7 @@ export const IconContainer: FC<IconContainerProps> = props => {
 
   return (
     <div className={clsx('icon-container', className)}>
-      <Icon name={name} className={clsx('icon-container__icon', iconClassName)} />
+      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} />
     </div>
   );
 };

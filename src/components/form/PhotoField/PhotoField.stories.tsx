@@ -17,9 +17,9 @@ const Template: React.FC = () => {
 
   return (
     <PhotoField
-      name="photo"
       control={form.control}
       label="Choose a photo"
+      name="photo"
       photoPlaceholder="/photo-placeholder.svg"
     />
   );

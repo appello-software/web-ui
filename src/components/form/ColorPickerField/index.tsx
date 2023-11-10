@@ -1,8 +1,9 @@
 import './styles.scss';
 
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
+import { useClickAway } from '@appello/web-kit';
 import clsx from 'clsx';
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement } from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
@@ -10,7 +11,6 @@ import { Icon } from '~/components/common/Icon';
 import { Field, FieldProps } from '~/components/form/Field';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
-import { useClickAway } from '~/hooks/useClickAway';
 
 export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
   extends Pick<FieldProps, 'className' | 'label' | 'required'> {
@@ -33,8 +33,6 @@ export const ColorPickerField = <
     props,
   });
 
-  const pickerRef = useRef(null);
-
   const { field, fieldState } = useController({ name, control });
 
   const {
@@ -43,15 +41,15 @@ export const ColorPickerField = <
     off: closeColorPicker,
   } = useSwitchValue(false);
 
-  useClickAway(pickerRef, closeColorPicker);
+  const { ref: pickerRef } = useClickAway<HTMLDivElement>(closeColorPicker);
 
   return (
     <Field
       {...{ label, required }}
-      error={fieldState.error}
       className={clsx(generateClassName(), className)}
+      error={fieldState.error}
     >
-      <div ref={pickerRef} className={generateClassName('input-wrapper')}>
+      <div className={generateClassName('input-wrapper')} ref={pickerRef}>
         {isColorPickerOpen && (
           <div className={generateClassName('picker')}>
             <HexColorPicker
@@ -63,7 +61,12 @@ export const ColorPickerField = <
         )}
         <TextInput
           readOnly
-          onClick={toggleColorPicker}
+          iconAfterElement={
+            <Icon
+              className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
+              name="down-arrow"
+            />
+          }
           iconBeforeElement={
             field.value && (
               <div
@@ -72,16 +75,11 @@ export const ColorPickerField = <
               />
             )
           }
+          label={label}
           placeholder="Select colour"
           size={size}
-          label={label}
           value={field.value ?? ''}
-          iconAfterElement={
-            <Icon
-              name="down-arrow"
-              className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
-            />
-          }
+          onClick={toggleColorPicker}
         />
       </div>
     </Field>

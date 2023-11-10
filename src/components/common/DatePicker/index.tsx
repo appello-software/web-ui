@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { useSwitchValue, useUpdateEffect } from '@appello/common/lib/hooks';
+import { useSwitchValue, useUpdateEffect } from '@appello/common';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
@@ -50,7 +50,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
 
   return (
     <div className={clsx('date-picker', className)}>
-      <button type="button" onClick={toggleCalendar} ref={buttonRef} className="date-picker__btn">
+      <button className="date-picker__btn" ref={buttonRef} type="button" onClick={toggleCalendar}>
         {leftIconElement !== undefined && leftIconElement}
         {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}
@@ -58,10 +58,10 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
       </button>
       {isOpen && (
         <DatePickerPopup
-          value={value}
-          onChange={setValue}
           callableElement={buttonRef.current}
           disabledDate={disabledDate}
+          value={value}
+          onChange={setValue}
           onClose={closeCalendar}
         />
       )}

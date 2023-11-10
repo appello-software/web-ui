@@ -19,10 +19,10 @@ export const RadioInput: React.FC<RadioInputProps> = props => {
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label className={clsx('radio-input', className)}>
       <input
-        type="radio"
-        className="radio-input__input"
         checked={checked}
+        className="radio-input__input"
         disabled={disabled}
+        type="radio"
         {...restProps}
       />
       <div className="radio-input__check-mark" />

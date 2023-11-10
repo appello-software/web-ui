@@ -47,9 +47,9 @@ export const TextAreaField = <
     <Field {...{ className, label, required }} error={controller.fieldState.error}>
       <TextArea
         {...controller.field}
+        className={textAreaClassName}
         error={!!controller.fieldState.error}
         placeholder={placeholder ?? label}
-        className={textAreaClassName}
         {...textAreaProps}
       />
     </Field>

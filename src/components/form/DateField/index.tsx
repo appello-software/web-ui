@@ -35,18 +35,18 @@ export const DateField = <
 
   return (
     <Field
-      label={label}
       className={className}
       error={controller.fieldState.error}
+      label={label}
       required={required}
     >
       <DateInput
+        disabledDate={disabledDate}
+        error={!!controller.fieldState.error}
+        inputSize={inputSize}
+        placeholder={placeholder ?? label}
         value={value}
         onChange={onChange}
-        placeholder={placeholder ?? label}
-        inputSize={inputSize}
-        error={!!controller.fieldState.error}
-        disabledDate={disabledDate}
       />
     </Field>
   );

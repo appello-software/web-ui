@@ -32,20 +32,20 @@ export const HeaderCell = <TData extends RowData>({
         {header.column.getCanSort() && (
           <div className={styles['head-cell__sort']}>
             <Icon
-              name="polygon"
-              width={6}
-              height={4}
               className={clsx(styles['head-cell__sort-icon'], {
                 [styles['head-cell__sort-icon--active']]: header.column.getIsSorted() === 'asc',
               })}
-            />
-            <Icon
+              height={4}
               name="polygon"
               width={6}
-              height={4}
+            />
+            <Icon
               className={clsx(styles['head-cell__sort-icon'], {
                 [styles['head-cell__sort-icon--active']]: header.column.getIsSorted() === 'desc',
               })}
+              height={4}
+              name="polygon"
+              width={6}
             />
           </div>
         )}

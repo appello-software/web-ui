@@ -23,14 +23,14 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props
   return (
     <label className={clsx(styles['container'], className)} htmlFor={checkboxId}>
       <input
-        id={checkboxId}
-        type="checkbox"
         className={styles['input']}
+        id={checkboxId}
         ref={ref}
+        type="checkbox"
         {...inputProps}
       />
       <div className={styles['square']}>
-        <Icon name="check" size={18} className={styles['square__icon']} />
+        <Icon className={styles['square__icon']} name="check" size={18} />
       </div>
       {label && <p className={styles['label']}>{label}</p>}
     </label>

@@ -15,7 +15,7 @@ export default meta;
 const Template: React.FC = () => {
   const form = useForm({ defaultValues: { date: null } });
 
-  return <DateField name="date" control={form.control} label="Date" />;
+  return <DateField control={form.control} label="Date" name="date" />;
 };
 
 export const Standard = Template.bind({});

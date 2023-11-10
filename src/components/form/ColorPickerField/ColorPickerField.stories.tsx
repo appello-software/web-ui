@@ -15,7 +15,7 @@ export default meta;
 const Template: React.FC = () => {
   const form = useForm({ defaultValues: { color: null } });
 
-  return <ColorPickerField name="color" control={form.control} label="Color" />;
+  return <ColorPickerField control={form.control} label="Color" name="color" />;
 };
 
 export const Standard = Template.bind({});

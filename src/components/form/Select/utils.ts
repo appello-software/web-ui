@@ -1,4 +1,4 @@
-import { isPlainObject } from '@appello/common/lib/utils/object';
+import { isPlainObject } from '@appello/common';
 import { MultiValue, SingleValue } from 'react-select';
 
 import { NewSelectOption } from './Select';

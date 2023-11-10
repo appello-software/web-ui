@@ -1,6 +1,7 @@
 import 'react-day-picker/dist/style.css';
 
-import { noop } from '@appello/common/lib/utils';
+import { noop } from '@appello/common';
+import { useClickAway } from '@appello/web-kit';
 import clsx from 'clsx';
 import {
   eachMonthOfInterval,
@@ -12,7 +13,7 @@ import {
   startOfDay,
   startOfYear,
 } from 'date-fns';
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActiveModifiers,
   CaptionLabelProps,
@@ -28,7 +29,7 @@ import { createPortal } from 'react-dom';
 
 import { BrowserSelect } from '~/components/common/BrowserSelect';
 import { Icon } from '~/components/common/Icon';
-import { useClickAway, useCombinedPropsWithKit } from '~/hooks';
+import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
@@ -70,7 +71,6 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
   const [month, setMonth] = useState<Date>(
     () => (isDateRange(value) ? value.from : value) ?? new Date(),
   );
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMonthChange = useCallback((month: Date) => {
     setMonth(month);
@@ -167,7 +167,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     };
   }, [onClose]);
 
-  useClickAway(containerRef, onClose ?? noop, {
+  const { ref: containerRef } = useClickAway<HTMLDivElement>(onClose ?? noop, {
     excludeElements: callableElement ? [callableElement] : undefined,
   });
 
@@ -188,10 +188,12 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     <div className={styles['calendar-wrapper']} ref={containerRef}>
       <DayPicker
         {...propsByMode}
-        month={month}
         className={styles['container']}
-        onMonthChange={handleMonthChange}
         components={{ CaptionLabel }}
+        disabled={disabledDate}
+        formatters={{
+          formatWeekdayName: renderWeekdayName,
+        }}
         modifiers={{
           weekend: isWeekend,
         }}
@@ -199,10 +201,8 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
           weekend: 'rdp-day--weekend',
           today: 'rdp-day--today',
         }}
-        formatters={{
-          formatWeekdayName: renderWeekdayName,
-        }}
-        disabled={disabledDate}
+        month={month}
+        onMonthChange={handleMonthChange}
       />
     </div>,
     document.body,
@@ -232,22 +232,22 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
     <>
       <BrowserSelect
         options={monthsOptions}
-        onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
         value={monthValue}
+        onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{monthLabel}</p>
-          <Icon name="down-arrow" className={styles['control__arrow']} />
+          <Icon className={styles['control__arrow']} name="down-arrow" />
         </div>
       </BrowserSelect>
       <BrowserSelect
         options={yearsOptions}
-        onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
         value={yearValue}
+        onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{yearValue}</p>
-          <Icon name="down-arrow" className={styles['control__arrow']} />
+          <Icon className={styles['control__arrow']} name="down-arrow" />
         </div>
       </BrowserSelect>
     </>

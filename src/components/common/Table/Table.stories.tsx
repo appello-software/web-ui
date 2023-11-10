@@ -24,8 +24,8 @@ export const WithPagination: React.FC = () => {
     <Table
       columns={COLUMNS}
       data={data.slice(offset, offset + pageSize)}
-      pageSize={pageSize}
       offset={offset}
+      pageSize={pageSize}
       setOffset={setOffset}
       totalCount={data.length}
     />
@@ -35,7 +35,7 @@ export const WithPagination: React.FC = () => {
 export const WithSorting: React.FC = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  return <Table columns={COLUMNS} data={data} sorting={sorting} setSorting={setSorting} />;
+  return <Table columns={COLUMNS} data={data} setSorting={setSorting} sorting={sorting} />;
 };
 
 interface ExampleDataItem {

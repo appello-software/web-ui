@@ -28,7 +28,7 @@ export const Badge: FC<BadgeProps> = props => {
   });
   return (
     <div className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}>
-      {icon !== undefined && <Icon name={icon} size={14} className="badge__icon" />}
+      {icon !== undefined && <Icon className="badge__icon" name={icon} size={14} />}
       <p className="badge__text">{children}</p>
     </div>
   );

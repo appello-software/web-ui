@@ -15,5 +15,5 @@ export default meta;
 export const Standard: React.FC = () => {
   const form = useForm({ defaultValues: { time: null } });
 
-  return <TimeField name="time" control={form.control} label="Choose a time" />;
+  return <TimeField control={form.control} label="Choose a time" name="time" />;
 };

@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import type { Meta } from '@storybook/react';
 import React from 'react';
 
@@ -22,7 +22,7 @@ export const Standard: React.FC = () => {
       <button type="button" onClick={openModal}>
         Open modal
       </button>
-      <Modal isOpen={isOpen} title="Lorem ipsum dolor sit amet" close={closeModal}>
+      <Modal close={closeModal} isOpen={isOpen} title="Lorem ipsum dolor sit amet">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
       </Modal>
@@ -39,10 +39,10 @@ export const WithDescription: React.FC = () => {
         Open modal
       </button>
       <Modal
-        isOpen={isOpen}
-        title="Lorem ipsum"
         close={closeModal}
         description="Lorem ipsum dolor sit amet"
+        isOpen={isOpen}
+        title="Lorem ipsum"
       >
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
@@ -59,7 +59,7 @@ export const RightPosition: React.FC = () => {
       <button type="button" onClick={openModal}>
         Open modal
       </button>
-      <Modal isOpen={isOpen} title="Lorem ipsum dolor sit amet" close={closeModal} position="right">
+      <Modal close={closeModal} isOpen={isOpen} position="right" title="Lorem ipsum dolor sit amet">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
       </Modal>
@@ -76,11 +76,11 @@ export const RightPositionWithDescription: React.FC = () => {
         Open modal
       </button>
       <Modal
-        isOpen={isOpen}
-        title="Lorem ipsum dolor sit amet"
         close={closeModal}
-        position="right"
         description="Lorem ipsum dolor sit amet"
+        isOpen={isOpen}
+        position="right"
+        title="Lorem ipsum dolor sit amet"
       >
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
@@ -97,7 +97,7 @@ export const WithoutElements: React.FC = () => {
       <button type="button" onClick={openModal}>
         Open modal
       </button>
-      <Modal isOpen={isOpen} withCloseButton={false} close={closeModal}>
+      <Modal close={closeModal} isOpen={isOpen} withCloseButton={false}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
       </Modal>
@@ -114,9 +114,6 @@ export const WithButtons: React.FC = () => {
         Open modal
       </button>
       <Modal
-        isOpen={isOpen}
-        title="Lorem ipsum dolor sit amet"
-        close={closeModal}
         buttons={[
           {
             label: 'No',
@@ -129,6 +126,9 @@ export const WithButtons: React.FC = () => {
             onClick: closeModal,
           },
         ]}
+        close={closeModal}
+        isOpen={isOpen}
+        title="Lorem ipsum dolor sit amet"
       >
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, amet aspernatur corporis
         cum dignissimos doloribus earum eius eveniet exercitationem harum.
@@ -145,7 +145,7 @@ export const WithLongContent: React.FC = () => {
       <button type="button" onClick={openModal}>
         Open modal
       </button>
-      <Modal isOpen={isOpen} title="Lorem ipsum dolor sit amet" close={closeModal}>
+      <Modal close={closeModal} isOpen={isOpen} title="Lorem ipsum dolor sit amet">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, dignissimos dolore illum
         in laboriosam officia tempore. Accusamus, aliquid, possimus. Ab alias aliquid, dignissimos
         ducimus esse excepturi expedita facere fugiat impedit in incidunt magnam modi officia optio

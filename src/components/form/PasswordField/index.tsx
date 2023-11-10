@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import * as React from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
@@ -36,16 +36,16 @@ export const PasswordField = <TFormValues extends FieldValues>(
   const { value: isPasswordVisible, toggle: togglePasswordVisibility } = useSwitchValue(false);
 
   return (
-    <Field label={label} error={controller.fieldState.error} className={className}>
+    <Field className={className} error={controller.fieldState.error} label={label}>
       <div className={styles['input-wrapper']}>
         <TextInput
           {...controller.field}
-          error={!!controller.fieldState.error}
           autoCapitalize="none"
-          type={isPasswordVisible ? 'text' : 'password'}
+          error={!!controller.fieldState.error}
+          iconAfterElement={<Icon name={isPasswordVisible ? 'eye' : 'eye-crossed'} />}
           inputClassName={styles['input']}
           placeholder={placeholder ?? label}
-          iconAfterElement={<Icon name={isPasswordVisible ? 'eye' : 'eye-crossed'} />}
+          type={isPasswordVisible ? 'text' : 'password'}
           onIconAfterClick={togglePasswordVisibility}
           {...textInputProps}
         />

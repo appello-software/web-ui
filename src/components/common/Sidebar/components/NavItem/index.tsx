@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import React, { useLayoutEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -29,23 +29,23 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
       {item.items && (
         <>
           <button
-            type="button"
             className={clsx('sidebar__item', { 'sidebar__item--expanded': isSubItemsOpen })}
+            type="button"
             onClick={toggleSubItems}
           >
-            <Icon name={item.icon} className="sidebar__nav-icon" />
+            <Icon className="sidebar__nav-icon" name={item.icon} />
             <span className="sidebar__item-title">{item.title}</span>
-            <Icon name="down-arrow" className="sidebar__chevron" />
+            <Icon className="sidebar__chevron" name="down-arrow" />
           </button>
           <ul className="sidebar__submenu">
             {item.items.map((subItem, index) => (
               <li key={index}>
                 <NavLink
-                  to={subItem.link}
+                  end
                   className={({ isActive }) =>
                     clsx('sidebar__item', { 'sidebar__item--active': isActive })
                   }
-                  end
+                  to={subItem.link}
                 >
                   <span className="sidebar__item-title">{subItem.title}</span>
                 </NavLink>
@@ -56,10 +56,10 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
       )}
       {!item.items && (
         <NavLink
-          to={item.link}
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
+          to={item.link}
         >
-          <Icon name={item.icon} className="sidebar__nav-icon" />
+          <Icon className="sidebar__nav-icon" name={item.icon} />
           <span className="sidebar__item-title">{item.title}</span>
         </NavLink>
       )}

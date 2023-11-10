@@ -48,12 +48,12 @@ export const TimePicker: React.FC<TimePickerProps> = props => {
 
   return (
     <BrowserSelect
+      className="time-picker"
       options={options}
       value={value}
       onChange={event => onChange(event.target.value)}
-      className="time-picker"
     >
-      <button type="button" className={clsx('time-picker__control', className)}>
+      <button className={clsx('time-picker__control', className)} type="button">
         {selectedValue?.label || 'select time'}
       </button>
     </BrowserSelect>

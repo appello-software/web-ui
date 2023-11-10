@@ -34,10 +34,10 @@ export const RadioGroupField = <TFormValues extends FieldValues>(
       <div className="radio-group">
         {items.map((item, index) => (
           <RadioInput
-            key={index}
             checked={controller.field.value === item.value}
-            onChange={() => controller.field.onChange(item.value)}
+            key={index}
             label={item.label}
+            onChange={() => controller.field.onChange(item.value)}
           />
         ))}
       </div>

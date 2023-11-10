@@ -28,6 +28,7 @@ export function useAppelloKit(): AppelloKit {
 }
 
 const AppelloKitComponentsCtx = createContext<AppelloKitComponents>({});
+
 export const AppelloKitComponentsProvider = AppelloKitComponentsCtx.Provider;
 
 export function useAppelloKitComponents(): AppelloKitComponents {

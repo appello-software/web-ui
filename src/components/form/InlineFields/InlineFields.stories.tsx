@@ -22,7 +22,7 @@ export const Standard: Story = {
         <Field label="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus dolorum et excepturi impedit laborum minima nisi nostrum quam quasi voluptatum.">
           <TextInput />
         </Field>
-        <Field label="Lorem ipsum" error={{ message: 'Some error', type: 'custom' }}>
+        <Field error={{ message: 'Some error', type: 'custom' }} label="Lorem ipsum">
           <TextInput error />
         </Field>
         <Field label="Lorem ipsum">

@@ -1,6 +1,6 @@
 import './styles.scss';
 
-import { isString } from '@appello/common/lib/utils/string';
+import { isString } from '@appello/common';
 import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode } from 'react';
@@ -84,21 +84,21 @@ export const Modal: React.FC<ModalProps> = props => {
 
   return (
     <ReactModal
-      isOpen={isOpen}
       appElement={app}
-      onRequestClose={close}
-      contentLabel={isString(title) ? title : undefined}
+      bodyOpenClassName="react-modal-opened"
       className={clsx('modal', `modal--${position}`, contentClassName)}
+      contentLabel={isString(title) ? title : undefined}
+      isOpen={isOpen}
       overlayClassName="modal-overlay"
       shouldCloseOnEsc={shouldCloseOnOverlayClick}
-      bodyOpenClassName="react-modal-opened"
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       onAfterClose={onAfterClose}
+      onRequestClose={close}
     >
       {Boolean(title || description || withCloseButton) && (
         <div className="modal__header">
           {withCloseButton && (
-            <button type="button" className="modal__close-btn" onClick={close}>
+            <button className="modal__close-btn" type="button" onClick={close}>
               <Icon name="close" size={20} />
             </button>
           )}

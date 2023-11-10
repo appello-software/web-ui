@@ -15,5 +15,5 @@ export default meta;
 export const Standard: React.FC = () => {
   const form = useForm({ defaultValues: { password: '' } });
 
-  return <PasswordField name="password" control={form.control} label="Password" />;
+  return <PasswordField control={form.control} label="Password" name="password" />;
 };

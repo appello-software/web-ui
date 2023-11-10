@@ -36,9 +36,9 @@ export const BrowserSelect: React.FC<BrowserSelectProps> = props => {
   return (
     <div className={clsx('browser-select', className)}>
       {children}
-      <select onChange={onChange} className="browser-select__select" value={value}>
+      <select className="browser-select__select" value={value} onChange={onChange}>
         {options.map((item, index) => (
-          <option value={item.value} key={index}>
+          <option key={index} value={item.value}>
             {item.label}
           </option>
         ))}

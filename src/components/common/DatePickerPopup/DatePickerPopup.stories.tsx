@@ -1,4 +1,4 @@
-import { useSwitchValue } from '@appello/common/lib/hooks';
+import { useSwitchValue } from '@appello/common';
 import type { Meta } from '@storybook/react';
 import React, { useRef, useState } from 'react';
 import { DateRange } from 'react-day-picker';
@@ -20,14 +20,14 @@ export const Standard: React.FC = () => {
 
   return (
     <div>
-      <button type="button" onClick={toggleCalendar} ref={buttonRef}>
+      <button ref={buttonRef} type="button" onClick={toggleCalendar}>
         show calendar
       </button>
       {isOpen && (
         <DatePickerPopup
+          callableElement={buttonRef.current}
           value={date}
           onChange={setDate}
-          callableElement={buttonRef.current}
           onClose={closeCalendar}
         />
       )}
@@ -42,15 +42,15 @@ export const WithRange: React.FC = () => {
 
   return (
     <div>
-      <button type="button" onClick={toggleCalendar} ref={buttonRef}>
+      <button ref={buttonRef} type="button" onClick={toggleCalendar}>
         show calendar
       </button>
       {isOpen && (
         <DatePickerPopup
-          value={dateRange}
-          mode="range"
-          onChange={setDateRange}
           callableElement={buttonRef.current}
+          mode="range"
+          value={dateRange}
+          onChange={setDateRange}
           onClose={closeCalendar}
         />
       )}
