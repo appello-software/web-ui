@@ -32,7 +32,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@appello/web-kit": "^1.1.4",
     "deepmerge-ts": "^5.1.0",
     "react-paginate": "^8.2.0",
     "use-debounce": "^9.0.4"
@@ -57,6 +56,7 @@
   "devDependencies": {
     "@appello/common": "^2.0.7",
     "@appello/eslint-config": "^0.1.16",
+    "@appello/web-kit": "^1.1.5",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
