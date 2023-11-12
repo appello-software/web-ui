@@ -57,7 +57,7 @@
   "devDependencies": {
     "@appello/common": "^2.0.8",
     "@appello/eslint-config": "^0.1.16",
-    "@appello/web-kit": "^1.1.6",
+    "@appello/web-kit": "^1.1.8",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
