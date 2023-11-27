@@ -92,3 +92,41 @@ export const MultiCreatable: React.FC = () => {
     />
   );
 };
+
+export const NotSearchable: React.FC = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  return (
+    <Select
+      isClearable
+      isSearchable={false}
+      options={[
+        { label: 'Option 1', value: 'option-1' },
+        { label: 'Option 2', value: 'option-2' },
+        { label: 'Option 3', value: 'option-3' },
+      ]}
+      value={value}
+      onChange={setValue}
+    />
+  );
+};
+
+export const CustomMultiValue: React.FC = () => {
+  const [value, setValue] = useState<string[]>([]);
+
+  return (
+    <Select
+      isClearable
+      isMulti
+      isSearchable={false}
+      options={[
+        { label: 'Option 1', value: 'option-1' },
+        { label: 'Option 2', value: 'option-2' },
+        { label: 'Option 3', value: 'option-3' },
+      ]}
+      value={value}
+      variantMulti="simple"
+      onChange={setValue}
+    />
+  );
+};

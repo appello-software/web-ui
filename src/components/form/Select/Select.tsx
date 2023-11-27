@@ -2,14 +2,19 @@ import './styles.scss';
 
 import clsx from 'clsx';
 import * as React from 'react';
-import { useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import ReactSelect, {
   ActionMeta,
+  components as reactSelectComponents,
   GroupBase,
   OnChangeValue,
+  OptionsOrGroups,
+  Props as ReactSelectProps,
+  PropsValue,
   SelectComponentsConfig,
 } from 'react-select';
 import CreatableReactSelect from 'react-select/creatable';
+import { SelectComponents } from 'react-select/dist/declarations/src/components';
 
 import { InputSize } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -75,6 +80,11 @@ export interface SelectProps<
   TIsClearable extends boolean,
   TIsCreatable extends boolean,
 > {
+  variantMulti?: 'simple' | 'tags';
+  multiValueContent?: (
+    values: PropsValue<SelectOptionType<TValue>>,
+    options: OptionsOrGroups<SelectOptionType<TValue>, GroupBase<SelectOptionType<TValue>>>,
+  ) => ReactNode;
   value: SelectValueType<TValue, TIsMulti, TIsClearable, TIsCreatable>;
   inputSize?: InputSize;
   options: SelectOptionType<TValue>[];
@@ -85,7 +95,9 @@ export interface SelectProps<
   isClearable?: TIsClearable;
   hasError?: boolean;
   disabled?: boolean;
+  hideSelectedOptions?: boolean;
   isCreatable?: TIsCreatable;
+  isSearchable?: boolean;
   components?: SelectComponentsConfig<
     SelectOptionType<TValue>,
     TIsMulti,
@@ -114,6 +126,10 @@ export const Select = <
     disabled,
     isCreatable,
     components,
+    isSearchable,
+    variantMulti = 'tags',
+    hideSelectedOptions,
+    multiValueContent,
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -171,6 +187,26 @@ export const Select = <
     [isMulti, onChange],
   );
 
+  const renderMultiSimple: SelectComponents<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['MultiValue'] = props => {
+    return (
+      <reactSelectComponents.SingleValue {...props}>
+        {multiValueContent?.(props.selectProps.value, props.options) || (
+          <span>{props.selectProps.value?.length} selected</span>
+        )}
+      </reactSelectComponents.SingleValue>
+    );
+  };
+
+  const MultiValue = useMemo(() => {
+    if (components?.MultiValue) return components?.MultiValue;
+    if (variantMulti === 'simple') return renderMultiSimple;
+    return undefined;
+  }, [components?.MultiValue, renderMultiSimple, variantMulti]);
+
   const reactSelectProps = {
     className: clsx('react-select', className, {
       [`react-select--size-${inputSize}`]: inputSize,
@@ -189,9 +225,14 @@ export const Select = <
     unstyled: true,
     isClearable,
     isDisabled: disabled,
-    components,
+    components: {
+      MultiValue,
+      ...components,
+    },
     closeMenuOnSelect: !isMulti,
-  } as const;
+    isSearchable,
+    hideSelectedOptions,
+  } as ReactSelectProps<SelectOptionType<TValue>, TIsMulti, GroupBase<SelectOptionType<TValue>>>;
 
   if (isCreatable) {
     return <CreatableReactSelect {...reactSelectProps} />;
