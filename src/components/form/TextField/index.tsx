@@ -5,21 +5,7 @@ import { Field, FieldProps } from '~/components/form/Field';
 import { TextInput, TextInputProps } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-type AllowedInputProps = Pick<
-  TextInputProps,
-  | 'autoComplete'
-  | 'autoFocus'
-  | 'size'
-  | 'placeholder'
-  | 'maxLength'
-  | 'disabled'
-  | 'iconBeforeElement'
-  | 'iconAfterElement'
-  | 'onIconBeforeClick'
-  | 'onIconAfterClick'
-  | 'onFocus'
-  | 'onBlur'
->;
+type AllowedInputProps = Omit<TextInputProps, 'label' | 'className' | 'required'>;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 export interface TextFieldProps<
