@@ -32,6 +32,10 @@ type AllowedSelectProps<
   | 'isCreatable'
   | 'disabled'
   | 'components'
+  | 'hideSelectedOptions'
+  | 'isSearchable'
+  | 'multiValueContent'
+  | 'variantMulti'
 >;
 
 export interface SelectFieldProps<
@@ -75,6 +79,10 @@ export const SelectField = <
     placeholder,
     disabled,
     components,
+    isSearchable,
+    variantMulti,
+    multiValueContent,
+    hideSelectedOptions,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -108,6 +116,10 @@ export const SelectField = <
           placeholder,
           disabled,
           components,
+          isSearchable,
+          variantMulti,
+          multiValueContent,
+          hideSelectedOptions,
         }}
         hasError={!!controller.fieldState.error}
       />
