@@ -204,7 +204,7 @@ export const Select = <
   const MultiValue = useMemo(() => {
     if (components?.MultiValue) return components?.MultiValue;
     if (variantMulti === 'simple') return renderMultiSimple;
-    return undefined;
+    return reactSelectComponents.MultiValue;
   }, [components?.MultiValue, renderMultiSimple, variantMulti]);
 
   const reactSelectProps = {
