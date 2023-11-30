@@ -192,13 +192,19 @@ export const Select = <
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >['MultiValue'] = props => {
-    return (
-      <reactSelectComponents.SingleValue {...props}>
-        {multiValueContent?.(props.selectProps.value, props.options) || (
-          <span>{props.selectProps.value?.length} selected</span>
-        )}
-      </reactSelectComponents.SingleValue>
+    const strObj = JSON.stringify(props.data);
+    const isFirst = props.selectProps.value?.findIndex(
+      (item: any) => JSON.stringify(item) === strObj,
     );
+    if (isFirst === 0)
+      return (
+        <reactSelectComponents.SingleValue {...props}>
+          {multiValueContent?.(props.selectProps.value, props.options) || (
+            <span>{props.selectProps.value?.length} selected</span>
+          )}
+        </reactSelectComponents.SingleValue>
+      );
+    return <></>;
   };
 
   const MultiValue = useMemo(() => {
