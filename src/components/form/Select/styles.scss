@@ -73,7 +73,6 @@ body .react-select {
     font-size: var(--p5-font-size);
     line-height: var(--p5-line-height);
     padding: 0.75rem 0.93rem;
-    cursor: pointer;
     word-break: break-word;
 
     &--is-selected {
@@ -81,7 +80,17 @@ body .react-select {
       color: hsl(var(--white-color));
     }
 
-    &:not(&--is-selected):hover {
+    &--is-disabled {
+      background-color: hsl(var(--gray-7-color));
+      color: hsl(var(--gray-3-color));
+      cursor: default;
+    }
+
+    &:not(&--is-disabled):hover {
+      cursor: pointer;
+    }
+
+    &:not(&--is-selected, &--is-disabled):hover {
       background-color: hsl(var(--gray-6-color));
     }
   }

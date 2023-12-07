@@ -98,6 +98,11 @@ export interface SelectProps<
   hideSelectedOptions?: boolean;
   isCreatable?: TIsCreatable;
   isSearchable?: boolean;
+  isOptionDisabled?: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['isOptionDisabled'];
   components?: SelectComponentsConfig<
     SelectOptionType<TValue>,
     TIsMulti,
@@ -130,6 +135,7 @@ export const Select = <
     variantMulti = 'tags',
     hideSelectedOptions,
     multiValueContent,
+    isOptionDisabled,
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -231,6 +237,7 @@ export const Select = <
     unstyled: true,
     isClearable,
     isDisabled: disabled,
+    isOptionDisabled,
     components: {
       MultiValue,
       ...components,
