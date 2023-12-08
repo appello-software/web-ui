@@ -1,7 +1,7 @@
 import './styles.scss';
 
 import clsx from 'clsx';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -12,7 +12,10 @@ export interface SidebarItem {
   title: string;
   icon: string;
   link: string;
-  items?: Omit<SidebarItem, 'icon' | 'items'>[];
+  items?: (Omit<SidebarItem, 'icon' | 'items'> & {
+    navRightContent?: (item: Omit<SidebarItem, 'icon' | 'items'>) => ReactElement;
+  })[];
+  navRightContent?: (item: SidebarItem) => ReactElement;
 }
 
 export interface SidebarProps {

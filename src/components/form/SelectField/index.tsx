@@ -36,6 +36,7 @@ type AllowedSelectProps<
   | 'isSearchable'
   | 'multiValueContent'
   | 'variantMulti'
+  | 'isOptionDisabled'
 >;
 
 export interface SelectFieldProps<
@@ -83,6 +84,7 @@ export const SelectField = <
     variantMulti,
     multiValueContent,
     hideSelectedOptions,
+    isOptionDisabled,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -120,6 +122,7 @@ export const SelectField = <
           variantMulti,
           multiValueContent,
           hideSelectedOptions,
+          isOptionDisabled,
         }}
         hasError={!!controller.fieldState.error}
       />

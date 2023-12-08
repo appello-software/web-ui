@@ -117,3 +117,68 @@ export const WithRightHeaderElement: Story = {
     ),
   },
 };
+
+export const WithNavRightContent: Story = {
+  name: 'Sidebar with nav right content',
+  args: {
+    ...defaultSidebarProps,
+    items: defaultSidebarProps.items.map(item => ({
+      ...item,
+      navRightContent: i => (
+        <span
+          style={{
+            width: 15,
+            height: 15,
+            backgroundColor: 'red',
+            color: 'white',
+            borderRadius: 15,
+            marginLeft: 10,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {i?.items?.length || 0}
+        </span>
+      ),
+      items: item.items?.map(i => ({
+        ...i,
+        navRightContent: () => (
+          <span
+            style={{
+              width: 15,
+              height: 15,
+              backgroundColor: 'red',
+              color: 'white',
+              borderRadius: 15,
+              marginLeft: 10,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            1
+          </span>
+        ),
+      })),
+    })),
+    rightHeaderElement: (
+      <div
+        style={{
+          backgroundColor: 'hsl(var(--white-color) / 5%)',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'hsl(var(--white-color) / 40%)',
+          borderRadius: 4,
+        }}
+      >
+        <Icon name="bell" size={16} />
+      </div>
+    ),
+  },
+};

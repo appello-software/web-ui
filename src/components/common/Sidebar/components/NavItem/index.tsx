@@ -35,6 +35,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
           >
             <Icon className="sidebar__nav-icon" name={item.icon} />
             <span className="sidebar__item-title">{item.title}</span>
+            {item?.navRightContent?.(item)}
             <Icon className="sidebar__chevron" name="down-arrow" />
           </button>
           <ul className="sidebar__submenu">
@@ -48,6 +49,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
                   to={subItem.link}
                 >
                   <span className="sidebar__item-title">{subItem.title}</span>
+                  {subItem?.navRightContent?.(subItem)}
                 </NavLink>
               </li>
             ))}
@@ -61,6 +63,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
         >
           <Icon className="sidebar__nav-icon" name={item.icon} />
           <span className="sidebar__item-title">{item.title}</span>
+          {item?.navRightContent?.(item)}
         </NavLink>
       )}
     </li>
