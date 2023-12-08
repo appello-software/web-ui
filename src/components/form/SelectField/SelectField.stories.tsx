@@ -134,3 +134,26 @@ export const CustomComponents: React.FC = () => {
     />
   );
 };
+
+export const MultiValueWithOptionDisabled: React.FC = () => {
+  const form = useForm<{ select: string[] }>({
+    defaultValues: {
+      select: [],
+    },
+  });
+
+  return (
+    <SelectField
+      isClearable
+      isMulti
+      control={form.control}
+      isOptionDisabled={option => !option.photo}
+      label="Choose an option"
+      name="select"
+      options={[
+        { label: 'Option 1', value: 'option-1', photo: 'https://picsum.photos/188' },
+        { label: 'Option 2', value: 'option-2' },
+      ]}
+    />
+  );
+};

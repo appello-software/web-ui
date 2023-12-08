@@ -36,7 +36,6 @@ type AllowedSelectProps<
   | 'isSearchable'
   | 'multiValueContent'
   | 'variantMulti'
-  | 'isOptionDisabled'
 >;
 
 export interface SelectFieldProps<
@@ -51,6 +50,10 @@ export interface SelectFieldProps<
   name: TName;
   control: Control<TFormValues>;
   options: SelectOptionType<FieldPathValue<TFormValues, TName>>[];
+  isOptionDisabled?: (
+    option: SelectOptionType<FieldPathValue<TFormValues, TName>>,
+    options: SelectOptionType<FieldPathValue<TFormValues, TName>>[],
+  ) => boolean;
 }
 
 export const SelectField = <
@@ -84,7 +87,7 @@ export const SelectField = <
     variantMulti,
     multiValueContent,
     hideSelectedOptions,
-    isOptionDisabled,
+    isOptionDisabled: passIsOptionDisabled,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -103,6 +106,12 @@ export const SelectField = <
     TIsClearable,
     TIsCreatable
   >;
+  const isOptionDisabled = passIsOptionDisabled as SelectProps<
+    TValue,
+    TIsMulti,
+    TIsClearable,
+    TIsCreatable
+  >['isOptionDisabled'];
 
   return (
     <Field {...{ label, className, required }} error={controller.fieldState.error}>

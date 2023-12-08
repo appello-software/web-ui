@@ -118,9 +118,10 @@ export const CustomMultiValue: React.FC = () => {
     <Select
       isClearable
       isMulti
+      isOptionDisabled={option => !!option.isDisabled}
       isSearchable={false}
       options={[
-        { label: 'Option 1', value: 'option-1' },
+        { label: 'Option 1', value: 'option-1', isDisabled: true },
         { label: 'Option 2', value: 'option-2' },
         { label: 'Option 3', value: 'option-3' },
       ]}
