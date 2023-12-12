@@ -5,7 +5,10 @@ import { DateInput, DateInputProps } from '~/components/form/DateInput';
 import { Field, FieldProps } from '~/components/form/Field';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-type AllowedDateInputProps = Pick<DateInputProps, 'placeholder' | 'inputSize' | 'disabledDate'>;
+type AllowedDateInputProps = Pick<
+  DateInputProps,
+  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName'
+>;
 type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
 
 export interface DateProps<
@@ -23,11 +26,20 @@ export const DateField = <
 >(
   props: DateProps<TFormValues, TName>,
 ): ReactElement => {
-  const { name, control, label, className, required, placeholder, inputSize, disabledDate } =
-    useCombinedPropsWithKit({
-      name: 'DateField',
-      props,
-    });
+  const {
+    name,
+    control,
+    label,
+    className,
+    required,
+    placeholder,
+    inputSize,
+    disabledDate,
+    iconAfterName,
+  } = useCombinedPropsWithKit({
+    name: 'DateField',
+    props,
+  });
 
   const controller = useController({ name, control });
   const value = controller.field.value as Date | null;
@@ -43,6 +55,7 @@ export const DateField = <
       <DateInput
         disabledDate={disabledDate}
         error={!!controller.fieldState.error}
+        iconAfterName={iconAfterName}
         inputSize={inputSize}
         placeholder={placeholder ?? label}
         value={value}
