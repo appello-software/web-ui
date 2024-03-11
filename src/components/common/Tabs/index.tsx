@@ -31,6 +31,7 @@ export interface TabsProps<TTab> {
   items: TTab[];
   contentClassName?: string;
   headListClassName?: string;
+  headClassName?: string;
   className?: string;
   tabsRef?: React.RefObject<TabsRef>;
   selected?: number;
@@ -38,11 +39,19 @@ export interface TabsProps<TTab> {
 }
 
 export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => {
-  const { items, contentClassName, headListClassName, className, tabsRef, selected, onSelect } =
-    useCombinedPropsWithKit({
-      name: 'Tabs',
-      props,
-    });
+  const {
+    items,
+    contentClassName,
+    headListClassName,
+    headClassName,
+    className,
+    tabsRef,
+    selected,
+    onSelect,
+  } = useCombinedPropsWithKit({
+    name: 'Tabs',
+    props,
+  });
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -98,7 +107,7 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
 
   return (
     <div className={clsx('tabs', className)}>
-      <div className="tabs__head">
+      <div className={clsx('tabs__head', headClassName)}>
         <ul className={clsx('tabs__head-list', headListClassName)} ref={headListRef}>
           {items.map((item, index) => (
             <li className="tabs__head-item" key={index}>
