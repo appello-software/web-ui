@@ -108,7 +108,7 @@ export interface SelectProps<
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >;
-  menuPortalTarget: ReactSelectProps<
+  menuPortalTarget?: ReactSelectProps<
     SelectOptionType<TValue>,
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
@@ -219,6 +219,11 @@ export const Select = <
     return <></>;
   };
 
+  const menuTarget = useMemo(() => {
+    if (menuPortalTarget === null) return null;
+    return document.body;
+  }, [menuPortalTarget]);
+
   const MultiValue = useMemo(() => {
     if (components?.MultiValue) return components?.MultiValue;
     if (variantMulti === 'simple') return renderMultiSimple;
@@ -235,7 +240,7 @@ export const Select = <
     placeholder,
     options,
     classNamePrefix: 'react-select',
-    menuPortalTarget: menuPortalTarget ?? document.body,
+    menuPortalTarget: menuTarget,
     onChange: handleChange,
     maxMenuHeight: 300,
     menuPlacement: 'auto',
