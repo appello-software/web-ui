@@ -37,6 +37,7 @@ type AllowedSelectProps<
   | 'multiValueContent'
   | 'variantMulti'
   | 'menuPortalTarget'
+  | 'closeMenuOnScroll'
 >;
 
 export interface SelectFieldProps<
@@ -90,6 +91,7 @@ export const SelectField = <
     hideSelectedOptions,
     isOptionDisabled: passIsOptionDisabled,
     menuPortalTarget,
+    closeMenuOnScroll,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -136,6 +138,7 @@ export const SelectField = <
           hideSelectedOptions,
           isOptionDisabled,
           menuPortalTarget,
+          closeMenuOnScroll,
         }}
         hasError={!!controller.fieldState.error}
       />

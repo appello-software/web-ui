@@ -113,6 +113,11 @@ export interface SelectProps<
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >['menuPortalTarget'];
+  closeMenuOnScroll?: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['closeMenuOnScroll'];
 }
 
 export const Select = <
@@ -142,6 +147,7 @@ export const Select = <
     multiValueContent,
     isOptionDisabled,
     menuPortalTarget,
+    closeMenuOnScroll,
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -257,6 +263,7 @@ export const Select = <
     closeMenuOnSelect: !isMulti,
     isSearchable,
     hideSelectedOptions,
+    closeMenuOnScroll,
   } as ReactSelectProps<SelectOptionType<TValue>, TIsMulti, GroupBase<SelectOptionType<TValue>>>;
 
   if (isCreatable) {
