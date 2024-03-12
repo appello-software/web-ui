@@ -108,6 +108,11 @@ export interface SelectProps<
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >;
+  menuPortalTarget: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['menuPortalTarget'];
 }
 
 export const Select = <
@@ -136,6 +141,7 @@ export const Select = <
     hideSelectedOptions,
     multiValueContent,
     isOptionDisabled,
+    menuPortalTarget,
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -229,7 +235,7 @@ export const Select = <
     placeholder,
     options,
     classNamePrefix: 'react-select',
-    menuPortalTarget: document.body,
+    menuPortalTarget: menuPortalTarget ?? document.body,
     onChange: handleChange,
     maxMenuHeight: 300,
     menuPlacement: 'auto',
