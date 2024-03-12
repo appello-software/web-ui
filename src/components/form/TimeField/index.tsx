@@ -16,7 +16,7 @@ type AllowedSelectProps<
   TIsCreatable extends boolean,
 > = Pick<
   SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
-  'inputSize' | 'placeholder' | 'disabled' | 'components'
+  'inputSize' | 'placeholder' | 'disabled' | 'components' | 'menuPortalTarget' | 'closeMenuOnScroll'
 >;
 
 export interface TimeFieldProps<TName, TFormValues extends FieldValues>
@@ -52,6 +52,8 @@ export const TimeField = <
     placeholder,
     disabled,
     components,
+    menuPortalTarget,
+    closeMenuOnScroll,
   } = useCombinedPropsWithKit({
     name: 'TimeField',
     props,
@@ -81,7 +83,7 @@ export const TimeField = <
         options={timeOptions}
         value={value}
         onChange={controller.field.onChange}
-        {...{ inputSize, placeholder, disabled, components }}
+        {...{ inputSize, placeholder, disabled, components, menuPortalTarget, closeMenuOnScroll }}
       />
     </Field>
   );

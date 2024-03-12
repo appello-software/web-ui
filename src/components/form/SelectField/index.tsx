@@ -121,7 +121,6 @@ export const SelectField = <
     <Field {...{ label, className, required }} error={controller.fieldState.error}>
       <Select
         {...{
-          ...props,
           isMulti,
           options,
           value,

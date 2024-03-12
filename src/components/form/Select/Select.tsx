@@ -237,7 +237,6 @@ export const Select = <
   }, [components?.MultiValue, renderMultiSimple, variantMulti]);
 
   const reactSelectProps = {
-    ...props,
     className: clsx('react-select', className, {
       [`react-select--size-${inputSize}`]: inputSize,
       [`react-select--error`]: hasError,
