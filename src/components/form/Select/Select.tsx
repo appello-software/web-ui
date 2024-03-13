@@ -210,6 +210,8 @@ export const Select = <
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >['MultiValue'] = props => {
+    if (props.selectProps.inputValue?.length) return <></>;
+
     const strObj = JSON.stringify(props.data);
     const isFirst = props.selectProps.value?.findIndex(
       (item: any) => JSON.stringify(item) === strObj,

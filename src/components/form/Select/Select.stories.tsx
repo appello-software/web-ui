@@ -131,3 +131,24 @@ export const CustomMultiValue: React.FC = () => {
     />
   );
 };
+
+export const CustomMultiValueWithSearch: React.FC = () => {
+  const [value, setValue] = useState<string[]>([]);
+
+  return (
+    <Select
+      isClearable
+      isMulti
+      isSearchable
+      isOptionDisabled={option => !!option.isDisabled}
+      options={[
+        { label: 'Option 1', value: 'option-1', isDisabled: true },
+        { label: 'Option 2', value: 'option-2' },
+        { label: 'Option 3', value: 'option-3' },
+      ]}
+      value={value}
+      variantMulti="simple"
+      onChange={setValue}
+    />
+  );
+};
