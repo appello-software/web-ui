@@ -1,5 +1,6 @@
 import './styles.scss';
 
+import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import { Control, FieldPath, FieldPathValue, FieldValues, useController } from 'react-hook-form';
 
@@ -17,21 +18,23 @@ export interface RadioGroupFieldProps<TFormValues extends FieldValues>
   name: FieldPath<TFormValues>;
   control: Control<TFormValues>;
   items: RadioGroupItem<FieldPathValue<TFormValues, FieldPath<TFormValues>>>[];
+  groupClassName?: string;
 }
 
 export const RadioGroupField = <TFormValues extends FieldValues>(
   props: RadioGroupFieldProps<TFormValues>,
 ): ReactElement => {
-  const { items, control, name, label, className, required } = useCombinedPropsWithKit({
-    name: 'RadioGroupField',
-    props,
-  });
+  const { items, control, name, label, className, required, groupClassName } =
+    useCombinedPropsWithKit({
+      name: 'RadioGroupField',
+      props,
+    });
 
   const controller = useController({ name, control });
 
   return (
     <Field {...{ label, className, required }}>
-      <div className="radio-group">
+      <div className={clsx('radio-group', groupClassName)}>
         {items.map((item, index) => (
           <RadioInput
             checked={controller.field.value === item.value}
