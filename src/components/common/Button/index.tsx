@@ -21,6 +21,11 @@ export enum ButtonSize {
   LARGE = 'large',
 }
 
+type DynamicClassesFn = Pick<
+  ButtonProps,
+  'variant' | 'disabled' | 'isLoading' | 'rounded' | 'size'
+>;
+
 export interface ButtonProps {
   /**
    * Button variant
@@ -91,6 +96,16 @@ export interface ButtonProps {
    * Set full width
    */
   fullWidth?: boolean;
+  /**
+   * Pass custom button classes
+   * @param props
+   */
+  buttonClassesFn?: (props: DynamicClassesFn) => string;
+  /**
+   * Pass custom loader classes
+   * @param props
+   */
+  loaderClassesFn?: (props: DynamicClassesFn) => string;
 }
 
 export const Button: React.FC<ButtonProps> = props => {
@@ -112,6 +127,19 @@ export const Button: React.FC<ButtonProps> = props => {
     iconAfter = false,
     bold = false,
     to,
+    buttonClassesFn = (
+      props: Pick<ButtonProps, 'variant' | 'disabled' | 'isLoading' | 'rounded'>,
+    ) => {
+      switch (true) {
+        case props?.variant === ButtonVariant.PRIMARY:
+          return 'button--primary--default-color';
+        case props?.variant === ButtonVariant.NEGATIVE:
+          return 'button--negative--default-color';
+        default:
+          return '';
+      }
+    },
+    loaderClassesFn,
   } = useCombinedPropsWithKit({
     name: 'Button',
     props,
@@ -132,19 +160,28 @@ export const Button: React.FC<ButtonProps> = props => {
         'button--only-icon': [label, children, count].every(isNil) && withIcon,
       },
       className,
+      buttonClassesFn({
+        variant,
+        disabled,
+        isLoading,
+        rounded,
+        size,
+      }),
     );
   }, [
-    disabled,
     variant,
     size,
+    fullWidth,
     rounded,
     bold,
+    disabled,
     label,
     children,
     count,
     withIcon,
     className,
-    fullWidth,
+    buttonClassesFn,
+    isLoading,
   ]);
 
   const renderIcon = React.useCallback(() => {
@@ -182,7 +219,16 @@ export const Button: React.FC<ButtonProps> = props => {
       </div>
       {isLoading && (
         <div className="button__loader">
-          <Loader colorful={variant === ButtonVariant.SECONDARY} />
+          <Loader
+            colorful={variant === ButtonVariant.SECONDARY}
+            dotClassNames={loaderClassesFn?.({
+              variant,
+              disabled,
+              isLoading,
+              rounded,
+              size,
+            })}
+          />
         </div>
       )}
     </button>

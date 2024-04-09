@@ -88,3 +88,20 @@ export const Loading: Story = {
     fullWidth: false,
   },
 };
+
+export const CustomClassesPrimary: Story = {
+  args: {
+    variant: ButtonVariant.PRIMARY,
+    label: 'Some action',
+    buttonClassesFn: () => 'button-custom',
+  },
+};
+
+export const LoaderCustomClasses: Story = {
+  args: {
+    variant: ButtonVariant.SECONDARY,
+    label: 'Some action',
+    isLoading: true,
+    loaderClassesFn: () => 'loader-custom',
+  },
+};

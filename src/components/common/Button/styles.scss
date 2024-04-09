@@ -19,7 +19,10 @@
 
   &--primary {
     background-color: hsl(var(--accent-color));
-    color: hsl(var(--white-color));
+
+    &--default-color {
+      color: hsl(var(--white-color));
+    }
   }
 
   &--secondary {
@@ -28,7 +31,10 @@
 
   &--negative {
     background-color: hsl(var(--red-color));
-    color: hsl(var(--white-color));
+
+    &--default-color {
+      color: hsl(var(--white-color));
+    }
   }
 
   &[disabled] {
@@ -118,7 +124,7 @@
   }
 
   &--secondary &__count {
-    background-color: hsl(var(--accent-color));
     color: hsl(var(--white-color));
+    background-color: hsl(var(--accent-color));
   }
 }

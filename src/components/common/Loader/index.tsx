@@ -18,6 +18,10 @@ export interface LoaderProps {
    * Each dot size
    */
   dotSize?: number;
+  /**
+   * Custom classes
+   */
+  dotClassNames?: string;
 }
 
 export const Loader: React.FC<LoaderProps> = props => {
@@ -25,6 +29,7 @@ export const Loader: React.FC<LoaderProps> = props => {
     full,
     colorful,
     dotSize = 10,
+    dotClassNames,
   } = useCombinedPropsWithKit({
     name: 'Loader',
     props,
@@ -38,15 +43,25 @@ export const Loader: React.FC<LoaderProps> = props => {
     [dotSize],
   );
 
+  const dotClasses = React.useMemo(
+    () => clsx(styles['dot'], !dotClassNames ? styles['dot--default-color'] : dotClassNames),
+    [dotClassNames],
+  );
+
   const loader = React.useMemo(() => {
     return (
-      <div className={clsx(styles['container'], { [styles['container--colorful']]: colorful })}>
-        <div className={styles['dot']} style={dotStyle} />
-        <div className={styles['dot']} style={dotStyle} />
-        <div className={styles['dot']} style={dotStyle} />
+      <div
+        className={clsx(
+          styles['container'],
+          !dotClassNames && { [styles['container--colorful']]: colorful },
+        )}
+      >
+        <div className={dotClasses} style={dotStyle} />
+        <div className={dotClasses} style={dotStyle} />
+        <div className={dotClasses} style={dotStyle} />
       </div>
     );
-  }, [colorful, dotStyle]);
+  }, [dotClassNames, colorful, dotClasses, dotStyle]);
 
   if (!full) {
     return loader;

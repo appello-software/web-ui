@@ -13,11 +13,14 @@
 
 .dot {
   content: '';
-  background-color: #fff;
   border-radius: 50%;
   display: inline-block;
   animation: scale 1.2s infinite ease-in-out both;
   margin: 3px;
+
+  &--default-color {
+    background-color: hsl(var(--white-color));
+  }
 }
 
 .container--colorful .dot {
