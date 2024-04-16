@@ -2,6 +2,7 @@ import './styles.scss';
 
 import { useBlobObjectUrl } from '@appello/web-kit';
 import * as React from 'react';
+import { ReactNode } from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { Button, ButtonSize, ButtonVariant } from '~/components/common/Button';
@@ -16,6 +17,7 @@ export interface PhotoFieldProps<TFormValues extends FieldValues, TName> {
   label?: string;
   className?: string;
   photoPlaceholder?: string;
+  labelChildren?: ReactNode;
 }
 
 type PhotoValue = File | string | null;
@@ -26,10 +28,11 @@ export const PhotoField = <
 >(
   props: PhotoFieldProps<TFormValues, TName>,
 ): React.ReactElement => {
-  const { name, control, label, className, photoPlaceholder } = useCombinedPropsWithKit({
-    name: 'PhotoField',
-    props,
-  });
+  const { name, control, label, className, photoPlaceholder, labelChildren } =
+    useCombinedPropsWithKit({
+      name: 'PhotoField',
+      props,
+    });
 
   const controller = useController({ name, control });
   const value = controller.field.value as PhotoValue;
@@ -40,6 +43,7 @@ export const PhotoField = <
       className={className}
       error={controller.fieldState.error}
       label={label}
+      labelChildren={labelChildren}
       labelClassName="photo-field__label"
     >
       <div className="photo-field__img-wrapper">

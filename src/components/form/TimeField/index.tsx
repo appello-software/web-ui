@@ -54,6 +54,7 @@ export const TimeField = <
     components,
     menuPortalTarget,
     closeMenuOnScroll,
+    labelChildren,
   } = useCombinedPropsWithKit({
     name: 'TimeField',
     props,
@@ -77,7 +78,7 @@ export const TimeField = <
   );
 
   return (
-    <Field {...{ className, label, required }} error={controller.fieldState.error}>
+    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
       <Select
         hasError={!!controller.fieldState.error}
         options={timeOptions}

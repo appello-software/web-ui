@@ -14,7 +14,7 @@ export interface RadioGroupItem<T> {
 }
 
 export interface RadioGroupFieldProps<TFormValues extends FieldValues>
-  extends Pick<FieldProps, 'label' | 'className' | 'required'> {
+  extends Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'> {
   name: FieldPath<TFormValues>;
   control: Control<TFormValues>;
   items: RadioGroupItem<FieldPathValue<TFormValues, FieldPath<TFormValues>>>[];
@@ -24,7 +24,7 @@ export interface RadioGroupFieldProps<TFormValues extends FieldValues>
 export const RadioGroupField = <TFormValues extends FieldValues>(
   props: RadioGroupFieldProps<TFormValues>,
 ): ReactElement => {
-  const { items, control, name, label, className, required, groupClassName } =
+  const { items, control, labelChildren, name, label, className, required, groupClassName } =
     useCombinedPropsWithKit({
       name: 'RadioGroupField',
       props,
@@ -33,7 +33,7 @@ export const RadioGroupField = <TFormValues extends FieldValues>(
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ label, className, required }}>
+    <Field {...{ label, className, required, labelChildren }}>
       <div className={clsx('radio-group', groupClassName)}>
         {items.map((item, index) => (
           <RadioInput

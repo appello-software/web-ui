@@ -26,16 +26,24 @@ export const TextField = <
 >(
   props: TextFieldProps<TFormValues, TName>,
 ): React.ReactElement => {
-  const { name, control, label, className, required, placeholder, ...textInputProps } =
-    useCombinedPropsWithKit({
-      name: 'TextField',
-      props,
-    });
+  const {
+    name,
+    control,
+    label,
+    className,
+    required,
+    placeholder,
+    labelChildren,
+    ...textInputProps
+  } = useCombinedPropsWithKit({
+    name: 'TextField',
+    props,
+  });
 
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ className, label, required }} error={controller.fieldState.error}>
+    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
       <TextInput
         {...controller.field}
         error={!!controller.fieldState.error}

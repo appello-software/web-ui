@@ -28,10 +28,11 @@ export const ColorPickerField = <
 >(
   props: ColorPickerFieldProps<TName, TFormValues>,
 ): ReactElement => {
-  const { name, control, label, size, className, required } = useCombinedPropsWithKit({
-    name: 'ColorPickerField',
-    props,
-  });
+  const { name, control, label, size, className, required, labelChildren } =
+    useCombinedPropsWithKit({
+      name: 'ColorPickerField',
+      props,
+    });
 
   const { field, fieldState } = useController({ name, control });
 
@@ -45,7 +46,7 @@ export const ColorPickerField = <
 
   return (
     <Field
-      {...{ label, required }}
+      {...{ label, required, labelChildren }}
       className={clsx(generateClassName(), className)}
       error={fieldState.error}
     >

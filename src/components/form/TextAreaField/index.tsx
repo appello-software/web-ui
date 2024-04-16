@@ -35,6 +35,7 @@ export const TextAreaField = <
     textAreaClassName,
     required,
     placeholder,
+    labelChildren,
     ...textAreaProps
   } = useCombinedPropsWithKit({
     name: 'TextAreaField',
@@ -44,7 +45,7 @@ export const TextAreaField = <
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ className, label, required }} error={controller.fieldState.error}>
+    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
       <TextArea
         {...controller.field}
         className={textAreaClassName}

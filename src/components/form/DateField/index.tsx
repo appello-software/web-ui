@@ -36,6 +36,7 @@ export const DateField = <
     inputSize,
     disabledDate,
     iconAfterName,
+    labelChildren,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -50,6 +51,7 @@ export const DateField = <
       className={className}
       error={controller.fieldState.error}
       label={label}
+      labelChildren={labelChildren}
       required={required}
     >
       <DateInput
