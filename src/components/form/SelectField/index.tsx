@@ -120,7 +120,10 @@ export const SelectField = <
   >['isOptionDisabled'];
 
   return (
-    <Field {...{ label, className, required, labelChildren }} error={controller.fieldState.error}>
+    <Field
+      {...{ label, className, required, labelChildren, labelClassName }}
+      error={controller.fieldState.error}
+    >
       <Select
         {...{
           isMulti,
@@ -140,7 +143,6 @@ export const SelectField = <
           isOptionDisabled,
           menuPortalTarget,
           closeMenuOnScroll,
-          labelClassName,
         }}
         hasError={!!controller.fieldState.error}
       />
