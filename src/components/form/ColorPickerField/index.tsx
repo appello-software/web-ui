@@ -13,7 +13,7 @@ import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
-  extends Pick<FieldProps, 'className' | 'label' | 'required'> {
+  extends Pick<FieldProps, 'className' | 'label' | 'required' | 'labelChildren'> {
   size?: InputSize;
   name: TName;
   control: Control<TFormValues>;
