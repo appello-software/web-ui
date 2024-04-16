@@ -157,3 +157,24 @@ export const MultiValueWithOptionDisabled: React.FC = () => {
     />
   );
 };
+
+export const WithCustomLabel: React.FC = () => {
+  const form = useForm<{ select: string[] }>({
+    defaultValues: {
+      select: [],
+    },
+  });
+
+  return (
+    <SelectField
+      control={form.control}
+      label="Choose an option"
+      labelChildren={<div>1212312</div>}
+      name="select"
+      options={[
+        { label: 'Option 1', value: 'option-1', photo: 'https://picsum.photos/188' },
+        { label: 'Option 2', value: 'option-2' },
+      ]}
+    />
+  );
+};
