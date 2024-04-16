@@ -7,6 +7,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface FieldProps {
   label?: string;
+  labelChildren?: ReactNode;
   error?: FieldError;
   className?: string;
   children: ReactNode;
@@ -16,11 +17,19 @@ export interface FieldProps {
 }
 
 export const Field: React.FC<FieldProps> = props => {
-  const { label, error, className, required, children, labelClassName, childrenClassName } =
-    useCombinedPropsWithKit({
-      name: 'Field',
-      props,
-    });
+  const {
+    label,
+    error,
+    className,
+    required,
+    children,
+    labelClassName,
+    childrenClassName,
+    labelChildren,
+  } = useCombinedPropsWithKit({
+    name: 'Field',
+    props,
+  });
 
   return (
     <div className={clsx('form__field', 'form__field-row', className)}>
@@ -29,6 +38,7 @@ export const Field: React.FC<FieldProps> = props => {
         <label className={clsx('form__label', labelClassName)} title={label}>
           {label}
           {required ? ' *' : null}
+          {labelChildren}
         </label>
       )}
       <div className={childrenClassName}>{children}</div>

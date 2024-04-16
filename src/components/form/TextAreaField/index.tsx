@@ -9,7 +9,7 @@ type AllowedInputProps = Pick<
   TextAreaProps,
   'autoComplete' | 'autoFocus' | 'placeholder' | 'maxLength' | 'disabled' | 'rows'
 >;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
 
 export interface TextAreaFieldProps<
   TFormValues extends FieldValues,

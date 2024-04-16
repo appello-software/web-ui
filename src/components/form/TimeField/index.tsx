@@ -7,7 +7,7 @@ import { Field, FieldProps } from '~/components/form/Field';
 import { Select, SelectProps } from '~/components/form/Select';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
 
 type AllowedSelectProps<
   TValue,

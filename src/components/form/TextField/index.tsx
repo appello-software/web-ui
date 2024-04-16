@@ -6,7 +6,7 @@ import { TextInput, TextInputProps } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedInputProps = Omit<TextInputProps, 'label' | 'className' | 'required'>;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
 
 export interface TextFieldProps<
   TFormValues extends FieldValues,

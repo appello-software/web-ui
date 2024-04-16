@@ -9,7 +9,7 @@ type AllowedDateInputProps = Pick<
   DateInputProps,
   'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName'
 >;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required'>;
+type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
 
 export interface DateProps<
   TFormValues extends FieldValues,
