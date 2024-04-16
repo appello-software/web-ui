@@ -7,7 +7,10 @@ import { Field, FieldProps } from '~/components/form/Field';
 import { Select, SelectProps } from '~/components/form/Select';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
+type AllowedFieldProps = Pick<
+  FieldProps,
+  'label' | 'className' | 'required' | 'labelChildren' | 'labelClassName'
+>;
 
 type AllowedSelectProps<
   TValue,
@@ -55,6 +58,7 @@ export const TimeField = <
     menuPortalTarget,
     closeMenuOnScroll,
     labelChildren,
+    labelClassName,
   } = useCombinedPropsWithKit({
     name: 'TimeField',
     props,
@@ -78,7 +82,10 @@ export const TimeField = <
   );
 
   return (
-    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
+    <Field
+      {...{ className, label, required, labelChildren, labelClassName }}
+      error={controller.fieldState.error}
+    >
       <Select
         hasError={!!controller.fieldState.error}
         options={timeOptions}

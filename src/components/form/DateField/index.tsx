@@ -9,7 +9,10 @@ type AllowedDateInputProps = Pick<
   DateInputProps,
   'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName'
 >;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
+type AllowedFieldProps = Pick<
+  FieldProps,
+  'label' | 'className' | 'required' | 'labelChildren' | 'labelClassName'
+>;
 
 export interface DateProps<
   TFormValues extends FieldValues,
@@ -37,6 +40,7 @@ export const DateField = <
     disabledDate,
     iconAfterName,
     labelChildren,
+    labelClassName,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -48,11 +52,14 @@ export const DateField = <
 
   return (
     <Field
-      className={className}
-      error={controller.fieldState.error}
-      label={label}
-      labelChildren={labelChildren}
-      required={required}
+      {...{
+        className,
+        error: controller.fieldState.error,
+        label,
+        labelChildren,
+        required,
+        labelClassName,
+      }}
     >
       <DateInput
         disabledDate={disabledDate}

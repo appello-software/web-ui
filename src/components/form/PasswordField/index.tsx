@@ -22,16 +22,25 @@ export interface PasswordFieldProps<TFormValues extends FieldValues> extends Tex
   autoComplete?: boolean | string;
   size?: InputSize;
   labelChildren?: ReactNode;
+  labelClassName?: string;
 }
 
 export const PasswordField = <TFormValues extends FieldValues>(
   props: PasswordFieldProps<TFormValues>,
 ): React.ReactElement => {
-  const { name, label, control, labelChildren, className, placeholder, ...textInputProps } =
-    useCombinedPropsWithKit({
-      name: 'PasswordField',
-      props,
-    });
+  const {
+    name,
+    label,
+    control,
+    labelChildren,
+    labelClassName,
+    className,
+    placeholder,
+    ...textInputProps
+  } = useCombinedPropsWithKit({
+    name: 'PasswordField',
+    props,
+  });
 
   const controller = useController({ name, control });
 
@@ -43,6 +52,7 @@ export const PasswordField = <TFormValues extends FieldValues>(
       error={controller.fieldState.error}
       label={label}
       labelChildren={labelChildren}
+      labelClassName={labelClassName}
     >
       <div className={styles['input-wrapper']}>
         <TextInput

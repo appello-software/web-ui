@@ -9,7 +9,10 @@ type AllowedInputProps = Pick<
   TextAreaProps,
   'autoComplete' | 'autoFocus' | 'placeholder' | 'maxLength' | 'disabled' | 'rows'
 >;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
+type AllowedFieldProps = Pick<
+  FieldProps,
+  'label' | 'className' | 'required' | 'labelChildren' | 'labelClassName'
+>;
 
 export interface TextAreaFieldProps<
   TFormValues extends FieldValues,
@@ -36,6 +39,7 @@ export const TextAreaField = <
     required,
     placeholder,
     labelChildren,
+    labelClassName,
     ...textAreaProps
   } = useCombinedPropsWithKit({
     name: 'TextAreaField',
@@ -45,7 +49,10 @@ export const TextAreaField = <
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
+    <Field
+      {...{ className, label, required, labelChildren, labelClassName }}
+      error={controller.fieldState.error}
+    >
       <TextArea
         {...controller.field}
         className={textAreaClassName}

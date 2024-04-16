@@ -13,7 +13,10 @@ import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
-  extends Pick<FieldProps, 'className' | 'label' | 'required' | 'labelChildren'> {
+  extends Pick<
+    FieldProps,
+    'className' | 'label' | 'required' | 'labelChildren' | 'labelClassName'
+  > {
   size?: InputSize;
   name: TName;
   control: Control<TFormValues>;
@@ -28,7 +31,7 @@ export const ColorPickerField = <
 >(
   props: ColorPickerFieldProps<TName, TFormValues>,
 ): ReactElement => {
-  const { name, control, label, size, className, required, labelChildren } =
+  const { name, control, label, size, className, required, labelChildren, labelClassName } =
     useCombinedPropsWithKit({
       name: 'ColorPickerField',
       props,
@@ -46,7 +49,7 @@ export const ColorPickerField = <
 
   return (
     <Field
-      {...{ label, required, labelChildren }}
+      {...{ label, required, labelChildren, labelClassName }}
       className={clsx(generateClassName(), className)}
       error={fieldState.error}
     >

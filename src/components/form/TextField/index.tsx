@@ -6,7 +6,10 @@ import { TextInput, TextInputProps } from '~/components/form/TextInput';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedInputProps = Omit<TextInputProps, 'label' | 'className' | 'required'>;
-type AllowedFieldProps = Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'>;
+type AllowedFieldProps = Pick<
+  FieldProps,
+  'label' | 'className' | 'required' | 'labelChildren' | 'labelClassName'
+>;
 
 export interface TextFieldProps<
   TFormValues extends FieldValues,
@@ -34,6 +37,7 @@ export const TextField = <
     required,
     placeholder,
     labelChildren,
+    labelClassName,
     ...textInputProps
   } = useCombinedPropsWithKit({
     name: 'TextField',
@@ -43,7 +47,10 @@ export const TextField = <
   const controller = useController({ name, control });
 
   return (
-    <Field {...{ className, label, required, labelChildren }} error={controller.fieldState.error}>
+    <Field
+      {...{ className, label, required, labelChildren, labelClassName }}
+      error={controller.fieldState.error}
+    >
       <TextInput
         {...controller.field}
         error={!!controller.fieldState.error}

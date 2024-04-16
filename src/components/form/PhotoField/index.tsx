@@ -1,6 +1,7 @@
 import './styles.scss';
 
 import { useBlobObjectUrl } from '@appello/web-kit';
+import clsx from 'clsx';
 import * as React from 'react';
 import { ReactNode } from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
@@ -16,6 +17,7 @@ export interface PhotoFieldProps<TFormValues extends FieldValues, TName> {
   // field props
   label?: string;
   className?: string;
+  labelClassName?: string;
   photoPlaceholder?: string;
   labelChildren?: ReactNode;
 }
@@ -28,7 +30,7 @@ export const PhotoField = <
 >(
   props: PhotoFieldProps<TFormValues, TName>,
 ): React.ReactElement => {
-  const { name, control, label, className, photoPlaceholder, labelChildren } =
+  const { name, control, label, labelClassName, className, photoPlaceholder, labelChildren } =
     useCombinedPropsWithKit({
       name: 'PhotoField',
       props,
@@ -44,7 +46,7 @@ export const PhotoField = <
       error={controller.fieldState.error}
       label={label}
       labelChildren={labelChildren}
-      labelClassName="photo-field__label"
+      labelClassName={clsx('photo-field__label', labelClassName)}
     >
       <div className="photo-field__img-wrapper">
         {photo && (

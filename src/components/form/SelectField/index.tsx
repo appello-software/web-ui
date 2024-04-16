@@ -48,7 +48,7 @@ export interface SelectFieldProps<
   TIsClearable extends boolean,
   TIsCreatable extends boolean,
 > extends AllowedSelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
-    Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren'> {
+    Pick<FieldProps, 'label' | 'className' | 'required' | 'labelChildren' | 'labelClassName'> {
   name: TName;
   control: Control<TFormValues>;
   options: SelectOptionType<FieldPathValue<TFormValues, TName>>[];
@@ -93,6 +93,7 @@ export const SelectField = <
     menuPortalTarget,
     closeMenuOnScroll,
     labelChildren,
+    labelClassName,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -139,6 +140,7 @@ export const SelectField = <
           isOptionDisabled,
           menuPortalTarget,
           closeMenuOnScroll,
+          labelClassName,
         }}
         hasError={!!controller.fieldState.error}
       />
