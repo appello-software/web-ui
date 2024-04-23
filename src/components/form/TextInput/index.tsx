@@ -8,7 +8,10 @@ import { FC, ReactNode, useMemo } from 'react';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface TextInputProps
-  extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'autoComplete' | 'size'> {
+  extends Omit<
+    React.AllHTMLAttributes<HTMLInputElement>,
+    'autoComplete' | 'size' | 'defaultValue'
+  > {
   error?: boolean;
   autoComplete?: boolean | string;
   size?: InputSize;
@@ -17,6 +20,7 @@ export interface TextInputProps
   onIconBeforeClick?: (value: string) => void;
   onIconAfterClick?: (value: string) => void;
   inputClassName?: string;
+  defaultValue?: string;
 }
 
 export enum InputSize {

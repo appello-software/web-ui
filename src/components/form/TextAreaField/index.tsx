@@ -7,7 +7,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedInputProps = Pick<
   TextAreaProps,
-  'autoComplete' | 'autoFocus' | 'placeholder' | 'maxLength' | 'disabled' | 'rows'
+  'autoComplete' | 'autoFocus' | 'placeholder' | 'maxLength' | 'disabled' | 'rows' | 'defaultValue'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -40,13 +40,14 @@ export const TextAreaField = <
     placeholder,
     labelChildren,
     labelClassName,
+    defaultValue,
     ...textAreaProps
   } = useCombinedPropsWithKit({
     name: 'TextAreaField',
     props,
   });
 
-  const controller = useController({ name, control });
+  const controller = useController({ name, control, defaultValue: defaultValue as any });
 
   return (
     <Field

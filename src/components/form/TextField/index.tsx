@@ -38,13 +38,14 @@ export const TextField = <
     placeholder,
     labelChildren,
     labelClassName,
+    defaultValue,
     ...textInputProps
   } = useCombinedPropsWithKit({
     name: 'TextField',
     props,
   });
 
-  const controller = useController({ name, control });
+  const controller = useController({ name, control, defaultValue: defaultValue as any });
 
   return (
     <Field
@@ -53,6 +54,7 @@ export const TextField = <
     >
       <TextInput
         {...controller.field}
+        defaultValue={defaultValue}
         error={!!controller.fieldState.error}
         placeholder={placeholder ?? label}
         {...textInputProps}

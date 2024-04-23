@@ -10,7 +10,9 @@ export interface TextAreaProps
   extends Omit<React.AllHTMLAttributes<HTMLTextAreaElement>, 'autoComplete' | 'size'> {
   error?: boolean;
   autoComplete?: boolean | string;
+  defaultValue?: string;
 }
+
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   const {
     className,
