@@ -3,7 +3,6 @@ import './styles.scss';
 import { isNil } from '@appello/common';
 import clsx from 'clsx';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Icon } from '~/components/common/Icon';
 import { Loader } from '~/components/common/Loader';
@@ -52,10 +51,6 @@ export interface ButtonProps {
    * @param e
    */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  /**
-   * Link to
-   */
-  to?: string;
   /**
    * Button type
    */
@@ -126,7 +121,6 @@ export const Button: React.FC<ButtonProps> = props => {
     rounded = false,
     iconAfter = false,
     bold = false,
-    to,
     buttonClassesFn = (
       props: Pick<ButtonProps, 'variant' | 'disabled' | 'isLoading' | 'rounded'>,
     ) => {
@@ -144,8 +138,6 @@ export const Button: React.FC<ButtonProps> = props => {
     name: 'Button',
     props,
   });
-
-  const navigate = useNavigate();
 
   const combinedClassName = React.useMemo(() => {
     return clsx(
@@ -205,7 +197,7 @@ export const Button: React.FC<ButtonProps> = props => {
       disabled={isLoading || disabled}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      onClick={to ? () => navigate(to) : onClick}
+      onClick={onClick}
     >
       <div
         className={clsx('button__label', {
