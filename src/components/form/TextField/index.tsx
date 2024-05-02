@@ -18,9 +18,10 @@ export interface TextFieldProps<
     AllowedFieldProps {
   name: TName;
   control: Control<TFormValues>;
-
-  // input type
-  type?: 'text' | 'email' | 'search' | 'tel' | 'url' | 'number';
+  type?: Extract<
+    React.HTMLInputTypeAttribute,
+    'text' | 'email' | 'search' | 'tel' | 'url' | 'number' | 'password'
+  >;
 }
 
 export const TextField = <
