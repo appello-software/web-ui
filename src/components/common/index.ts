@@ -8,6 +8,7 @@ export * from './EmptyState';
 export * from './FileUpload';
 export * from './Icon';
 export * from './IconContainer';
+export * from './Link';
 export * from './Loader';
 export * from './Modal';
 export * from './Pagination';

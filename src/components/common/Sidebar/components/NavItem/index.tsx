@@ -1,18 +1,20 @@
 import { useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import React, { useLayoutEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 
+import { Link } from '~/components';
 import { Icon } from '~/components/common/Icon';
+import { useLocation } from '~/hooks';
 
 import { SidebarItem } from '../..';
 
 interface Props {
   item: SidebarItem;
   className?: string;
+  onNavigate?: (to: string) => void;
 }
 
-export const NavItem: React.FC<Props> = ({ item, className }) => {
+export const NavItem: React.FC<Props> = ({ item, className, onNavigate }) => {
   const location = useLocation();
   const {
     value: isSubItemsOpen,
@@ -41,30 +43,32 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
           <ul className="sidebar__submenu">
             {item.items.map((subItem, index) => (
               <li key={index}>
-                <NavLink
+                <Link
                   end
                   className={({ isActive }) =>
                     clsx('sidebar__item', { 'sidebar__item--active': isActive })
                   }
                   to={subItem.link}
+                  onNavigate={onNavigate}
                 >
                   <span className="sidebar__item-title">{subItem.title}</span>
                   {subItem?.navRightContent?.(subItem)}
-                </NavLink>
+                </Link>
               </li>
             ))}
           </ul>
         </>
       )}
       {!item.items && (
-        <NavLink
+        <Link
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
           to={item.link}
+          onNavigate={onNavigate}
         >
           <Icon className="sidebar__nav-icon" name={item.icon} />
           <span className="sidebar__item-title">{item.title}</span>
           {item?.navRightContent?.(item)}
-        </NavLink>
+        </Link>
       )}
     </li>
   );

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
+import { Link } from '~/components';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
@@ -11,6 +11,7 @@ export interface TextLinkProps {
   external?: boolean;
   children: React.ReactNode;
   className?: string;
+  onNavigate: (to: string) => void;
 }
 
 export const TextLink: React.FC<TextLinkProps> = props => {
@@ -18,6 +19,7 @@ export const TextLink: React.FC<TextLinkProps> = props => {
     to,
     children,
     className,
+    onNavigate,
     external = false,
   } = useCombinedPropsWithKit({
     name: 'TextLink',
@@ -45,7 +47,7 @@ export const TextLink: React.FC<TextLinkProps> = props => {
   }
 
   return (
-    <Link className={combinedClassName} to={to}>
+    <Link className={combinedClassName} to={to} onNavigate={onNavigate}>
       {children}
     </Link>
   );
