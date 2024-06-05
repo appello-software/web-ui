@@ -50,7 +50,6 @@
     "react-hot-toast": "*",
     "react-modal": "*",
     "react-nested-dropdown": "*",
-    "react-router-dom": "^6.0.0",
     "react-select": "*",
     "use-query-params": "*"
   },
@@ -110,7 +109,6 @@
     "react-hot-toast": "^2.4.0",
     "react-modal": "^3.16.1",
     "react-nested-dropdown": "^0.0.12",
-    "react-router-dom": "^6.10.0",
     "react-select": "^5.7.2",
     "remark-gfm": "^3.0.1",
     "rollup": "^3.20.2",

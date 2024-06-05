@@ -11,9 +11,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 
-import { useCombinedPropsWithKit } from '~/hooks';
+import { useCombinedPropsWithKit, useMatchUrl } from '~/hooks';
 
 export interface Tab {
   title: ReactNode;
@@ -35,6 +34,7 @@ export interface TabsProps<TTab> {
   className?: string;
   tabsRef?: React.RefObject<TabsRef>;
   selected?: number;
+  onNavigate?: (to: string) => void;
   onSelect?: (value: number) => void;
 }
 
@@ -48,18 +48,18 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
     tabsRef,
     selected,
     onSelect,
+    onNavigate,
   } = useCombinedPropsWithKit({
     name: 'Tabs',
     props,
   });
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { checkIsMatch } = useMatchUrl();
 
   const tabIndexByPath = useMemo(() => {
-    const index = items.findIndex(item => item.path && matchPath(location.pathname, item.path));
+    const index = items.findIndex(item => item.path && checkIsMatch(item.path));
     return index === -1 ? undefined : index;
-  }, [items, location.pathname]);
+  }, [items, checkIsMatch]);
 
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(selected ?? tabIndexByPath ?? 0);
   const element = items[selectedTabIndex]?.element;
@@ -121,7 +121,7 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
                 onClick={() => {
                   setSelectedTabIndex(index);
                   if (!isNil(item.path)) {
-                    navigate(item.path);
+                    onNavigate?.(item.path);
                   }
                 }}
               >

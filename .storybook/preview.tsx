@@ -1,15 +1,8 @@
 import './styles.scss';
 import type { Preview } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 import React, { ComponentType } from 'react';
 
-export const decorators = [
-  (Story: ComponentType) => (
-    <BrowserRouter>
-      <Story />
-    </BrowserRouter>
-  ),
-];
+export const decorators = [(Story: ComponentType) => <Story />];
 
 const preview: Preview = {
   parameters: {
