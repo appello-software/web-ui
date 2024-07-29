@@ -182,3 +182,23 @@ export const WithNavRightContent: Story = {
     ),
   },
 };
+
+export const WithFooterTopElement: Story = {
+  name: 'Sidebar footer with custom element',
+  args: {
+    ...defaultSidebarProps,
+    user: {
+      fullName: 'John Doe',
+      email: 'johndoe@gmail.com',
+      photoPlaceholder: '/photo-placeholder.svg',
+    },
+    footerTopElement: (
+      <div
+        style={{
+          marginBottom: 16,
+          borderRadius: 4,
+        }}
+      />
+    ),
+  },
+};
