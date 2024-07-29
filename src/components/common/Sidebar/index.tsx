@@ -30,14 +30,22 @@ export interface SidebarProps {
   };
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
+  footerTopElement?: React.ReactNode;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { items, logo, smallLogo, user, rightHeaderElement, userInfoRightElement } =
-    useCombinedPropsWithKit({
-      name: 'Sidebar',
-      props,
-    });
+  const {
+    items,
+    logo,
+    smallLogo,
+    user,
+    rightHeaderElement,
+    userInfoRightElement,
+    footerTopElement,
+  } = useCombinedPropsWithKit({
+    name: 'Sidebar',
+    props,
+  });
 
   return (
     <div className="sidebar">
@@ -63,8 +71,13 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         <footer
           className={clsx('sidebar__footer', {
             'sidebar__footer--with-user-right-element': userInfoRightElement,
+            'sidebar__footer--with-top-element': footerTopElement,
           })}
         >
+          {footerTopElement && (
+            <div className="sidebar__footer-with-top-element">{footerTopElement}</div>
+          )}
+
           <div className="sidebar__footer-user-info">
             {Boolean(user.photo || user.photoPlaceholder) && (
               <img
