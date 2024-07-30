@@ -84,8 +84,7 @@
     }
 
     &--with-top-element {
-      flex-direction: column;
-      align-items: flex-start;
+      margin-top: unset;
     }
   }
 
@@ -127,6 +126,7 @@
     width: 100%;
     margin-bottom: 16px;
     border-radius: 0.25rem;
+    margin-top: auto;
   }
 
   &__submenu {
@@ -155,6 +155,9 @@
     }
 
     &__footer-user-right-element {
+      display: none;
+    }
+    &__footer-with-top-element {
       display: none;
     }
 

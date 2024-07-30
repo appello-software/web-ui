@@ -67,6 +67,9 @@ export const Sidebar: React.FC<SidebarProps> = props => {
           ))}
         </ul>
       </nav>
+      {footerTopElement && (
+        <div className="sidebar__footer-with-top-element">{footerTopElement}</div>
+      )}
       {user && (
         <footer
           className={clsx('sidebar__footer', {
@@ -74,10 +77,6 @@ export const Sidebar: React.FC<SidebarProps> = props => {
             'sidebar__footer--with-top-element': footerTopElement,
           })}
         >
-          {footerTopElement && (
-            <div className="sidebar__footer-with-top-element">{footerTopElement}</div>
-          )}
-
           <div className="sidebar__footer-user-info">
             {Boolean(user.photo || user.photoPlaceholder) && (
               <img
