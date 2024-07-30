@@ -95,7 +95,6 @@ export const Sidebar: React.FC<SidebarProps> = props => {
               <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>
             )}
           </div>
-
           {!!footerBottomElement && footerBottomElement}
         </footer>
       )}
