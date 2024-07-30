@@ -1,6 +1,5 @@
 import './styles.scss';
 
-import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -70,14 +69,8 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         </ul>
       </nav>
       {user && (
-        <footer
-          className={clsx('sidebar__footer', {
-            'sidebar__footer--with-top-element': footerTopElement,
-          })}
-        >
-          {footerTopElement && (
-            <div className="sidebar__footer-with-top-element">{footerTopElement}</div>
-          )}
+        <footer className="sidebar__footer">
+          {!!footerTopElement && footerTopElement}
 
           <div className="sidebar__footer-user-wrapper">
             <div className="sidebar__footer-user-info">

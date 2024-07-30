@@ -73,18 +73,9 @@
   }
 
   &__footer {
+    flex-direction: column;
     padding-inline: var(--padding-x);
     margin-top: auto;
-
-    &--with-user-right-element {
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    &--with-top-element {
-      flex-direction: column;
-      align-items: flex-start;
-    }
   }
 
   &__footer-user-wrapper {
@@ -125,12 +116,6 @@
 
   &__footer-user-right-element {
     flex-shrink: 0;
-  }
-
-  &__footer-with-top-element {
-    width: 100%;
-    margin-bottom: 16px;
-    border-radius: 0.25rem;
   }
 
   &__submenu {
