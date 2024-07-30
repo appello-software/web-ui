@@ -50,6 +50,12 @@ const defaultSidebarProps: SidebarProps = {
   smallLogo: '/small-logo.svg',
 };
 
+const defaultUser = {
+  fullName: 'John Doe',
+  email: 'johndoe@gmail.com',
+  photoPlaceholder: '/photo-placeholder.svg',
+};
+
 export const LoggedOut: Story = {
   name: 'Sidebar when user logged out',
   args: defaultSidebarProps,
@@ -59,11 +65,7 @@ export const LoggedIn: Story = {
   name: 'Sidebar when user authorized',
   args: {
     ...defaultSidebarProps,
-    user: {
-      fullName: 'John Doe',
-      email: 'johndoe@gmail.com',
-      photoPlaceholder: '/photo-placeholder.svg',
-    },
+    user: defaultUser,
   },
 };
 
@@ -71,11 +73,7 @@ export const WithUserRightElement: Story = {
   name: 'Sidebar with user right custom block',
   args: {
     ...defaultSidebarProps,
-    user: {
-      fullName: 'John Doe',
-      email: 'johndoe@gmail.com',
-      photoPlaceholder: '/photo-placeholder.svg',
-    },
+    user: defaultUser,
     userInfoRightElement: (
       <div
         style={{
@@ -184,21 +182,41 @@ export const WithNavRightContent: Story = {
 };
 
 export const WithFooterTopElement: Story = {
-  name: 'Sidebar footer with custom element',
+  name: 'Sidebar footer with custom top element',
   args: {
     ...defaultSidebarProps,
-    user: {
-      fullName: 'John Doe',
-      email: 'johndoe@gmail.com',
-      photoPlaceholder: '/photo-placeholder.svg',
-    },
+    user: defaultUser,
     footerTopElement: (
       <div
         style={{
           marginBottom: 16,
           borderRadius: 4,
+          background: '#fff',
+          padding: 20,
         }}
-      />
+      >
+        FOOTER TOP ELEMENT
+      </div>
+    ),
+  },
+};
+
+export const WithFooterBottomElement: Story = {
+  name: 'Sidebar footer with custom bottom element',
+  args: {
+    ...defaultSidebarProps,
+    user: defaultUser,
+    footerBottomElement: (
+      <div
+        style={{
+          marginTop: 16,
+          borderRadius: 4,
+          background: '#fff',
+          padding: 20,
+        }}
+      >
+        FOOTER TOP ELEMENT
+      </div>
     ),
   },
 };

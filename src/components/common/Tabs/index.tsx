@@ -3,6 +3,7 @@ import './styles.scss';
 import { isNil, useMountEffect, useUpdateEffect } from '@appello/common';
 import clsx from 'clsx';
 import React, {
+  cloneElement,
   ReactElement,
   ReactNode,
   useImperativeHandle,
@@ -36,6 +37,7 @@ export interface TabsProps<TTab> {
   tabsRef?: React.RefObject<TabsRef>;
   selected?: number;
   onSelect?: (value: number) => void;
+  tabsHeadWrapper?: React.ReactNode;
 }
 
 export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => {
@@ -48,6 +50,7 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
     tabsRef,
     selected,
     onSelect,
+    tabsHeadWrapper = <></>,
   } = useCombinedPropsWithKit({
     name: 'Tabs',
     props,
@@ -105,34 +108,41 @@ export const Tabs = <TTab extends Tab>(props: TabsProps<TTab>): ReactElement => 
     }
   }, [selectedTabIndex, element]);
 
+  const TabsHeadWrapper = tabsHeadWrapper as ReactElement;
+
   return (
     <div className={clsx('tabs', className)}>
-      <div className={clsx('tabs__head', headClassName)}>
-        <ul className={clsx('tabs__head-list', headListClassName)} ref={headListRef}>
-          {items.map((item, index) => (
-            <li className="tabs__head-item" key={index}>
-              <button
-                className={clsx('tabs__head-button', {
-                  'tabs__head-button--active': index === selectedTabIndex,
-                  'tabs__head-button--with-right-component': item.rightComponent,
-                })}
-                disabled={item.disabled}
-                type="button"
-                onClick={() => {
-                  setSelectedTabIndex(index);
-                  if (!isNil(item.path)) {
-                    navigate(item.path);
-                  }
-                }}
-              >
-                <span>{item.title}</span>
-                {item.rightComponent}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <div className="tabs__head-line" ref={activeLineRef} />
-      </div>
+      {cloneElement(
+        TabsHeadWrapper,
+        undefined,
+        <div className={clsx('tabs__head', headClassName)}>
+          <ul className={clsx('tabs__head-list', headListClassName)} ref={headListRef}>
+            {items.map((item, index) => (
+              <li className="tabs__head-item" key={index}>
+                <button
+                  className={clsx('tabs__head-button', {
+                    'tabs__head-button--active': index === selectedTabIndex,
+                    'tabs__head-button--with-right-component': item.rightComponent,
+                  })}
+                  disabled={item.disabled}
+                  type="button"
+                  onClick={() => {
+                    setSelectedTabIndex(index);
+                    if (!isNil(item.path)) {
+                      navigate(item.path);
+                    }
+                  }}
+                >
+                  <span>{item.title}</span>
+                  {item.rightComponent}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="tabs__head-line" ref={activeLineRef} />
+        </div>,
+      )}
+
       <div className={clsx('tabs__body', contentClassName)}>{element}</div>
     </div>
   );
