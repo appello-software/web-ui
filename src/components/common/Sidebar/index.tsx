@@ -31,6 +31,7 @@ export interface SidebarProps {
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
   footerTopElement?: React.ReactNode;
+  footerBottomElement?: React.ReactNode;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
@@ -42,6 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     rightHeaderElement,
     userInfoRightElement,
     footerTopElement,
+    footerBottomElement,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
@@ -70,7 +72,6 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       {user && (
         <footer
           className={clsx('sidebar__footer', {
-            'sidebar__footer--with-user-right-element': userInfoRightElement,
             'sidebar__footer--with-top-element': footerTopElement,
           })}
         >
@@ -78,22 +79,27 @@ export const Sidebar: React.FC<SidebarProps> = props => {
             <div className="sidebar__footer-with-top-element">{footerTopElement}</div>
           )}
 
-          <div className="sidebar__footer-user-info">
-            {Boolean(user.photo || user.photoPlaceholder) && (
-              <img
-                alt={user.fullName}
-                className="sidebar__user-photo"
-                src={user.photo || user.photoPlaceholder}
-              />
-            )}
-            <div>
-              <p className="sidebar__user-name">{user.fullName}</p>
-              <p className="sidebar__user-email">{user.email}</p>
+          <div className="sidebar__footer-user-wrapper">
+            <div className="sidebar__footer-user-info">
+              {Boolean(user.photo || user.photoPlaceholder) && (
+                <img
+                  alt={user.fullName}
+                  className="sidebar__user-photo"
+                  src={user.photo || user.photoPlaceholder}
+                />
+              )}
+              <div>
+                <p className="sidebar__user-name">{user.fullName}</p>
+                <p className="sidebar__user-email">{user.email}</p>
+              </div>
             </div>
+
+            {userInfoRightElement && (
+              <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>
+            )}
           </div>
-          {userInfoRightElement && (
-            <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>
-          )}
+
+          {!!footerBottomElement && footerBottomElement}
         </footer>
       )}
     </div>
