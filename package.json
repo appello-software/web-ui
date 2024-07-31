@@ -32,6 +32,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.20",
     "deepmerge-ts": "^5.1.0",
     "react-paginate": "^8.2.0",
     "use-debounce": "^9.0.4"

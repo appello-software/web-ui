@@ -22,6 +22,7 @@
   }
 
   &__nav-container {
+    overflow-y: scroll;
     margin-top: 1.75rem;
     padding-inline: 0.75rem;
   }
@@ -122,6 +123,10 @@
     display: none;
   }
 
+  &__floating {
+    display: none;
+  }
+
   &__item--expanded ~ &__submenu {
     display: block;
   }
@@ -188,7 +193,7 @@
       display: none;
     }
 
-    &__submenu &__item-title {
+    &__floating &__item-title {
       display: block;
     }
 
@@ -205,21 +210,18 @@
       display: none;
     }
 
-    &__list-item:hover &__submenu {
+    &__floating {
       display: block;
     }
 
-    &__submenu {
-      position: absolute;
-      left: 100%;
-      top: 0;
+    &__floating-menu {
       background-color: hsl(var(--primary-color));
       width: 14rem;
       padding: 0.25rem 0;
       border-radius: 0.25rem;
     }
 
-    &__submenu &__item {
+    &__floating-menu &__item {
       padding: 0.6rem 1rem;
     }
 
