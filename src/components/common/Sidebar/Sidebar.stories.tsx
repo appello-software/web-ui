@@ -277,7 +277,37 @@ export const WithCustomFooterElementsAndBigMenu: Story = {
   name: 'Sidebar footer with custom bottom element and big menu',
   args: {
     ...defaultSidebarProps,
-    items: clonedList(defaultSidebarProps.items, 10),
+    items: [
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+      ...clonedList(defaultSidebarProps.items, 10),
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+    ],
     user: defaultUser,
     userInfoRightElement: (
       <div

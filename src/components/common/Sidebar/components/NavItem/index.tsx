@@ -2,6 +2,7 @@ import { useSwitchValue } from '@appello/common';
 import {
   autoUpdate,
   safePolygon,
+  shift,
   useFloating,
   useHover,
   useInteractions,
@@ -36,6 +37,11 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
     whileElementsMounted: autoUpdate,
     placement: 'right-start',
     strategy: 'fixed',
+    middleware: [
+      shift({
+        crossAxis: true,
+      }),
+    ],
   });
 
   const hover = useHover(context, {

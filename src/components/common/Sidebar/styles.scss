@@ -83,6 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 1.64rem;
   }
 
   &__footer-user-info {
@@ -212,6 +213,8 @@
 
     &__floating {
       display: block;
+      height: 400px;
+      overflow-y: scroll;
     }
 
     &__floating-menu {
