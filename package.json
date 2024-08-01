@@ -1,6 +1,6 @@
 {
   "name": "@appello/web-ui",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "author": "Appello Software",
   "description": "Web ui library for a better development experience",
   "keywords": [
@@ -22,16 +22,17 @@
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "check-types": "tsc -p tsconfig.json",
     "prepare-release": "npx lint-staged && npm run build",
-    "alpha-version": "npm version prerelease --preid=alpha",
-    "release-major": "echo \"Release major changes...\" && npm run prepare-release && npm version major && npm publish",
-    "release-minor": "echo \"Release minor changes...\" && npm run prepare-release && npm version minor && npm publish",
-    "release-patch": "echo \"Release patch changes...\" && npm run prepare-release && npm version patch && npm publish",
-    "postpublish": "git push && git push --tags && rm -rf dist",
+    "release:alpha": "npm run prepare-release && npm version prerelease --preid=alpha && npm publish --tag alpha && after-release",
+    "release:patch": "npm run prepare-release && npm version patch && npm publish && npm run after-release",
+    "release:minor": "npm run prepare-release && npm version minor && npm publish && npm run after-release",
+    "release:major": "npm run prepare-release && npm version major && npm publish && npm run after-release",
+    "after-release": "git push && git push --tags && rm -rf dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.20",
     "deepmerge-ts": "^5.1.0",
     "react-paginate": "^8.2.0",
     "use-debounce": "^9.0.4"

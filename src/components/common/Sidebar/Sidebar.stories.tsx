@@ -221,10 +221,93 @@ export const WithFooterBottomElement: Story = {
   },
 };
 
-export const WithCustomFooterElement: Story = {
+export const WithCustomFooterElements: Story = {
   name: 'Sidebar footer with custom bottom element',
   args: {
     ...defaultSidebarProps,
+    user: defaultUser,
+    userInfoRightElement: (
+      <div
+        style={{
+          backgroundColor: 'hsl(var(--white-color) / 5%)',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'hsl(var(--white-color) / 40%)',
+          borderRadius: 4,
+        }}
+      >
+        <Icon name="bell" size={16} />
+      </div>
+    ),
+    footerTopElement: (
+      <div
+        style={{
+          marginBottom: 16,
+          borderRadius: 4,
+          background: '#fff',
+          padding: 20,
+        }}
+      >
+        FOOTER TOP ELEMENT
+      </div>
+    ),
+    footerBottomElement: (
+      <div
+        style={{
+          marginTop: 16,
+          borderRadius: 4,
+          background: '#fff',
+          padding: 20,
+        }}
+      >
+        FOOTER BOTTOM ELEMENT
+      </div>
+    ),
+  },
+};
+
+function clonedList<T>(list: T, count: number): T {
+  return new Array(count).fill(list).flat() as T;
+}
+
+export const WithCustomFooterElementsAndBigMenu: Story = {
+  name: 'Sidebar footer with custom bottom element and big menu',
+  args: {
+    ...defaultSidebarProps,
+    items: [
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+      ...clonedList(defaultSidebarProps.items, 10),
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+    ],
     user: defaultUser,
     userInfoRightElement: (
       <div
