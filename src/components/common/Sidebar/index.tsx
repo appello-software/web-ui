@@ -1,5 +1,6 @@
 import './styles.scss';
 
+import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ export interface SidebarProps {
     fullName: string;
     email: string;
   };
+  isCollapsed?: boolean;
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
   footerTopElement?: React.ReactNode;
@@ -43,13 +45,14 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     userInfoRightElement,
     footerTopElement,
     footerBottomElement,
+    isCollapsed,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
   });
 
   return (
-    <div className="sidebar">
+    <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
       <header className="sidebar__header">
         <Link className="sidebar__logo-link" to="/">
           <img alt="logo" className="sidebar__logo" src={logo} />
