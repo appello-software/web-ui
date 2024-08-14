@@ -47,21 +47,21 @@ export type SelectValueType<
         : TValue
       : never
     : Extract<TValue, NewSelectOption> extends never
-    ? never
-    : TIsClearable extends true
-    ? Extract<TValue, null> extends never
       ? never
-      : TValue
-    : TValue
+      : TIsClearable extends true
+        ? Extract<TValue, null> extends never
+          ? never
+          : TValue
+        : TValue
   : TIsMulti extends true
-  ? TValue extends unknown[]
-    ? TValue
-    : never
-  : TIsClearable extends true
-  ? Extract<TValue, null> extends never
-    ? never
-    : TValue
-  : TValue;
+    ? TValue extends unknown[]
+      ? TValue
+      : never
+    : TIsClearable extends true
+      ? Extract<TValue, null> extends never
+        ? never
+        : TValue
+      : TValue;
 
 export type SelectOnChange<
   TValue,
