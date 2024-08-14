@@ -22,7 +22,7 @@
   }
 
   &__nav-container {
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 1.75rem;
     padding-inline: 0.75rem;
   }
@@ -140,11 +140,8 @@
   }
 }
 
-@media screen and (max-width: 1400px) {
+@mixin collapsedSidebar {
   .sidebar {
-    width: 3.75rem;
-    padding-inline: 0.75rem;
-
     &__footer {
       padding-inline: 0;
     }
@@ -214,7 +211,7 @@
     &__floating {
       display: block;
       height: 400px;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
 
     &__floating-menu {
@@ -231,5 +228,21 @@
     &__nav-icon {
       margin-right: 0;
     }
+  }
+}
+
+.sidebar.sidebar--collapsed {
+  width: 3.75rem;
+  padding-inline: 0.75rem;
+
+  @include collapsedSidebar;
+}
+
+@media screen and (max-width: 1400px) {
+  .sidebar:not(.sidebar--collapsed) {
+    width: 3.75rem;
+    padding-inline: 0.75rem;
+
+    @include collapsedSidebar;
   }
 }
