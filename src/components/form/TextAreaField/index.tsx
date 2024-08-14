@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
+import { Control, Controller, FieldPathByValue, FieldValues } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextArea, TextAreaProps } from '~/components/form/TextArea';
@@ -40,28 +40,27 @@ export const TextAreaField = <
     placeholder,
     labelChildren,
     labelClassName,
-    defaultValue,
     ...textAreaProps
   } = useCombinedPropsWithKit({
     name: 'TextAreaField',
     props,
   });
 
-  const controller = useController({ name, control, defaultValue: defaultValue as any });
-
   return (
-    <Field
-      {...{ className, label, required, labelChildren, labelClassName }}
-      error={controller.fieldState.error}
-    >
-      <TextArea
-        {...controller.field}
-        className={textAreaClassName}
-        defaultValue={defaultValue}
-        error={!!controller.fieldState.error}
-        placeholder={placeholder ?? label}
-        {...textAreaProps}
-      />
-    </Field>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <Field {...{ className, label, required, labelChildren, labelClassName }} error={error}>
+          <TextArea
+            className={textAreaClassName}
+            error={!!error}
+            placeholder={placeholder ?? label}
+            {...field}
+            {...textAreaProps}
+          />
+        </Field>
+      )}
+    />
   );
 };

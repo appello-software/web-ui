@@ -50,9 +50,9 @@ export const SearchInput: FC<SearchInputProps> = props => {
   return (
     <div className={clsx('search-input', className)}>
       <TextInput
-        defaultValue={defaultValue}
         inputClassName="search-input__input"
         placeholder={placeholder}
+        value={defaultValue}
         onChange={handleChange}
       />
       <Icon className="search-input__icon" name="magnifier" />

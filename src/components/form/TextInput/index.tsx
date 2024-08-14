@@ -20,7 +20,6 @@ export interface TextInputProps
   onIconBeforeClick?: (value: string) => void;
   onIconAfterClick?: (value: string) => void;
   inputClassName?: string;
-  defaultValue?: string;
 }
 
 export enum InputSize {
@@ -41,8 +40,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
     iconAfterElement,
     onIconBeforeClick,
     onIconAfterClick,
-    value,
-    defaultValue,
+    value = '',
     ...inputProps
   } = useCombinedPropsWithKit({
     name: 'TextInput',
@@ -82,7 +80,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
         placeholder={placeholder}
         ref={useCombinedRef(ref, innerRef)}
         type={type}
-        value={value || defaultValue || ''}
+        value={value}
         {...inputProps}
       />
       {iconBeforeElement && (
