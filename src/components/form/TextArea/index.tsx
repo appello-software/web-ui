@@ -20,11 +20,14 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
     error = false,
     maxLength,
     value,
+    defaultValue,
     ...inputProps
   } = useCombinedPropsWithKit({
     name: 'TextArea',
     props,
   });
+
+  const getValue = value || defaultValue || '';
 
   const autoCompleteAttribute = useMemo(() => {
     if (typeof autoComplete === 'boolean') {
@@ -47,12 +50,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
         )}
         maxLength={maxLength}
         ref={ref}
-        value={value}
+        value={getValue}
         {...inputProps}
       />
       {maxLength !== undefined && (
         <div className="textarea__counter">
-          {`${value ?? ''}`.length}/{maxLength}
+          {`${getValue ?? ''}`.length}/{maxLength}
         </div>
       )}
     </div>

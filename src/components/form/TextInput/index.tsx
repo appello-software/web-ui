@@ -41,6 +41,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
     iconAfterElement,
     onIconBeforeClick,
     onIconAfterClick,
+    value,
+    defaultValue,
     ...inputProps
   } = useCombinedPropsWithKit({
     name: 'TextInput',
@@ -80,6 +82,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
         placeholder={placeholder}
         ref={useCombinedRef(ref, innerRef)}
         type={type}
+        value={value || defaultValue || ''}
         {...inputProps}
       />
       {iconBeforeElement && (

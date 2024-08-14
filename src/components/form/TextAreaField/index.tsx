@@ -57,6 +57,7 @@ export const TextAreaField = <
       <TextArea
         {...controller.field}
         className={textAreaClassName}
+        defaultValue={defaultValue}
         error={!!controller.fieldState.error}
         placeholder={placeholder ?? label}
         {...textAreaProps}
