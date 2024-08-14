@@ -49,6 +49,7 @@ export const TextAreaField = <
   return (
     <Controller
       control={control}
+      defaultValue={'' as any}
       name={name}
       render={({ field, fieldState: { error } }) => (
         <Field {...{ className, label, required, labelChildren, labelClassName }} error={error}>

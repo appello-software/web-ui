@@ -10,6 +10,7 @@ export interface TextAreaProps
   extends Omit<React.AllHTMLAttributes<HTMLTextAreaElement>, 'autoComplete' | 'size'> {
   error?: boolean;
   autoComplete?: boolean | string;
+  defaultValue?: string;
 }
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
@@ -18,7 +19,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
     autoComplete,
     error = false,
     maxLength,
-    value = '',
     ...inputProps
   } = useCombinedPropsWithKit({
     name: 'TextArea',
@@ -46,12 +46,11 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
         )}
         maxLength={maxLength}
         ref={ref}
-        value={value}
         {...inputProps}
       />
       {maxLength !== undefined && (
         <div className="textarea__counter">
-          {`${value ?? ''}`.length}/{maxLength}
+          {`${inputProps.value ?? ''}`.length}/{maxLength}
         </div>
       )}
     </div>
