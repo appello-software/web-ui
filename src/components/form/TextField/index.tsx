@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Control, Controller, FieldValues } from 'react-hook-form';
-import { FieldPath } from 'react-hook-form/dist/types';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextInput, TextInputProps } from '~/components/form/TextInput';
