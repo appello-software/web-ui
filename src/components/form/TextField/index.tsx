@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Control, Controller, FieldPathByValue, FieldValues } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
+import { FieldPath } from 'react-hook-form/dist/types';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextInput, TextInputProps } from '~/components/form/TextInput';
@@ -12,22 +13,22 @@ type AllowedFieldProps = Pick<
 >;
 
 export interface TextFieldProps<
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, number | string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends AllowedInputProps,
     AllowedFieldProps {
   name: TName;
-  control: Control<TFormValues>;
+  control: Control<TFieldValues>;
 
   // input type
   type?: 'text' | 'email' | 'search' | 'tel' | 'url' | 'number';
 }
 
 export const TextField = <
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, number | string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
-  props: TextFieldProps<TFormValues, TName>,
+  props: TextFieldProps<TFieldValues, TName>,
 ): React.ReactElement => {
   const {
     name,
