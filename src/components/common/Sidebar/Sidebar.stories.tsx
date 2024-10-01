@@ -351,3 +351,61 @@ export const WithCustomFooterElementsAndBigMenu: Story = {
     ),
   },
 };
+
+export const WithClickOnUserProfile: Story = {
+  name: 'Sidebar with click on user profile',
+  args: {
+    ...defaultSidebarProps,
+    items: [
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+      ...clonedList(defaultSidebarProps.items, 10),
+      {
+        title: 'Dashboard',
+        icon: 'add',
+        link: '/dashboard',
+        items: clonedList(
+          [
+            {
+              title: 'General',
+              link: '/settings/general',
+            },
+          ],
+          40,
+        ),
+      },
+    ],
+    onClickUserProfile: () => {
+      alert('User profile clicked');
+    },
+    user: defaultUser,
+    userInfoRightElement: (
+      <div
+        style={{
+          backgroundColor: 'hsl(var(--white-color) / 5%)',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'hsl(var(--white-color) / 40%)',
+          borderRadius: 4,
+        }}
+      >
+        <Icon name="bell" size={16} />
+      </div>
+    ),
+  },
+};

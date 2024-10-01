@@ -28,6 +28,7 @@ export interface SidebarProps {
     fullName: string;
     email: string;
   };
+  onClickUserProfile?: () => void;
   isCollapsed?: boolean;
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
@@ -46,10 +47,12 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     footerTopElement,
     footerBottomElement,
     isCollapsed,
+    onClickUserProfile,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
   });
+  const SidebarFooterUserInfoComponent = onClickUserProfile ? 'button' : 'div';
 
   return (
     <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
@@ -76,7 +79,10 @@ export const Sidebar: React.FC<SidebarProps> = props => {
           {!!footerTopElement && footerTopElement}
 
           <div className="sidebar__footer-user-wrapper">
-            <div className="sidebar__footer-user-info">
+            <SidebarFooterUserInfoComponent
+              className="sidebar__footer-user-info"
+              onClick={onClickUserProfile}
+            >
               {Boolean(user.photo || user.photoPlaceholder) && (
                 <img
                   alt={user.fullName}
@@ -88,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
                 <p className="sidebar__user-name">{user.fullName}</p>
                 <p className="sidebar__user-email">{user.email}</p>
               </div>
-            </div>
+            </SidebarFooterUserInfoComponent>
 
             {userInfoRightElement && (
               <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>

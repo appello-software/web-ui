@@ -9,7 +9,7 @@ import { TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-export interface SearchInputProps {
+export interface SearchInputProps extends Pick<React.AllHTMLAttributes<HTMLInputElement>, 'type'> {
   /**
    * Change handler
    * @param value
@@ -41,6 +41,7 @@ export const SearchInput: FC<SearchInputProps> = props => {
     placeholder,
     defaultValue,
     debounceDelay = kit.debounceDelay,
+    type,
   } = useCombinedPropsWithKit({ name: 'SearchInput', props });
 
   const handleChange = useDebouncedCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +54,7 @@ export const SearchInput: FC<SearchInputProps> = props => {
         defaultValue={defaultValue}
         inputClassName="search-input__input"
         placeholder={placeholder}
+        type={type}
         onChange={handleChange}
       />
       <Icon className="search-input__icon" name="magnifier" />
