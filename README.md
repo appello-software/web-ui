@@ -9,7 +9,7 @@ React UI library of components and modules. Designed by [Appello](https://appell
   <img alt="npm downloads" src="https://img.shields.io/npm/dm/@appello/web-ui.svg?style=flat-square" />
 </a>
 
-[Demo](https://main--644289178c2770e8e278fef0.chromatic.com/)
+[Demo](https://main--670460f5d4ff38a07b902ee1.chromatic.com/)
 
 ## Installation
 
