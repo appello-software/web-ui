@@ -57,7 +57,7 @@ export const WithIcon: Story = {
 
 export const Filled: Story = {
   args: {
-    color: BadgeColor.GREEN,
+    color: BadgeColor.RED,
     children: 'Text',
     filled: true,
   },
