@@ -5,15 +5,21 @@ import { DateRange } from 'react-day-picker';
 
 import { DatePickerPopup } from '.';
 
-const meta = {
+const meta: Meta<typeof DatePickerPopup> = {
   title: 'Components/DatePickerPopup',
   component: DatePickerPopup,
   tags: ['autodocs'],
-} satisfies Meta<typeof DatePickerPopup>;
+  args: {
+    yearsLength: 100,
+  },
+  argTypes: {
+    yearsLength: {
+      control: { type: 'number' },
+    },
+  },
+};
 
-export default meta;
-
-export const Standard: React.FC = () => {
+export const Standard: React.FC = props => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [date, setDate] = useState<Date | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -25,6 +31,7 @@ export const Standard: React.FC = () => {
       </button>
       {isOpen && (
         <DatePickerPopup
+          {...props}
           callableElement={buttonRef.current}
           value={date}
           onChange={setDate}
@@ -35,7 +42,7 @@ export const Standard: React.FC = () => {
   );
 };
 
-export const WithRange: React.FC = () => {
+export const WithRange: React.FC = props => {
   const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
   const [dateRange, setDateRange] = useState<DateRange | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -47,6 +54,7 @@ export const WithRange: React.FC = () => {
       </button>
       {isOpen && (
         <DatePickerPopup
+          {...props}
           callableElement={buttonRef.current}
           mode="range"
           value={dateRange}
@@ -57,3 +65,5 @@ export const WithRange: React.FC = () => {
     </div>
   );
 };
+
+export default meta;
