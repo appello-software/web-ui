@@ -30,6 +30,36 @@
     color: hsl(var(--orange-color));
   }
 
+  &--pink {
+    background-color: hsl(var(--pink-color) / 10%);
+    color: hsl(var(--pink-color));
+  }
+
+  &--yellow {
+    background-color: hsl(var(--yellow-color) / 10%);
+    color: hsl(var(--black-2-color));
+  }
+
+  &--green-light {
+    background-color: hsl(var(--green-light-color) / 10%);
+    color: hsl(var(--black-2-color));
+  }
+
+  &--cyan-dark {
+    background-color: hsl(var(--cyan-dark-color) / 10%);
+    color: hsl(var(--cyan-dark-color));
+  }
+
+  &--cyan-light {
+    background-color: hsl(var(--cyan-light-color) / 10%);
+    color: hsl(var(--cyan-light-color));
+  }
+
+  &--purple {
+    background-color: hsl(var(--purple-color) / 10%);
+    color: hsl(var(--purple-color));
+  }
+
   &--filled.badge--green {
     background-color: hsl(var(--green-color));
     color: hsl(var(--white-color));
@@ -52,6 +82,36 @@
 
   &--filled.badge--orange {
     background-color: hsl(var(--orange-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--pink {
+    background-color: hsl(var(--pink-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--yellow {
+    background-color: hsl(var(--yellow-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--green-light {
+    background-color: hsl(var(--green-light-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--cyan-dark {
+    background-color: hsl(var(--cyan-dark-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--cyan-light {
+    background-color: hsl(var(--cyan-light-color));
+    color: hsl(var(--white-color));
+  }
+
+  &--filled.badge--purple {
+    background-color: hsl(var(--purple-color));
     color: hsl(var(--white-color));
   }
 

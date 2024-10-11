@@ -2,13 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Badge, BadgeColor } from '.';
 
-const meta = {
+const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
   component: Badge,
   tags: ['autodocs'],
-} satisfies Meta<typeof Badge>;
-
-export default meta;
+};
 
 type Story = StoryObj<typeof meta>;
 
@@ -47,6 +45,48 @@ export const Orange: Story = {
   },
 };
 
+export const Pink: Story = {
+  args: {
+    color: BadgeColor.PINK,
+    children: 'Text',
+  },
+};
+
+export const Yellow: Story = {
+  args: {
+    color: BadgeColor.YELLOW,
+    children: 'Text',
+  },
+};
+
+export const GreenLight: Story = {
+  args: {
+    color: BadgeColor.GREEN_LIGHT,
+    children: 'Text',
+  },
+};
+
+export const CyanDark: Story = {
+  args: {
+    color: BadgeColor.CYAN_DARK,
+    children: 'Text',
+  },
+};
+
+export const CyanLight: Story = {
+  args: {
+    color: BadgeColor.CYAN_LIGHT,
+    children: 'Text',
+  },
+};
+
+export const Purple: Story = {
+  args: {
+    color: BadgeColor.PURPLE,
+    children: 'Text',
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     color: BadgeColor.GREEN,
@@ -62,3 +102,5 @@ export const Filled: Story = {
     filled: true,
   },
 };
+
+export default meta;

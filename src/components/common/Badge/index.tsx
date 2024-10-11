@@ -12,6 +12,12 @@ export enum BadgeColor {
   BLUE = 'blue',
   RED = 'red',
   ORANGE = 'orange',
+  PINK = 'pink',
+  YELLOW = 'yellow',
+  GREEN_LIGHT = 'green-light',
+  CYAN_DARK = 'cyan-dark',
+  CYAN_LIGHT = 'cyan-light',
+  PURPLE = 'purple',
 }
 
 export interface BadgeProps {
