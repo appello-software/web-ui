@@ -5,6 +5,7 @@ import React, { ReactElement, useMemo, useRef } from 'react';
 import { Matcher } from 'react-day-picker';
 
 import {
+  DatePickerBaseProps,
   DatePickerDefaultProps,
   DatePickerPopup,
   DatePickerRangeProps,
@@ -16,14 +17,15 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 
-export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) & {
-  placeholder?: string;
-  inputSize?: InputSize;
-  error?: boolean;
-  className?: string;
-  disabledDate?: Matcher;
-  iconAfterName?: string;
-};
+export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
+  Pick<DatePickerBaseProps, 'yearsLength'> & {
+    placeholder?: string;
+    inputSize?: InputSize;
+    error?: boolean;
+    className?: string;
+    disabledDate?: Matcher;
+    iconAfterName?: string;
+  };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
   const {
@@ -36,6 +38,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     mode,
     disabledDate,
     iconAfterName = 'down-arrow',
+    yearsLength,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -97,11 +100,13 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           mode: 'range' as const,
           value,
           onChange: handleRangeChange,
+          yearsLength,
         }
       : {
           mode: undefined,
           value,
           onChange: handleDayChange,
+          yearsLength,
         };
 
   return (

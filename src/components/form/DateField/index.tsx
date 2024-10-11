@@ -7,7 +7,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedDateInputProps = Pick<
   DateInputProps,
-  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName'
+  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName' | 'yearsLength'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -41,6 +41,7 @@ export const DateField = <
     iconAfterName,
     labelChildren,
     labelClassName,
+    yearsLength,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -68,6 +69,7 @@ export const DateField = <
         inputSize={inputSize}
         placeholder={placeholder ?? label}
         value={value}
+        yearsLength={yearsLength}
         onChange={onChange}
       />
     </Field>
