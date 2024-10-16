@@ -37,7 +37,7 @@ export const Field: React.FC<FieldProps> = props => {
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={clsx('form__label', labelClassName)} title={label}>
           {label}
-          {required ? ' *' : null}
+          {required ? <span className="form__label-required"> *</span> : null}
           {labelChildren}
         </label>
       )}
