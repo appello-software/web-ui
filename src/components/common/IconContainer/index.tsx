@@ -10,17 +10,18 @@ export interface IconContainerProps {
   name: string;
   className?: string;
   iconClassName?: string;
+  isRawIcon?: boolean;
 }
 
 export const IconContainer: FC<IconContainerProps> = props => {
-  const { name, className, iconClassName } = useCombinedPropsWithKit({
+  const { name, className, iconClassName, isRawIcon } = useCombinedPropsWithKit({
     name: 'IconContainer',
     props,
   });
 
   return (
     <div className={clsx('icon-container', className)}>
-      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} />
+      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} raw={isRawIcon} />
     </div>
   );
 };

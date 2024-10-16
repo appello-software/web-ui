@@ -19,17 +19,23 @@ export interface EmptyStateProps {
    * Additional class name
    */
   className?: string;
+
+  /** Icon raw */
+  isRawIcon?: boolean;
+
+  /** Icon className */
+  iconClassName?: string;
 }
 
 export const EmptyState: FC<EmptyStateProps> = props => {
-  const { iconName, label, className } = useCombinedPropsWithKit({
+  const { iconName, label, className, isRawIcon, iconClassName } = useCombinedPropsWithKit({
     name: 'EmptyState',
     props,
   });
 
   return (
     <div className={clsx('empty-state', className)}>
-      <IconContainer name={iconName} />
+      <IconContainer iconClassName={iconClassName} isRawIcon={isRawIcon} name={iconName} />
       <p className="empty-state__label">{label}</p>
     </div>
   );
