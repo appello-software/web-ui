@@ -1,5 +1,6 @@
 import 'react-nested-dropdown/dist/styles.css';
 
+import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import {
   Dropdown as ReactNestedDropdown,
@@ -12,12 +13,12 @@ import { useCombinedPropsWithKit } from '~/hooks';
 import styles from './styles.module.scss';
 
 export const Dropdown = <TValue,>(props: DropdownProps<TValue>): ReactElement => {
-  const { children, ...restProps } = useCombinedPropsWithKit({
+  const { children, className, ...restProps } = useCombinedPropsWithKit({
     name: 'Dropdown',
     props,
   });
   return (
-    <ReactNestedDropdown {...restProps} className={styles['container']}>
+    <ReactNestedDropdown {...restProps} className={clsx(styles['container'], className)}>
       {children}
     </ReactNestedDropdown>
   );
