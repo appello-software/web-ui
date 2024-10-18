@@ -1,8 +1,8 @@
 import './styles.scss';
 
+import { useDebounceCallback } from '@appello/common';
 import clsx from 'clsx';
 import React, { ChangeEvent, FC } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
 
 import { Icon } from '~/components/common/Icon';
 import { TextInput } from '~/components/form/TextInput';
@@ -44,9 +44,14 @@ export const SearchInput: FC<SearchInputProps> = props => {
     type,
   } = useCombinedPropsWithKit({ name: 'SearchInput', props });
 
-  const handleChange = useDebouncedCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
-    onChange(target.value);
-  }, debounceDelay);
+  const { debounce: handleChange } = useDebounceCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      onChange(target.value);
+    },
+    {
+      wait: debounceDelay,
+    },
+  );
 
   return (
     <div className={clsx('search-input', className)}>

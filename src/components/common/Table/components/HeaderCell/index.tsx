@@ -5,6 +5,7 @@ import React, { ReactElement } from 'react';
 
 import { Icon } from '~/components/common/Icon';
 
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from '../../styles.module.scss';
 
 interface HeaderCellProps<TData> {

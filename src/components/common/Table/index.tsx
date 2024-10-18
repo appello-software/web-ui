@@ -15,6 +15,7 @@ import { Pagination, PaginationProps } from '~/components/common/Pagination';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import { HeaderCell } from './components/HeaderCell';
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from './styles.module.scss';
 
 export interface TableProps<TData> {
