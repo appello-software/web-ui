@@ -34,6 +34,7 @@ export interface SidebarProps {
   userInfoRightElement?: React.ReactNode;
   footerTopElement?: React.ReactNode;
   footerBottomElement?: React.ReactNode;
+  logoPath?: string;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
@@ -47,6 +48,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     footerTopElement,
     footerBottomElement,
     isCollapsed,
+    logoPath,
     onClickUserProfile,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
@@ -57,11 +59,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   return (
     <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
       <header className="sidebar__header">
-        <Link className="sidebar__logo-link" to="/">
+        <Link className="sidebar__logo-link" to={logoPath || '/'}>
           <img alt="logo" className="sidebar__logo" src={logo} />
         </Link>
         {smallLogo && (
-          <Link className="sidebar__logo-link--collapsed" to="/">
+          <Link className="sidebar__logo-link--collapsed" to={logoPath || '/'}>
             <img alt="minimized logo" className="sidebar__logo" src={smallLogo} />
           </Link>
         )}
