@@ -176,7 +176,7 @@ export const DraggableTable = <TData extends object>(
             <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
               {' '}
               {table.getRowModel().rows.map(row => (
-                <DraggableRow key={row.id} row={row} rowId={getRowId(row.original)} />
+                <DraggableRow key={row.id} row={row} />
               ))}
             </SortableContext>
           </tbody>

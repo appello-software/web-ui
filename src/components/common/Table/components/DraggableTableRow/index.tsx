@@ -8,12 +8,11 @@ import styles from '../../styles.module.scss';
 
 type DraggableRowProps<TData> = {
   row: Row<TData>;
-  rowId: string;
 };
 
-export const DraggableRow = <TData,>({ row, rowId }: DraggableRowProps<TData>) => {
+export const DraggableRow = <TData,>({ row }: DraggableRowProps<TData>) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: rowId,
+    id: row.id,
   });
 
   const style: React.CSSProperties = {
