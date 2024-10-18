@@ -40,7 +40,6 @@ import {
   TimeFieldProps,
   TimePickerProps,
 } from '~/components';
-import { DraggableTableProps } from '~/components/common/Table/DraggableTable';
 
 export interface UIComponents {
   Badge: BadgeProps;
@@ -82,7 +81,6 @@ export interface UIComponents {
   TextField: TextFieldProps<any, any>;
   TextInput: TextInputProps;
   TimeField: TimeFieldProps<any, any>;
-  DraggableTable: DraggableTableProps<any>;
 }
 
 export interface AppelloKit {

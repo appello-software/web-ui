@@ -2,18 +2,34 @@ import type { Meta } from '@storybook/react';
 import { createColumnHelper, SortingState } from '@tanstack/react-table';
 import React, { useState } from 'react';
 
-import { Table } from '.';
+import { CommonTable } from './CommonTable';
+import { RowDragHandleCell } from './components/RowDragHandleCell';
+import { Table } from './Table';
 
 const meta = {
   title: 'Components/Table',
   component: Table,
   tags: ['autodocs'],
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof CommonTable>;
 
 export default meta;
 
 export const Standard: React.FC = () => {
-  return <Table columns={COLUMNS} data={data} />;
+  return <CommonTable columns={COLUMNS} data={data} />;
+};
+
+export const DragAndDropTable: React.FC = () => {
+  const [tableData, setTableData] = React.useState([...data]);
+
+  return (
+    <Table
+      dragAndDrop
+      columns={DRAG_AND_DROP_COLUMNS}
+      data={tableData}
+      getRowId={row => String(row.id)}
+      setData={setTableData}
+    />
+  );
 };
 
 export const WithPagination: React.FC = () => {
@@ -21,7 +37,7 @@ export const WithPagination: React.FC = () => {
   const pageSize = 1;
 
   return (
-    <Table
+    <CommonTable
       columns={COLUMNS}
       data={data.slice(offset, offset + pageSize)}
       offset={offset}
@@ -35,7 +51,7 @@ export const WithPagination: React.FC = () => {
 export const WithSorting: React.FC = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  return <Table columns={COLUMNS} data={data} setSorting={setSorting} sorting={sorting} />;
+  return <CommonTable columns={COLUMNS} data={data} setSorting={setSorting} sorting={sorting} />;
 };
 
 interface ExampleDataItem {
@@ -47,6 +63,23 @@ interface ExampleDataItem {
 const columnHelper = createColumnHelper<ExampleDataItem>();
 
 const COLUMNS = [
+  columnHelper.accessor('fullName', {
+    id: 'fullName',
+    header: 'Full Name',
+  }),
+  columnHelper.accessor('email', {
+    id: 'email',
+    header: 'Email',
+  }),
+];
+
+const DRAG_AND_DROP_COLUMNS = [
+  columnHelper.display({
+    id: 'drag-handle',
+    header: 'Move',
+    cell: ({ row }) => <RowDragHandleCell rowId={row.id} />,
+    size: 60,
+  }),
   columnHelper.accessor('fullName', {
     id: 'fullName',
     header: 'Full Name',

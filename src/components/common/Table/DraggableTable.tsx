@@ -110,10 +110,9 @@ export const DraggableTable = <TData extends object>(
     getRowId,
     setData,
   } = useCombinedPropsWithKit({
-    name: 'DraggableTable',
+    name: 'Table',
     props,
   });
-
   const dataIds = React.useMemo<UniqueIdentifier[]>(() => data.map(getRowId), [data, getRowId]);
 
   const hasPagination =
@@ -174,7 +173,6 @@ export const DraggableTable = <TData extends object>(
           </thead>
           <tbody>
             <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
-              {' '}
               {table.getRowModel().rows.map(row => (
                 <DraggableRow key={row.id} row={row} />
               ))}
