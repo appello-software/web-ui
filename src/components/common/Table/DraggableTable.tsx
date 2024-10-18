@@ -1,7 +1,19 @@
 import { isNil } from '@appello/common';
 import {
+  closestCenter,
+  DndContext,
+  type DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  UniqueIdentifier,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
@@ -14,10 +26,11 @@ import React, { ReactElement } from 'react';
 import { Pagination, PaginationProps } from '~/components/common/Pagination';
 import { useCombinedPropsWithKit } from '~/hooks';
 
+import { DraggableRow } from './components/DraggableTableRow';
 import { HeaderCell } from './components/HeaderCell';
 import styles from './styles.module.scss';
 
-export interface TableProps<TData> {
+export interface DraggableTableProps<TData> {
   /**
    * Additional class name
    */
@@ -64,6 +77,12 @@ export interface TableProps<TData> {
    * Triggering when page changed
    */
   onPageChange?: PaginationProps['onPageChange'];
+  /**
+   * Update data order after drag and drop
+   */
+  setData: React.Dispatch<React.SetStateAction<TData[]>>;
+  /** Get item id */
+  getRowId: (row: TData) => string;
 }
 
 declare module '@tanstack/react-table' {
@@ -73,7 +92,9 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const Table = <TData extends object>(props: TableProps<TData>): ReactElement => {
+export const DraggableTable = <TData extends object>(
+  props: DraggableTableProps<TData>,
+): ReactElement => {
   const {
     className,
     data,
@@ -86,10 +107,13 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
     error,
     offset,
     pageSize,
+    getRowId,
+    setData,
   } = useCombinedPropsWithKit({
     name: 'Table',
     props,
   });
+  const dataIds = React.useMemo<UniqueIdentifier[]>(() => data.map(getRowId), [data, getRowId]);
 
   const hasPagination =
     !isNil(offset) && !isNil(setOffset) && !isNil(totalCount) && !isNil(pageSize);
@@ -106,40 +130,57 @@ export const Table = <TData extends object>(props: TableProps<TData>): ReactElem
     getSortedRowModel: hasSorting ? getSortedRowModel() : undefined,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: hasSorting ? setSorting : undefined,
+    getRowId,
   });
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (active && over && active.id !== over.id) {
+      setData(data => {
+        const oldIndex = dataIds.indexOf(active.id);
+        const newIndex = dataIds.indexOf(over.id);
+        return arrayMove(data, oldIndex, newIndex); // this is just a splice util
+      });
+    }
+  };
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {}),
+    useSensor(TouchSensor, {}),
+    useSensor(KeyboardSensor, {}),
+  );
 
   return (
     <div className={clsx(styles['table-wrapper'], className)}>
       {error && <p className={clsx('form__error', styles['table-error'])}>{error}</p>}
-      <table className={styles['table']}>
-        <thead className={styles['head']}>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header =>
-                header.column.columnDef.enableHiding ? null : (
-                  <HeaderCell header={header} key={header.id} />
-                ),
-              )}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell =>
-                cell.column.columnDef.enableHiding ? null : (
-                  <td
-                    className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
-                    key={cell.id}
-                  >
-                    {flexRender(cell.column.columnDef.cell || '-', cell.getContext())}
-                  </td>
-                ),
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <DndContext
+        collisionDetection={closestCenter}
+        modifiers={[restrictToVerticalAxis]}
+        sensors={sensors}
+        onDragEnd={handleDragEnd}
+      >
+        <table className={styles['table']}>
+          <thead className={styles['head']}>
+            {table.getHeaderGroups().map(headerGroup => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map(header =>
+                  header.column.columnDef.enableHiding ? null : (
+                    <HeaderCell header={header} key={header.id} />
+                  ),
+                )}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+              {table.getRowModel().rows.map(row => (
+                <DraggableRow key={row.id} row={row} />
+              ))}
+            </SortableContext>
+          </tbody>
+        </table>
+      </DndContext>
+
       {hasPagination && totalCount > pageSize && (
         <Pagination
           itemsCount={data.length}
