@@ -20,6 +20,8 @@ export const DraggableRow = <TData,>({ row, rowId }: DraggableRowProps<TData>) =
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.8 : 1,
+    zIndex: isDragging ? 1 : 0,
+    position: 'relative',
   };
 
   const dragHandleProps = {
@@ -33,23 +35,23 @@ export const DraggableRow = <TData,>({ row, rowId }: DraggableRowProps<TData>) =
 
         if (cell.column.id === 'drag-handle') {
           return (
-            <div
+            <td
               className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
               key={cell.id}
               style={{ width: cell.column.getSize() }}
             >
               <div {...dragHandleProps}>{cellContent}</div>
-            </div>
+            </td>
           );
         }
         return (
-          <div
+          <td
             className={clsx(styles['cell'], cell.column.columnDef.meta?.className)}
             key={cell.id}
             style={{ width: cell.column.getSize() }}
           >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </div>
+          </td>
         );
       })}
     </tr>

@@ -11,7 +11,7 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { arrayMove } from '@dnd-kit/sortable';
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import {
   ColumnDef,
   getCoreRowModel,
@@ -173,9 +173,12 @@ export const DraggableTable = <TData extends object>(
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map(row => (
-              <DraggableRow key={row.id} row={row} rowId={getRowId(row.original)} />
-            ))}
+            <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+              {' '}
+              {table.getRowModel().rows.map(row => (
+                <DraggableRow key={row.id} row={row} rowId={getRowId(row.original)} />
+              ))}
+            </SortableContext>
           </tbody>
         </table>
       </DndContext>
