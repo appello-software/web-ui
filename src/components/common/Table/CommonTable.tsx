@@ -1,71 +1,21 @@
 import { isNil } from '@appello/common';
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { OnChangeFn, RowData } from '@tanstack/table-core';
+import { RowData } from '@tanstack/table-core';
 import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 
-import { Pagination, PaginationProps } from '~/components/common/Pagination';
+import { Pagination } from '~/components/common/Pagination';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import { HeaderCell } from './components/HeaderCell';
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './styles.module.scss';
-
-export interface TableProps<TData> {
-  /**
-   * Additional class name
-   */
-  className?: string;
-  /**
-   * Table data
-   */
-  data: TData[];
-  /**
-   * Table columns
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: ColumnDef<TData, any>[];
-  /**
-   * Sorting state
-   */
-  sorting?: SortingState;
-  /**
-   * Sorting state setter
-   */
-  setSorting?: OnChangeFn<SortingState>;
-  /**
-   * Pagination offset
-   */
-  offset?: number;
-  /**
-   * Pagination offset setter
-   * @param offset
-   */
-  setOffset?: (offset: number) => void;
-  /**
-   * Total items count for pagination
-   */
-  totalCount?: number;
-  /**
-   * Items count per page
-   */
-  pageSize?: number;
-  /**
-   * Error message
-   */
-  error?: string;
-  /**
-   * Triggering when page changed
-   */
-  onPageChange?: PaginationProps['onPageChange'];
-}
+import { CommonTableProps } from './types';
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -74,7 +24,7 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const Table = <TData extends object>(props: TableProps<TData>): ReactElement => {
+export const CommonTable = <TData extends object>(props: CommonTableProps<TData>): ReactElement => {
   const {
     className,
     data,

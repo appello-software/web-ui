@@ -16,7 +16,7 @@ export const HeaderCell = <TData extends RowData>({
   header,
 }: HeaderCellProps<TData>): ReactElement => {
   return (
-    <th className={styles['head-cell']}>
+    <th className={styles['head-cell']} colSpan={header.colSpan}>
       <div
         className={styles['head-cell__body']}
         {...(header.column.getCanSort()
