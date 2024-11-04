@@ -144,11 +144,9 @@
 @mixin collapsedSidebar {
   .sidebar {
     &__footer {
+      display: flex;
+      flex-direction: column;
       padding-inline: 0;
-    }
-
-    &__footer-user-right-element {
-      display: none;
     }
 
     &__user-photo {
