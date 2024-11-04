@@ -2,9 +2,11 @@ name: 'Chromatic Publish'
 
 on:
   push:
-    tags:
-      - v*
-
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   chromatic:
     runs-on: ubuntu-latest
