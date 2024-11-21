@@ -83,11 +83,11 @@ body .react-select {
     &--is-disabled {
       background-color: hsl(var(--gray-7-color));
       color: hsl(var(--gray-3-color));
-      cursor: default;
+      cursor: not-allowed;
     }
 
     &:not(&--is-disabled):hover {
-      cursor: pointer;
+      cursor: not-allowed;
     }
 
     &:not(&--is-selected, &--is-disabled):hover {
