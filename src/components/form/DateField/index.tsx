@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { ActiveModifiers, DateRange } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { DateInput, DateInputProps } from '~/components/form/DateInput';
@@ -7,7 +8,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedDateInputProps = Pick<
   DateInputProps,
-  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName' | 'yearsLength'
+  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName' | 'yearsLength' | 'mode'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -16,7 +17,7 @@ type AllowedFieldProps = Pick<
 
 export interface DateProps<
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Date | null>,
+  TName extends FieldPathByValue<TFormValues, Date | DateRange | null>,
 > extends AllowedDateInputProps,
     AllowedFieldProps {
   name: TName;
@@ -25,7 +26,7 @@ export interface DateProps<
 
 export const DateField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Date | null>,
+  TName extends FieldPathByValue<TFormValues, Date | DateRange | null>,
 >(
   props: DateProps<TFormValues, TName>,
 ): ReactElement => {
@@ -42,14 +43,33 @@ export const DateField = <
     labelChildren,
     labelClassName,
     yearsLength,
+    mode,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
   });
 
   const controller = useController({ name, control });
-  const value = controller.field.value as Date | null;
-  const onChange = controller.field.onChange as (value: Date | null) => void;
+
+  const propsByMode =
+    mode === 'range'
+      ? {
+          mode: 'range' as const,
+          value: controller.field.value as DateRange | null,
+          onChange: controller.field.onChange as (
+            range: DateRange | null,
+            selectedDay: Date,
+            activeModifiers: ActiveModifiers,
+            e: React.MouseEvent,
+          ) => void,
+          yearsLength,
+        }
+      : {
+          mode: undefined,
+          value: controller.field.value as Date | null,
+          onChange: controller.field.onChange as (value: Date | null) => void,
+          yearsLength,
+        };
 
   return (
     <Field
@@ -68,9 +88,7 @@ export const DateField = <
         iconAfterName={iconAfterName}
         inputSize={inputSize}
         placeholder={placeholder ?? label}
-        value={value}
-        yearsLength={yearsLength}
-        onChange={onChange}
+        {...propsByMode}
       />
     </Field>
   );
