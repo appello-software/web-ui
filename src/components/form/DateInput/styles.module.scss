@@ -3,6 +3,10 @@
 
   &__arrow {
     transform: rotate(180deg);
+
+    &__disabled {
+      opacity: 0.3;
+    }
   }
 
   &__input {
