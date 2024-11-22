@@ -14,6 +14,11 @@ body .react-select {
     border-color: hsl(var(--red-color));
   }
 
+  &--is-disabled {
+    pointer-events: all;
+    cursor: not-allowed;
+  }
+
   &__menu-portal {
     z-index: 999 !important;
   }
@@ -43,6 +48,10 @@ body .react-select {
     border-radius: 0.37rem;
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s;
+
+    &--is-disabled {
+      cursor: not-allowed;
+    }
   }
 
   &__control--is-focused &__input-container {
