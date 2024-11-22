@@ -86,6 +86,10 @@
         color: hsl(var(--white-color));
       }
 
+      &_disabled {
+        cursor: not-allowed;
+      }
+
       &_range_middle {
         border-radius: 0;
         background-color: hsl(var(--accent-color) / 0.1);

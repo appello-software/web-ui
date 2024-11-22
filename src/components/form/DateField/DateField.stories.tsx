@@ -18,4 +18,11 @@ const Template: React.FC = () => {
   return <DateField control={form.control} label="Date" name="date" />;
 };
 
+const TemplateWithRange: React.FC = () => {
+  const form = useForm({ defaultValues: { date: null } });
+
+  return <DateField control={form.control} label="Date" mode="range" name="date" />;
+};
+
 export const Standard = Template.bind({});
+export const WithRange = TemplateWithRange.bind({});
