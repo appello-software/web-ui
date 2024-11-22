@@ -1,3 +1,4 @@
+import { Nullable } from '@appello/common';
 import React, { ReactElement } from 'react';
 import { ActiveModifiers, DateRange } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
@@ -55,9 +56,9 @@ export const DateField = <
     mode === 'range'
       ? {
           mode: 'range' as const,
-          value: controller.field.value as DateRange | null,
+          value: controller.field.value as Nullable<DateRange>,
           onChange: controller.field.onChange as (
-            range: DateRange | null,
+            range: Nullable<DateRange>,
             selectedDay: Date,
             activeModifiers: ActiveModifiers,
             e: React.MouseEvent,
@@ -66,8 +67,8 @@ export const DateField = <
         }
       : {
           mode: undefined,
-          value: controller.field.value as Date | null,
-          onChange: controller.field.onChange as (value: Date | null) => void,
+          value: controller.field.value as Nullable<Date>,
+          onChange: controller.field.onChange as (value: Nullable<Date>) => void,
           yearsLength,
         };
 
