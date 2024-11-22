@@ -1,6 +1,6 @@
 import 'react-day-picker/dist/style.css';
 
-import { noop } from '@appello/common';
+import { noop, Nullable } from '@appello/common';
 import { useClickAway } from '@appello/web-kit';
 import clsx from 'clsx';
 import {
@@ -42,9 +42,9 @@ export interface DatePickerDefaultProps {
 
 export interface DatePickerRangeProps {
   mode: 'range';
-  value: DateRange | null;
+  value: Nullable<DateRange>;
   onChange: (
-    range: DateRange | null,
+    range: Nullable<DateRange>,
     selectedDay: Date,
     activeModifiers: ActiveModifiers,
     e: React.MouseEvent,

@@ -18,7 +18,7 @@ type AllowedFieldProps = Pick<
 
 export interface DateProps<
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Date | DateRange | null>,
+  TName extends FieldPathByValue<TFormValues, Nullable<Date | DateRange>>,
 > extends AllowedDateInputProps,
     AllowedFieldProps {
   name: TName;
@@ -27,7 +27,7 @@ export interface DateProps<
 
 export const DateField = <
   TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, Date | DateRange | null>,
+  TName extends FieldPathByValue<TFormValues, Nullable<Date | DateRange>>,
 >(
   props: DateProps<TFormValues, TName>,
 ): ReactElement => {
