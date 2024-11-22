@@ -9,7 +9,13 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedDateInputProps = Pick<
   DateInputProps,
-  'placeholder' | 'inputSize' | 'disabledDate' | 'iconAfterName' | 'yearsLength' | 'mode'
+  | 'placeholder'
+  | 'inputSize'
+  | 'disabledDate'
+  | 'iconAfterName'
+  | 'yearsLength'
+  | 'mode'
+  | 'disabled'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -45,6 +51,7 @@ export const DateField = <
     labelClassName,
     yearsLength,
     mode,
+    disabled,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -84,6 +91,7 @@ export const DateField = <
       }}
     >
       <DateInput
+        disabled={disabled}
         disabledDate={disabledDate}
         error={!!controller.fieldState.error}
         iconAfterName={iconAfterName}
