@@ -95,10 +95,6 @@ body .react-select {
       cursor: not-allowed;
     }
 
-    &:not(&--is-disabled):hover {
-      cursor: not-allowed;
-    }
-
     &:not(&--is-selected, &--is-disabled):hover {
       background-color: hsl(var(--gray-6-color));
     }
