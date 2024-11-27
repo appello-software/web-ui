@@ -36,7 +36,8 @@
   "dependencies": {
     "@floating-ui/react": "^0.26.25",
     "deepmerge-ts": "^5.1.0",
-    "react-paginate": "^8.2.0"
+    "react-paginate": "^8.2.0",
+    "react-svg": "^16.2.0"
   },
   "peerDependencies": {
     "@appello/common": "~3.3.0",

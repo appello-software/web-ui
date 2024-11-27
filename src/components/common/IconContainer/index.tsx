@@ -14,14 +14,14 @@ export interface IconContainerProps {
 }
 
 export const IconContainer: FC<IconContainerProps> = props => {
-  const { name, className, iconClassName, isRawIcon } = useCombinedPropsWithKit({
+  const { name, className, iconClassName } = useCombinedPropsWithKit({
     name: 'IconContainer',
     props,
   });
 
   return (
     <div className={clsx('icon-container', className)}>
-      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} raw={isRawIcon} />
+      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} />
     </div>
   );
 };
