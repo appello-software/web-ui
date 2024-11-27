@@ -1,11 +1,30 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 
+const icons = {
+  bell: 'string',
+  add: 'string',
+  calendar: 'string',
+  eye: 'string',
+  close: 'string',
+  document: 'string',
+  magnifier: 'string',
+  polygon: 'string',
+  downArrow: 'string',
+  eyeCrossed: 'string',
+  check: 'string',
+  upload: 'string',
+} as const;
+
+export interface IconNames {
+  icons?: keyof typeof icons;
+}
+
 export interface IconProps {
   /**
    * Icon name (required, used to build the `src` path)
    */
-  name: string;
+  name: IconNames['icons'];
 
   /**
    * Additional class name for the wrapper

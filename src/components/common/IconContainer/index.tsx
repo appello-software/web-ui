@@ -3,11 +3,11 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconNames } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface IconContainerProps {
-  name: string;
+  name: IconNames['icons'];
   className?: string;
   iconClassName?: string;
   isRawIcon?: boolean;

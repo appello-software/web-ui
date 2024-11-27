@@ -250,7 +250,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{monthLabel}</p>
-          <Icon className={styles['control__arrow']} name="down-arrow" />
+          <Icon className={styles['control__arrow']} name="downArrow" />
         </div>
       </BrowserSelect>
       <BrowserSelect
@@ -260,7 +260,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{yearValue}</p>
-          <Icon className={styles['control__arrow']} name="down-arrow" />
+          <Icon className={styles['control__arrow']} name="downArrow" />
         </div>
       </BrowserSelect>
     </>

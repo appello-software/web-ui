@@ -4,7 +4,7 @@ import { isNil } from '@appello/common';
 import clsx from 'clsx';
 import React from 'react';
 
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconNames } from '~/components/common/Icon';
 import { Loader } from '~/components/common/Loader';
 import { useCombinedPropsWithKit } from '~/hooks';
 
@@ -58,7 +58,7 @@ export interface ButtonProps {
   /**
    * Button icon
    */
-  withIcon?: string;
+  withIcon?: IconNames['icons'];
   /**
    * Icon class name
    */

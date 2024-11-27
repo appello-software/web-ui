@@ -6,11 +6,13 @@ import React, { FC } from 'react';
 import { IconContainer } from '~/components/common/IconContainer';
 import { useCombinedPropsWithKit } from '~/hooks';
 
+import { IconNames } from '../Icon';
+
 export interface EmptyStateProps {
   /**
    * Icon name from spritemap
    */
-  iconName: string;
+  iconName: IconNames['icons'];
   /**
    * Description text
    */
