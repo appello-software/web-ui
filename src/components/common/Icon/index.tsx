@@ -16,7 +16,7 @@ const icons = {
   upload: 'string',
 } as const;
 
-export interface IconNames {
+export interface IconName {
   icons?: keyof typeof icons;
 }
 
@@ -24,7 +24,7 @@ export interface IconProps {
   /**
    * Icon name (required, used to build the `src` path)
    */
-  name: IconNames['icons'];
+  name: IconName['icons'];
 
   /**
    * Additional class name for the wrapper

@@ -10,7 +10,7 @@ import {
   DatePickerPopup,
   DatePickerRangeProps,
 } from '~/components/common/DatePickerPopup';
-import { Icon, IconNames } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -118,7 +118,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           iconAfterElement={
             <Icon
               className={clsx({ [styles['date-input__arrow']]: isCalendarVisible })}
-              name={(iconAfterName as IconNames['icons']) || 'downArrow'}
+              name={(iconAfterName as IconName['icons']) || 'downArrow'}
             />
           }
           iconBeforeElement={<Icon name="calendar" />}

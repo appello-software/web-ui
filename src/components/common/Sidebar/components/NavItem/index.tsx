@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import React, { useLayoutEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { Icon, IconNames } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 
 import { SidebarItem } from '../..';
 
@@ -81,7 +81,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
             type="button"
             onClick={toggleSubItems}
           >
-            <Icon className="sidebar__nav-icon" name={item.icon as IconNames['icons']} />
+            <Icon className="sidebar__nav-icon" name={item.icon as IconName['icons']} />
             <span className="sidebar__item-title">{item.title}</span>
             {item?.navRightContent?.(item)}
             <Icon className="sidebar__chevron" name="downArrow" />
@@ -109,7 +109,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
           to={item.link}
         >
-          <Icon className="sidebar__nav-icon" name={item.icon as IconNames['icons']} />
+          <Icon className="sidebar__nav-icon" name={item.icon as IconName['icons']} />
           <span className="sidebar__item-title">{item.title}</span>
           {item?.navRightContent?.(item)}
         </NavLink>
