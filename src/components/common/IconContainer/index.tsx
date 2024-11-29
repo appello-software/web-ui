@@ -7,7 +7,7 @@ import { Icon, IconName } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface IconContainerProps {
-  name: IconName['icons'];
+  name: IconName;
   className?: string;
   iconClassName?: string;
   isRawIcon?: boolean;

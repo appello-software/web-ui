@@ -1,7 +1,9 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 
-const icons = {
+export interface RegisterIconName {}
+
+const baseIcons = {
   bell: 'string',
   add: 'string',
   calendar: 'string',
@@ -16,15 +18,17 @@ const icons = {
   upload: 'string',
 } as const;
 
-export interface IconName {
-  icons?: keyof typeof icons;
+export type IconName = RegisterIconName extends {
+  icons: infer TRouter extends string;
 }
+  ? TRouter
+  : keyof typeof baseIcons;
 
 export interface IconProps {
   /**
    * Icon name (required, used to build the `src` path)
    */
-  name: IconName['icons'];
+  name: IconName;
 
   /**
    * Additional class name for the wrapper

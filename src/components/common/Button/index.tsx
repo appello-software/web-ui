@@ -58,7 +58,7 @@ export interface ButtonProps {
   /**
    * Button icon
    */
-  withIcon?: IconName['icons'];
+  withIcon?: IconName;
   /**
    * Icon class name
    */

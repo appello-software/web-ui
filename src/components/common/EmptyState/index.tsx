@@ -3,16 +3,15 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 
+import { IconName } from '~/components';
 import { IconContainer } from '~/components/common/IconContainer';
 import { useCombinedPropsWithKit } from '~/hooks';
-
-import { IconName } from '../Icon';
 
 export interface EmptyStateProps {
   /**
    * Icon name from spritemap
    */
-  iconName: IconName['icons'];
+  iconName: IconName;
   /**
    * Description text
    */

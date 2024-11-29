@@ -23,7 +23,7 @@ export enum BadgeColor {
 export interface BadgeProps {
   children: ReactNode;
   color: BadgeColor;
-  icon?: IconName['icons'];
+  icon?: IconName;
   filled?: boolean;
 }
 

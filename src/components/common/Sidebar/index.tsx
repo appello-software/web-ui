@@ -4,13 +4,14 @@ import clsx from 'clsx';
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
+import { IconName } from '~/components';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import { NavItem } from './components/NavItem';
 
 export interface SidebarItem {
   title: string;
-  icon: string;
+  icon: IconName;
   link: string;
   items?: (Omit<SidebarItem, 'icon' | 'items'> & {
     navRightContent?: (item: Omit<SidebarItem, 'icon' | 'items'>) => ReactElement;
