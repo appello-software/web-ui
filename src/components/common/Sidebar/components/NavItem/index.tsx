@@ -84,7 +84,7 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
             <Icon className="sidebar__nav-icon" name={item.icon} />
             <span className="sidebar__item-title">{item.title}</span>
             {item?.navRightContent?.(item)}
-            <Icon className="sidebar__chevron" name="down-arrow" />
+            <Icon className="sidebar__chevron" name="downArrow" />
           </button>
 
           <ul className="sidebar__submenu">{renderNestedItems()}</ul>

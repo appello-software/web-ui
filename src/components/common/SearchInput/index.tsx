@@ -33,6 +33,8 @@ export interface SearchInputProps extends Pick<React.AllHTMLAttributes<HTMLInput
   debounceDelay?: number;
 }
 
+const SIZE_ICON = 16;
+
 export const SearchInput: FC<SearchInputProps> = props => {
   const kit = useAppelloKit();
   const {
@@ -54,7 +56,14 @@ export const SearchInput: FC<SearchInputProps> = props => {
   );
 
   return (
-    <div className={clsx('search-input', className)}>
+    <div
+      className={clsx('search-input', className)}
+      style={{
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        '--icon-size': `${SIZE_ICON}px`,
+      }}
+    >
       <TextInput
         defaultValue={defaultValue}
         inputClassName="search-input__input"
@@ -62,7 +71,7 @@ export const SearchInput: FC<SearchInputProps> = props => {
         type={type}
         onChange={handleChange}
       />
-      <Icon className="search-input__icon" name="magnifier" />
+      <Icon className="search-input__icon" height={SIZE_ICON} name="magnifier" width={SIZE_ICON} />
     </div>
   );
 };

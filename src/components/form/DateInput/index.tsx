@@ -10,7 +10,7 @@ import {
   DatePickerPopup,
   DatePickerRangeProps,
 } from '~/components/common/DatePickerPopup';
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -24,7 +24,7 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     error?: boolean;
     className?: string;
     disabledDate?: Matcher;
-    iconAfterName?: string;
+    iconAfterName?: IconName;
     disabled?: boolean;
   };
 
@@ -38,7 +38,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     onChange,
     mode,
     disabledDate,
-    iconAfterName = 'down-arrow',
+    iconAfterName = 'downArrow',
     yearsLength,
     disabled,
   } = useCombinedPropsWithKit({
@@ -124,7 +124,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
                 [styles['date-input__arrow']]: isCalendarVisible,
                 [styles['date-input__arrow__disabled']]: disabled,
               })}
-              name={iconAfterName || 'down-arrow'}
+              name={iconAfterName || 'downArrow'}
             />
           }
           iconBeforeElement={

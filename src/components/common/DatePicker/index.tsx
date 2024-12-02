@@ -55,7 +55,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
         {leftIconElement !== undefined && leftIconElement}
         {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}
-        <Icon name="down-arrow" size={18} />
+        <Icon name="downArrow" size={18} />
       </button>
       {isOpen && (
         <DatePickerPopup

@@ -67,7 +67,7 @@ export const ColorPickerField = <
           iconAfterElement={
             <Icon
               className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
-              name="down-arrow"
+              name="downArrow"
             />
           }
           iconBeforeElement={

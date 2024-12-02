@@ -40,7 +40,8 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "deepmerge-ts": "^5.1.0",
-    "react-paginate": "^8.2.0"
+    "react-paginate": "^8.2.0",
+    "react-svg": "^16.2.0"
   },
   "peerDependencies": {
     "@appello/common": "^3.4.0",

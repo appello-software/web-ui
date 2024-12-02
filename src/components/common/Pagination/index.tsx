@@ -85,14 +85,14 @@ export const Pagination: React.FC<PaginationProps> = props => {
         forcePage={offset / pageSize}
         marginPagesDisplayed={5}
         nextClassName="pagination__item"
-        nextLabel={<Icon className="pagination__nav-icon--next" name="down-arrow" size={18} />}
+        nextLabel={<Icon className="pagination__nav-icon--next" name="downArrow" size={18} />}
         nextLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
         pageClassName="pagination__item"
         pageCount={pageCount}
         pageLinkClassName="pagination__link"
         pageRangeDisplayed={5}
         previousClassName="pagination__item"
-        previousLabel={<Icon className="pagination__nav-icon--prev" name="down-arrow" size={18} />}
+        previousLabel={<Icon className="pagination__nav-icon--prev" name="downArrow" size={18} />}
         previousLinkClassName={clsx('pagination__link', 'pagination__link--nav')}
         onPageChange={handlePageClick}
       />

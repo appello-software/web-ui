@@ -3,25 +3,25 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { FC } from 'react';
 
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface IconContainerProps {
-  name: string;
+  name: IconName;
   className?: string;
   iconClassName?: string;
   isRawIcon?: boolean;
 }
 
 export const IconContainer: FC<IconContainerProps> = props => {
-  const { name, className, iconClassName, isRawIcon } = useCombinedPropsWithKit({
+  const { name, className, iconClassName } = useCombinedPropsWithKit({
     name: 'IconContainer',
     props,
   });
 
   return (
     <div className={clsx('icon-container', className)}>
-      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} raw={isRawIcon} />
+      <Icon className={clsx('icon-container__icon', iconClassName)} name={name} />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 .search-input {
   --text-input-x-padding: 1.18rem;
-  --icon-size: 1.24rem;
 
   position: relative;
 
@@ -8,8 +7,6 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: var(--icon-size);
-    height: var(--icon-size);
     left: var(--text-input-x-padding);
     pointer-events: none;
     color: hsl(var(--gray-3-color));
