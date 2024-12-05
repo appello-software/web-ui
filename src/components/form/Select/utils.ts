@@ -1,4 +1,4 @@
-import { isPlainObject } from '@appello/common';
+import { isObject } from '@appello/common';
 import { MultiValue, SingleValue } from 'react-select';
 
 import { NewSelectOption } from './Select';
@@ -10,5 +10,5 @@ export function isMultiOption<TOption>(
 }
 
 export function isNewSelectOption(arg: unknown): arg is NewSelectOption {
-  return isPlainObject(arg) && '__isNew__' in arg;
+  return isObject(arg) && '__isNew__' in arg;
 }

@@ -1,6 +1,6 @@
 import 'react-day-picker/dist/style.css';
 
-import { noop } from '@appello/common';
+import { noop, Nullable } from '@appello/common';
 import { useClickAway } from '@appello/web-kit';
 import clsx from 'clsx';
 import {
@@ -16,7 +16,7 @@ import {
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActiveModifiers,
-  CaptionLabelProps,
+  CaptionLabelProps as ReactDayCaptionLabelProps,
   DateRange,
   DayClickEventHandler,
   DayPicker,
@@ -42,9 +42,9 @@ export interface DatePickerDefaultProps {
 
 export interface DatePickerRangeProps {
   mode: 'range';
-  value: DateRange | null;
+  value: Nullable<DateRange>;
   onChange: (
-    range: DateRange | null,
+    range: Nullable<DateRange>,
     selectedDay: Date,
     activeModifiers: ActiveModifiers,
     e: React.MouseEvent,
@@ -52,6 +52,7 @@ export interface DatePickerRangeProps {
 }
 
 export interface DatePickerBaseProps {
+  yearsLength?: number;
   disabledDate?: Matcher;
   callableElement: HTMLElement | null;
   onClose: () => void;
@@ -61,12 +62,18 @@ export type DatePickerPopupProps = DatePickerBaseProps &
   (DatePickerDefaultProps | DatePickerRangeProps);
 
 export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
-  const { value, onChange, disabledDate, onClose, callableElement, mode } = useCombinedPropsWithKit(
-    {
-      name: 'DatePickerPopup',
-      props,
-    },
-  );
+  const {
+    value,
+    onChange,
+    disabledDate,
+    onClose,
+    callableElement,
+    mode,
+    yearsLength = 100,
+  } = useCombinedPropsWithKit({
+    name: 'DatePickerPopup',
+    props,
+  });
 
   const [month, setMonth] = useState<Date>(
     () => (isDateRange(value) ? value.from : value) ?? new Date(),
@@ -189,7 +196,9 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
       <DayPicker
         {...propsByMode}
         className={styles['container']}
-        components={{ CaptionLabel }}
+        components={{
+          CaptionLabel: props => <CaptionLabel {...props} yearsLength={yearsLength} />,
+        }}
         disabled={disabledDate}
         formatters={{
           formatWeekdayName: renderWeekdayName,
@@ -209,24 +218,28 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
   );
 };
 
-const yearsOptions = Array.from({ length: 100 }, (_, index) => {
-  const year = new Date().getFullYear() + 5 - index;
-  return { label: year.toString(), value: year.toString() };
-});
+interface CaptionLabelProps extends ReactDayCaptionLabelProps {
+  yearsLength?: number;
+}
 
-const monthsOptions = eachMonthOfInterval({
-  start: startOfYear(new Date()),
-  end: endOfYear(new Date()),
-}).map(month => {
-  return { label: format(month, 'MMMM'), value: `${month.getMonth()}` };
-});
-
-const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
+const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }) => {
   const { onMonthChange, month } = useDayPicker();
 
   const monthLabel = useMemo(() => format(displayMonth, 'MMMM'), [displayMonth]);
   const monthValue = useMemo(() => `${displayMonth.getMonth()}`, [displayMonth]);
   const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
+
+  const yearsOptions = Array.from({ length: yearsLength }, (_, index) => {
+    const year = new Date().getFullYear() + 5 - index;
+    return { label: year.toString(), value: year.toString() };
+  });
+
+  const monthsOptions = eachMonthOfInterval({
+    start: startOfYear(new Date()),
+    end: endOfYear(new Date()),
+  }).map(month => {
+    return { label: format(month, 'MMMM'), value: `${month.getMonth()}` };
+  });
 
   return (
     <>
@@ -237,7 +250,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{monthLabel}</p>
-          <Icon className={styles['control__arrow']} name="down-arrow" />
+          <Icon className={styles['control__arrow']} name="downArrow" size={16} />
         </div>
       </BrowserSelect>
       <BrowserSelect
@@ -247,7 +260,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth }) => {
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{yearValue}</p>
-          <Icon className={styles['control__arrow']} name="down-arrow" />
+          <Icon className={styles['control__arrow']} name="downArrow" size={16} />
         </div>
       </BrowserSelect>
     </>

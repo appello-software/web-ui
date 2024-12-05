@@ -6,11 +6,11 @@ import { format } from 'date-fns';
 import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { Matcher } from 'react-day-picker';
 
-import { DatePickerPopup } from '~/components/common/DatePickerPopup';
+import { DatePickerBaseProps, DatePickerPopup } from '~/components/common/DatePickerPopup';
 import { Icon } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-export interface DatePickerProps {
+export interface DatePickerProps extends Pick<DatePickerBaseProps, 'yearsLength'> {
   placeholder?: ReactNode;
   onChange: (value: Date | null) => void;
   defaultValue?: Date | null;
@@ -27,6 +27,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     leftIconElement,
     disabledDate,
     defaultValue,
+    yearsLength,
   } = useCombinedPropsWithKit({
     name: 'DatePicker',
     props,
@@ -54,13 +55,14 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
         {leftIconElement !== undefined && leftIconElement}
         {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}
-        <Icon name="down-arrow" size={18} />
+        <Icon name="downArrow" size={18} />
       </button>
       {isOpen && (
         <DatePickerPopup
           callableElement={buttonRef.current}
           disabledDate={disabledDate}
           value={value}
+          yearsLength={yearsLength}
           onChange={setValue}
           onClose={closeCalendar}
         />

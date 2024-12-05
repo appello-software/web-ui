@@ -5,25 +5,28 @@ import React, { ReactElement, useMemo, useRef } from 'react';
 import { Matcher } from 'react-day-picker';
 
 import {
+  DatePickerBaseProps,
   DatePickerDefaultProps,
   DatePickerPopup,
   DatePickerRangeProps,
 } from '~/components/common/DatePickerPopup';
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 import { InputSize, TextInput } from '~/components/form/TextInput';
 import { useAppelloKit } from '~/ctx';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 
-export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) & {
-  placeholder?: string;
-  inputSize?: InputSize;
-  error?: boolean;
-  className?: string;
-  disabledDate?: Matcher;
-  iconAfterName?: string;
-};
+export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
+  Pick<DatePickerBaseProps, 'yearsLength'> & {
+    placeholder?: string;
+    inputSize?: InputSize;
+    error?: boolean;
+    className?: string;
+    disabledDate?: Matcher;
+    iconAfterName?: IconName;
+    disabled?: boolean;
+  };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
   const {
@@ -35,7 +38,9 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     onChange,
     mode,
     disabledDate,
-    iconAfterName = 'down-arrow',
+    iconAfterName = 'downArrow',
+    yearsLength,
+    disabled,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -97,11 +102,13 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           mode: 'range' as const,
           value,
           onChange: handleRangeChange,
+          yearsLength,
         }
       : {
           mode: undefined,
           value,
           onChange: handleDayChange,
+          yearsLength,
         };
 
   return (
@@ -109,14 +116,25 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
       <div>
         <TextInput
           readOnly
+          disabled={disabled}
           error={error}
           iconAfterElement={
             <Icon
-              className={clsx({ [styles['date-input__arrow']]: isCalendarVisible })}
-              name={iconAfterName || 'down-arrow'}
+              className={clsx({
+                [styles['date-input__arrow']]: isCalendarVisible,
+                [styles['date-input__arrow__disabled']]: disabled,
+              })}
+              name={iconAfterName || 'downArrow'}
             />
           }
-          iconBeforeElement={<Icon name="calendar" />}
+          iconBeforeElement={
+            <Icon
+              className={clsx({
+                [styles['date-input__arrow__disabled']]: disabled,
+              })}
+              name="calendar"
+            />
+          }
           inputClassName={styles['date-input__input']}
           placeholder={placeholder}
           ref={inputRef}

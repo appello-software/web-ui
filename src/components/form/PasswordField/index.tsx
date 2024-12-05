@@ -59,7 +59,7 @@ export const PasswordField = <TFormValues extends FieldValues>(
           {...controller.field}
           autoCapitalize="none"
           error={!!controller.fieldState.error}
-          iconAfterElement={<Icon name={!isPasswordVisible ? 'eye' : 'eye-crossed'} />}
+          iconAfterElement={<Icon name={!isPasswordVisible ? 'eye' : 'eyeCrossed'} />}
           inputClassName={styles['input']}
           placeholder={placeholder ?? label}
           type={isPasswordVisible ? 'text' : 'password'}

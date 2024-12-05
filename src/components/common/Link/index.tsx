@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useCombinedPropsWithKit, useMatchUrl, usePathname } from '~/hooks';
 
@@ -33,9 +33,9 @@ export const Link: React.FC<LinkProps> = props => {
 
   const computedClassName = typeof className === 'function' ? className({ isActive }) : className;
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     onNavigate?.(to);
-  }, [onNavigate, to]);
+  };
 
   return (
     <a className={computedClassName} onClick={onClick} {...linkProps}>

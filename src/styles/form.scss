@@ -22,6 +22,10 @@
     line-height: var(--p4-line-height);
     color: hsl(var(--gray-1-color));
     margin-bottom: 2px;
+
+    &-required {
+      color: hsl(var(--red-color));
+    }
   }
 
   &__inline-fields &__label {
@@ -38,7 +42,9 @@
     border-radius: 0.37rem;
     width: 100%;
 
-    transition: background-color 0.2s, border-color 0.2s;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
 
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,

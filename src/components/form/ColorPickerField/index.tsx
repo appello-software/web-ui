@@ -64,11 +64,10 @@ export const ColorPickerField = <
           </div>
         )}
         <TextInput
-          readOnly
           iconAfterElement={
             <Icon
               className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
-              name="down-arrow"
+              name="downArrow"
             />
           }
           iconBeforeElement={
@@ -80,9 +79,10 @@ export const ColorPickerField = <
             )
           }
           label={label}
-          placeholder="Select colour"
+          placeholder="Select color"
           size={size}
-          value={field.value ?? ''}
+          value={field.value ?? '#ffffff'}
+          onChange={e => field.onChange(e)}
           onClick={toggleColorPicker}
         />
       </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextInput, TextInputProps } from '~/components/form/TextInput';
@@ -12,22 +12,22 @@ type AllowedFieldProps = Pick<
 >;
 
 export interface TextFieldProps<
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, number | string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends AllowedInputProps,
     AllowedFieldProps {
   name: TName;
-  control: Control<TFormValues>;
+  control: Control<TFieldValues>;
 
   // input type
   type?: 'text' | 'email' | 'search' | 'tel' | 'url' | 'number';
 }
 
 export const TextField = <
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, number | string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
-  props: TextFieldProps<TFormValues, TName>,
+  props: TextFieldProps<TFieldValues, TName>,
 ): React.ReactElement => {
   const {
     name,
@@ -38,27 +38,27 @@ export const TextField = <
     placeholder,
     labelChildren,
     labelClassName,
-    defaultValue,
     ...textInputProps
   } = useCombinedPropsWithKit({
     name: 'TextField',
     props,
   });
 
-  const controller = useController({ name, control, defaultValue: defaultValue as any });
-
   return (
-    <Field
-      {...{ className, label, required, labelChildren, labelClassName }}
-      error={controller.fieldState.error}
-    >
-      <TextInput
-        {...controller.field}
-        defaultValue={defaultValue}
-        error={!!controller.fieldState.error}
-        placeholder={placeholder ?? label}
-        {...textInputProps}
-      />
-    </Field>
+    <Controller
+      control={control}
+      defaultValue={'' as any}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <Field {...{ className, label, required, labelChildren, labelClassName }} error={error}>
+          <TextInput
+            error={!!error}
+            placeholder={placeholder ?? label}
+            {...field}
+            {...textInputProps}
+          />
+        </Field>
+      )}
+    />
   );
 };

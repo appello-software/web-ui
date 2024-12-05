@@ -47,21 +47,21 @@ export type SelectValueType<
         : TValue
       : never
     : Extract<TValue, NewSelectOption> extends never
-    ? never
-    : TIsClearable extends true
-    ? Extract<TValue, null> extends never
       ? never
-      : TValue
-    : TValue
+      : TIsClearable extends true
+        ? Extract<TValue, null> extends never
+          ? never
+          : TValue
+        : TValue
   : TIsMulti extends true
-  ? TValue extends unknown[]
-    ? TValue
-    : never
-  : TIsClearable extends true
-  ? Extract<TValue, null> extends never
-    ? never
-    : TValue
-  : TValue;
+    ? TValue extends unknown[]
+      ? TValue
+      : never
+    : TIsClearable extends true
+      ? Extract<TValue, null> extends never
+        ? never
+        : TValue
+      : TValue;
 
 export type SelectOnChange<
   TValue,
@@ -118,6 +118,11 @@ export interface SelectProps<
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >['closeMenuOnScroll'];
+  formatOptionLabel?: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['formatOptionLabel'];
 }
 
 export const Select = <
@@ -147,6 +152,7 @@ export const Select = <
     multiValueContent,
     isOptionDisabled,
     menuPortalTarget,
+    formatOptionLabel,
     closeMenuOnScroll,
   } = useCombinedPropsWithKit({
     name: 'Select',
@@ -265,6 +271,7 @@ export const Select = <
     isSearchable,
     hideSelectedOptions,
     closeMenuOnScroll,
+    formatOptionLabel,
   } as ReactSelectProps<SelectOptionType<TValue>, TIsMulti, GroupBase<SelectOptionType<TValue>>>;
 
   if (isCreatable) {

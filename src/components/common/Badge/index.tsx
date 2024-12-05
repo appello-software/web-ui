@@ -3,7 +3,7 @@ import './styles.scss';
 import clsx from 'clsx';
 import React, { FC, ReactNode } from 'react';
 
-import { Icon } from '~/components/common/Icon';
+import { Icon, IconName } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export enum BadgeColor {
@@ -12,12 +12,18 @@ export enum BadgeColor {
   BLUE = 'blue',
   RED = 'red',
   ORANGE = 'orange',
+  PINK = 'pink',
+  YELLOW = 'yellow',
+  GREEN_LIGHT = 'green-light',
+  CYAN_DARK = 'cyan-dark',
+  CYAN_LIGHT = 'cyan-light',
+  PURPLE = 'purple',
 }
 
 export interface BadgeProps {
   children: ReactNode;
   color: BadgeColor;
-  icon?: string;
+  icon?: IconName;
   filled?: boolean;
 }
 

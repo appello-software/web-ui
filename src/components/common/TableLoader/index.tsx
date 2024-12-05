@@ -1,15 +1,21 @@
 import clsx from 'clsx';
 import React, { FC, Fragment } from 'react';
-import ContentLoader from 'react-content-loader';
+import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
 
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface TableLoaderProps {
   className?: string;
+  rowsCount?: number;
+  contentLoaderProps?: IContentLoaderProps;
 }
 
 export const TableLoader: FC<TableLoaderProps> = props => {
-  const { className } = useCombinedPropsWithKit({
+  const {
+    className,
+    rowsCount = 10,
+    contentLoaderProps,
+  } = useCombinedPropsWithKit({
     name: 'TableLoader',
     props,
   });
@@ -20,8 +26,9 @@ export const TableLoader: FC<TableLoaderProps> = props => {
       className={clsx('pointer-events-none', className)}
       foregroundColor="hsl(var(--gray-7-color) / 50%)"
       viewBox="0 0 1112 800"
+      {...contentLoaderProps}
     >
-      {Array.from({ length: 10 }).map((_, index) => {
+      {Array.from({ length: rowsCount }).map((_, index) => {
         const y = index * 120;
         const y2 = y + 60;
 

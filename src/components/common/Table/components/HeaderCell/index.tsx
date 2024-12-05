@@ -5,6 +5,7 @@ import React, { ReactElement } from 'react';
 
 import { Icon } from '~/components/common/Icon';
 
+// eslint-disable-next-line css-modules/no-unused-class
 import styles from '../../styles.module.scss';
 
 interface HeaderCellProps<TData> {
@@ -15,7 +16,7 @@ export const HeaderCell = <TData extends RowData>({
   header,
 }: HeaderCellProps<TData>): ReactElement => {
   return (
-    <th className={styles['head-cell']}>
+    <th className={styles['head-cell']} colSpan={header.colSpan}>
       <div
         className={styles['head-cell__body']}
         {...(header.column.getCanSort()

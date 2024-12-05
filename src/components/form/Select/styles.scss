@@ -14,6 +14,11 @@ body .react-select {
     border-color: hsl(var(--red-color));
   }
 
+  &--is-disabled {
+    pointer-events: all;
+    cursor: not-allowed;
+  }
+
   &__menu-portal {
     z-index: 999 !important;
   }
@@ -42,7 +47,13 @@ body .react-select {
     border: 1px solid hsl(var(--gray-5-color));
     border-radius: 0.37rem;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+
+    &--is-disabled {
+      cursor: not-allowed;
+    }
   }
 
   &__control--is-focused &__input-container {
@@ -83,11 +94,7 @@ body .react-select {
     &--is-disabled {
       background-color: hsl(var(--gray-7-color));
       color: hsl(var(--gray-3-color));
-      cursor: default;
-    }
-
-    &:not(&--is-disabled):hover {
-      cursor: pointer;
+      cursor: not-allowed;
     }
 
     &:not(&--is-selected, &--is-disabled):hover {
@@ -128,7 +135,9 @@ body .react-select {
       display: flex;
       padding-left: 4px;
       padding-right: 4px;
-      transition: background-color 0.2s ease-in-out, opacity 0.1s;
+      transition:
+        background-color 0.2s ease-in-out,
+        opacity 0.1s;
 
       &:hover {
         background-color: hsl(var(--gray-6-color));

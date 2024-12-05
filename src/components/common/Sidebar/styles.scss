@@ -22,6 +22,7 @@
   }
 
   &__nav-container {
+    overflow-y: auto;
     margin-top: 1.75rem;
     padding-inline: 0.75rem;
   }
@@ -73,21 +74,23 @@
   }
 
   &__footer {
-    display: flex;
+    flex-direction: column;
     padding-inline: var(--padding-x);
     margin-top: auto;
-    align-items: center;
+  }
 
-    &--with-user-right-element {
-      justify-content: space-between;
-      gap: 10px;
-    }
+  &__footer-user-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.64rem;
   }
 
   &__footer-user-info {
     display: flex;
     margin-top: auto;
     align-items: center;
+    text-align: left;
     padding-inline: 0;
   }
 
@@ -122,6 +125,10 @@
     display: none;
   }
 
+  &__floating {
+    display: none;
+  }
+
   &__item--expanded ~ &__submenu {
     display: block;
   }
@@ -134,17 +141,12 @@
   }
 }
 
-@media screen and (max-width: 1400px) {
+@mixin collapsedSidebar {
   .sidebar {
-    width: 3.75rem;
-    padding-inline: 0.75rem;
-
     &__footer {
+      display: flex;
+      flex-direction: column;
       padding-inline: 0;
-    }
-
-    &__footer-user-right-element {
-      display: none;
     }
 
     &__user-photo {
@@ -188,7 +190,7 @@
       display: none;
     }
 
-    &__submenu &__item-title {
+    &__floating .sidebar__item-title {
       display: block;
     }
 
@@ -201,30 +203,45 @@
       }
     }
 
-    &__item ~ &__submenu {
+    &__item ~ .sidebar__submenu {
       display: none;
     }
 
-    &__list-item:hover &__submenu {
+    &__floating {
       display: block;
+      height: 400px;
+      overflow-y: auto;
     }
 
-    &__submenu {
-      position: absolute;
-      left: 100%;
-      top: 0;
+    &__floating-menu {
       background-color: hsl(var(--primary-color));
       width: 14rem;
       padding: 0.25rem 0;
       border-radius: 0.25rem;
     }
 
-    &__submenu &__item {
+    &__floating-menu &__item {
       padding: 0.6rem 1rem;
     }
 
     &__nav-icon {
       margin-right: 0;
     }
+  }
+}
+
+.sidebar.sidebar--collapsed {
+  width: 3.75rem;
+  padding-inline: 0.75rem;
+
+  @include collapsedSidebar;
+}
+
+@media screen and (max-width: 1400px) {
+  .sidebar:not(.sidebar--collapsed) {
+    width: 3.75rem;
+    padding-inline: 0.75rem;
+
+    @include collapsedSidebar;
   }
 }

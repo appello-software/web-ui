@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 
 import { Field, FieldProps } from '~/components/form/Field';
 import { TextArea, TextAreaProps } from '~/components/form/TextArea';
@@ -15,20 +15,20 @@ type AllowedFieldProps = Pick<
 >;
 
 export interface TextAreaFieldProps<
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends AllowedInputProps,
     AllowedFieldProps {
   name: TName;
-  control: Control<TFormValues>;
+  control: Control<TFieldValues>;
   textAreaClassName?: string;
 }
 
 export const TextAreaField = <
-  TFormValues extends FieldValues,
-  TName extends FieldPathByValue<TFormValues, string>,
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
-  props: TextAreaFieldProps<TFormValues, TName>,
+  props: TextAreaFieldProps<TFieldValues, TName>,
 ): React.ReactElement => {
   const {
     name,
@@ -40,27 +40,28 @@ export const TextAreaField = <
     placeholder,
     labelChildren,
     labelClassName,
-    defaultValue,
     ...textAreaProps
   } = useCombinedPropsWithKit({
     name: 'TextAreaField',
     props,
   });
 
-  const controller = useController({ name, control, defaultValue: defaultValue as any });
-
   return (
-    <Field
-      {...{ className, label, required, labelChildren, labelClassName }}
-      error={controller.fieldState.error}
-    >
-      <TextArea
-        {...controller.field}
-        className={textAreaClassName}
-        error={!!controller.fieldState.error}
-        placeholder={placeholder ?? label}
-        {...textAreaProps}
-      />
-    </Field>
+    <Controller
+      control={control}
+      defaultValue={'' as any}
+      name={name}
+      render={({ field, fieldState: { error } }) => (
+        <Field {...{ className, label, required, labelChildren, labelClassName }} error={error}>
+          <TextArea
+            className={textAreaClassName}
+            error={!!error}
+            placeholder={placeholder ?? label}
+            {...field}
+            {...textAreaProps}
+          />
+        </Field>
+      )}
+    />
   );
 };

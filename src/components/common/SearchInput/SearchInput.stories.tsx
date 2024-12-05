@@ -1,5 +1,5 @@
-import { noop } from '@appello/common';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
+import React, { useState } from 'react';
 
 import { SearchInput } from '.';
 
@@ -11,10 +11,8 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Standard: React.FC = () => {
+  const [value, setValue] = useState('');
 
-export const Standard: Story = {
-  args: {
-    onChange: noop,
-  },
+  return <SearchInput defaultValue={value} onChange={setValue} />;
 };
