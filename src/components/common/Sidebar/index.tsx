@@ -2,9 +2,8 @@ import './styles.scss';
 
 import clsx from 'clsx';
 import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
 
-import { IconName } from '~/components';
+import { IconName, Link } from '~/components';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import { NavItem } from './components/NavItem';
@@ -33,6 +32,7 @@ export interface SidebarProps {
   isCollapsed?: boolean;
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
+  onNavigate?: (to: string) => void;
   footerTopElement?: React.ReactNode;
   footerBottomElement?: React.ReactNode;
   logoPath?: string;
@@ -46,6 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     user,
     rightHeaderElement,
     userInfoRightElement,
+    onNavigate,
     footerTopElement,
     footerBottomElement,
     isCollapsed,
@@ -60,11 +61,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   return (
     <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
       <header className="sidebar__header">
-        <Link className="sidebar__logo-link" to={logoPath}>
+        <Link className="sidebar__logo-link" to={logoPath} onNavigate={onNavigate}>
           <img alt="logo" className="sidebar__logo" src={logo} />
         </Link>
         {smallLogo && (
-          <Link className="sidebar__logo-link--collapsed" to={logoPath}>
+          <Link className="sidebar__logo-link--collapsed" to={logoPath} onNavigate={onNavigate}>
             <img alt="minimized logo" className="sidebar__logo" src={smallLogo} />
           </Link>
         )}
@@ -73,7 +74,12 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       <nav className="sidebar__nav-container">
         <ul>
           {items.map(item => (
-            <NavItem className="sidebar__list-item" item={item} key={item.title} />
+            <NavItem
+              className="sidebar__list-item"
+              item={item}
+              key={item.title}
+              onNavigate={onNavigate}
+            />
           ))}
         </ul>
       </nav>

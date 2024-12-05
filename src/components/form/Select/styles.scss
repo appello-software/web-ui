@@ -47,7 +47,9 @@ body .react-select {
     border: 1px solid hsl(var(--gray-5-color));
     border-radius: 0.37rem;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
 
     &--is-disabled {
       cursor: not-allowed;
@@ -133,7 +135,9 @@ body .react-select {
       display: flex;
       padding-left: 4px;
       padding-right: 4px;
-      transition: background-color 0.2s ease-in-out, opacity 0.1s;
+      transition:
+        background-color 0.2s ease-in-out,
+        opacity 0.1s;
 
       &:hover {
         background-color: hsl(var(--gray-6-color));

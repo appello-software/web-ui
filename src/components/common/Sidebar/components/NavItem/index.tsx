@@ -9,18 +9,19 @@ import {
 } from '@floating-ui/react';
 import clsx from 'clsx';
 import React, { useLayoutEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 
-import { Icon } from '~/components/common/Icon';
+import { Icon, Link } from '~/components';
+import { useLocation } from '~/hooks';
 
 import { SidebarItem } from '../..';
 
 interface Props {
   item: SidebarItem;
   className?: string;
+  onNavigate?: (to: string) => void;
 }
 
-export const NavItem: React.FC<Props> = ({ item, className }) => {
+export const NavItem: React.FC<Props> = ({ item, className, onNavigate }) => {
   const location = useLocation();
 
   const { value: isHover, set: setHover } = useSwitchValue(false);
@@ -59,14 +60,14 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
   const renderNestedItems = () =>
     item?.items?.map((subItem, index) => (
       <li key={index}>
-        <NavLink
+        <Link
           end
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
           to={subItem.link}
         >
           <span className="sidebar__item-title">{subItem.title}</span>
           {subItem?.navRightContent?.(subItem)}
-        </NavLink>
+        </Link>
       </li>
     ));
 
@@ -105,14 +106,15 @@ export const NavItem: React.FC<Props> = ({ item, className }) => {
       )}
 
       {!item.items && (
-        <NavLink
+        <Link
           className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
           to={item.link}
+          onNavigate={onNavigate}
         >
           <Icon className="sidebar__nav-icon" name={item.icon} />
           <span className="sidebar__item-title">{item.title}</span>
           {item?.navRightContent?.(item)}
-        </NavLink>
+        </Link>
       )}
     </li>
   );

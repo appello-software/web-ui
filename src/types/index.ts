@@ -18,6 +18,7 @@ import {
   IconContainerProps,
   IconProps,
   InlineFieldsProps,
+  LinkProps,
   LoaderProps,
   ModalProps,
   PaginationProps,
@@ -52,6 +53,7 @@ export interface UIComponents {
   FileUpload: FileUploadProps<any>;
   Icon: IconProps;
   IconContainer: IconContainerProps;
+  Link: LinkProps;
   Loader: LoaderProps;
   Modal: ModalProps;
   Pagination: PaginationProps;
