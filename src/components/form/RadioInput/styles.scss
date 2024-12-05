@@ -30,7 +30,9 @@
     border-radius: 50%;
     border: 1px solid hsl(var(--gray-4-color));
     background-color: hsl(var(--white-color));
-    transition: background-color 0.2s, opacity 0.2s;
+    transition:
+      background-color 0.2s,
+      opacity 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;

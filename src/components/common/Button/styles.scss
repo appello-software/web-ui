@@ -7,7 +7,9 @@
   border-radius: 5px;
   justify-content: center;
 
-  transition: background-color 0.2s ease-in-out, opacity 0.1s;
+  transition:
+    background-color 0.2s ease-in-out,
+    opacity 0.1s;
 
   &:not(&--only-icon) {
     padding-inline: 1rem;

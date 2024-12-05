@@ -14,14 +14,18 @@
   position: relative;
   width: 20px;
   height: 20px;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
   border: 1px solid hsl(var(--gray-4-color));
   border-radius: 3px;
 
   background-color: hsl(var(--white-color));
 
   &__icon {
-    transition: opacity 0.2s, transform 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
     transform: scale(0);
     opacity: 0;
     color: hsl(var(--white-color));
