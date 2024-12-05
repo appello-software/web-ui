@@ -15,5 +15,6 @@ type Story = StoryObj<typeof meta>;
 export const Standard: Story = {
   args: {
     children: 'Some link',
+    onNavigate: () => {},
   },
 };

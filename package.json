@@ -18,10 +18,11 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && npx rollup -c",
-    "prettier": "prettier --write src/**/*.{ts,tsx,scss}",
     "commit": "git add . && npx git-cz",
-    "format:lint": "eslint --quiet src/**/*.{ts,tsx}",
-    "format:prettier": "prettier --no-error-on-unmatched-pattern --write src/**/*.{ts,tsx,scss,json,css,js}",
+    "format:lint": "eslint --quiet 'src/**/*.{ts,tsx}'",
+    "format:lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "format:prettier": "prettier --check 'src/**/*.{ts,tsx,scss,json,css,js,graphql}'",
+    "format:prettier:fix": "prettier --write 'src/**/*.{ts,tsx,scss,json,css,js,graphql}'",
     "check-types": "tsc -p tsconfig.json",
     "prepare-release": "npx lint-staged && npm run build",
     "release:alpha": "npm run prepare-release && npm version prerelease --preid=alpha && npm publish --tag alpha && after-release",
@@ -148,10 +149,10 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run format:lint"
+      "npm run format:lint:fix"
     ],
     "src/**/*.{ts,tsx,scss,json,css,js,graphql}": [
-      "npm run format:prettier"
+      "npm run format:prettier:fix"
     ]
   },
   "homepage": "https://main--670460f5d4ff38a07b902ee1.chromatic.com",

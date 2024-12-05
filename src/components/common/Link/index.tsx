@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { useCombinedPropsWithKit, useMatchUrl, usePathname } from '~/hooks';
@@ -38,7 +36,7 @@ export const Link: React.FC<LinkProps> = props => {
   };
 
   return (
-    <a className={computedClassName} onClick={onClick} {...linkProps}>
+    <a aria-hidden="true" className={computedClassName} onClick={onClick} {...linkProps}>
       {children}
     </a>
   );
