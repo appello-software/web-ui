@@ -18,7 +18,6 @@ export enum BadgeColor {
   CYAN_DARK = 'cyan-dark',
   CYAN_LIGHT = 'cyan-light',
   PURPLE = 'purple',
-  CUSTOM = 'custom',
 }
 
 export interface BadgeProps {
@@ -26,25 +25,28 @@ export interface BadgeProps {
   color: BadgeColor;
   icon?: IconName;
   filled?: boolean;
-  badgeStyle?: React.CSSProperties; // for custom badge styles
-  textStyle?: React.CSSProperties; // for custom text styles
+  badgeBackground?: string;
+  textWeight?: string;
+  textColor?: string;
 }
 
 export const Badge: FC<BadgeProps> = props => {
-  const { children, color, icon, filled, badgeStyle, textStyle } = useCombinedPropsWithKit({
-    name: 'Badge',
-    props,
-  });
-
-  const isCustomStyle = color === BadgeColor.CUSTOM;
+  const { children, color, icon, filled, badgeBackground, textWeight, textColor } =
+    useCombinedPropsWithKit({
+      name: 'Badge',
+      props,
+    });
 
   return (
     <div
       className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}
-      style={isCustomStyle ? badgeStyle : undefined}
+      style={{ backgroundColor: badgeBackground } as React.CSSProperties}
     >
       {icon !== undefined && <Icon className="badge__icon" name={icon} size={14} />}
-      <p className="badge__text" style={isCustomStyle ? textStyle : undefined}>
+      <p
+        className="badge__text"
+        style={{ fontWeight: textWeight, color: textColor } as React.CSSProperties}
+      >
         {children}
       </p>
     </div>
