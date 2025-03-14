@@ -7,7 +7,7 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface RadioInputProps extends Omit<AllHTMLAttributes<HTMLInputElement>, 'label'> {
   label?: ReactNode | string;
-  labelClassName?: string;
+  labelClassName?: React.CSSProperties;
 }
 
 export const RadioInput: React.FC<RadioInputProps> = props => {
@@ -29,7 +29,9 @@ export const RadioInput: React.FC<RadioInputProps> = props => {
       />
       <div className="radio-input__check-mark" />
       {typeof label === 'string' ? (
-        <div className={clsx('radio-input__label-text', labelClassName)}>{label}</div>
+        <div className={clsx('radio-input__label-text')} style={labelClassName}>
+          {label}
+        </div>
       ) : (
         label
       )}
