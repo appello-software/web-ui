@@ -8,12 +8,13 @@ import styles from './styles.module.scss';
 
 export interface CheckboxProps extends Omit<React.AllHTMLAttributes<HTMLInputElement>, 'label'> {
   label?: string | ReactNode | null;
+  borderColor?: string;
   checkedColor?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { label, className, checkedColor, ...inputProps } = useCombinedPropsWithKit({
+  const { label, className, checkedColor, borderColor, ...inputProps } = useCombinedPropsWithKit({
     name: 'Checkbox',
     props,
   });
@@ -34,7 +35,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props
         type="checkbox"
         {...inputProps}
       />
-      <div className={styles['square']}>
+      <div className={styles['square']} style={{ borderColor }}>
         <Icon className={styles['square__icon']} name="check" size={18} />
       </div>
       {typeof label === 'string' ? <p className={styles['label']}>{label}</p> : label}

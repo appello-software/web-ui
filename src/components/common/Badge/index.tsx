@@ -1,7 +1,7 @@
 import './styles.scss';
 
 import clsx from 'clsx';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, HTMLAttributes, ReactNode } from 'react';
 
 import { Icon, IconName } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -20,33 +20,25 @@ export enum BadgeColor {
   PURPLE = 'purple',
 }
 
-export interface BadgeProps {
+type AllowedDivProps = Pick<HTMLAttributes<HTMLDivElement>, 'className' | 'style'>;
+
+export interface BadgeProps extends AllowedDivProps {
   children: ReactNode;
   color: BadgeColor;
   icon?: IconName;
   filled?: boolean;
-  badgeBackground?: string;
-  textWeight?: string;
-  textColor?: string;
 }
 
 export const Badge: FC<BadgeProps> = props => {
-  const { children, color, icon, filled, badgeBackground, textWeight, textColor } =
-    useCombinedPropsWithKit({
-      name: 'Badge',
-      props,
-    });
+  const { children, color, icon, filled, className, style } = useCombinedPropsWithKit({
+    name: 'Badge',
+    props,
+  });
 
   return (
-    <div
-      className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}
-      style={{ backgroundColor: badgeBackground } as React.CSSProperties}
-    >
+    <div className={clsx('badge', `badge--${color}`, { 'badge--filled': filled }, className)}>
       {icon !== undefined && <Icon className="badge__icon" name={icon} size={14} />}
-      <p
-        className="badge__text"
-        style={{ fontWeight: textWeight, color: textColor } as React.CSSProperties}
-      >
+      <p className="badge__text" style={style}>
         {children}
       </p>
     </div>
