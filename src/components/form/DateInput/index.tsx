@@ -1,7 +1,7 @@
 import { useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import React, { ReactElement, useMemo, useRef } from 'react';
+import React, { ReactElement, ReactNode, useMemo, useRef } from 'react';
 import { Matcher } from 'react-day-picker';
 
 import {
@@ -26,6 +26,7 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     disabledDate?: Matcher;
     iconAfterName?: string;
     disabled?: boolean;
+    afterElement?: ReactNode;
   };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
@@ -41,6 +42,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     iconAfterName = 'down-arrow',
     yearsLength,
     disabled,
+    afterElement,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -119,13 +121,16 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           disabled={disabled}
           error={error}
           iconAfterElement={
-            <Icon
-              className={clsx({
-                [styles['date-input__arrow']]: isCalendarVisible,
-                [styles['date-input__arrow__disabled']]: disabled,
-              })}
-              name={iconAfterName || 'down-arrow'}
-            />
+            <>
+              <Icon
+                className={clsx({
+                  [styles['date-input__arrow']]: isCalendarVisible,
+                  [styles['date-input__arrow__disabled']]: disabled,
+                })}
+                name={iconAfterName || 'down-arrow'}
+              />
+              {afterElement}
+            </>
           }
           iconBeforeElement={
             <Icon

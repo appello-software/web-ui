@@ -13,6 +13,7 @@ type AllowedDateInputProps = Pick<
   | 'inputSize'
   | 'disabledDate'
   | 'iconAfterName'
+  | 'afterElement'
   | 'yearsLength'
   | 'mode'
   | 'disabled'
@@ -52,6 +53,7 @@ export const DateField = <
     yearsLength,
     mode,
     disabled,
+    afterElement,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -91,6 +93,7 @@ export const DateField = <
       }}
     >
       <DateInput
+        afterElement={afterElement}
         disabled={disabled}
         disabledDate={disabledDate}
         error={!!controller.fieldState.error}
