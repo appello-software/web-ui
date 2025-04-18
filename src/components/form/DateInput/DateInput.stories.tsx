@@ -39,10 +39,10 @@ export const WithRightContent: React.FC = () => {
 
   return (
     <DateInput
-      afterElement={<Icon name="bell" size={16} />}
       iconAfterElementClassName={styles.iconAfterClassName}
       inputClassName={styles.inputClassName}
       mode="range"
+      rightElement={<Icon className={styles.rightElement} name="bell" size={16} />}
       value={controller.field.value}
       onChange={controller.field.onChange}
     />

@@ -38,13 +38,13 @@ export const WithRightContent: React.FC = () => {
 
   return (
     <DateField
-      afterElement={<Icon name="bell" size={16} />}
       control={form.control}
       iconAfterElementClassName={styles.iconAfterClassName}
       inputClassName={styles.inputClassName}
       label="Date"
       mode="range"
       name="date"
+      rightElement={<Icon className={styles.rightElement} name="bell" size={16} />}
     />
   );
 };
