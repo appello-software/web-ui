@@ -27,6 +27,8 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     iconAfterName?: string;
     disabled?: boolean;
     afterElement?: ReactNode;
+    iconAfterElementClassName?: string;
+    inputClassName?: string;
   };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
@@ -43,6 +45,8 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     yearsLength,
     disabled,
     afterElement,
+    iconAfterElementClassName,
+    inputClassName,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -127,20 +131,25 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
                   [styles['date-input__arrow']]: isCalendarVisible,
                   [styles['date-input__arrow__disabled']]: disabled,
                 })}
+                height={20}
                 name={iconAfterName || 'down-arrow'}
+                width={20}
               />
               {afterElement}
             </>
           }
+          iconAfterElementClassName={iconAfterElementClassName}
           iconBeforeElement={
             <Icon
               className={clsx({
                 [styles['date-input__arrow__disabled']]: disabled,
               })}
+              height={20}
               name="calendar"
+              width={20}
             />
           }
-          inputClassName={styles['date-input__input']}
+          inputClassName={clsx(styles['date-input__input'], inputClassName)}
           placeholder={placeholder}
           ref={inputRef}
           size={inputSize}

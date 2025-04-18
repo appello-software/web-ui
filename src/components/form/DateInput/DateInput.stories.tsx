@@ -4,7 +4,10 @@ import React from 'react';
 import { DateRange } from 'react-day-picker';
 import { useController, useForm } from 'react-hook-form';
 
+import { Icon } from '~/components';
+
 import { DateInput } from '.';
+import styles from './story.module.scss';
 
 const meta = {
   title: 'Components/Inputs/DateInput',
@@ -27,5 +30,21 @@ export const WithRange: React.FC = () => {
 
   return (
     <DateInput mode="range" value={controller.field.value} onChange={controller.field.onChange} />
+  );
+};
+
+export const WithRightContent: React.FC = () => {
+  const form = useForm<{ dateRange: Nullable<DateRange> }>({ defaultValues: { dateRange: null } });
+  const controller = useController({ name: 'dateRange', control: form.control });
+
+  return (
+    <DateInput
+      afterElement={<Icon name="bell" size={16} />}
+      iconAfterElementClassName={styles.iconAfterClassName}
+      inputClassName={styles.inputClassName}
+      mode="range"
+      value={controller.field.value}
+      onChange={controller.field.onChange}
+    />
   );
 };

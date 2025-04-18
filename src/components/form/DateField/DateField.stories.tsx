@@ -1,6 +1,11 @@
+import { Nullable } from '@appello/common';
 import type { Meta } from '@storybook/react';
 import React from 'react';
+import { DateRange } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
+
+import { Icon } from '~/components';
+import styles from '~/components/form/DateInput/story.module.scss';
 
 import { DateField } from '.';
 
@@ -25,4 +30,21 @@ const TemplateWithRange: React.FC = () => {
 };
 
 export const Standard = Template.bind({});
+
 export const WithRange = TemplateWithRange.bind({});
+
+export const WithRightContent: React.FC = () => {
+  const form = useForm<{ date: Nullable<DateRange> }>({ defaultValues: { date: null } });
+
+  return (
+    <DateField
+      afterElement={<Icon name="bell" size={16} />}
+      control={form.control}
+      iconAfterElementClassName={styles.iconAfterClassName}
+      inputClassName={styles.inputClassName}
+      label="Date"
+      mode="range"
+      name="date"
+    />
+  );
+};

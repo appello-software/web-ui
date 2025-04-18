@@ -21,6 +21,7 @@ export interface TextInputProps
   onIconAfterClick?: (value: string) => void;
   inputClassName?: string;
   defaultValue?: string;
+  iconAfterElementClassName?: string;
 }
 
 export enum InputSize {
@@ -41,6 +42,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
     iconAfterElement,
     onIconBeforeClick,
     onIconAfterClick,
+    iconAfterElementClassName,
     ...inputProps
   } = useCombinedPropsWithKit({
     name: 'TextInput',
@@ -88,7 +90,11 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((pro
         </AsideIcon>
       )}
       {iconAfterElement && (
-        <AsideIcon position="after" onClick={wrapAsideIconClick(onIconAfterClick)}>
+        <AsideIcon
+          className={iconAfterElementClassName}
+          position="after"
+          onClick={wrapAsideIconClick(onIconAfterClick)}
+        >
           {iconAfterElement}
         </AsideIcon>
       )}
@@ -100,16 +106,27 @@ interface AsideIconProps {
   onClick?: () => void;
   children: ReactNode;
   position: 'before' | 'after';
+  className?: string;
 }
 
-const AsideIcon: FC<AsideIconProps> = ({ onClick, children, position }) => {
+const AsideIcon: FC<AsideIconProps> = ({
+  onClick,
+  children,
+  position,
+  className: passClassName,
+}) => {
   const className = useMemo(() => {
-    return clsx('form__input-icon', 'form__input-icon--after', {
-      'form__input-icon--after': position === 'after',
-      'form__input-icon--before': position === 'before',
-      'form__input-icon--clickable': onClick,
-    });
-  }, [onClick, position]);
+    return clsx(
+      'form__input-icon',
+      'form__input-icon--after',
+      {
+        'form__input-icon--after': position === 'after',
+        'form__input-icon--before': position === 'before',
+        'form__input-icon--clickable': onClick,
+      },
+      passClassName,
+    );
+  }, [onClick, passClassName, position]);
 
   if (onClick) {
     return (
