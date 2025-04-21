@@ -17,9 +17,10 @@ export interface ColorPickerFieldProps<TName, TFormValues extends FieldValues>
     FieldProps,
     'className' | 'label' | 'required' | 'labelChildren' | 'labelClassName'
   > {
-  size?: InputSize;
   name: TName;
   control: Control<TFormValues>;
+  size?: InputSize;
+  disabled?: boolean;
 }
 
 const generateClassName = (child?: string): string =>
@@ -31,11 +32,20 @@ export const ColorPickerField = <
 >(
   props: ColorPickerFieldProps<TName, TFormValues>,
 ): ReactElement => {
-  const { name, control, label, size, className, required, labelChildren, labelClassName } =
-    useCombinedPropsWithKit({
-      name: 'ColorPickerField',
-      props,
-    });
+  const {
+    name,
+    control,
+    label,
+    size,
+    className,
+    required,
+    labelChildren,
+    labelClassName,
+    disabled,
+  } = useCombinedPropsWithKit({
+    name: 'ColorPickerField',
+    props,
+  });
 
   const { field, fieldState } = useController({ name, control });
 
@@ -64,6 +74,7 @@ export const ColorPickerField = <
           </div>
         )}
         <TextInput
+          disabled={disabled}
           iconAfterElement={
             <Icon
               className={clsx({ [generateClassName('icon-after')]: isColorPickerOpen })}
