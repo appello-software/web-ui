@@ -62,7 +62,11 @@ export const NavItem: React.FC<Props> = ({ item, className, onNavigate }) => {
       <li key={index}>
         <Link
           end
-          className={({ isActive }) => clsx('sidebar__item', { 'sidebar__item--active': isActive })}
+          className={({ isActive }) =>
+            clsx('sidebar__item', {
+              'sidebar__item--active': isActive || subItem.isActive?.(subItem.link),
+            })
+          }
           to={subItem.link}
           onNavigate={onNavigate}
         >

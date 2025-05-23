@@ -95,6 +95,7 @@ export interface SelectProps<
   isClearable?: TIsClearable;
   hasError?: boolean;
   disabled?: boolean;
+  maxMenuHeight?: number;
   hideSelectedOptions?: boolean;
   isCreatable?: TIsCreatable;
   isSearchable?: boolean;
@@ -103,6 +104,16 @@ export interface SelectProps<
     TIsMulti,
     GroupBase<SelectOptionType<TValue>>
   >['isOptionDisabled'];
+  onBlur?: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['onBlur'];
+  menuPlacement?: ReactSelectProps<
+    SelectOptionType<TValue>,
+    TIsMulti,
+    GroupBase<SelectOptionType<TValue>>
+  >['menuPlacement'];
   components?: SelectComponentsConfig<
     SelectOptionType<TValue>,
     TIsMulti,

@@ -16,6 +16,7 @@ export interface SidebarItem {
     navRightContent?: (item: Omit<SidebarItem, 'icon' | 'items'>) => ReactElement;
   })[];
   navRightContent?: (item: SidebarItem) => ReactElement;
+  isActive?: (to: string) => boolean;
 }
 
 export interface SidebarProps {
