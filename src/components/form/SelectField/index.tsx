@@ -120,6 +120,12 @@ export const SelectField = <
     TIsClearable,
     TIsCreatable
   >;
+  const customOnBlur = controller.field.onBlur as SelectProps<
+    TValue,
+    TIsMulti,
+    TIsClearable,
+    TIsCreatable
+  >['onBlur'];
   const isOptionDisabled = passIsOptionDisabled as SelectProps<
     TValue,
     TIsMulti,
@@ -154,7 +160,7 @@ export const SelectField = <
           formatOptionLabel,
           maxMenuHeight,
           menuPlacement,
-          onBlur,
+          onBlur: onBlur || customOnBlur,
         }}
         hasError={!!controller.fieldState.error}
       />
