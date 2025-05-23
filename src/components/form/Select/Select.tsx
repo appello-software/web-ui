@@ -165,6 +165,9 @@ export const Select = <
     menuPortalTarget,
     formatOptionLabel,
     closeMenuOnScroll,
+    onBlur,
+    maxMenuHeight = 300,
+    menuPlacement = 'auto',
   } = useCombinedPropsWithKit({
     name: 'Select',
     props,
@@ -267,8 +270,8 @@ export const Select = <
     classNamePrefix: 'react-select',
     menuPortalTarget: menuTarget,
     onChange: handleChange,
-    maxMenuHeight: 300,
-    menuPlacement: 'auto',
+    maxMenuHeight,
+    menuPlacement,
     menuPosition: 'fixed',
     unstyled: true,
     isClearable,
@@ -283,6 +286,7 @@ export const Select = <
     hideSelectedOptions,
     closeMenuOnScroll,
     formatOptionLabel,
+    onBlur,
   } as ReactSelectProps<SelectOptionType<TValue>, TIsMulti, GroupBase<SelectOptionType<TValue>>>;
 
   if (isCreatable) {

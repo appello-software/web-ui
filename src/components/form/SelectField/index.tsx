@@ -39,6 +39,9 @@ type AllowedSelectProps<
   | 'menuPortalTarget'
   | 'closeMenuOnScroll'
   | 'formatOptionLabel'
+  | 'onBlur'
+  | 'menuPlacement'
+  | 'maxMenuHeight'
 >;
 
 export interface SelectFieldProps<
@@ -96,6 +99,9 @@ export const SelectField = <
     labelChildren,
     labelClassName,
     formatOptionLabel,
+    maxMenuHeight,
+    menuPlacement,
+    onBlur,
   } = useCombinedPropsWithKit({
     name: 'SelectField',
     props,
@@ -146,6 +152,9 @@ export const SelectField = <
           menuPortalTarget,
           closeMenuOnScroll,
           formatOptionLabel,
+          maxMenuHeight,
+          menuPlacement,
+          onBlur,
         }}
         hasError={!!controller.fieldState.error}
       />
