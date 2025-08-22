@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import React, { useId } from 'react';
+import React, { type ReactNode, useId } from 'react';
 
 import { Icon } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 import styles from './styles.module.scss';
 
-export interface CheckboxProps extends React.AllHTMLAttributes<HTMLInputElement> {
-  label?: string;
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string | ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -32,7 +32,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props
       <div className={styles['square']}>
         <Icon className={styles['square__icon']} name="check" size={18} />
       </div>
-      {label && <p className={styles['label']}>{label}</p>}
+      {typeof label === 'string' ? <p className={styles['label']}>{label}</p> : label}
     </label>
   );
 });
