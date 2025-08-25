@@ -52,7 +52,7 @@ const defaultSidebarProps: SidebarProps = {
 
 const defaultUser = {
   fullName: 'John Doe',
-  email: 'johndoe@gmail.com',
+  email: 'johndoefermfekrfklmerklfklerfklermfklerklmfmklerfklerfmlekrmf@gmail.com',
   photoPlaceholder: '/photo-placeholder.svg',
 };
 
