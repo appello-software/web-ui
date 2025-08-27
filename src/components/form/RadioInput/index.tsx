@@ -7,13 +7,15 @@ import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface RadioInputProps extends AllHTMLAttributes<HTMLInputElement> {
   label?: string;
+  labelClassName?: string;
 }
 
 export const RadioInput: React.FC<RadioInputProps> = props => {
-  const { checked, label, className, disabled, ...restProps } = useCombinedPropsWithKit({
-    name: 'RadioInput',
-    props,
-  });
+  const { checked, label, className, labelClassName, disabled, ...restProps } =
+    useCombinedPropsWithKit({
+      name: 'RadioInput',
+      props,
+    });
 
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
@@ -26,7 +28,7 @@ export const RadioInput: React.FC<RadioInputProps> = props => {
         {...restProps}
       />
       <div className="radio-input__check-mark" />
-      {label && <div className="radio-input__label-text">{label}</div>}
+      {label && <div className={clsx('radio-input__label-text', labelClassName)}>{label}</div>}
     </label>
   );
 };
