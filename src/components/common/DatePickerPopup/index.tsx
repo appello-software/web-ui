@@ -53,6 +53,7 @@ export interface DatePickerRangeProps {
 
 export interface DatePickerBaseProps {
   yearsLength?: number;
+  selectedDate?: Date | DateRange;
   disabledDate?: Matcher;
   callableElement: HTMLElement | null;
   onClose: () => void;
@@ -69,6 +70,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     onClose,
     callableElement,
     mode,
+    selectedDate,
     yearsLength = 100,
   } = useCombinedPropsWithKit({
     name: 'DatePickerPopup',
@@ -182,12 +184,12 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     mode === 'range'
       ? {
           mode: 'range' as const,
-          selected: value ?? undefined,
+          selected: value ?? (selectedDate as DateRange) ?? undefined,
           onSelect: handleRangeSelect,
         }
       : {
           mode: 'default' as const,
-          selected: value ?? undefined,
+          selected: value ?? (selectedDate as Date) ?? undefined,
           onDayClick: handleDayClick,
         };
 
