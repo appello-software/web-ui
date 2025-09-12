@@ -19,3 +19,4 @@ export * from './Tabs';
 export * from './TextLink';
 export * from './TimePicker';
 export * from './Toaster';
+export * from './Typography';
