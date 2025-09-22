@@ -47,16 +47,16 @@ const variantClasses: Record<TypographyVariant, string> = {
   [TypographyVariant.P6]: 'text-p6',
 };
 
-type BaseProps = {
+interface BaseProps {
   children?: ReactNode;
   text?: ReactNode;
   variant?: TypographyVariant;
   className?: string;
   truncate?: boolean;
   noWrap?: boolean;
-};
+}
 
-export type TypographyProps = BaseProps & HTMLAttributes<HTMLElement>;
+export interface TypographyProps extends BaseProps, HTMLAttributes<HTMLElement> {}
 
 export const Typography = forwardRef<HTMLElement, TypographyProps>(
   (
