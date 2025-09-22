@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import clsx from 'clsx';
 import React, { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 export enum TypographyVariant {
@@ -14,10 +15,6 @@ export enum TypographyVariant {
   P4,
   P5,
   P6,
-}
-
-function clsx(...parts: (string | false | null | undefined)[]) {
-  return parts.filter(Boolean).join(' ');
 }
 
 const tagByVariant: Record<TypographyVariant, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'> = {
