@@ -22,18 +22,19 @@ export enum BadgeColor {
 
 export interface BadgeProps {
   children: ReactNode;
-  color: BadgeColor;
+  color: BadgeColor | string;
   icon?: string;
   filled?: boolean;
+  className?: string;
 }
 
 export const Badge: FC<BadgeProps> = props => {
-  const { children, color, icon, filled } = useCombinedPropsWithKit({
+  const { children, color, icon, filled, className } = useCombinedPropsWithKit({
     name: 'Badge',
     props,
   });
   return (
-    <div className={clsx('badge', `badge--${color}`, { 'badge--filled': filled })}>
+    <div className={clsx('badge', className, `badge--${color}`, { 'badge--filled': filled })}>
       {icon !== undefined && <Icon className="badge__icon" name={icon} size={14} />}
       <p className="badge__text">{children}</p>
     </div>
