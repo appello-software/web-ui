@@ -29,6 +29,7 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     rightElement?: ReactNode;
     iconAfterElementClassName?: string;
     inputClassName?: string;
+    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
@@ -47,6 +48,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     rightElement,
     iconAfterElementClassName,
     inputClassName,
+    position,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -160,6 +162,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           {...propsByMode}
           callableElement={inputRef.current}
           disabledDate={disabledDate}
+          position={position}
           onClose={closeCalendar}
         />
       )}

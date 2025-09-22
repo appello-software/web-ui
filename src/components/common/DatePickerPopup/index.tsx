@@ -54,6 +54,7 @@ export interface DatePickerRangeProps {
 export interface DatePickerBaseProps {
   yearsLength?: number;
   disabledDate?: Matcher;
+  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   callableElement: HTMLElement | null;
   onClose: () => void;
 }
@@ -70,11 +71,11 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     callableElement,
     mode,
     yearsLength = 100,
+    position = 'bottom-left',
   } = useCombinedPropsWithKit({
     name: 'DatePickerPopup',
     props,
   });
-
   const [month, setMonth] = useState<Date>(
     () => (isDateRange(value) ? value.from : value) ?? new Date(),
   );
@@ -115,10 +116,23 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     const observer = new ResizeObserver(entries => {
       entries.forEach(entry => {
         const isHTMLElement = entry.target instanceof HTMLElement;
+
         if (isHTMLElement && containerRef.current) {
           const rect = entry.target.getBoundingClientRect();
-          containerRef.current.style.top = `${rect.bottom}px`;
-          containerRef.current.style.left = `${rect.left}px`;
+          const callableRect = callableElement?.getBoundingClientRect();
+          if (position?.includes('top')) {
+            containerRef.current.style.top = `${122}px`;
+          }
+
+          if (position?.includes('bottom')) {
+            containerRef.current.style.top = `${rect.bottom}px`;
+          }
+
+          if (position?.includes('left')) {
+            containerRef.current.style.left = `${rect.left}px`;
+          } else {
+            containerRef.current.style.right = `${rect.right - Number(callableRect?.width)}px`;
+          }
         }
       });
     });
@@ -132,7 +146,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
         observer.unobserve(callableElement);
       }
     };
-  }, [callableElement]);
+  }, [callableElement, position]);
 
   useEffect(() => {
     const calendarElement = containerRef.current;
