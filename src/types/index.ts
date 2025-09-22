@@ -39,6 +39,7 @@ import {
   TextLinkProps,
   TimeFieldProps,
   TimePickerProps,
+  TypographyProps,
 } from '~/components';
 
 export interface UIComponents {
@@ -81,6 +82,7 @@ export interface UIComponents {
   TextField: TextFieldProps<any, any>;
   TextInput: TextInputProps;
   TimeField: TimeFieldProps<any, any>;
+  Typography: TypographyProps;
 }
 
 export interface AppelloKit {
