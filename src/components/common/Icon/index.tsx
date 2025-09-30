@@ -13,7 +13,7 @@ const baseIcons = {
   magnifier: 'string',
   polygon: 'string',
   downArrow: 'string',
-  eyeCrossed: 'string',
+  'eye-crossed': 'string',
   check: 'string',
   upload: 'string',
 } as const;
