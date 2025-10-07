@@ -15,7 +15,7 @@ body .react-select {
   }
 
   &--is-disabled {
-    pointer-events: all;
+    pointer-events: none;
     cursor: not-allowed;
   }
 
