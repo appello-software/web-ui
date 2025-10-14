@@ -236,12 +236,3 @@
 
   @include collapsedSidebar;
 }
-
-@media screen and (max-width: 1400px) {
-  .sidebar:not(.sidebar--collapsed) {
-    width: 3.75rem;
-    padding-inline: 0.75rem;
-
-    @include collapsedSidebar;
-  }
-}

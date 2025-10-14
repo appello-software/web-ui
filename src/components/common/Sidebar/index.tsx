@@ -1,7 +1,8 @@
 import './styles.scss';
 
+import { useMedia } from '@appello/web-kit';
 import clsx from 'clsx';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { IconName, Link } from '~/components';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -16,7 +17,6 @@ export interface SidebarItem {
     navRightContent?: (item: Omit<SidebarItem, 'icon' | 'items'>) => ReactElement;
   })[];
   navRightContent?: (item: SidebarItem) => ReactElement;
-  isActive?: (to: string) => boolean;
 }
 
 export interface SidebarProps {
@@ -31,12 +31,19 @@ export interface SidebarProps {
   };
   onClickUserProfile?: () => void;
   isCollapsed?: boolean;
+  toggleCollapsed?: (collapse: boolean) => void;
   rightHeaderElement?: React.ReactNode;
   userInfoRightElement?: React.ReactNode;
   onNavigate?: (to: string) => void;
   footerTopElement?: React.ReactNode;
   footerBottomElement?: React.ReactNode;
   logoPath?: string;
+  isActiveMenu?: (to: string) => boolean;
+  renderLink?: (props: {
+    children: React.ReactNode;
+    className: string;
+    to: string;
+  }) => ReactElement;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
@@ -53,11 +60,19 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     isCollapsed,
     logoPath = '/',
     onClickUserProfile,
+    toggleCollapsed,
+    isActiveMenu,
+    renderLink,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
   });
   const SidebarFooterUserInfoComponent = onClickUserProfile ? 'button' : 'div';
+  const isDesktop = useMedia('(max-width: 1400px)');
+
+  useEffect(() => {
+    toggleCollapsed?.(isDesktop);
+  }, [isDesktop]);
 
   return (
     <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
@@ -77,8 +92,11 @@ export const Sidebar: React.FC<SidebarProps> = props => {
           {items.map(item => (
             <NavItem
               className="sidebar__list-item"
+              isActiveMenu={isActiveMenu}
+              isCollapsed={isCollapsed}
               item={item}
               key={item.title}
+              renderLink={renderLink}
               onNavigate={onNavigate}
             />
           ))}
