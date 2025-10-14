@@ -45,6 +45,36 @@ const defaultSidebarProps: SidebarProps = {
         },
       ],
     },
+    {
+      title: 'Settings2',
+      icon: 'add',
+      link: '/settings2',
+      items: [
+        {
+          title: 'General2',
+          link: '/settings2/general',
+        },
+        {
+          title: 'Profile2',
+          link: '/settings2/profile',
+        },
+      ],
+    },
+    {
+      title: 'Settings3',
+      icon: 'add',
+      link: '/settings3',
+      items: [
+        {
+          title: 'General3',
+          link: '/settings3/general',
+        },
+        {
+          title: 'Profile3',
+          link: '/settings3/profile',
+        },
+      ],
+    },
   ],
   logo: '/white-logo.svg',
   smallLogo: '/small-logo.svg',
@@ -364,37 +394,6 @@ export const WithClickOnUserProfile: Story = {
   name: 'Sidebar with click on user profile',
   args: {
     ...defaultSidebarProps,
-    items: [
-      {
-        title: 'Dashboard',
-        icon: 'add',
-        link: '/dashboard',
-        items: clonedList(
-          [
-            {
-              title: 'General',
-              link: '/settings/general',
-            },
-          ],
-          40,
-        ),
-      },
-      ...clonedList(defaultSidebarProps.items, 10),
-      {
-        title: 'Dashboard',
-        icon: 'add',
-        link: '/dashboard',
-        items: clonedList(
-          [
-            {
-              title: 'General',
-              link: '/settings/general',
-            },
-          ],
-          40,
-        ),
-      },
-    ],
     onClickUserProfile: () => {
       alert('User profile clicked');
     },

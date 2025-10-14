@@ -1,11 +1,13 @@
 import { useSwitchValue } from '@appello/common';
 import {
   autoUpdate,
+  FloatingPortal,
   safePolygon,
   shift,
   useFloating,
   useHover,
   useInteractions,
+  useTransitionStyles,
 } from '@floating-ui/react';
 import clsx from 'clsx';
 import React, { memo, ReactElement, useCallback, useLayoutEffect } from 'react';
@@ -77,10 +79,13 @@ export const NavItem: React.FC<Props> = memo(
     });
 
     const hover = useHover(context, {
+      enabled: isCollapsed,
       handleClose: safePolygon({
         blockPointerEvents: true,
       }),
     });
+
+    const { styles: transitionStyles } = useTransitionStyles(context);
 
     const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
 
@@ -121,19 +126,21 @@ export const NavItem: React.FC<Props> = memo(
               <Icon className="sidebar__chevron" name="downArrow" />
             </button>
 
-            <ul className="sidebar__submenu">{renderNestedItems()}</ul>
+            {!isCollapsed && <ul className="sidebar__submenu">{renderNestedItems()}</ul>}
 
             {/* Show only on <1400px */}
             {/* @TODO unify it */}
-            {isHover && isCollapsed && (
-              <div
-                className="sidebar__floating"
-                ref={refs.setFloating}
-                style={floatingStyles}
-                {...getFloatingProps()}
-              >
-                <ul className="sidebar__floating-menu">{renderNestedItems()}</ul>
-              </div>
+            {isHover && (
+              <FloatingPortal>
+                <div
+                  className="sidebar__floating"
+                  ref={refs.setFloating}
+                  style={{ ...floatingStyles, ...transitionStyles }}
+                  {...getFloatingProps()}
+                >
+                  <ul className="sidebar__floating-menu">{renderNestedItems()}</ul>
+                </div>
+              </FloatingPortal>
             )}
           </>
         )}

@@ -125,10 +125,6 @@
     display: none;
   }
 
-  &__floating {
-    display: none;
-  }
-
   &__item--expanded ~ &__submenu {
     display: block;
   }
