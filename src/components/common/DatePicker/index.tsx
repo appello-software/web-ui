@@ -16,6 +16,7 @@ export interface DatePickerProps extends Pick<DatePickerBaseProps, 'yearsLength'
   defaultValue?: Date | null;
   disabledDate?: Matcher;
   className?: string;
+  withClear?: boolean;
   leftIconElement?: ReactNode;
 }
 
@@ -28,6 +29,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     disabledDate,
     defaultValue,
     yearsLength,
+    withClear,
   } = useCombinedPropsWithKit({
     name: 'DatePicker',
     props,
@@ -45,6 +47,11 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     return format(value, 'd MMM yyyy');
   }, [value]);
 
+  const clearDate = () => {
+    setValue(null);
+    onChange?.(null);
+  };
+
   useUpdateEffect(() => {
     onChange?.(value);
   }, [value]);
@@ -55,8 +62,15 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
         {leftIconElement !== undefined && leftIconElement}
         {leftIconElement === undefined && <Icon name="calendar" size={16} />}
         {displayDate || placeholder}
-        <Icon name="down-arrow" size={18} />
+
+        {withClear && displayDate ? null : <Icon name="down-arrow" size={18} />}
       </button>
+      {withClear && displayDate && (
+        <button type="button" onClick={clearDate}>
+          <Icon name="close" size={16} />
+        </button>
+      )}
+
       {isOpen && (
         <DatePickerPopup
           callableElement={buttonRef.current}
