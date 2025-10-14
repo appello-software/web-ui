@@ -125,7 +125,7 @@ export const NavItem: React.FC<Props> = memo(
 
             {/* Show only on <1400px */}
             {/* @TODO unify it */}
-            {isHover && !isCollapsed && (
+            {isHover && isCollapsed && (
               <div
                 className="sidebar__floating"
                 ref={refs.setFloating}

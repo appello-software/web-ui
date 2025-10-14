@@ -61,6 +61,14 @@ export const LoggedOut: Story = {
   args: defaultSidebarProps,
 };
 
+export const Collapsed: Story = {
+  name: 'Sidebar collapsed',
+  args: {
+    isCollapsed: true,
+    ...defaultSidebarProps,
+  },
+};
+
 export const LoggedIn: Story = {
   name: 'Sidebar when user authorized',
   args: {
