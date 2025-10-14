@@ -1,4 +1,7 @@
 .date-picker {
+  display: flex;
+  gap: 0.43rem;
+  align-items: center;
   &__btn {
     display: flex;
     align-items: center;
