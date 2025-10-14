@@ -131,7 +131,7 @@ export const NavItem: React.FC<Props> = memo(
             {/* Show only on <1400px */}
             {/* @TODO unify it */}
             {isHover && (
-              <FloatingPortal>
+              <FloatingPortal root={document.getElementById('uisidebar')}>
                 <div
                   className="sidebar__floating"
                   ref={refs.setFloating}

@@ -32,7 +32,7 @@ const defaultSidebarProps: SidebarProps = {
     },
     {
       title: 'Settings',
-      icon: 'add',
+      icon: 'bell',
       link: '/settings',
       items: [
         {
@@ -47,7 +47,7 @@ const defaultSidebarProps: SidebarProps = {
     },
     {
       title: 'Settings2',
-      icon: 'add',
+      icon: 'calendar',
       link: '/settings2',
       items: [
         {
@@ -62,7 +62,7 @@ const defaultSidebarProps: SidebarProps = {
     },
     {
       title: 'Settings3',
-      icon: 'add',
+      icon: 'check',
       link: '/settings3',
       items: [
         {

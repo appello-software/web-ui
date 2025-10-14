@@ -75,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   }, [isDesktop]);
 
   return (
-    <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')}>
+    <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')} id="uisidebar">
       <header className="sidebar__header">
         <Link className="sidebar__logo-link" to={logoPath} onNavigate={onNavigate}>
           <img alt="logo" className="sidebar__logo" src={logo} />

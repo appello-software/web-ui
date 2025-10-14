@@ -59,6 +59,7 @@
     width: var(--icon-size);
     height: var(--icon-size);
     margin-right: var(--margin-between-icon-and-title);
+    pointer-events: none;
   }
 
   &__submenu .sidebar__item {
