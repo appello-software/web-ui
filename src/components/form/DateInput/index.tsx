@@ -1,8 +1,8 @@
-import { useSwitchValue } from '@appello/common';
+import { Nullable, useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import React, { ReactElement, useMemo, useRef } from 'react';
-import { Matcher } from 'react-day-picker';
+import React, { ReactElement, ReactNode, useMemo, useRef } from 'react';
+import { DateRange, Matcher } from 'react-day-picker';
 
 import {
   DatePickerBaseProps,
@@ -26,6 +26,11 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     disabledDate?: Matcher;
     iconAfterName?: IconName;
     disabled?: boolean;
+    rightElement?: ReactNode;
+    iconAfterElementClassName?: string;
+    inputClassName?: string;
+    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+    formatInputValue?: (value: Date | Nullable<DateRange>) => string;
   };
 
 export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
@@ -41,6 +46,11 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     iconAfterName = 'downArrow',
     yearsLength,
     disabled,
+    rightElement,
+    iconAfterElementClassName,
+    inputClassName,
+    position,
+    formatInputValue,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -124,22 +134,28 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
                 [styles['date-input__arrow']]: isCalendarVisible,
                 [styles['date-input__arrow__disabled']]: disabled,
               })}
-              name={iconAfterName || 'downArrow'}
+              height={20}
+              name={iconAfterName}
+              width={20}
             />
           }
+          iconAfterElementClassName={iconAfterElementClassName}
           iconBeforeElement={
             <Icon
               className={clsx({
                 [styles['date-input__arrow__disabled']]: disabled,
               })}
+              height={20}
               name="calendar"
+              width={20}
             />
           }
-          inputClassName={styles['date-input__input']}
+          inputClassName={clsx(styles['date-input__input'], inputClassName)}
           placeholder={placeholder}
           ref={inputRef}
+          rightElement={rightElement}
           size={inputSize}
-          value={displayDate}
+          value={formatInputValue?.(value) ?? displayDate}
           onClick={toggleCalendar}
         />
       </div>
@@ -148,6 +164,7 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
           {...propsByMode}
           callableElement={inputRef.current}
           disabledDate={disabledDate}
+          position={position}
           onClose={closeCalendar}
         />
       )}
