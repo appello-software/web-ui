@@ -97,10 +97,10 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
       }
 
       if (!to) {
-        return format(from, 'd MMM yyyy');
+        return format(from, dateFormat);
       }
 
-      return `${format(from, 'd MMM yyyy')} - ${format(to, 'd MMM yyyy')}`;
+      return `${format(from, dateFormat)} - ${format(to, dateFormat)}`;
     }
 
     return format(value, dateFormat);
