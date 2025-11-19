@@ -125,7 +125,7 @@
     "react-hook-form": "7.66.1",
     "react-hot-toast": "^2.6.0",
     "react-modal": "^3.16.3",
-    "react-nested-dropdown": "^0.0.12",
+    "react-nested-dropdown19": "^0.0.13",
     "react-select": "^5.10.2",
     "remark-gfm": "^3.0.1",
     "rollup": "^4.24.0",

@@ -1,5 +1,5 @@
 import { ToasterProps } from 'react-hot-toast';
-import { DropdownProps } from 'react-nested-dropdown';
+import { DropdownProps } from 'react-nested-dropdown19';
 
 import {
   BadgeProps,
