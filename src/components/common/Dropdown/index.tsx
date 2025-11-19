@@ -6,7 +6,7 @@ import {
   Dropdown as ReactNestedDropdown,
   type DropdownItem,
   DropdownProps,
-} from 'react-nested-dropdown';
+} from 'react-nested-dropdown19';
 
 import { useCombinedPropsWithKit } from '~/hooks';
 

@@ -57,7 +57,6 @@
     "react-hook-form": "*",
     "react-hot-toast": "*",
     "react-modal": "*",
-    "react-nested-dropdown": "*",
     "react-select": "*",
     "use-query-params": "*"
   },
