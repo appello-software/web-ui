@@ -45,8 +45,8 @@
     "react-svg": "^16.3.0"
   },
   "peerDependencies": {
-    "@appello/common": "*",
-    "@appello/web-kit": "*",
+    "@appello/common": ">=4",
+    "@appello/web-kit": ">=3",
     "@tanstack/react-table": "*",
     "@tanstack/table-core": "*",
     "clsx": "*",
@@ -62,11 +62,11 @@
     "use-query-params": "*"
   },
   "devDependencies": {
-    "@appello/commitlint-config": "^4.0.0",
-    "@appello/common": "3.4.5-alpha.2",
+    "@appello/common": "^4.0.1",
+    "@appello/commitlint-config": "^4.0.1",
     "@appello/eslint-config": "^5.0.0",
     "@appello/prettier-config": "^4.0.0",
-    "@appello/web-kit": "^2.3.3-alpha.3",
+    "@appello/web-kit": "^3.0.0",
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
@@ -137,6 +137,14 @@
     "typescript": "^5.9.3",
     "vite": "^5.4.21"
   },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run format:lint:fix"
+    ],
+    "src/**/*.{ts,tsx,scss,json,css,js,graphql}": [
+      "npm run format:prettier:fix"
+    ]
+  },
   "files": [
     "dist",
     "tsconfig.json"
@@ -145,14 +153,6 @@
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
     }
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "npm run format:lint:fix"
-    ],
-    "src/**/*.{ts,tsx,scss,json,css,js,graphql}": [
-      "npm run format:prettier:fix"
-    ]
   },
   "homepage": "https://main--670460f5d4ff38a07b902ee1.chromatic.com",
   "repository": {
