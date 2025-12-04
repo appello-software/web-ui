@@ -1,4 +1,4 @@
-import 'react-nested-dropdown/dist/styles.css';
+import 'react-nested-dropdown19/dist/styles.css';
 
 import clsx from 'clsx';
 import React, { ReactElement } from 'react';
@@ -6,7 +6,7 @@ import {
   Dropdown as ReactNestedDropdown,
   type DropdownItem,
   DropdownProps,
-} from 'react-nested-dropdown';
+} from 'react-nested-dropdown19';
 
 import { useCombinedPropsWithKit } from '~/hooks';
 
