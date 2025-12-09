@@ -30,6 +30,8 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     defaultValue,
     yearsLength,
     weekStartsOn,
+    toYear,
+    fromYear,
   } = useCombinedPropsWithKit({
     name: 'DatePicker',
     props,
@@ -63,6 +65,8 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
         <DatePickerPopup
           callableElement={buttonRef.current}
           disabledDate={disabledDate}
+          fromYear={fromYear}
+          toYear={toYear}
           value={value}
           weekStartsOn={weekStartsOn}
           yearsLength={yearsLength}
