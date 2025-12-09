@@ -52,7 +52,8 @@ export interface DatePickerRangeProps {
   ) => void;
 }
 
-export interface DatePickerBaseProps extends Pick<DayPickerDefaultProps, 'weekStartsOn'> {
+export interface DatePickerBaseProps
+  extends Pick<DayPickerDefaultProps, 'weekStartsOn' | 'fromYear' | 'toYear'> {
   yearsLength?: number;
   disabledDate?: Matcher;
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';

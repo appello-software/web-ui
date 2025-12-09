@@ -10,7 +10,8 @@ import { DatePickerBaseProps, DatePickerPopup } from '~/components/common/DatePi
 import { Icon } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
-export interface DatePickerProps extends Pick<DatePickerBaseProps, 'yearsLength' | 'weekStartsOn'> {
+export interface DatePickerProps
+  extends Pick<DatePickerBaseProps, 'yearsLength' | 'weekStartsOn' | 'fromYear' | 'toYear'> {
   placeholder?: ReactNode;
   onChange: (value: Date | null) => void;
   defaultValue?: Date | null;
