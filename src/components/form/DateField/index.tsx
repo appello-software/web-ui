@@ -21,6 +21,9 @@ type AllowedDateInputProps = Pick<
   | 'disabled'
   | 'position'
   | 'formatInputValue'
+  | 'toYear'
+  | 'fromYear'
+  | 'weekStartsOn'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -62,6 +65,9 @@ export const DateField = <
     inputClassName,
     position,
     formatInputValue,
+    fromYear,
+    toYear,
+    weekStartsOn,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -105,6 +111,7 @@ export const DateField = <
         disabledDate={disabledDate}
         error={!!controller.fieldState.error}
         formatInputValue={formatInputValue}
+        fromYear={fromYear}
         iconAfterElementClassName={iconAfterElementClassName}
         iconAfterName={iconAfterName}
         inputClassName={inputClassName}
@@ -112,6 +119,8 @@ export const DateField = <
         placeholder={placeholder ?? label}
         position={position}
         rightElement={rightElement}
+        toYear={toYear}
+        weekStartsOn={weekStartsOn}
         {...propsByMode}
       />
     </Field>
