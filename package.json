@@ -45,21 +45,21 @@
     "react-svg": "^16.3.0"
   },
   "peerDependencies": {
-    "@appello/common": ">=4",
+    "@appello/common": ">=3",
     "@appello/web-kit": ">=3",
-    "@tanstack/react-table": "^8.21.3",
-    "@tanstack/table-core": "^8.21.3",
-    "clsx": "^2.1.1",
+    "@tanstack/react-table": "^8",
+    "@tanstack/table-core": "^8",
+    "clsx": "^2",
     "react": ">=17",
     "react-dom": ">=17",
-    "react-colorful": "^5.6.1",
-    "react-content-loader": "^7.1.1",
-    "react-day-picker": "^8.10.1",
-    "react-hook-form": "^7.66.1",
+    "react-colorful": "^5",
+    "react-content-loader": "^7",
+    "react-day-picker": "^8",
+    "react-hook-form": "^7",
     "react-nested-dropdown19": "^0.0.13",
-    "react-select": "^5.10.2",
-    "react-hot-toast": "^2.6.0",
-    "react-modal": "^3.16.3"
+    "react-select": "^5",
+    "react-hot-toast": "^2",
+    "react-modal": "^3"
   },
   "devDependencies": {
     "@appello/common": "^4.0.1",
