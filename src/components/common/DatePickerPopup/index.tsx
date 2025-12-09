@@ -20,6 +20,7 @@ import {
   DateRange,
   DayClickEventHandler,
   DayPicker,
+  DayPickerDefaultProps,
   isDateRange,
   Matcher,
   SelectRangeEventHandler,
@@ -51,7 +52,8 @@ export interface DatePickerRangeProps {
   ) => void;
 }
 
-export interface DatePickerBaseProps {
+export interface DatePickerBaseProps
+  extends Pick<DayPickerDefaultProps, 'fromYear' | 'toYear' | 'weekStartsOn'> {
   yearsLength?: number;
   disabledDate?: Matcher;
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
@@ -72,10 +74,12 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     mode,
     yearsLength = 100,
     position = 'bottom-left',
+    ...restProps
   } = useCombinedPropsWithKit({
     name: 'DatePickerPopup',
     props,
   });
+
   const [month, setMonth] = useState<Date>(
     () => (isDateRange(value) ? value.from : value) ?? new Date(),
   );
@@ -210,6 +214,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
       <DayPicker
         {...propsByMode}
         className={styles['container']}
+        {...restProps}
         components={{
           CaptionLabel: props => <CaptionLabel {...props} yearsLength={yearsLength} />,
         }}
