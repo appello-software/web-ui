@@ -2,27 +2,25 @@ import 'react-day-picker/dist/style.css';
 
 import { noop, Nullable } from '@appello/common';
 import { useClickAway } from '@appello/web-kit';
-import clsx from 'clsx';
 import {
   eachMonthOfInterval,
   endOfYear,
   format,
-  isWeekend,
   setMonth,
   setYear,
   startOfDay,
+  startOfMonth,
   startOfYear,
 } from 'date-fns';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  ActiveModifiers,
   CaptionLabelProps as ReactDayCaptionLabelProps,
   DateRange,
-  DayClickEventHandler,
+  type DayEventHandler,
   DayPicker,
   isDateRange,
   Matcher,
-  SelectRangeEventHandler,
+  type PropsRange,
   useDayPicker,
 } from 'react-day-picker';
 import { createPortal } from 'react-dom';
@@ -37,18 +35,13 @@ import { formatWeekdayName } from './utils';
 export interface DatePickerDefaultProps {
   mode?: undefined;
   value: Date | null;
-  onChange: DayClickEventHandler;
+  onChange: DayEventHandler<React.MouseEvent>;
 }
 
 export interface DatePickerRangeProps {
   mode: 'range';
   value: Nullable<DateRange>;
-  onChange: (
-    range: Nullable<DateRange>,
-    selectedDay: Date,
-    activeModifiers: ActiveModifiers,
-    e: React.MouseEvent,
-  ) => void;
+  onChange: (range: Nullable<DateRange>) => void;
 }
 
 export interface DatePickerBaseProps {
@@ -84,16 +77,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     setMonth(month);
   }, []);
 
-  const renderWeekdayName = useCallback((date: Date) => {
-    const name = formatWeekdayName(date);
-    return (
-      <span className={clsx(styles['weekday'], { [styles['weekday--weekend']]: isWeekend(date) })}>
-        {name}
-      </span>
-    );
-  }, []);
-
-  const handleDayClick: DayClickEventHandler = useCallback(
+  const handleDayClick: DayEventHandler<React.MouseEvent> = useCallback(
     (day, ...args) => {
       if (mode === undefined) {
         onChange(startOfDay(day), ...args);
@@ -103,10 +87,10 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     [mode, onChange, onClose],
   );
 
-  const handleRangeSelect: SelectRangeEventHandler = useCallback(
-    (range, ...args) => {
+  const handleRangeSelect: PropsRange['onSelect'] = useCallback(
+    range => {
       if (mode === 'range') {
-        onChange(range ?? null, ...args);
+        onChange(range ?? null);
       }
     },
     [mode, onChange],
@@ -200,7 +184,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
           onSelect: handleRangeSelect,
         }
       : {
-          mode: 'default' as const,
+          mode: 'single' as const,
           selected: value ?? undefined,
           onDayClick: handleDayClick,
         };
@@ -215,13 +199,15 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
         }}
         disabled={disabledDate}
         formatters={{
-          formatWeekdayName: renderWeekdayName,
+          formatWeekdayName: date => formatWeekdayName(date),
         }}
         modifiers={{
-          weekend: isWeekend,
+          weekend: {
+            dayOfWeek: [0, 6],
+          },
         }}
         modifiersClassNames={{
-          weekend: 'rdp-day--weekend',
+          weekend: 'rdp-weekend',
           today: 'rdp-day--today',
         }}
         month={month}
@@ -236,18 +222,22 @@ interface CaptionLabelProps extends ReactDayCaptionLabelProps {
   yearsLength?: number;
 }
 
-const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }) => {
-  const { onMonthChange, month } = useDayPicker();
+const CaptionLabel: FC<CaptionLabelProps> = ({ yearsLength = 100 }) => {
+  const {
+    dayPickerProps: { onMonthChange, month },
+  } = useDayPicker();
 
-  const monthLabel = useMemo(() => format(displayMonth, 'MMMM'), [displayMonth]);
-  const monthValue = useMemo(() => `${displayMonth.getMonth()}`, [displayMonth]);
-  const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
+  const currentMonth = useMemo(() => month ?? new Date(), [month]);
+  const base = startOfMonth(currentMonth);
+  const monthLabel = useMemo(() => format(currentMonth, 'MMMM'), [currentMonth]);
+  const monthValue = useMemo(() => String(currentMonth.getMonth()), [currentMonth]); // "0".."11"
+
+  const yearValue = useMemo(() => String(currentMonth.getFullYear()), [currentMonth]);
 
   const yearsOptions = Array.from({ length: yearsLength }, (_, index) => {
     const year = new Date().getFullYear() + 5 - index;
     return { label: year.toString(), value: year.toString() };
   });
-
   const monthsOptions = eachMonthOfInterval({
     start: startOfYear(new Date()),
     end: endOfYear(new Date()),
@@ -260,7 +250,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }
       <BrowserSelect
         options={monthsOptions}
         value={monthValue}
-        onChange={e => month && onMonthChange?.(setMonth(month, Number(e.target.value)))}
+        onChange={e => onMonthChange?.(setMonth(base, Number(e.target.value)))}
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{monthLabel}</p>
@@ -270,7 +260,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }
       <BrowserSelect
         options={yearsOptions}
         value={yearValue}
-        onChange={e => month && onMonthChange?.(setYear(month, Number(e.target.value)))}
+        onChange={e => onMonthChange?.(setYear(base, Number(e.target.value)))}
       >
         <div className={styles['control']}>
           <p className={styles['control__label']}>{yearValue}</p>
