@@ -79,8 +79,8 @@
           color: hsl(var(--accent-color));
         }
 
-        &:not(.rdp-disabled):not(.rdp-range_start):not(.rdp-range_end):not(
-            .rdp-range_middle
+        &:not(.rdp-disabled):not(.rdp-range_start):not(.rdp-range_end):not(.rdp-range_middle):not(
+            .rdp-selected
           ):hover {
           cursor: pointer;
           background-color: hsl(var(--accent-color) / 0.1);
