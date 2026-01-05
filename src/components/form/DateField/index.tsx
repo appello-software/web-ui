@@ -1,6 +1,6 @@
 import { Nullable } from '@appello/common';
 import React, { ReactElement } from 'react';
-import { ActiveModifiers, DateRange } from 'react-day-picker';
+import { DateRange, type Modifiers } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { DateInput, DateInputProps } from '~/components/form/DateInput';
@@ -75,8 +75,8 @@ export const DateField = <
           onChange: controller.field.onChange as (
             range: Nullable<DateRange>,
             selectedDay: Date,
-            activeModifiers: ActiveModifiers,
-            e: React.MouseEvent,
+            activeModifiers: Modifiers,
+            e: React.MouseEvent | React.KeyboardEvent,
           ) => void,
           yearsLength,
         }

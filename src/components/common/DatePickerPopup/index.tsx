@@ -20,7 +20,8 @@ import {
   DayPicker,
   isDateRange,
   Matcher,
-  type PropsRange,
+  type Modifiers,
+  OnSelectHandler,
   useDayPicker,
 } from 'react-day-picker';
 import { createPortal } from 'react-dom';
@@ -33,7 +34,7 @@ import styles from './styles.module.scss';
 import { formatWeekdayName } from './utils';
 
 export interface DatePickerDefaultProps {
-  mode?: undefined;
+  mode?: 'single';
   value: Date | null;
   onChange: DayEventHandler<React.MouseEvent>;
 }
@@ -41,7 +42,12 @@ export interface DatePickerDefaultProps {
 export interface DatePickerRangeProps {
   mode: 'range';
   value: Nullable<DateRange>;
-  onChange: (range: Nullable<DateRange>) => void;
+  onChange: (
+    range: Nullable<DateRange>,
+    selectedDay: Date,
+    activeModifiers: Modifiers,
+    e: React.MouseEvent | React.KeyboardEvent,
+  ) => void;
 }
 
 export interface DatePickerBaseProps {
@@ -87,10 +93,10 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     [mode, onChange, onClose],
   );
 
-  const handleRangeSelect: PropsRange['onSelect'] = useCallback(
-    range => {
+  const handleRangeSelect: OnSelectHandler<DateRange | undefined> = useCallback(
+    (range, ...args) => {
       if (mode === 'range') {
-        onChange(range ?? null);
+        onChange(range ?? null, ...args);
       }
     },
     [mode, onChange],

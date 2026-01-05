@@ -16,6 +16,5 @@ type Story = StoryObj<typeof meta>;
 export const Standard: Story = {
   args: {
     onChange: noop,
-    disabledDate: new Date(),
   },
 };
