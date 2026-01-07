@@ -59,6 +59,8 @@ export interface DatePickerBaseProps
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   callableElement: HTMLElement | null;
   onClose: () => void;
+  containerWrapperClassName?: string;
+  containerClassName?: string;
 }
 
 export type DatePickerPopupProps = DatePickerBaseProps &
@@ -74,6 +76,8 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     mode,
     yearsLength = 100,
     position = 'bottom-left',
+    containerWrapperClassName,
+    containerClassName,
     ...restProps
   } = useCombinedPropsWithKit({
     name: 'DatePickerPopup',
@@ -210,10 +214,10 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
         };
 
   return createPortal(
-    <div className={styles['calendar-wrapper']} ref={containerRef}>
+    <div className={clsx(styles['calendar-wrapper'], containerWrapperClassName)} ref={containerRef}>
       <DayPicker
         {...propsByMode}
-        className={styles['container']}
+        className={clsx(styles['container'], containerClassName)}
         {...restProps}
         components={{
           CaptionLabel: props => <CaptionLabel {...props} yearsLength={yearsLength} />,

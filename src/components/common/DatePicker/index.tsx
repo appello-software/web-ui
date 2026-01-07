@@ -11,7 +11,15 @@ import { Icon } from '~/components/common/Icon';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 export interface DatePickerProps
-  extends Pick<DatePickerBaseProps, 'yearsLength' | 'weekStartsOn' | 'toYear' | 'fromYear'> {
+  extends Pick<
+    DatePickerBaseProps,
+    | 'yearsLength'
+    | 'weekStartsOn'
+    | 'toYear'
+    | 'fromYear'
+    | 'containerWrapperClassName'
+    | 'containerClassName'
+  > {
   placeholder?: ReactNode;
   onChange: (value: Date | null) => void;
   defaultValue?: Date | null;

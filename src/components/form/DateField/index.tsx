@@ -24,6 +24,8 @@ type AllowedDateInputProps = Pick<
   | 'toYear'
   | 'fromYear'
   | 'weekStartsOn'
+  | 'containerWrapperClassName'
+  | 'containerClassName'
 >;
 type AllowedFieldProps = Pick<
   FieldProps,
@@ -68,6 +70,8 @@ export const DateField = <
     fromYear,
     toYear,
     weekStartsOn,
+    containerWrapperClassName,
+    containerClassName,
   } = useCombinedPropsWithKit({
     name: 'DateField',
     props,
@@ -107,6 +111,8 @@ export const DateField = <
       }}
     >
       <DateInput
+        containerClassName={containerClassName}
+        containerWrapperClassName={containerWrapperClassName}
         disabled={disabled}
         disabledDate={disabledDate}
         error={!!controller.fieldState.error}

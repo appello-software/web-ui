@@ -18,7 +18,15 @@ import { useCombinedPropsWithKit } from '~/hooks';
 import styles from './styles.module.scss';
 
 export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
-  Pick<DatePickerBaseProps, 'yearsLength' | 'toYear' | 'fromYear' | 'weekStartsOn'> & {
+  Pick<
+    DatePickerBaseProps,
+    | 'yearsLength'
+    | 'toYear'
+    | 'fromYear'
+    | 'weekStartsOn'
+    | 'containerWrapperClassName'
+    | 'containerClassName'
+  > & {
     placeholder?: string;
     inputSize?: InputSize;
     error?: boolean;
@@ -54,6 +62,8 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
     fromYear,
     toYear,
     weekStartsOn,
+    containerWrapperClassName,
+    containerClassName,
   } = useCombinedPropsWithKit({
     name: 'DateInput',
     props,
@@ -166,6 +176,8 @@ export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
         <DatePickerPopup
           {...propsByMode}
           callableElement={inputRef.current}
+          containerClassName={containerClassName}
+          containerWrapperClassName={containerWrapperClassName}
           disabledDate={disabledDate}
           fromYear={fromYear}
           position={position}
