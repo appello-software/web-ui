@@ -1,9 +1,3 @@
-.weekday {
-  &--weekend {
-    color: hsl(var(--red-color));
-  }
-}
-
 .calendar-wrapper {
   position: fixed;
   z-index: 999;
@@ -26,7 +20,7 @@
   }
 }
 
-.container:global(.rdp) {
+.container:global(.rdp-root) {
   border: 1px solid hsl(var(--gray-5-color));
   box-shadow: var(--shadow-4);
   background-color: hsl(var(--white-color));
@@ -34,66 +28,125 @@
   margin-block: 0.43rem;
   border-radius: 0.5rem;
   padding: 1rem;
-
-  --rdp-cell-size: 30px;
+  --rdp-day-width: 30px;
+  --rdp-day-height: 30px;
+  --rdp-nav-height: 30px;
+  --rdp-nav_button-width: 30px;
+  --rdp-nav_button-height: 30px;
+  --rdp-day_button-width: 30px;
+  --rdp-day_button-height: 30px;
   --rdp-accent-color: hsl(var(--accent-color));
   --rdp-background-color: hsl(var(--accent-color) / 0.1);
+  --rdp-range_start-background: hsl(var(--accent-color));
+  --rdp-range_end-background: hsl(var(--accent-color));
+  --rdp-today-color: hsl(var(--accent-color));
 }
 
 .container {
   :global {
-    .rdp-caption_label {
-      font-size: var(--p3-font-size);
-      line-height: var(--p3-line-height);
-      font-weight: 600;
-    }
-
-    .rdp-nav_button {
+    .rdp-button_previous,
+    .rdp-button_next {
       border-radius: 8px;
 
       > svg {
         width: 12px;
         height: 12px;
+        fill: black;
       }
     }
 
-    .rdp-head_cell {
-      font-size: var(--p4-font-size);
-      line-height: var(--p4-line-height);
-      font-weight: 400;
-      text-transform: none;
-      height: 38px;
-    }
-
-    .rdp-day {
-      font-size: var(--p5-font-size);
-      line-height: var(--p5-line-height);
-      font-weight: 600;
-      color: hsl(var(--gray-1-color));
-      border-radius: 8px;
-      border-inline: 1px solid transparent;
-      margin-block: 1px;
-
-      &--today {
-        color: hsl(var(--accent-color));
+    .rdp {
+      &-month_caption {
+        align-items: center;
       }
 
-      &--weekend {
+      &-caption_label {
+        font-size: var(--p3-font-size);
+        line-height: var(--p3-line-height);
+        font-weight: 600;
+      }
+
+      &-day {
+        font-size: var(--p5-font-size);
+        line-height: var(--p5-line-height);
+        font-weight: 600;
+        color: hsl(var(--gray-1-color));
+        border-radius: 8px;
+        border-inline: 1px solid transparent;
+        margin-block: 1px;
+
+        &--today {
+          color: hsl(var(--accent-color));
+        }
+
+        &:not(.rdp-disabled):not(.rdp-range_start):not(.rdp-range_end):not(.rdp-range_middle):not(
+            .rdp-selected
+          ):hover {
+          cursor: pointer;
+          background-color: hsl(var(--accent-color) / 0.1);
+          border-radius: 8px;
+        }
+
+        &_button:disabled {
+          cursor: not-allowed;
+        }
+      }
+
+      &-disabled {
+        cursor: not-allowed;
+      }
+
+      &-weekday {
+        opacity: 1;
+        font-size: var(--p4-font-size);
+        line-height: var(--p4-line-height);
+        font-weight: 400;
+        text-transform: none;
+        height: 38px;
+
+        &:first-child {
+          color: hsl(var(--red-color));
+        }
+
+        &:last-child {
+          color: hsl(var(--red-color));
+        }
+      }
+
+      &-weekend {
         color: hsl(var(--red-color));
       }
 
-      &_selected {
+      &-selected {
         color: hsl(var(--white-color));
+        background-color: hsl(var(--accent-color));
+        border-radius: 8px;
       }
 
       &_disabled {
         cursor: not-allowed;
       }
 
-      &_range_middle {
-        border-radius: 0;
-        background-color: hsl(var(--accent-color) / 0.1);
-        color: hsl(var(--accent-color));
+      &-range {
+        &_start:not(.rdp-range_end) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &_start:has {
+          border-radius: 8px;
+        }
+
+        &_middle {
+          border-radius: 0;
+          background-color: hsl(var(--accent-color) / 0.1);
+          color: hsl(var(--accent-color));
+        }
+
+        &_end:not(.rdp-range_start) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
       }
     }
   }
