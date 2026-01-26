@@ -44,6 +44,7 @@ export interface SidebarProps {
     className: string;
     to: string;
   }) => ReactElement;
+  className?: string;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
@@ -63,6 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     toggleCollapsed,
     isActiveMenu,
     renderLink,
+    className,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
@@ -75,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
   }, [isDesktop]);
 
   return (
-    <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed')} id="uisidebar">
+    <div className={clsx('sidebar', isCollapsed && 'sidebar--collapsed', className)} id="uisidebar">
       <header className="sidebar__header">
         <Link className="sidebar__logo-link" to={logoPath} onNavigate={onNavigate}>
           <img alt="logo" className="sidebar__logo" src={logo} />
