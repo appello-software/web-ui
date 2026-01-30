@@ -1,8 +1,8 @@
 import type { Meta } from '@storybook/react';
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { components, OptionProps } from 'react-select';
 
-import { NewSelectOption, Select, SelectOption } from '.';
+import { NewSelectOption, Select, SelectOption, SelectRefProps } from '.';
 
 const meta = {
   title: 'Components/Inputs/Select',
@@ -150,5 +150,39 @@ export const CustomMultiValueWithSearch: React.FC = () => {
       variantMulti="simple"
       onChange={setValue}
     />
+  );
+};
+
+export const ManualOpen: React.FC = () => {
+  const [value, setValue] = useState<string[]>([]);
+  const ref = useRef<SelectRefProps<string[], true>>(null);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          ref.current?.focus();
+          ref.current?.onMenuOpen();
+        }}
+      >
+        Open popup
+      </button>
+      <Select
+        isClearable
+        isMulti
+        isSearchable
+        isOptionDisabled={option => !!option.isDisabled}
+        options={[
+          { label: 'Option 1', value: 'option-1', isDisabled: true },
+          { label: 'Option 2', value: 'option-2' },
+          { label: 'Option 3', value: 'option-3' },
+        ]}
+        ref={ref}
+        value={value}
+        variantMulti="simple"
+        onChange={setValue}
+      />
+    </>
   );
 };

@@ -1,8 +1,9 @@
 import type { Meta } from '@storybook/react';
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { components, OptionProps } from 'react-select';
 
+import { SelectRefProps } from '~/components';
 import { NewSelectOption, SelectOption } from '~/components/form/Select';
 
 import { SelectField } from '.';
@@ -176,5 +177,40 @@ export const WithCustomLabel: React.FC = () => {
         { label: 'Option 2', value: 'option-2' },
       ]}
     />
+  );
+};
+
+export const ManualOpen: React.FC = () => {
+  const ref = useRef<SelectRefProps<string>>(null);
+
+  const form = useForm<{ select: string[] }>({
+    defaultValues: {
+      select: [],
+    },
+  });
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          ref.current?.focus();
+          ref.current?.onMenuOpen();
+        }}
+      >
+        Open popup
+      </button>
+      <SelectField
+        control={form.control}
+        label="Choose an option"
+        labelChildren={<div>1212312</div>}
+        name="select"
+        options={[
+          { label: 'Option 1', value: 'option-1', photo: 'https://picsum.photos/188' },
+          { label: 'Option 2', value: 'option-2' },
+        ]}
+        ref={ref}
+      />
+    </>
   );
 };

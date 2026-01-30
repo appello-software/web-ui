@@ -1,6 +1,8 @@
 import type { Meta } from '@storybook/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { DateInputRefProps } from '~/components';
 
 import { DateField } from '.';
 
@@ -26,3 +28,24 @@ const TemplateWithRange: React.FC = () => {
 
 export const Standard = Template.bind({});
 export const WithRange = TemplateWithRange.bind({});
+
+export const ManualOpen: React.FC = () => {
+  const form = useForm({ defaultValues: { time: null } });
+
+  const ref = useRef<DateInputRefProps>(null);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          ref.current?.setShowCalendar(true);
+        }}
+      >
+        Open popup
+      </button>
+
+      <DateField control={form.control} label="Choose a time" name="time" ref={ref} />
+    </>
+  );
+};

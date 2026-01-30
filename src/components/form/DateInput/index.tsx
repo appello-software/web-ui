@@ -1,7 +1,14 @@
 import { Nullable, useSwitchValue } from '@appello/common';
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import React, { ReactElement, ReactNode, useMemo, useRef } from 'react';
+import React, {
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import { DateRange, Matcher } from 'react-day-picker';
 
 import {
@@ -41,151 +48,164 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
     formatInputValue?: (value: Date | Nullable<DateRange>) => string;
   };
 
-export const DateInput: React.FC<DateInputProps> = (props): ReactElement => {
-  const {
-    className,
-    placeholder,
-    inputSize,
-    value,
-    error,
-    onChange,
-    mode,
-    disabledDate,
-    iconAfterName = 'downArrow',
-    yearsLength,
-    disabled,
-    rightElement,
-    iconAfterElementClassName,
-    inputClassName,
-    position,
-    formatInputValue,
-    fromYear,
-    toYear,
-    weekStartsOn,
-    containerWrapperClassName,
-    containerClassName,
-  } = useCombinedPropsWithKit({
-    name: 'DateInput',
-    props,
-  });
+export interface DateInputRefProps {
+  setShowCalendar: (val: boolean) => void;
+}
 
-  const { dateFormat } = useAppelloKit();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+export const DateInput = forwardRef<DateInputRefProps, DateInputProps>(
+  (props, ref): ReactElement => {
+    const {
+      className,
+      placeholder,
+      inputSize,
+      value,
+      error,
+      onChange,
+      mode,
+      disabledDate,
+      iconAfterName = 'downArrow',
+      yearsLength,
+      disabled,
+      rightElement,
+      iconAfterElementClassName,
+      inputClassName,
+      position,
+      formatInputValue,
+      fromYear,
+      toYear,
+      weekStartsOn,
+      containerWrapperClassName,
+      containerClassName,
+    } = useCombinedPropsWithKit({
+      name: 'DateInput',
+      props,
+    });
 
-  const {
-    value: isCalendarVisible,
-    toggle: toggleCalendar,
-    off: closeCalendar,
-  } = useSwitchValue(false);
+    const { dateFormat } = useAppelloKit();
+    const containerRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleDayChange: DatePickerDefaultProps['onChange'] = React.useCallback(
-    (day, ...args) => {
-      if (mode === undefined) {
-        onChange(day, ...args);
-      }
-    },
-    [mode, onChange],
-  );
+    const {
+      value: isCalendarVisible,
+      toggle: toggleCalendar,
+      off: closeCalendar,
+      set: setCalendar,
+    } = useSwitchValue(false);
 
-  const handleRangeChange: DatePickerRangeProps['onChange'] = React.useCallback(
-    (range, ...args) => {
-      if (mode === 'range') {
-        onChange(range, ...args);
-      }
-    },
-    [mode, onChange],
-  );
+    const handleDayChange: DatePickerDefaultProps['onChange'] = React.useCallback(
+      (day, ...args) => {
+        if (mode === undefined) {
+          onChange(day, ...args);
+        }
+      },
+      [mode, onChange],
+    );
 
-  const displayDate = useMemo(() => {
-    if (!value) {
-      return '';
-    }
+    const handleRangeChange: DatePickerRangeProps['onChange'] = React.useCallback(
+      (range, ...args) => {
+        if (mode === 'range') {
+          onChange(range, ...args);
+        }
+      },
+      [mode, onChange],
+    );
 
-    if (mode === 'range') {
-      const { to, from } = value;
-
-      if (!from) {
+    const displayDate = useMemo(() => {
+      if (!value) {
         return '';
       }
 
-      if (!to) {
-        return format(from, dateFormat);
+      if (mode === 'range') {
+        const { to, from } = value;
+
+        if (!from) {
+          return '';
+        }
+
+        if (!to) {
+          return format(from, dateFormat);
+        }
+
+        return `${format(from, dateFormat)} - ${format(to, dateFormat)}`;
       }
 
-      return `${format(from, dateFormat)} - ${format(to, dateFormat)}`;
-    }
+      return format(value, dateFormat);
+    }, [value, mode, dateFormat]);
 
-    return format(value, dateFormat);
-  }, [value, mode, dateFormat]);
-
-  const propsByMode =
-    mode === 'range'
-      ? {
-          mode: 'range' as const,
-          value,
-          onChange: handleRangeChange,
-          yearsLength,
-        }
-      : {
-          mode: undefined,
-          value,
-          onChange: handleDayChange,
-          yearsLength,
-        };
-
-  return (
-    <div className={clsx(styles['date-input'], className)} ref={containerRef}>
-      <div>
-        <TextInput
-          readOnly
-          disabled={disabled}
-          error={error}
-          iconAfterElement={
-            <Icon
-              className={clsx({
-                [styles['date-input__arrow']]: isCalendarVisible,
-                [styles['date-input__arrow__disabled']]: disabled,
-              })}
-              height={20}
-              name={iconAfterName}
-              width={20}
-            />
+    const propsByMode =
+      mode === 'range'
+        ? {
+            mode: 'range' as const,
+            value,
+            onChange: handleRangeChange,
+            yearsLength,
           }
-          iconAfterElementClassName={iconAfterElementClassName}
-          iconBeforeElement={
-            <Icon
-              className={clsx({
-                [styles['date-input__arrow__disabled']]: disabled,
-              })}
-              height={20}
-              name="calendar"
-              width={20}
-            />
-          }
-          inputClassName={clsx(styles['date-input__input'], inputClassName)}
-          placeholder={placeholder}
-          ref={inputRef}
-          rightElement={rightElement}
-          size={inputSize}
-          value={formatInputValue?.(value) ?? displayDate}
-          onClick={toggleCalendar}
-        />
+        : {
+            mode: undefined,
+            value,
+            onChange: handleDayChange,
+            yearsLength,
+          };
+
+    useImperativeHandle<DateInputRefProps, DateInputRefProps>(ref, () => {
+      return {
+        setShowCalendar: setCalendar,
+      };
+    });
+
+    return (
+      <div className={clsx(styles['date-input'], className)} ref={containerRef}>
+        <div>
+          <TextInput
+            readOnly
+            disabled={disabled}
+            error={error}
+            iconAfterElement={
+              <Icon
+                className={clsx({
+                  [styles['date-input__arrow']]: isCalendarVisible,
+                  [styles['date-input__arrow__disabled']]: disabled,
+                })}
+                height={20}
+                name={iconAfterName}
+                width={20}
+              />
+            }
+            iconAfterElementClassName={iconAfterElementClassName}
+            iconBeforeElement={
+              <Icon
+                className={clsx({
+                  [styles['date-input__arrow__disabled']]: disabled,
+                })}
+                height={20}
+                name="calendar"
+                width={20}
+              />
+            }
+            inputClassName={clsx(styles['date-input__input'], inputClassName)}
+            placeholder={placeholder}
+            ref={inputRef}
+            rightElement={rightElement}
+            size={inputSize}
+            value={formatInputValue?.(value) ?? displayDate}
+            onClick={toggleCalendar}
+          />
+        </div>
+        {isCalendarVisible && (
+          <DatePickerPopup
+            {...propsByMode}
+            callableElement={inputRef.current}
+            containerClassName={containerClassName}
+            containerWrapperClassName={containerWrapperClassName}
+            disabledDate={disabledDate}
+            fromYear={fromYear}
+            position={position}
+            toYear={toYear}
+            weekStartsOn={weekStartsOn}
+            onClose={closeCalendar}
+          />
+        )}
       </div>
-      {isCalendarVisible && (
-        <DatePickerPopup
-          {...propsByMode}
-          callableElement={inputRef.current}
-          containerClassName={containerClassName}
-          containerWrapperClassName={containerWrapperClassName}
-          disabledDate={disabledDate}
-          fromYear={fromYear}
-          position={position}
-          toYear={toYear}
-          weekStartsOn={weekStartsOn}
-          onClose={closeCalendar}
-        />
-      )}
-    </div>
-  );
-};
+    );
+  },
+);

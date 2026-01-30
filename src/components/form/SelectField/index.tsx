@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ForwardedRef, forwardRef, ReactElement } from 'react';
 import {
   Control,
   FieldPath,
@@ -14,6 +15,7 @@ import {
   SelectOnChange,
   SelectOptionType,
   SelectProps,
+  SelectRefProps,
   SelectValueType,
 } from '~/components/form/Select';
 import { useCombinedPropsWithKit } from '~/hooks';
@@ -62,7 +64,7 @@ export interface SelectFieldProps<
   ) => boolean;
 }
 
-export const SelectField = <
+export const BaseSelectField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<
     TFormValues,
@@ -74,6 +76,7 @@ export const SelectField = <
   TIsCreatable extends boolean = false,
 >(
   props: SelectFieldProps<TFormValues, TName, TValue, TIsMulti, TIsClearable, TIsCreatable>,
+  ref?: ForwardedRef<SelectRefProps<TValue, TIsMulti>>,
 ): React.ReactElement => {
   const {
     control,
@@ -140,6 +143,7 @@ export const SelectField = <
     >
       <Select
         {...{
+          ref,
           isMulti,
           options,
           value,
@@ -167,3 +171,19 @@ export const SelectField = <
     </Field>
   );
 };
+
+export const SelectField = forwardRef(BaseSelectField) as <
+  TFormValues extends FieldValues,
+  TName extends FieldPathByValue<
+    TFormValues,
+    SelectValueType<TValue, TIsMulti, TIsClearable, TIsCreatable>
+  >,
+  TValue extends FieldPathValue<TFormValues, TName>,
+  TIsMulti extends boolean = false,
+  TIsClearable extends boolean = false,
+  TIsCreatable extends boolean = false,
+>(
+  props: SelectFieldProps<TFormValues, TName, TValue, TIsMulti, TIsClearable, TIsCreatable> & {
+    ref?: ForwardedRef<SelectRefProps<TValue, TIsMulti>>;
+  },
+) => ReactElement;

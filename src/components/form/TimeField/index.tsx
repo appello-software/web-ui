@@ -1,10 +1,10 @@
 import { eachMinuteOfInterval, endOfToday, format, startOfToday } from 'date-fns';
-import React, { ReactElement, useMemo } from 'react';
+import React, { ForwardedRef, forwardRef, ReactElement, useMemo } from 'react';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
 import { ISO_TIME_FORMAT, TIME_FORMAT } from '~/components/common/TimePicker/consts';
 import { Field, FieldProps } from '~/components/form/Field';
-import { Select, SelectProps } from '~/components/form/Select';
+import { Select, SelectProps, SelectRefProps } from '~/components/form/Select';
 import { useCombinedPropsWithKit } from '~/hooks';
 
 type AllowedFieldProps = Pick<
@@ -19,7 +19,13 @@ type AllowedSelectProps<
   TIsCreatable extends boolean,
 > = Pick<
   SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
-  'inputSize' | 'placeholder' | 'disabled' | 'components' | 'menuPortalTarget' | 'closeMenuOnScroll'
+  | 'inputSize'
+  | 'placeholder'
+  | 'disabled'
+  | 'components'
+  | 'menuPortalTarget'
+  | 'closeMenuOnScroll'
+  | 'formatOptionLabel'
 >;
 
 export interface TimeFieldProps<TName, TFormValues extends FieldValues>
@@ -30,17 +36,18 @@ export interface TimeFieldProps<TName, TFormValues extends FieldValues>
   name: TName;
   control: Control<TFormValues>;
   step?: number;
+  defaultStartDate?: Date;
+  defaultEndDate?: Date;
 }
-const defaultStartDate = startOfToday();
-const defaultEndDate = endOfToday();
 
 type TimeFieldValue = string | null;
 
-export const TimeField = <
+const BaseTimeField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, TimeFieldValue>,
 >(
   props: TimeFieldProps<TName, TFormValues>,
+  ref: ForwardedRef<SelectRefProps<TimeFieldValue>>,
 ): ReactElement => {
   const {
     name,
@@ -59,6 +66,9 @@ export const TimeField = <
     closeMenuOnScroll,
     labelChildren,
     labelClassName,
+    formatOptionLabel,
+    defaultStartDate = startOfToday(),
+    defaultEndDate = endOfToday(),
   } = useCombinedPropsWithKit({
     name: 'TimeField',
     props,
@@ -78,7 +88,7 @@ export const TimeField = <
         value: format(time, valueFormat),
         label: format(time, labelFormat),
       })),
-    [labelFormat, step, valueFormat],
+    [defaultEndDate, defaultStartDate, labelFormat, step, valueFormat],
   );
 
   return (
@@ -89,10 +99,28 @@ export const TimeField = <
       <Select
         hasError={!!controller.fieldState.error}
         options={timeOptions}
+        ref={ref}
         value={value}
         onChange={controller.field.onChange}
-        {...{ inputSize, placeholder, disabled, components, menuPortalTarget, closeMenuOnScroll }}
+        {...{
+          inputSize,
+          placeholder,
+          disabled,
+          components,
+          menuPortalTarget,
+          closeMenuOnScroll,
+          formatOptionLabel,
+        }}
       />
     </Field>
   );
 };
+
+export const TimeField = forwardRef(BaseTimeField) as <
+  TFormValues extends FieldValues,
+  TName extends FieldPathByValue<TFormValues, TimeFieldValue>,
+>(
+  props: TimeFieldProps<TName, TFormValues> & {
+    ref?: ForwardedRef<SelectRefProps<TimeFieldValue>>;
+  },
+) => ReactElement;

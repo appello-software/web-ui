@@ -1,9 +1,9 @@
 import { Nullable } from '@appello/common';
-import React, { ReactElement } from 'react';
+import React, { ForwardedRef, forwardRef, ReactElement } from 'react';
 import { ActiveModifiers, DateRange } from 'react-day-picker';
 import { Control, FieldPathByValue, FieldValues, useController } from 'react-hook-form';
 
-import { DateInput, DateInputProps } from '~/components/form/DateInput';
+import { DateInput, DateInputProps, DateInputRefProps } from '~/components/form/DateInput';
 import { Field, FieldProps } from '~/components/form/Field';
 import { useCombinedPropsWithKit } from '~/hooks';
 
@@ -41,11 +41,12 @@ export interface DateProps<
   control: Control<TFormValues>;
 }
 
-export const DateField = <
+const BaseDateField = <
   TFormValues extends FieldValues,
   TName extends FieldPathByValue<TFormValues, Nullable<Date | DateRange>>,
 >(
   props: DateProps<TFormValues, TName>,
+  ref: ForwardedRef<DateInputRefProps>,
 ): ReactElement => {
   const {
     name,
@@ -124,6 +125,7 @@ export const DateField = <
         inputSize={inputSize}
         placeholder={placeholder ?? label}
         position={position}
+        ref={ref}
         rightElement={rightElement}
         toYear={toYear}
         weekStartsOn={weekStartsOn}
@@ -132,3 +134,12 @@ export const DateField = <
     </Field>
   );
 };
+
+export const DateField = forwardRef(BaseDateField) as <
+  TFormValues extends FieldValues,
+  TName extends FieldPathByValue<TFormValues, Nullable<Date | DateRange>>,
+>(
+  props: DateProps<TFormValues, TName> & {
+    ref?: ForwardedRef<DateInputRefProps>;
+  },
+) => ReactElement;

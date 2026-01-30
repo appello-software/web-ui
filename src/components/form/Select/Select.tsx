@@ -2,7 +2,7 @@ import './styles.scss';
 
 import clsx from 'clsx';
 import * as React from 'react';
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ForwardedRef, forwardRef, ReactElement, ReactNode, useCallback, useMemo } from 'react';
 import ReactSelect, {
   ActionMeta,
   components as reactSelectComponents,
@@ -13,6 +13,7 @@ import ReactSelect, {
   PropsValue,
   SelectComponentsConfig,
 } from 'react-select';
+import BaseReactSelect from 'react-select/base';
 import CreatableReactSelect from 'react-select/creatable';
 import { SelectComponents } from 'react-select/dist/declarations/src/components';
 
@@ -72,6 +73,12 @@ export type SelectOnChange<
 
 export type SelectOptionType<TValue> = SelectOption<
   TValue extends unknown[] ? TValue[number] : TValue
+>;
+
+export type SelectRefProps<TValue, TIsMulti extends boolean = false> = BaseReactSelect<
+  SelectOptionType<TValue>,
+  TIsMulti,
+  GroupBase<SelectOptionType<TValue>>
 >;
 
 export interface SelectProps<
@@ -136,13 +143,14 @@ export interface SelectProps<
   >['formatOptionLabel'];
 }
 
-export const Select = <
+const BaseSelect = <
   TValue,
   TIsMulti extends boolean = false,
   TIsClearable extends boolean = false,
   TIsCreatable extends boolean = false,
 >(
   props: SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable>,
+  ref?: ForwardedRef<SelectRefProps<TValue, TIsMulti>>,
 ): React.ReactElement => {
   const {
     placeholder,
@@ -287,6 +295,7 @@ export const Select = <
     closeMenuOnScroll,
     formatOptionLabel,
     onBlur,
+    ref,
   } as ReactSelectProps<SelectOptionType<TValue>, TIsMulti, GroupBase<SelectOptionType<TValue>>>;
 
   if (isCreatable) {
@@ -295,3 +304,14 @@ export const Select = <
 
   return <ReactSelect {...reactSelectProps} />;
 };
+
+export const Select = forwardRef(BaseSelect) as <
+  TValue,
+  TIsMulti extends boolean = false,
+  TIsClearable extends boolean = false,
+  TIsCreatable extends boolean = false,
+>(
+  props: SelectProps<TValue, TIsMulti, TIsClearable, TIsCreatable> & {
+    ref?: ForwardedRef<SelectRefProps<TValue, TIsMulti>>;
+  },
+) => ReactElement;
