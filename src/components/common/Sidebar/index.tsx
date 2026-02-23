@@ -45,6 +45,7 @@ export interface SidebarProps {
     to: string;
   }) => ReactElement;
   className?: string;
+  hideUserAvatar?: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = props => {
@@ -65,6 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     isActiveMenu,
     renderLink,
     className,
+    hideUserAvatar,
   } = useCombinedPropsWithKit({
     name: 'Sidebar',
     props,
@@ -113,7 +115,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
               className="sidebar__footer-user-info"
               onClick={onClickUserProfile}
             >
-              {Boolean(user.photo || user.photoPlaceholder) && (
+              {!hideUserAvatar && Boolean(user.photo || user.photoPlaceholder) && (
                 <img
                   alt={user.fullName}
                   className="sidebar__user-photo"
@@ -127,7 +129,13 @@ export const Sidebar: React.FC<SidebarProps> = props => {
             </SidebarFooterUserInfoComponent>
 
             {userInfoRightElement && (
-              <div className="sidebar__footer-user-right-element">{userInfoRightElement}</div>
+              <div
+                className={clsx('sidebar__footer-user-right-element', {
+                  'sidebar__footer-user-right-element--active': hideUserAvatar,
+                })}
+              >
+                {userInfoRightElement}
+              </div>
             )}
           </div>
 

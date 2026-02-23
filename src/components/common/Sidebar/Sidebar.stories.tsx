@@ -416,3 +416,29 @@ export const WithClickOnUserProfile: Story = {
     ),
   },
 };
+
+export const WithTurnedOffUserAvatar: Story = {
+  name: 'Sidebar with turned off User`s avatar',
+  args: {
+    ...defaultSidebarProps,
+    isCollapsed: true,
+    hideUserAvatar: true,
+    user: defaultUser,
+    userInfoRightElement: (
+      <div
+        style={{
+          width: '36px',
+          height: '36px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          background: '#356181',
+          color: '#fff',
+        }}
+      >
+        А А
+      </div>
+    ),
+  },
+};
