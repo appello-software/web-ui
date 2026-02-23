@@ -120,6 +120,10 @@
 
   &__footer-user-right-element {
     flex-shrink: 0;
+
+    &--active {
+      flex: 1;
+    }
   }
 
   &__submenu {
