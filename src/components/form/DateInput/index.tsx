@@ -28,6 +28,7 @@ export type DateInputProps = (DatePickerRangeProps | DatePickerDefaultProps) &
   Pick<
     DatePickerBaseProps,
     | 'yearsLength'
+    | 'yearsOffset'
     | 'toYear'
     | 'fromYear'
     | 'weekStartsOn'
@@ -65,6 +66,7 @@ export const DateInput = forwardRef<DateInputRefProps, DateInputProps>(
       disabledDate,
       iconAfterName = 'downArrow',
       yearsLength,
+      yearsOffset,
       disabled,
       rightElement,
       iconAfterElementClassName,
@@ -139,12 +141,14 @@ export const DateInput = forwardRef<DateInputRefProps, DateInputProps>(
             value,
             onChange: handleRangeChange,
             yearsLength,
+            yearsOffset,
           }
         : {
             mode: undefined,
             value,
             onChange: handleDayChange,
             yearsLength,
+            yearsOffset,
           };
 
     useImperativeHandle<DateInputRefProps, DateInputRefProps>(ref, () => {

@@ -17,6 +17,7 @@ type AllowedDateInputProps = Pick<
   | 'inputClassName'
   | 'rightElement'
   | 'yearsLength'
+  | 'yearsOffset'
   | 'mode'
   | 'disabled'
   | 'position'
@@ -61,6 +62,7 @@ const BaseDateField = <
     labelChildren,
     labelClassName,
     yearsLength,
+    yearsOffset,
     mode,
     disabled,
     rightElement,
@@ -92,12 +94,14 @@ const BaseDateField = <
             e: React.MouseEvent,
           ) => void,
           yearsLength,
+          yearsOffset,
         }
       : {
           mode: undefined,
           value: controller.field.value as Nullable<Date>,
           onChange: controller.field.onChange as (value: Nullable<Date>) => void,
           yearsLength,
+          yearsOffset,
         };
 
   return (

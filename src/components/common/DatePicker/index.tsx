@@ -14,6 +14,7 @@ export interface DatePickerProps
   extends Pick<
     DatePickerBaseProps,
     | 'yearsLength'
+    | 'yearsOffset'
     | 'weekStartsOn'
     | 'toYear'
     | 'fromYear'
@@ -37,6 +38,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     disabledDate,
     defaultValue,
     yearsLength,
+    yearsOffset,
     ...restProps
   } = useCombinedPropsWithKit({
     name: 'DatePicker',
@@ -73,6 +75,7 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
           disabledDate={disabledDate}
           value={value}
           yearsLength={yearsLength}
+          yearsOffset={yearsOffset}
           onChange={setValue}
           onClose={closeCalendar}
           {...restProps}

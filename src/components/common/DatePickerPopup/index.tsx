@@ -55,6 +55,7 @@ export interface DatePickerRangeProps {
 export interface DatePickerBaseProps
   extends Pick<DayPickerDefaultProps, 'fromYear' | 'toYear' | 'weekStartsOn'> {
   yearsLength?: number;
+  yearsOffset?: number;
   disabledDate?: Matcher;
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   callableElement: HTMLElement | null;
@@ -75,6 +76,7 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
     callableElement,
     mode,
     yearsLength = 100,
+    yearsOffset = 5,
     position = 'bottom-left',
     containerWrapperClassName,
     containerClassName,
@@ -220,7 +222,9 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
         className={clsx(styles['container'], containerClassName)}
         {...restProps}
         components={{
-          CaptionLabel: props => <CaptionLabel {...props} yearsLength={yearsLength} />,
+          CaptionLabel: props => (
+            <CaptionLabel {...props} yearsLength={yearsLength} yearsOffset={yearsOffset} />
+          ),
         }}
         disabled={disabledDate}
         formatters={{
@@ -243,9 +247,14 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
 
 interface CaptionLabelProps extends ReactDayCaptionLabelProps {
   yearsLength?: number;
+  yearsOffset?: number;
 }
 
-const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }) => {
+const CaptionLabel: FC<CaptionLabelProps> = ({
+  displayMonth,
+  yearsLength = 100,
+  yearsOffset = 5,
+}) => {
   const { onMonthChange, month } = useDayPicker();
 
   const monthLabel = useMemo(() => format(displayMonth, 'MMMM'), [displayMonth]);
@@ -253,7 +262,7 @@ const CaptionLabel: FC<CaptionLabelProps> = ({ displayMonth, yearsLength = 100 }
   const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
 
   const yearsOptions = Array.from({ length: yearsLength }, (_, index) => {
-    const year = new Date().getFullYear() + 5 - index;
+    const year = new Date().getFullYear() + yearsOffset - index;
     return { label: year.toString(), value: year.toString() };
   });
 
