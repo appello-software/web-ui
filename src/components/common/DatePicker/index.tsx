@@ -37,8 +37,6 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
     leftIconElement,
     disabledDate,
     defaultValue,
-    yearsLength,
-    yearsOffset,
     ...restProps
   } = useCombinedPropsWithKit({
     name: 'DatePicker',
@@ -74,8 +72,6 @@ export const DatePicker: React.FC<DatePickerProps> = props => {
           callableElement={buttonRef.current}
           disabledDate={disabledDate}
           value={value}
-          yearsLength={yearsLength}
-          yearsOffset={yearsOffset}
           onChange={setValue}
           onClose={closeCalendar}
           {...restProps}

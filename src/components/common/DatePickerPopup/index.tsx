@@ -223,7 +223,12 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
         {...restProps}
         components={{
           CaptionLabel: props => (
-            <CaptionLabel {...props} yearsLength={yearsLength} yearsOffset={yearsOffset} />
+            <CaptionLabel
+              {...props}
+              {...restProps}
+              yearsLength={yearsLength}
+              yearsOffset={yearsOffset}
+            />
           ),
         }}
         disabled={disabledDate}
@@ -245,7 +250,9 @@ export const DatePickerPopup: React.FC<DatePickerPopupProps> = props => {
   );
 };
 
-interface CaptionLabelProps extends ReactDayCaptionLabelProps {
+interface CaptionLabelProps
+  extends ReactDayCaptionLabelProps,
+    Pick<DayPickerDefaultProps, 'fromYear' | 'toYear'> {
   yearsLength?: number;
   yearsOffset?: number;
 }
@@ -254,6 +261,8 @@ const CaptionLabel: FC<CaptionLabelProps> = ({
   displayMonth,
   yearsLength = 100,
   yearsOffset = 5,
+  fromYear,
+  toYear,
 }) => {
   const { onMonthChange, month } = useDayPicker();
 
@@ -261,8 +270,15 @@ const CaptionLabel: FC<CaptionLabelProps> = ({
   const monthValue = useMemo(() => `${displayMonth.getMonth()}`, [displayMonth]);
   const yearValue = useMemo(() => format(displayMonth, 'yyyy'), [displayMonth]);
 
-  const yearsOptions = Array.from({ length: yearsLength }, (_, index) => {
-    const year = new Date().getFullYear() + yearsOffset - index;
+  const rangeYears = useMemo(() => {
+    if (fromYear && toYear) {
+      return toYear - fromYear + 1;
+    }
+    return yearsLength;
+  }, [fromYear, toYear, yearsLength]);
+
+  const yearsOptions = Array.from({ length: rangeYears }, (_, index) => {
+    const year = (toYear || new Date().getFullYear()) + yearsOffset - index;
     return { label: year.toString(), value: year.toString() };
   });
 

@@ -1,5 +1,6 @@
 import { useSwitchValue } from '@appello/common';
 import type { Meta } from '@storybook/react';
+import { setYear } from 'date-fns';
 import React, { useRef, useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
@@ -59,6 +60,32 @@ export const WithRange: React.FC = props => {
           mode="range"
           value={dateRange}
           onChange={setDateRange}
+          onClose={closeCalendar}
+        />
+      )}
+    </div>
+  );
+};
+
+export const CustomFromToYears: React.FC = props => {
+  const { value: isOpen, toggle: toggleCalendar, off: closeCalendar } = useSwitchValue(false);
+  const [date, setDate] = useState<Date | null>(setYear(Date.now(), 2010));
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <div>
+      <button ref={buttonRef} type="button" onClick={toggleCalendar}>
+        show calendar
+      </button>
+      {isOpen && (
+        <DatePickerPopup
+          {...props}
+          callableElement={buttonRef.current}
+          fromYear={1906}
+          toYear={2010}
+          value={date}
+          yearsOffset={0}
+          onChange={setDate}
           onClose={closeCalendar}
         />
       )}
